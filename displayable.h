@@ -1,9 +1,8 @@
 #ifndef __DISPLAYABLE_H__
 #define __DISPLAYABLE_H__
 
-#include "grid.h"
-
 class Display;
+class UI;
 
 class Displayable {
     friend class Display;
@@ -22,8 +21,8 @@ protected:
 public:
     Displayable();
 
-    // Draw this item on the grid provided.
-    virtual void draw(Grid& grid) = 0;
+    // Draw this item on the screen.
+    virtual void draw(UI& grid) const = 0;
 };
 
 #endif

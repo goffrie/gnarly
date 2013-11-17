@@ -21,7 +21,7 @@ void Display::remove(Displayable* item) {
     item->disp = 0;
 }
 
-void Display::draw(Grid& grid) const {
+void Display::draw(UI& grid) const {
     for (std::set<std::pair<int, Displayable*> >::const_iterator p = items.begin();
             p != items.end();
             ++p) {

@@ -1,6 +1,6 @@
 #include "game.h"
 
-#include "cursesgrid.h"
+#include "cursesui.h"
 
 #include <ncurses.h>
 
@@ -26,8 +26,9 @@ Game::~Game() {
 }
 
 void Game::print() const {
-    CursesGrid grid;
+    CursesUI grid;
     display.draw(grid);
     refresh();
-    getch();
+    grid.say("Really quit? ");
+    grid.readLine();
 }

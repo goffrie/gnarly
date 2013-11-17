@@ -18,7 +18,7 @@ class Dungeon : public Displayable {
     std::vector<std::vector<Tile> > grid;
     Dungeon() { }
 public:
-    virtual void draw(Grid& grid) override;
+    virtual void draw(UI& grid) const override;
 
     static Dungeon defaultDungeon();
     static Dungeon loadDungeon(const char* dungeonStr);

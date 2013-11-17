@@ -30,7 +30,7 @@ public:
 
     void takeDamage(int attack);
 
-    virtual void draw(Grid& grid) override;
+    virtual void draw(UI& grid) const override;
 };
 
 #endif

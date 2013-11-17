@@ -2,11 +2,10 @@
 #define __DISPLAY_H__
 
 #include <set>
-#include "grid.h"
+#include "displayable.h"
 
-class Displayable;
-
-class Display {
+// Groups Displayables into a single Displayable.
+class Display : public Displayable {
     std::set<std::pair<int, Displayable*> > items;
 public:
     Display() { }
@@ -19,7 +18,7 @@ public:
     void remove(Displayable* item);
 
     // Draw the display on the given grid.
-    void draw(Grid& grid) const;
+    void draw(UI& grid) const override;
 };
 
 #endif

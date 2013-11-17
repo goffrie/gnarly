@@ -2,6 +2,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include "ui.h"
 
 using namespace std;
 
@@ -29,7 +30,7 @@ inline Tile tileFromChar(char c) {
     }
 }
 
-void Dungeon::draw(Grid& dgrid) {
+void Dungeon::draw(UI& dgrid) const {
     for (unsigned y = 0; y < grid.size(); ++y) {
         for (unsigned x = 0; x < grid[y].size(); ++x) {
             dgrid.draw(y, x, tileChar(grid[y][x]));

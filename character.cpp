@@ -1,5 +1,7 @@
 #include "character.h"
 
+#include "ui.h"
+
 #include <iostream>
 
 using namespace std;
@@ -24,6 +26,6 @@ void Character::takeDamage(int attack) {
     reduceHp((attack * 100 + ratio - 1) / ratio);
 }
 
-void Character::draw(Grid& grid) {
+void Character::draw(UI& grid) const {
     grid.draw(y, x, tile());
 }
