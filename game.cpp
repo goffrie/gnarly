@@ -30,10 +30,9 @@ Game::~Game() {
     delete player;
 }
 
-void Game::print() const {
-    CursesUI grid;
-    display.draw(grid);
+void Game::print() {
+    display.draw(ui);
     refresh();
-    grid.say("Really quit? ");
-    grid.readLine();
+    ui.say("Really quit? ");
+    ui.readLine();
 }

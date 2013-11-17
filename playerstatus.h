@@ -8,7 +8,7 @@
 class Player;
 class UI;
 
-class PlayerStatus : public Displayable {
+class PlayerStatus final : public Displayable {
     const Player& player;
 public:
     PlayerStatus(const Player& p);

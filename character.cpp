@@ -1,12 +1,10 @@
 #include "character.h"
 
-#include "ui.h"
-
 #include <iostream>
 
 using namespace std;
 
-Character::Character(int startingHp, int y, int x) : hp(startingHp), y(y), x(x) {
+Character::Character(int y, int x) : LevelItem(y, x), hp(0) {
 }
 
 Character::~Character() {
@@ -24,8 +22,4 @@ void Character::takeDamage(int attack) {
     // damage = ceil( attack * 100 / (100 + defense) )
     const int ratio = 100 + def();
     reduceHp((attack * 100 + ratio - 1) / ratio);
-}
-
-void Character::draw(UI& grid) const {
-    grid.draw(y, x, tile());
 }

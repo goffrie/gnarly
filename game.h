@@ -5,17 +5,21 @@
 #include "display.h"
 #include "dungeon.h"
 #include "playerstatus.h"
+#include "cursesui.h"
 
 class Game {
+    // Has ownership of `player` and `pstatus`.
     Player* player;
     PlayerStatus* pstatus;
+
     Display display;
     Dungeon dungeon;
+    CursesUI ui;
 public:
     Game();
     ~Game();
 
-    void print() const;
+    void print();
 };
 
 #endif

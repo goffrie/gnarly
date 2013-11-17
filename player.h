@@ -8,7 +8,7 @@ protected:
     // Since the constructor has no access to virtual methods,
     // we cannot expose the constructor as-is. Instead,
     // derived classes must call the `init` method.
-    Player(int y, int x) : Character(0, y, x) { }
+    Player(int y, int x) : Character(y, x) { }
 
     void init();
 public:
