@@ -45,3 +45,22 @@ void Level::move(LevelItem* i, int y, int x) {
     i->y = y;
     i->x = x;
 }
+
+bool Level::free(int y, int x) const {
+    Tile t = dungeon.tileAt(y, x);
+    return !grid[y][x] && (t == Floor || t == Passage || t == Door);
+}
+
+bool Level::movable(int y, int x) const {
+    struct IsGoldVisitor : public LevelItemVisitor {
+        bool ans;
+    };
+    IsGoldVisitor v;
+    v.ans = false;
+    if (grid[y][x]) {
+        grid[y][x]->accept(v);
+        if (!v.ans) return false;
+    }
+    Tile t = dungeon.tileAt(y, x);
+    return (t == Floor || t == Passage || t == Door);
+}
