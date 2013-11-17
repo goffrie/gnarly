@@ -22,6 +22,8 @@ public:
     // virtual int def() const = 0;
 
     virtual ~Player() { }
+
+    virtual void accept(LevelItemVisitor& v) override { v.visit(*this); }
 };
 
 #endif

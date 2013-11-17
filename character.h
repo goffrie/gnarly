@@ -24,6 +24,8 @@ public:
     }
 
     void takeDamage(int attack);
+
+    virtual void accept(LevelItemVisitor& v) override { v.visit(*this); }
 };
 
 #endif

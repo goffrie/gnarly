@@ -2,6 +2,7 @@
 #define __LEVEL_ITEM_H__
 
 #include "displayable.h"
+#include "levelitemvisitor.h"
 
 // An abstract class representing any object
 // (whether a monster, player, or item)
@@ -29,6 +30,8 @@ public:
     int getX() const { return x; }
 
     void moveTo(int y, int x);
+
+    virtual void accept(LevelItemVisitor& v) { v.visit(*this); }
 };
 
 #endif
