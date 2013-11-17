@@ -11,14 +11,13 @@ protected:
     int y, x;
 
 // Pure virtual methods to be implemented by subclasses.
-protected:
+    virtual void reduceHp(int amt);
+public:
     // The ASCII char that represents this character.
     virtual char tile() const = 0;
 
     virtual int atk() const = 0;
     virtual int def() const = 0;
-
-    virtual void reduceHp(int amt);
 
 public:
     Character(int startingHp, int y, int x);

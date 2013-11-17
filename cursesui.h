@@ -10,6 +10,7 @@ public:
     virtual char readChar() override;
     virtual std::string readLine() override;
     virtual void draw(int y, int x, char c) override;
+    virtual void draw(int y, int x, const std::string& str) override;
 };
 
 #endif

@@ -4,9 +4,11 @@
 #include "player.h"
 #include "display.h"
 #include "dungeon.h"
+#include "playerstatus.h"
 
 class Game {
     Player* player;
+    PlayerStatus* pstatus;
     Display display;
     Dungeon dungeon;
 public:

@@ -1,3 +1,4 @@
 *.d
 *.o
 gnarly
+.ycm_extra_conf.pyc

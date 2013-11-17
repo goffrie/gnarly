@@ -30,6 +30,8 @@ public:
 
     // Draw a tile at the given location.
     virtual void draw(int y, int x, char c) = 0;
+    // Or a string.
+    virtual void draw(int y, int x, const std::string& c) = 0;
 };
 
 #endif

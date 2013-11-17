@@ -1,6 +1,7 @@
 #include "game.h"
 
 #include "cursesui.h"
+#include "humanplayer.h"
 
 #include <ncurses.h>
 
@@ -12,7 +13,10 @@ using namespace std;
 Game::Game() : dungeon(Dungeon::defaultDungeon()) {
     // TODO: class selection?
     display.add(&dungeon);
-    player = 0;
+    player = new HumanPlayer(5, 5);
+    pstatus = new PlayerStatus(*player);
+    display.add(player, 1);
+    display.add(pstatus);
 
     initscr();
     raw();
@@ -22,6 +26,7 @@ Game::Game() : dungeon(Dungeon::defaultDungeon()) {
 
 Game::~Game() {
     endwin();
+    delete pstatus;
     delete player;
 }
 

@@ -5,6 +5,13 @@
 
 class Player : public Character {
 protected:
+    // Since the constructor has no access to virtual methods,
+    // we cannot expose the constructor as-is. Instead,
+    // derived classes must call the `init` method.
+    Player(int y, int x) : Character(0, y, x) { }
+
+    void init();
+public:
     virtual char tile() const override { return '@'; }
 
     // To be overridden.
@@ -14,13 +21,6 @@ protected:
     // virtual int atk() const = 0;
     // virtual int def() const = 0;
 
-    // Since the constructor has no access to virtual methods,
-    // we cannot expose the constructor as-is. Instead,
-    // derived classes must call the `init` method.
-    Player(int y, int x) : Character(0, y, x) { }
-
-    void init();
-public:
     virtual ~Player() { }
 };
 
