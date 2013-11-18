@@ -20,6 +20,17 @@ inline Direction viKey(char c) {
     return INVALID_DIRECTION;
 }
 
+void CursesUI::init() {
+    initscr();
+    raw();
+    keypad(stdscr, TRUE);
+    noecho();
+}
+
+CursesUI::~CursesUI() {
+    endwin();
+}
+
 void CursesUI::queryCommand(CommandHandler& target) {
     switch (char c = readChar()) {
         case 'h': case 'j': case 'k': case 'l':
@@ -107,4 +118,8 @@ void CursesUI::draw(int y, int x, char c) {
 
 void CursesUI::draw(int y, int x, const std::string& str) {
     mvaddstr(y, x, str.c_str());
+}
+
+void CursesUI::redraw() {
+    refresh();
 }

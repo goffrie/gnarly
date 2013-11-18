@@ -3,33 +3,26 @@
 #include "cursesui.h"
 #include "humanplayer.h"
 
-#include <ncurses.h>
-
 #include <cstring>
 #include <iostream>
 
 using namespace std;
 
-Game::Game() : isDone(FALSE) {
+Game::Game() : isDone(false) {
     // TODO: class selection?
     level = new Level();
     player = new HumanPlayer(5, 5);
     pstatus = new PlayerStatus(*player);
     display.add(player, 1);
     display.add(pstatus);
-    level->add(player, FALSE);
+    level->add(player, false);
 
     level->addAllToDisplay(&display);
 
-    initscr();
-    raw();
-    keypad(stdscr, TRUE);
-    noecho();
-
+    ui.init();
 }
 
 Game::~Game() {
-    endwin();
     delete pstatus;
     delete player;
     delete level;
@@ -54,7 +47,7 @@ void Game::step() {
 
 void Game::print() {
     display.draw(ui);
-    refresh();
+    ui.redraw();
 }
 
 void Game::move(Direction d) {
@@ -74,5 +67,5 @@ void Game::restart() {
 }
 
 void Game::quit() {
-    isDone = TRUE;
+    isDone = true;
 }

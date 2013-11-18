@@ -10,6 +10,9 @@
 class UI {
 public:
 
+    // Initialize what need to be
+    virtual void init() = 0;
+
     // Ask for (and wait on) a command from the user.
     virtual void queryCommand(CommandHandler& target) = 0;
 
@@ -24,6 +27,8 @@ public:
     virtual void draw(int y, int x, char c) = 0;
     // Or a string.
     virtual void draw(int y, int x, const std::string& c) = 0;
+    // Refreshes the display (by reprinting or curses)
+    virtual void redraw() = 0;
 };
 
 #endif
