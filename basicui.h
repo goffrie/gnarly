@@ -1,16 +1,22 @@
-#ifndef __CURSES_UI_H__
-#define __CURSES_UI_H__
+#ifndef __BASIC_UI_H__
+#define __BASIC_UI_H__
 
+#include <string>
+#include <vector>
 #include "ui.h"
 
-class CursesUI : public UI {
+class BasicUI : public UI {
+    std::vector<std::string> screen;
+
 public:
-    virtual ~CursesUI() override;
+    BasicUI();
+    virtual ~BasicUI() override;
     virtual void init() override;
     virtual void queryCommand(CommandHandler& target) override;
     virtual void say(const char* msg) override;
     virtual char readChar() override;
     virtual std::string readLine() override;
+    std::string readNext();
     virtual void draw(int y, int x, char c) override;
     virtual void draw(int y, int x, const std::string& str) override;
     virtual void redraw() override;

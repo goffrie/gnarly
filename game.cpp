@@ -9,6 +9,14 @@
 using namespace std;
 
 Game::Game() : isDone(false) {
+    cout << "Curses? (y/n)" << endl;
+    char c;
+    cin >> c;
+    if (c == 'y') {
+        ui = new CursesUI();
+    } else {
+        ui = new BasicUI();
+    }
     // TODO: class selection?
     level = new Level();
     player = new HumanPlayer(5, 5);
@@ -19,10 +27,11 @@ Game::Game() : isDone(false) {
 
     level->addAllToDisplay(&display);
 
-    ui.init();
+    ui->init();
 }
 
 Game::~Game() {
+    delete ui;
     delete pstatus;
     delete player;
     delete level;
@@ -38,7 +47,7 @@ void Game::run() {
 }
 
 void Game::readCommand() {
-    ui.queryCommand(*this);
+    ui->queryCommand(*this);
 }
 
 void Game::step() {
@@ -46,8 +55,8 @@ void Game::step() {
 }
 
 void Game::print() {
-    display.draw(ui);
-    ui.redraw();
+    display.draw(*ui);
+    ui->redraw();
 }
 
 void Game::move(Direction d) {

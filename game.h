@@ -6,6 +6,7 @@
 #include "dungeon.h"
 #include "playerstatus.h"
 #include "cursesui.h"
+#include "basicui.h"
 #include "commandhandler.h"
 #include "level.h"
 
@@ -16,7 +17,7 @@ class Game : public CommandHandler {
     Level* level;
 
     Display display;
-    CursesUI ui;
+    UI* ui;
 
     bool isDone;
 public:

@@ -9,7 +9,7 @@
 // An abstract class for input/output, to provide pluggable implementations.
 class UI {
 public:
-
+    virtual ~UI() {};
     // Initialize what need to be
     virtual void init() = 0;
 

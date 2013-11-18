@@ -1,5 +1,5 @@
-#ifndef __LEVEL_ITEM_VISITOR_H__
-#define __LEVEL_ITEM_VISITOR_H__
+#ifndef __LEVEL_OBJECT_VISITOR_H__
+#define __LEVEL_OBJECT_VISITOR_H__
 
 // A visitor for LevelItems.
 // All the methods are default-empty for convenience.
