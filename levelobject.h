@@ -22,7 +22,7 @@ public:
     virtual char tile() const = 0;
 
 public:
-    LevelObject(int y = -1, int x = -1) : y(y), x(x) { }
+    LevelObject(int y = -1, int x = -1) : level(0), y(y), x(x) { }
     virtual ~LevelObject() { }
 
     virtual void draw(UI& ui) const override;

@@ -29,8 +29,7 @@ inline Direction convert(string s) {
 
 BasicUI::BasicUI() {
     for (int y = 0; y < 30; y++) {
-        string s(79, '_');
-        screen.push_back(s);
+        screen.push_back(string(79, '_'));
     }
 }
 
