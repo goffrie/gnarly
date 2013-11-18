@@ -24,7 +24,7 @@ public:
     unsigned int height() const { return grid.size(); }
     unsigned int width() const { return grid[0].size(); }
 
-    Tile tileAt(int y, int x) { return grid[y][x]; }
+    Tile tileAt(int y, int x) const { return grid[y][x]; }
 
     static Dungeon defaultDungeon();
     static Dungeon loadDungeon(const char* dungeonStr);

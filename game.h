@@ -7,14 +7,15 @@
 #include "playerstatus.h"
 #include "cursesui.h"
 #include "commandhandler.h"
+#include "level.h"
 
 class Game : public CommandHandler {
-    // Has ownership of `player` and `pstatus`.
+    // Has ownership of `player`, `pstatus`, and 'level'.
     Player* player;
     PlayerStatus* pstatus;
+    Level* level;
 
     Display display;
-    Dungeon dungeon;
     CursesUI ui;
 
     bool isDone;

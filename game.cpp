@@ -10,13 +10,16 @@
 
 using namespace std;
 
-Game::Game() : dungeon(Dungeon::defaultDungeon()), isDone(FALSE) {
+Game::Game() : isDone(FALSE) {
     // TODO: class selection?
-    display.add(&dungeon);
+    level = new Level();
     player = new HumanPlayer(5, 5);
     pstatus = new PlayerStatus(*player);
     display.add(player, 1);
     display.add(pstatus);
+    level->add(player, FALSE);
+
+    level->addAllToDisplay(&display);
 
     initscr();
     raw();
@@ -29,6 +32,7 @@ Game::~Game() {
     endwin();
     delete pstatus;
     delete player;
+    delete level;
 }
 
 void Game::run() {

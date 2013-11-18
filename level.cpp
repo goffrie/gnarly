@@ -7,13 +7,21 @@
 
 using namespace std;
 
-Level::Level(Dungeon& dungeon) : dungeon(dungeon),
-    grid(dungeon.height(), vector<LevelObject*>(dungeon.width(), 0)) {
+Level::Level() : dungeon(Dungeon::defaultDungeon()),
+    grid(dungeon.height(),
+    vector<LevelObject*>(dungeon.width(), 0)) {
 }
 
 Level::~Level() {
     for (unsigned int i = 0; i < items.size(); ++i) {
         delete items[i];
+    }
+}
+
+void Level::addAllToDisplay(Display *d) {
+    d->add(&dungeon);
+    for (unsigned int i = 0; i < items.size(); i++) {
+        d->add(items[i], 1);
     }
 }
 

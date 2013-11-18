@@ -2,15 +2,17 @@
 #define __LEVEL_H__
 
 #include "displayable.h"
+#include "display.h"
+#include "dungeon.h"
 
 #include <vector>
 
-class Dungeon;
 class LevelObject;
 
-class Level : public Displayable {
-    // The base dungeon layout. Not owned by this class.
-    Dungeon& dungeon;
+// Represents a single dungeon floor in the game
+class Level {
+    // The base dungeon layout. Owned by this class.
+    Dungeon dungeon;
 
     // A catalogue of the things on this level,
     // indexed by their location.
@@ -21,11 +23,14 @@ class Level : public Displayable {
     std::vector<LevelObject*> items;
 
 public:
-    Level(Dungeon& dungeon);
+    Level();
     ~Level();
 
     unsigned int height() const { return grid.size(); }
     unsigned int width() const { return grid[0].size(); }
+
+    // Adds all of this level's contents to the display
+    void addAllToDisplay(Display* d);
 
     // Add something to the level. `own` controls whether the level
     // should take ownership of it.
