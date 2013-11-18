@@ -18,6 +18,11 @@ Level::~Level() {
     }
 }
 
+void Level::generate() {
+    pair<int,int> nextPos = dungeon.randomPlacement();
+    player->moveTo(nextPos.first, nextPos.second);
+}
+
 void Level::addAllToDisplay(Display *d) {
     d->add(&dungeon);
     for (unsigned int i = 0; i < items.size(); i++) {
@@ -36,6 +41,11 @@ void Level::add(LevelObject* i, bool own) {
     if (own) {
         items.push_back(i);
     }
+}
+
+void Level::addPlayer(Player* p) {
+    player = p;
+    add(p, false);
 }
 
 void Level::move(LevelObject* i, int y, int x) {

@@ -11,7 +11,7 @@ protected:
     virtual int def() const { return 20; }
 
 public:
-    HumanPlayer(int y, int x);
+    HumanPlayer();
 };
 
 #endif

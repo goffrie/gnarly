@@ -1,7 +1,6 @@
 #include "dungeon.h"
 
 #include <cstdlib>
-#include <iostream>
 #include "ui.h"
 
 using namespace std;
@@ -68,6 +67,7 @@ Dungeon Dungeon::defaultDungeon() {
     );
 }
 
+
 Dungeon Dungeon::loadDungeon(const char* str) {
     Dungeon r;
     bool newLine = true;
@@ -82,5 +82,52 @@ Dungeon Dungeon::loadDungeon(const char* str) {
         }
         r.grid.back().push_back(tileFromChar(*str));
     }
+    r.loadRooms();
+
     return r;
+}
+
+bool Dungeon::inSameRoom(int y1, int x1, int y2, int x2) {
+    return rooms[y1][x1] == rooms[y2][x2];
+}
+
+pair<int,int> Dungeon::randomPlacement() {
+    // Get room
+    int roomNum = rand() % numberRooms;
+    // Get position in room
+    while (true) {
+        int y = rand() % grid.size();
+        int x = rand() % grid[y].size();
+        if (rooms[y][x] == roomNum) {
+            return pair<int,int>(y, x);
+        }
+    }
+}
+
+void Dungeon::loadRooms() {
+    // Floodfills to identify rooms
+    for (unsigned int y = 0; y < grid.size(); y++) {
+        rooms.push_back(vector<int>(grid[y].size(), -1));
+    }
+
+    for (unsigned int y = 0; y < grid.size(); y++) {
+        for (unsigned int x = 0; x < grid[y].size(); x++) {
+            if (grid[y][x] == Floor && rooms[y][x] == -1) {
+                floodfill(y, x, numberRooms);
+                numberRooms++;
+            }
+        }
+    }
+}
+
+void Dungeon::floodfill(unsigned int y, unsigned int x, int n) {
+    if (x < 0 || y < 0 || y >= grid.size() || x >= grid[y].size() || rooms[y][x] != -1 || grid[y][x] != Floor) {
+        return;
+    }
+    rooms[y][x] = n;
+    for (int dy = -1; dy <= 1; dy++) {
+        for (int dx = -1; dx <= 1; dx++) {
+            floodfill(y + dy, x + dx, n);
+        }
+    }
 }

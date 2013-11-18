@@ -19,12 +19,13 @@ Game::Game() : isDone(false) {
     }
     // TODO: class selection?
     level = new Level();
-    player = new HumanPlayer(5, 5);
+    player = new HumanPlayer();
     pstatus = new PlayerStatus(*player);
     display.add(player, 1);
     display.add(pstatus);
-    level->add(player, false);
+    level->addPlayer(player);
 
+    level->generate();
     level->addAllToDisplay(&display);
 }
 
