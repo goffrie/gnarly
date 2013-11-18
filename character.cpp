@@ -4,10 +4,11 @@
 
 using namespace std;
 
-Character::Character(int y, int x) : LevelObject(y, x), hp(0) {
+Character::Character(int y, int x, CharAttr c) : LevelObject(y, x), attributes(new Attributes(Attributes::get(c))), hp(attributes->startingHP()) {
 }
 
 Character::~Character() {
+    delete attributes;
 }
 
 void Character::reduceHp(int amt) {

@@ -4,12 +4,6 @@
 #include "player.h"
 
 class HumanPlayer : public Player {
-protected:
-    virtual const char* race() const { return "Human"; }
-    virtual int startingHp() const { return 140; }
-    virtual int atk() const { return 20; }
-    virtual int def() const { return 20; }
-
 public:
     HumanPlayer();
 };

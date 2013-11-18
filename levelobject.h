@@ -12,16 +12,16 @@
 class Level;
 
 class LevelObject : public Displayable {
-public:
     friend class Level;
     Level* level;
     // The item's position.
     int y, x;
 
+
+public:
     // The item's ASCII tile.
     virtual char tile() const = 0;
 
-public:
     LevelObject(int y = -1, int x = -1) : level(0), y(y), x(x) { }
     virtual ~LevelObject() { }
 

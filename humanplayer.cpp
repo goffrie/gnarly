@@ -1,5 +1,4 @@
 #include "humanplayer.h"
 
-HumanPlayer::HumanPlayer() : Player() {
-    init();
+HumanPlayer::HumanPlayer() : Player(Human) {
 }

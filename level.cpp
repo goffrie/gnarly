@@ -7,9 +7,11 @@
 
 using namespace std;
 
-Level::Level() : dungeon(Dungeon::defaultDungeon()),
-    grid(dungeon.height(),
-    vector<LevelObject*>(dungeon.width(), 0)) {
+Level::Level()
+: dungeon(Dungeon::defaultDungeon()),
+  grid(dungeon.height(),
+  vector<LevelObject*>(dungeon.width(), 0)) {
+    
 }
 
 Level::~Level() {
@@ -18,9 +20,9 @@ Level::~Level() {
     }
 }
 
-void Level::generate() {
+void Level::generate(Player* p) {
     pair<int,int> nextPos = dungeon.randomPlacement();
-    player->moveTo(nextPos.first, nextPos.second);
+    p->moveTo(nextPos.first, nextPos.second);
 }
 
 void Level::addAllToDisplay(Display *d) {
@@ -41,11 +43,6 @@ void Level::add(LevelObject* i, bool own) {
     if (own) {
         items.push_back(i);
     }
-}
-
-void Level::addPlayer(Player* p) {
-    player = p;
-    add(p, false);
 }
 
 void Level::move(LevelObject* i, int y, int x) {

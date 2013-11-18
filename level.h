@@ -14,8 +14,6 @@ class LevelObject;
 class Level {
     // The base dungeon layout. Owned by this class.
     Dungeon dungeon;
-    // Not owned by this class
-    Player* player;
 
     // A catalogue of the things on this level,
     // indexed by their location.
@@ -32,7 +30,7 @@ public:
     unsigned int height() const { return grid.size(); }
     unsigned int width() const { return grid[0].size(); }
 
-    void generate();
+    void generate(Player* p);
 
     // Adds all of this level's contents to the display
     void addAllToDisplay(Display* d);
@@ -40,8 +38,6 @@ public:
     // Add something to the level. `own` controls whether the level
     // should take ownership of it.
     void add(LevelObject* i, bool own = true);
-
-    void addPlayer(Player* i);
 
     // Move something on this level to the given position.
     void move(LevelObject* i, int y, int x);
