@@ -26,8 +26,6 @@ Game::Game() : isDone(false) {
     level->add(player, false);
 
     level->addAllToDisplay(&display);
-
-    ui->init();
 }
 
 Game::~Game() {

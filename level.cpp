@@ -60,6 +60,8 @@ bool Level::free(int y, int x) const {
 bool Level::movable(int y, int x) const {
     struct IsGoldVisitor : public LevelObjectVisitor {
         bool ans;
+        // TODO: when gold is implemented, check for it
+        // XXX: also staircases
     };
     IsGoldVisitor v;
     v.ans = false;

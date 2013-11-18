@@ -5,8 +5,8 @@
 
 class CursesUI : public UI {
 public:
+    CursesUI();
     virtual ~CursesUI() override;
-    virtual void init() override;
     virtual void queryCommand(CommandHandler& target) override;
     virtual void say(const char* msg) override;
     virtual char readChar() override;

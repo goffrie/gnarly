@@ -34,9 +34,6 @@ BasicUI::BasicUI() {
     }
 }
 
-void BasicUI::init() {
-}
-
 BasicUI::~BasicUI() {
 
 }

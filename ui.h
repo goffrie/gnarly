@@ -10,8 +10,6 @@
 class UI {
 public:
     virtual ~UI() {};
-    // Initialize what need to be
-    virtual void init() = 0;
 
     // Ask for (and wait on) a command from the user.
     virtual void queryCommand(CommandHandler& target) = 0;

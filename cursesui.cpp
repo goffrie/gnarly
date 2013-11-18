@@ -20,7 +20,7 @@ inline Direction viKey(char c) {
     return INVALID_DIRECTION;
 }
 
-void CursesUI::init() {
+CursesUI::CursesUI() {
     initscr();
     raw();
     keypad(stdscr, TRUE);

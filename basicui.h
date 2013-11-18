@@ -11,7 +11,6 @@ class BasicUI : public UI {
 public:
     BasicUI();
     virtual ~BasicUI() override;
-    virtual void init() override;
     virtual void queryCommand(CommandHandler& target) override;
     virtual void say(const char* msg) override;
     virtual char readChar() override;
