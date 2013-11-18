@@ -1,14 +1,14 @@
 #include "level.h"
 
 #include "dungeon.h"
-#include "levelitem.h"
+#include "levelobject.h"
 
 #include <cassert>
 
 using namespace std;
 
 Level::Level(Dungeon& dungeon) : dungeon(dungeon),
-    grid(dungeon.height(), vector<LevelItem*>(dungeon.width(), 0)) {
+    grid(dungeon.height(), vector<LevelObject*>(dungeon.width(), 0)) {
 }
 
 Level::~Level() {
@@ -17,7 +17,7 @@ Level::~Level() {
     }
 }
 
-void Level::add(LevelItem* i, bool own) {
+void Level::add(LevelObject* i, bool own) {
     assert(!i->level);
     assert(i->y >= 0 && (unsigned) i->y < height());
     assert(i->x >= 0 && (unsigned) i->x < width());
@@ -30,10 +30,8 @@ void Level::add(LevelItem* i, bool own) {
     }
 }
 
-void Level::move(LevelItem* i, int y, int x) {
+void Level::move(LevelObject* i, int y, int x) {
     // Sanity checks.
-    assert(y >= 0 && (unsigned) y < height());
-    assert(x >= 0 && (unsigned) x < width());
     assert(grid[y][x] == 0 || grid[y][x] == i);
     assert(grid[i->y][i->x] == i);
 
@@ -52,7 +50,7 @@ bool Level::free(int y, int x) const {
 }
 
 bool Level::movable(int y, int x) const {
-    struct IsGoldVisitor : public LevelItemVisitor {
+    struct IsGoldVisitor : public LevelObjectVisitor {
         bool ans;
     };
     IsGoldVisitor v;

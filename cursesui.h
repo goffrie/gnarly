@@ -5,7 +5,7 @@
 
 class CursesUI : public UI {
 public:
-    virtual void queryCommand(UI::CommandDelegate& target) override;
+    virtual void queryCommand(CommandHandler& target) override;
     virtual void say(const char* msg) override;
     virtual char readChar() override;
     virtual std::string readLine() override;

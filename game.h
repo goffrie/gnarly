@@ -6,8 +6,9 @@
 #include "dungeon.h"
 #include "playerstatus.h"
 #include "cursesui.h"
+#include "commandhandler.h"
 
-class Game {
+class Game : public CommandHandler {
     // Has ownership of `player` and `pstatus`.
     Player* player;
     PlayerStatus* pstatus;
@@ -15,11 +16,21 @@ class Game {
     Display display;
     Dungeon dungeon;
     CursesUI ui;
+
+    bool isDone;
 public:
     Game();
     ~Game();
 
+    void run();
+    void readCommand();
+    void step();
     void print();
+    void move(Direction d);
+    void attack(Direction d);
+    void use(Direction d);
+    void quit();
+    void restart();
 };
 
 #endif

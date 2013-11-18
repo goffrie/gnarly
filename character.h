@@ -1,10 +1,10 @@
 #ifndef __CHARACTER_H__
 #define __CHARACTER_H__
 
-#include "levelitem.h"
+#include "levelobject.h"
 
 // An abstract class representing a character with HP, attack, and defense.
-class Character : public LevelItem {
+class Character : public LevelObject {
 protected:
     int hp;
 
@@ -25,7 +25,7 @@ public:
 
     void takeDamage(int attack);
 
-    virtual void accept(LevelItemVisitor& v) override { v.visit(*this); }
+    virtual void accept(LevelObjectVisitor& v) override { v.visit(*this); }
 };
 
 #endif

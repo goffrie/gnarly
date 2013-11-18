@@ -23,7 +23,7 @@ public:
 
     virtual ~Player() { }
 
-    virtual void accept(LevelItemVisitor& v) override { v.visit(*this); }
+    virtual void accept(LevelObjectVisitor& v) override { v.visit(*this); }
 };
 
 #endif

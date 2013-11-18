@@ -20,7 +20,7 @@ inline Direction viKey(char c) {
     return INVALID_DIRECTION;
 }
 
-void CursesUI::queryCommand(UI::CommandDelegate& target) {
+void CursesUI::queryCommand(CommandHandler& target) {
     switch (char c = readChar()) {
         case 'h': case 'j': case 'k': case 'l':
         case 'y': case 'u': case 'b': case 'n':

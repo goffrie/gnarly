@@ -2,5 +2,5 @@
 
 int main() {
     Game g;
-    g.print();
+    g.run();
 }
