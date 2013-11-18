@@ -19,14 +19,12 @@ void LevelObject::moveRelative(Direction d) {
 }
  
 bool LevelObject::canMove(int nY, int nX) {
-    if (
-           nX < 0 
-        || nY < 0 
-        || (unsigned)nX >= level->width() 
-        || (unsigned)nY >= level->height() 
-        || !level->free(nY, nX)
-    ) {
+    if (!level->valid(nY, nX) || !level->free(nY, nX)) {
         return false;
     }
     return true;
+}
+
+void LevelObject::step() {
+    
 }

@@ -27,12 +27,12 @@ void Level::generate(Player* p) {
 
     for (int i = 0; i < numberEnemies; i++) {
         Monster* newEnemy = randomMonster();
-        add(newEnemy);
-        nextPos = dungeon.randomPlacement();
-        while (!free(nextPos.first, nextPos.second)) {
+        do {
             nextPos = dungeon.randomPlacement();
-        }
-        newEnemy->moveTo(nextPos.first, nextPos.second);
+        } while (!free(nextPos.first, nextPos.second));
+        newEnemy->y = nextPos.first;
+        newEnemy->x = nextPos.second;
+        add(newEnemy);
     }
 }
 
@@ -70,6 +70,10 @@ void Level::move(LevelObject* i, int y, int x) {
     i->x = x;
 }
 
+bool Level::valid(int y, int x) const {
+    return x < 0 || y < 0 || (unsigned)x >= width() || (unsigned)y >= height();
+}
+
 bool Level::free(int y, int x) const {
     Tile t = dungeon.tileAt(y, x);
     return !grid[y][x] && (t == Floor || t == Passage || t == Door);
@@ -89,4 +93,22 @@ bool Level::movable(int y, int x) const {
     }
     Tile t = dungeon.tileAt(y, x);
     return (t == Floor || t == Passage || t == Door);
+}
+
+void Level::stepObjects() {
+    for (unsigned int i = 0; i < objects.size(); i++) {
+        objects[i]->step();
+    }
+}
+
+vector<LevelObject*> Level::getAdjacent(int y, int x) {
+    vector<LevelObject*> adjacent;
+    for (unsigned int dy = -1; dy <= 1; dy++) {
+        for (unsigned int dx = -1; dx <= 1; dx ++) {
+            if (valid(y + dy, x + dx) && (dy != 0 || dx !=0)) {
+                adjacent.push_back(grid[y + dy][x + dx]);
+            }
+        }
+    }
+    return adjacent;
 }

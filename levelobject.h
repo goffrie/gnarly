@@ -32,6 +32,7 @@ public:
 
     void moveTo(int y, int x);
     void moveRelative(Direction d);
+    virtual void step();
     virtual bool canMove(int y, int x);
 
     virtual void accept(LevelObjectVisitor& v) { v.visit(*this); }

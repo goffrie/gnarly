@@ -50,7 +50,7 @@ void Game::readCommand() {
 }
 
 void Game::step() {
-
+    level->stepObjects();
 }
 
 void Game::print() {

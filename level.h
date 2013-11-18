@@ -45,6 +45,8 @@ public:
     // Move something on this level to the given position.
     void move(LevelObject* i, int y, int x);
 
+    bool valid(int y, int x) const;
+
     // Check if a position is free (i.e. there is
     // nothing in that location).
     bool free(int y, int x) const;
@@ -52,6 +54,9 @@ public:
     // Check if a location can be moved into
     // (i.e. it has nothing except gold).
     bool movable(int y, int x) const;
+
+    void stepObjects();
+    std::vector<LevelObject*> getAdjacent(int y, int x);
 };
 
 #endif

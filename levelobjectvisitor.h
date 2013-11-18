@@ -3,6 +3,7 @@
 
 // A visitor for LevelItems.
 // All the methods are default-empty for convenience.
+// XXX
 class LevelObjectVisitor {
 public:
     virtual void visit(class LevelObject&) {}
