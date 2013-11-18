@@ -5,7 +5,7 @@
 
 class Player : public Character {
 public:
-    Player(CharAttr c) : Character(0, 0, c) { }
+    Player(CharAttr c) : Character(c) { }
 
     virtual ~Player() { }
 

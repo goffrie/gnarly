@@ -8,6 +8,7 @@ public:
     virtual void visit(class LevelObject&) {}
     virtual void visit(class Character&) {}
     virtual void visit(class Player&) {}
+    virtual void visit(class Monster&) {}
 };
 
 #endif

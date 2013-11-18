@@ -13,12 +13,9 @@ protected:
 
     virtual void reduceHp(int amt);
 
-// Pure virtual methods to be implemented by subclasses.
 public:
-
-public:
-    Character(int y, int x, CharAttr c);
-    virtual ~Character();
+    Character(CharAttr c);
+    virtual ~Character() = 0;
 
     int currentHp() const {
         return hp;

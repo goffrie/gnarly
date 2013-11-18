@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Character::Character(int y, int x, CharAttr c) : LevelObject(y, x), attributes(new Attributes(Attributes::get(c))), hp(attributes->startingHP()) {
+Character::Character(CharAttr c) : LevelObject(0, 0), attributes(new Attributes(Attributes::get(c))), hp(attributes->startingHP()) {
 }
 
 Character::~Character() {

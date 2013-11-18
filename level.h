@@ -5,6 +5,7 @@
 #include "display.h"
 #include "dungeon.h"
 #include "player.h"
+#include "randomspawn.h"
 
 #include <vector>
 
@@ -21,7 +22,9 @@ class Level {
 
     // All the items owned by this level.
     // This includes everything except the player.
-    std::vector<LevelObject*> items;
+    std::vector<LevelObject*> objects;
+
+    int numberEnemies;
 
 public:
     Level();

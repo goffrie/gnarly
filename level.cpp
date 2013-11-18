@@ -10,25 +10,36 @@ using namespace std;
 Level::Level()
 : dungeon(Dungeon::defaultDungeon()),
   grid(dungeon.height(),
-  vector<LevelObject*>(dungeon.width(), 0)) {
+  vector<LevelObject*>(dungeon.width(), 0)),
+  numberEnemies(20) {
     
 }
 
 Level::~Level() {
-    for (unsigned int i = 0; i < items.size(); ++i) {
-        delete items[i];
+    for (unsigned int i = 0; i < objects.size(); ++i) {
+        delete objects[i];
     }
 }
 
 void Level::generate(Player* p) {
     pair<int,int> nextPos = dungeon.randomPlacement();
     p->moveTo(nextPos.first, nextPos.second);
+
+    for (int i = 0; i < numberEnemies; i++) {
+        Monster* newEnemy = randomMonster();
+        add(newEnemy);
+        nextPos = dungeon.randomPlacement();
+        while (!free(nextPos.first, nextPos.second)) {
+            nextPos = dungeon.randomPlacement();
+        }
+        newEnemy->moveTo(nextPos.first, nextPos.second);
+    }
 }
 
 void Level::addAllToDisplay(Display *d) {
     d->add(&dungeon);
-    for (unsigned int i = 0; i < items.size(); i++) {
-        d->add(items[i], 1);
+    for (unsigned int i = 0; i < objects.size(); i++) {
+        d->add(objects[i], 1);
     }
 }
 
@@ -41,7 +52,7 @@ void Level::add(LevelObject* i, bool own) {
     i->level = this;
     grid[i->y][i->x] = i;
     if (own) {
-        items.push_back(i);
+        objects.push_back(i);
     }
 }
 
