@@ -48,7 +48,6 @@ void Game::readCommand() {
 }
 
 void Game::step() {
-    UI::instance()->say("Nothing happens.");
     level->stepObjects();
 }
 
@@ -69,7 +68,20 @@ void Game::move(Direction d) {
 }
 
 void Game::attack(Direction d) {
-    UI::instance()->say("Give peace a chance.");
+    const int ny = player->getY() + directionDy(d),
+              nx = player->getX() + directionDx(d);
+    if (level->free(ny, nx)) {
+        UI::instance()->say("You swing at open space.");
+        return;
+    }
+    // XXX ?
+    Character* target = dynamic_cast<Character*>(level->objectAt(ny, nx));
+    if (target) {
+        player->attack(target);
+        step();
+    } else {
+        UI::instance()->say("You can't attack that.");
+    }
 }
 
 void Game::use(Direction d) {
