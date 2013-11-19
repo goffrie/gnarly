@@ -60,6 +60,9 @@ void Level::add(LevelObject* i, bool own) {
 }
 
 void Level::remove(LevelObject* l) {
+    if (grid[l->y][l->x] == l) {
+        grid[l->y][l->x] = 0;
+    }
     vector<LevelObject*>::iterator it = find(objects.begin(), objects.end(), l);
     if (it != objects.end()) {
         objects.erase(it);

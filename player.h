@@ -5,13 +5,14 @@
 
 class Player : public Character {
 protected:
-    virtual void reduceHP(int amt) override { hp -= amount; }
+    virtual void reduceHp(int amt) override;
 public:
     Player(CharAttr c) : Character(c) { }
 
     virtual ~Player();
 
     virtual bool canMove(int nY, int nX) override;
+    virtual void attack(Character* other) override;
 
     virtual void accept(LevelObjectVisitor& v) override { v.visit(*this); }
 };

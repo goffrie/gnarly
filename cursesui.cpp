@@ -2,8 +2,13 @@
 
 #include <ncurses.h>
 #include <cctype>
+#include <cassert>
 
 using namespace std;
+
+// The maximum allowed number of characters in the current
+// message line, not including the " --more--"
+const int maxMsgLineLength = 70;
 
 inline Direction viKey(int c) {
     switch (c) {
@@ -28,7 +33,7 @@ inline Direction viKey(int c) {
     return INVALID_DIRECTION;
 }
 
-CursesUI::CursesUI() {
+CursesUI::CursesUI() : msgLineLength(0) {
     initscr();
     raw();
     keypad(stdscr, TRUE);
@@ -40,6 +45,7 @@ CursesUI::~CursesUI() {
 }
 
 void CursesUI::queryCommand(CommandHandler& target) {
+    msgLineLength = 0;
     switch (int c = readChar()) {
         case 'h': case 'j': case 'k': case 'l':
         case 'y': case 'u': case 'b': case 'n':
@@ -51,10 +57,7 @@ void CursesUI::queryCommand(CommandHandler& target) {
             int a = readChar();
             Direction d = viKey(a);
             if (d == INVALID_DIRECTION) {
-                string msg = "Unknown direction ";
-                msg += a;
-                msg += "!";
-                say(msg.c_str());
+                say(string("Unknown direction ") + (char)a + "!");
             } else {
                 target.attack(d);
             }
@@ -65,10 +68,7 @@ void CursesUI::queryCommand(CommandHandler& target) {
             int a = readChar();
             Direction d = viKey(a);
             if (d == INVALID_DIRECTION) {
-                string msg = "Unknown direction ";
-                msg += a;
-                msg += "!";
-                say(msg.c_str());
+                say(string("Unknown direction ") + (char)a + "!");
             } else {
                 target.use(d);
             }
@@ -90,17 +90,25 @@ void CursesUI::queryCommand(CommandHandler& target) {
                 say("Never mind.");
             }
             break;
-        default: {
-            string msg = "Unknown command ";
-            msg += c;
-            msg += "!";
-            say(msg.c_str());
-        }
+        default:
+            say(string("Unknown command ") + (char)c + "!");
     }
 }
 
-void CursesUI::say(const char* msg) {
-    mvaddstr(29, 0, msg);
+void CursesUI::say(const std::string& msg) {
+    assert(msg.size() <= maxMsgLineLength);
+    if (msgLineLength + msg.size() > maxMsgLineLength) {
+        mvaddstr(29, msgLineLength, " --more--");
+        clrtoeol();
+        while (getch() != '\n');
+        msgLineLength = 0;
+    }
+
+    // Leave a space between messages.
+    if (msgLineLength) ++msgLineLength;
+
+    mvaddstr(29, msgLineLength, msg.c_str());
+    msgLineLength += msg.size();
     clrtoeol();
 }
 
