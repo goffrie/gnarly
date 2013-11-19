@@ -2,6 +2,10 @@
 
 #include "level.h"
 
+Player::~Player() {
+    Game::quit();
+}
+
 bool Player::canMove(int nY, int nX) {
     struct IsPassableVisitor : public LevelObjectVisitor {
         bool ans;

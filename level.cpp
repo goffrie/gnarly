@@ -4,6 +4,7 @@
 #include "levelobject.h"
 
 #include <cassert>
+#include <algorithm>
 
 using namespace std;
 
@@ -58,6 +59,13 @@ void Level::add(LevelObject* i, bool own) {
     }
 }
 
+void Level::remove(LevelObject* l) {
+    vector<LevelObject*>::iterator it = find(objects.begin(), objects.end(), l);
+    if (it != objects.end()) {
+        objects.erase(it);
+    }
+}
+
 void Level::move(LevelObject* i, int y, int x) {
     // Sanity checks.
     assert(grid[y][x] == 0 || grid[y][x] == i);
@@ -84,8 +92,8 @@ bool Level::free(int y, int x) const {
 void Level::stepObjects() {
     // XXX: steps in the wrong order
     // needs to do it in grid order
-    for (unsigned int i = 0; i < objects.size(); i++) {
-        objects[i]->step();
+    for (vector<LevelObject*>::iterator it = objects.begin(); it != objects.end(); ) {
+        (*(it++))->step();
     }
 }
 

@@ -41,6 +41,7 @@ public:
     // Add something to the level. `own` controls whether the level
     // should take ownership of it.
     void add(LevelObject* i, bool own = true);
+    void remove(LevelObject* i);
 
     // Move something on this level to the given position.
     void move(LevelObject* i, int y, int x);

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-inline Direction viKey(char c) {
+inline Direction viKey(int c) {
     switch (c) {
         case 'h': return WEST;
         case 'j': return SOUTH;
@@ -15,6 +15,14 @@ inline Direction viKey(char c) {
         case 'u': return NE;
         case 'b': return SW;
         case 'n': return SE;
+        case KEY_UP: return NORTH;
+        case KEY_DOWN: return SOUTH;
+        case KEY_LEFT: return WEST;
+        case KEY_RIGHT: return EAST;
+        case KEY_A1: return NW;
+        case KEY_A3: return NE;
+        case KEY_C1: return SW;
+        case KEY_C3: return SE;
     }
 
     return INVALID_DIRECTION;
@@ -32,13 +40,15 @@ CursesUI::~CursesUI() {
 }
 
 void CursesUI::queryCommand(CommandHandler& target) {
-    switch (char c = readChar()) {
+    switch (int c = readChar()) {
         case 'h': case 'j': case 'k': case 'l':
         case 'y': case 'u': case 'b': case 'n':
+        case KEY_UP: case KEY_DOWN: case KEY_LEFT: case KEY_RIGHT:
+        case KEY_A1: case KEY_A3: case KEY_C1: case KEY_C3:
             target.move(viKey(c));
             break;
         case 'a': {
-            char a = readChar();
+            int a = readChar();
             Direction d = viKey(a);
             if (d == INVALID_DIRECTION) {
                 string msg = "Unknown direction ";
@@ -52,7 +62,7 @@ void CursesUI::queryCommand(CommandHandler& target) {
         }
         case 'q': { // quaff
             // XXX
-            char a = readChar();
+            int a = readChar();
             Direction d = viKey(a);
             if (d == INVALID_DIRECTION) {
                 string msg = "Unknown direction ";
@@ -94,13 +104,8 @@ void CursesUI::say(const char* msg) {
     clrtoeol();
 }
 
-char CursesUI::readChar() {
-    while (1) {
-        char c = getch();
-        if (!isspace(c)) {
-            return c;
-        }
-    }
+int CursesUI::readChar() {
+    return getch();
 }
 
 string CursesUI::readLine() {

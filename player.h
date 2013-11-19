@@ -4,10 +4,12 @@
 #include "character.h"
 
 class Player : public Character {
+protected:
+    virtual void reduceHP(int amt) override { hp -= amount; }
 public:
     Player(CharAttr c) : Character(c) { }
 
-    virtual ~Player() { }
+    virtual ~Player();
 
     virtual bool canMove(int nY, int nX) override;
 

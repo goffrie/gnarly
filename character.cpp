@@ -16,6 +16,7 @@ void Character::reduceHp(int amt) {
     // TODO: notify
     if (hp <= 0) {
         UI::instance()->say("I died.");
+        delete this;
     }
 }
 

@@ -3,6 +3,12 @@
 #include "ui.h"
 #include "level.h"
 
+LevelObject::~LevelObject() {
+    if (level) {
+        level->remove(this);
+    }
+}
+
 void LevelObject::draw(UI& ui) const {
     ui.draw(y, x, tile());
 }
@@ -18,7 +24,7 @@ bool LevelObject::moveTo(int nY, int nX) {
 }
 
 bool LevelObject::moveRelative(Direction d) {
-    moveTo(y + directionDy(d), x + directionDx(d));
+    return moveTo(y + directionDy(d), x + directionDx(d));
 }
 
 bool LevelObject::canMove(int nY, int nX) {

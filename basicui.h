@@ -13,7 +13,7 @@ public:
     virtual ~BasicUI() override;
     virtual void queryCommand(CommandHandler& target) override;
     virtual void say(const char* msg) override;
-    virtual char readChar() override;
+    virtual int readChar() override;
     virtual std::string readLine() override;
     std::string readNext();
     virtual void draw(int y, int x, char c) override;

@@ -75,10 +75,10 @@ void BasicUI::say(const char* msg) {
     redraw();
 }
 
-char BasicUI::readChar() {
+int BasicUI::readChar() {
     char c;
     cin >> c;
-    return c;
+    return (int)c;
 }
 
 string BasicUI::readNext() {

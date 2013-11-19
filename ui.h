@@ -17,7 +17,7 @@ public:
     // Write a message to the user.
     virtual void say(const char* msg) = 0;
     // Read one (non-space) character.
-    virtual char readChar() = 0;
+    virtual int readChar() = 0;
     // Read a line. Always call `say` first, to prompt the user.
     virtual std::string readLine() = 0;
 
