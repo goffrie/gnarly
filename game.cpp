@@ -21,9 +21,8 @@ Game::Game() : isDone(false) {
     level = new Level();
     player = new HumanPlayer();
     pstatus = new PlayerStatus(*player);
-    display.add(player, 1);
     display.add(pstatus);
-    level->add(player, false);
+    display.add(player, 1);
 
     level->generate(player);
     level->addAllToDisplay(&display);

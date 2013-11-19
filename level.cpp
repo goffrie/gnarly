@@ -22,8 +22,10 @@ Level::~Level() {
 }
 
 void Level::generate(Player* p) {
-    pair<int,int> nextPos = dungeon.randomPlacement();
-    p->moveTo(nextPos.first, nextPos.second);
+    pair<int, int> nextPos = dungeon.randomPlacement();
+    p->y = nextPos.first;
+    p->x = nextPos.second;
+    add(p, false);
 
     for (int i = 0; i < numberEnemies; i++) {
         Monster* newEnemy = randomMonster();
