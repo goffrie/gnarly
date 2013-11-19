@@ -46,7 +46,7 @@ void BasicUI::queryCommand(CommandHandler& target) {
         Direction d = convert(a);
         if (d == INVALID_DIRECTION) {
             string msg = "Unknown direction " + a + "!";
-            say(msg.c_str());
+            say(msg);
         } else {
             target.attack(d);
         }
@@ -55,7 +55,7 @@ void BasicUI::queryCommand(CommandHandler& target) {
         Direction d = convert(u);
         if (d == INVALID_DIRECTION) {
             string msg = "Unknown direction " + u + "!";
-            say(msg.c_str());
+            say(msg);
         } else {
             target.use(d);
         }
@@ -66,11 +66,11 @@ void BasicUI::queryCommand(CommandHandler& target) {
         say("Really quit? [yes/no] ");
         if (readNext() == "yes") target.quit();
     } else {
-        say(("Unknown command " + s + "!").c_str());
+        say("Unknown command " + s + "!");
     }
 }
 
-void BasicUI::say(const char* msg) {
+void BasicUI::say(const std::string& msg) {
     draw(29, 0, msg);
     redraw();
 }

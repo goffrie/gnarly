@@ -15,7 +15,7 @@ public:
     virtual void queryCommand(CommandHandler& target) = 0;
 
     // Write a message to the user.
-    virtual void say(const char* msg) = 0;
+    virtual void say(const std::string& msg) = 0;
     // Read one (non-space) character.
     virtual char readChar() = 0;
     // Read a line. Always call `say` first, to prompt the user.

@@ -1,5 +1,6 @@
 #include "player.h"
 
+#include "ui.h"
 #include "level.h"
 
 bool Player::canMove(int nY, int nX) {
@@ -22,4 +23,9 @@ bool Player::canMove(int nY, int nX) {
     // Otherwise, there has to be no terrain in the way.
     Tile t = getLevel()->tileAt(nY, nX);
     return (t == Floor || t == Passage || t == Door);
+}
+
+void Player::attack(Character* other) {
+    UI::instance()->say("You hit the " + other->race() + ".");
+    other->takeDamage(atk());
 }

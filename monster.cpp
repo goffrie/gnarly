@@ -58,10 +58,10 @@ void Monster::attack(Character* target) {
     ostringstream msg;
     if (rand() % 2 == 0) {
         msg << "The " << race() << " misses.";
-        UI::instance()->say(msg.str().c_str());
+        UI::instance()->say(msg.str());
     } else {
         msg << "The " << race() << " hits!";
-        UI::instance()->say(msg.str().c_str());
+        UI::instance()->say(msg.str());
         target->takeDamage(atk());
     }
 }

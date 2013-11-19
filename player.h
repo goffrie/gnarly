@@ -10,6 +10,7 @@ public:
     virtual ~Player() { }
 
     virtual bool canMove(int nY, int nX) override;
+    virtual void attack(Character* other) override;
 
     virtual void accept(LevelObjectVisitor& v) override { v.visit(*this); }
 };
