@@ -89,8 +89,8 @@ void Level::stepObjects() {
 
 vector<LevelObject*> Level::getAdjacent(int y, int x) {
     vector<LevelObject*> adjacent;
-    for (unsigned int dy = -1; dy <= 1; dy++) {
-        for (unsigned int dx = -1; dx <= 1; dx ++) {
+    for (int dy = -1; dy <= 1; dy++) {
+        for (int dx = -1; dx <= 1; dx ++) {
             if (valid(y + dy, x + dx) && (dy != 0 || dx !=0)) {
                 adjacent.push_back(grid[y + dy][x + dx]);
             }
