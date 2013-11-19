@@ -18,7 +18,7 @@ bool LevelObject::moveTo(int nY, int nX) {
 }
 
 bool LevelObject::moveRelative(Direction d) {
-    moveTo(y + directionDy(d), x + directionDx(d));
+    return moveTo(y + directionDy(d), x + directionDx(d));
 }
 
 bool LevelObject::canMove(int nY, int nX) {
