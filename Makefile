@@ -12,6 +12,7 @@ OBJECTS=\
 	humanplayer.o \
 	level.o \
 	levelobject.o \
+	levelobjectvisitor.o \
 	main.o \
 	player.o \
 	playerstatus.o \

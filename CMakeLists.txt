@@ -16,6 +16,7 @@ set(gnarly_SOURCES
     humanplayer.cpp
     level.cpp
     levelobject.cpp
+    levelobjectvisitor.cpp
     main.cpp
     monster.cpp
     player.cpp
