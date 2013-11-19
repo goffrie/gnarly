@@ -18,7 +18,8 @@ OBJECTS=\
 	playerstatus.o \
 	basicui.o \
 	attributes.o \
-	monster.o
+	monster.o \
+	ui.o
 DEPENDS=${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

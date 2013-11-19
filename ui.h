@@ -31,6 +31,14 @@ public:
 
     // Refreshes the display (by reprinting or curses)
     virtual void redraw() = 0;
+
+// A kind of singleton, where the instance is chosen at runtime.
+private:
+    static UI* ui;
+    static void cleanup();
+public:
+    static UI* instance();
+    static void setInstance(UI* ui);
 };
 
 #endif

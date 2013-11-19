@@ -17,7 +17,6 @@ class Game : public CommandHandler {
     Level* level;
 
     Display display;
-    UI* ui;
 
     bool isDone;
 public:

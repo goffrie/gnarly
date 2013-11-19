@@ -13,9 +13,9 @@ Game::Game() : isDone(false) {
     char c;
     cin >> c;
     if (c == 'y') {
-        ui = new CursesUI();
+        UI::setInstance(new CursesUI());
     } else {
-        ui = new BasicUI();
+        UI::setInstance(new BasicUI());
     }
     // TODO: class selection?
     level = new Level();
@@ -29,7 +29,7 @@ Game::Game() : isDone(false) {
 }
 
 Game::~Game() {
-    delete ui;
+    UI::setInstance(0);
     delete pstatus;
     delete player;
     delete level;
@@ -44,15 +44,16 @@ void Game::run() {
 }
 
 void Game::readCommand() {
-    ui->queryCommand(*this);
+    UI::instance()->queryCommand(*this);
 }
 
 void Game::step() {
-    ui->say("Nothing happens.");
+    UI::instance()->say("Nothing happens.");
     level->stepObjects();
 }
 
 void Game::print() {
+    UI* ui = UI::instance();
     display.draw(*ui);
     ui->cursor(player->getY(), player->getX());
     ui->redraw();
@@ -63,20 +64,20 @@ void Game::move(Direction d) {
         // A player action happened, so step.
         step();
     } else {
-        ui->say("You can't pass that way.");
+        UI::instance()->say("You can't pass that way.");
     }
 }
 
 void Game::attack(Direction d) {
-    ui->say("Give peace a chance.");
+    UI::instance()->say("Give peace a chance.");
 }
 
 void Game::use(Direction d) {
-    ui->say("There couldn't possibly be anything to use there.");
+    UI::instance()->say("There couldn't possibly be anything to use there.");
 }
 
 void Game::restart() {
-    ui->say("Nah.");
+    UI::instance()->say("Nah.");
 }
 
 void Game::quit() {

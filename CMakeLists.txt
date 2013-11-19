@@ -21,6 +21,7 @@ set(gnarly_SOURCES
     monster.cpp
     player.cpp
     playerstatus.cpp
+    ui.cpp
 )
 set(grapher_HEADERS
     attributes.h
