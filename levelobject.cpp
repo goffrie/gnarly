@@ -17,12 +17,9 @@ void LevelObject::moveTo(int nY, int nX) {
 void LevelObject::moveRelative(Direction d) {
     moveTo(y + directionDy(d), x + directionDx(d));
 }
- 
+
 bool LevelObject::canMove(int nY, int nX) {
-    if (!level->valid(nY, nX) || !level->free(nY, nX)) {
-        return false;
-    }
-    return true;
+    return level->valid(nY, nX) && level->free(nY, nX);
 }
 
 void LevelObject::step() {

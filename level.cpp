@@ -73,7 +73,7 @@ void Level::move(LevelObject* i, int y, int x) {
 }
 
 bool Level::valid(int y, int x) const {
-    return x < 0 || y < 0 || (unsigned)x >= width() || (unsigned)y >= height();
+    return !(x < 0 || y < 0 || (unsigned)x >= width() || (unsigned)y >= height());
 }
 
 bool Level::free(int y, int x) const {
