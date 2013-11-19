@@ -5,6 +5,7 @@ project(gnarly)
 find_package(Curses REQUIRED)
 
 set(gnarly_SOURCES
+    attributes.cpp
     basicui.cpp
     character.cpp
     cursesui.cpp
@@ -16,10 +17,12 @@ set(gnarly_SOURCES
     level.cpp
     levelobject.cpp
     main.cpp
+    monster.cpp
     player.cpp
     playerstatus.cpp
 )
 set(grapher_HEADERS
+    attributes.h
     basicui.h
     character.h
     commandhandler.h
@@ -32,8 +35,10 @@ set(grapher_HEADERS
     level.h
     levelobject.h
     levelobjectvisitor.h
+    monster.h
     player.h
     playerstatus.h
+    randomspawn.h
     ui.h
     util.h
 )
