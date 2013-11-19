@@ -81,22 +81,6 @@ bool Level::free(int y, int x) const {
     return !grid[y][x] && (t == Floor || t == Passage || t == Door);
 }
 
-bool Level::movable(int y, int x) const {
-    struct IsGoldVisitor : public LevelObjectVisitor {
-        bool ans;
-        // TODO: when gold is implemented, check for it
-        // XXX: also staircases
-    };
-    IsGoldVisitor v;
-    v.ans = false;
-    if (grid[y][x]) {
-        grid[y][x]->accept(v);
-        if (!v.ans) return false;
-    }
-    Tile t = dungeon.tileAt(y, x);
-    return (t == Floor || t == Passage || t == Door);
-}
-
 void Level::stepObjects() {
     for (unsigned int i = 0; i < objects.size(); i++) {
         objects[i]->step();

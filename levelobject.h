@@ -30,6 +30,8 @@ public:
     int getY() const { return y; }
     int getX() const { return x; }
 
+    Level* getLevel() const { return level; }
+
     void moveTo(int y, int x);
     void moveRelative(Direction d);
     virtual void step();

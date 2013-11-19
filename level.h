@@ -51,9 +51,8 @@ public:
     // nothing in that location).
     bool free(int y, int x) const;
 
-    // Check if a location can be moved into
-    // (i.e. it has nothing except gold).
-    bool movable(int y, int x) const;
+    Tile tileAt(int y, int x) const { return dungeon.tileAt(y, x); }
+    LevelObject* objectAt(int y, int x) const { return grid[y][x]; }
 
     void stepObjects();
     std::vector<LevelObject*> getAdjacent(int y, int x);

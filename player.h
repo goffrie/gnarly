@@ -9,6 +9,8 @@ public:
 
     virtual ~Player() { }
 
+    virtual bool canMove(int nY, int nX) override;
+
     virtual void accept(LevelObjectVisitor& v) override { v.visit(*this); }
 };
 
