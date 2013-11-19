@@ -25,6 +25,10 @@ public:
     virtual void draw(int y, int x, char c) = 0;
     // Or a string.
     virtual void draw(int y, int x, const std::string& c) = 0;
+
+    // Move the cursor here, if possible.
+    virtual void cursor(int y, int x) { }
+
     // Refreshes the display (by reprinting or curses)
     virtual void redraw() = 0;
 };

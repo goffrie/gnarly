@@ -66,11 +66,19 @@ void CursesUI::queryCommand(CommandHandler& target) {
         }
         case 'R': // restart
             say("Really restart? [yes/no] ");
-            if (readLine() == "yes") target.restart();
+            if (readLine() == "yes") {
+                target.restart();
+            } else {
+                say("Never mind.");
+            }
             break;
         case 'Q': // quit
             say("Really quit? [yes/no] ");
-            if (readLine() == "yes") target.quit();
+            if (readLine() == "yes") {
+                target.quit();
+            } else {
+                say("Never mind.");
+            }
             break;
         default: {
             string msg = "Unknown command ";
@@ -118,6 +126,10 @@ void CursesUI::draw(int y, int x, char c) {
 
 void CursesUI::draw(int y, int x, const std::string& str) {
     mvaddstr(y, x, str.c_str());
+}
+
+void CursesUI::cursor(int y, int x) {
+    move(y, x);
 }
 
 void CursesUI::redraw() {

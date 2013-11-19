@@ -39,7 +39,6 @@ void Game::run() {
     print();
     while (!isDone) {
         readCommand();
-        step();
         print();
     }
 }
@@ -49,28 +48,35 @@ void Game::readCommand() {
 }
 
 void Game::step() {
+    ui->say("Nothing happens.");
     level->stepObjects();
 }
 
 void Game::print() {
     display.draw(*ui);
+    ui->cursor(player->getY(), player->getX());
     ui->redraw();
 }
 
 void Game::move(Direction d) {
-    player->moveRelative(d);
+    if (player->moveRelative(d)) {
+        // A player action happened, so step.
+        step();
+    } else {
+        ui->say("You can't pass that way.");
+    }
 }
 
 void Game::attack(Direction d) {
-
+    ui->say("Give peace a chance.");
 }
 
 void Game::use(Direction d) {
-    
+    ui->say("There couldn't possibly be anything to use there.");
 }
 
 void Game::restart() {
-    
+    ui->say("Nah.");
 }
 
 void Game::quit() {
