@@ -1,6 +1,6 @@
 #include "character.h"
 
-#include <iostream>
+#include "ui.h"
 
 using namespace std;
 
@@ -15,7 +15,7 @@ void Character::reduceHp(int amt) {
     hp -= amt;
     // TODO: notify
     if (hp <= 0) {
-        cerr << "I died." << endl;
+        UI::instance()->say("I died.");
     }
 }
 
@@ -23,4 +23,8 @@ void Character::takeDamage(int attack) {
     // damage = ceil( attack * 100 / (100 + defense) )
     const int ratio = 100 + def();
     reduceHp((attack * 100 + ratio - 1) / ratio);
+}
+
+void Character::attack(Character* other) {
+    other->takeDamage(atk());
 }

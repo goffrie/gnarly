@@ -55,7 +55,7 @@ public:
     LevelObject* objectAt(int y, int x) const { return grid[y][x]; }
 
     void stepObjects();
-    std::vector<LevelObject*> getAdjacent(int y, int x);
+    std::vector<LevelObject*> neighbours(int y, int x);
 };
 
 #endif

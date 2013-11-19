@@ -19,7 +19,7 @@ enum Tile {
 class Dungeon : public Displayable {
     std::vector<std::vector<Tile> > grid;
     std::vector<std::vector<int> > rooms;
-    int numberRooms;
+    int roomCount;
     Dungeon() { }
 public:
     virtual void draw(UI& grid) const override;

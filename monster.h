@@ -9,6 +9,8 @@ public:
 
     virtual ~Monster() { }
 
+    virtual void attack(Character* target) override;
+
     virtual void accept(LevelObjectVisitor& v) override { v.visit(*this); }
     virtual void step();
 };

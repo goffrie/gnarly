@@ -82,17 +82,20 @@ bool Level::free(int y, int x) const {
 }
 
 void Level::stepObjects() {
+    // XXX: steps in the wrong order
+    // needs to do it in grid order
     for (unsigned int i = 0; i < objects.size(); i++) {
         objects[i]->step();
     }
 }
 
-vector<LevelObject*> Level::getAdjacent(int y, int x) {
+vector<LevelObject*> Level::neighbours(int y, int x) {
     vector<LevelObject*> adjacent;
     for (int dy = -1; dy <= 1; dy++) {
         for (int dx = -1; dx <= 1; dx ++) {
             if (valid(y + dy, x + dx) && (dy != 0 || dx !=0)) {
-                adjacent.push_back(grid[y + dy][x + dx]);
+                LevelObject* o = grid[y + dy][x + dx];
+                if (o) adjacent.push_back(o);
             }
         }
     }
