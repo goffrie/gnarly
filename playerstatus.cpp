@@ -12,18 +12,18 @@ void PlayerStatus::draw(UI& screen) const {
     ostringstream line;
 
     line << "Race: " << player.race() << " Gold: " << /* XXX */ 0;
-    screen.draw(25, 0, line.str());
+    screen.fillLine(25, line.str());
     line.str("");
 
     line << "HP: " << player.currentHp();
-    screen.draw(26, 0, line.str());
+    screen.fillLine(26, line.str());
     line.str("");
 
     line << "Atk: " << player.atk();
-    screen.draw(27, 0, line.str());
+    screen.fillLine(27, line.str());
     line.str("");
 
     line << "Def: " << player.def();
-    screen.draw(28, 0, line.str());
+    screen.fillLine(28, line.str());
     line.str("");
 }

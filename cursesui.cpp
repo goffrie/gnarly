@@ -128,6 +128,11 @@ void CursesUI::draw(int y, int x, const std::string& str) {
     mvaddstr(y, x, str.c_str());
 }
 
+void CursesUI::fillLine(int y, const std::string& str) {
+    mvaddstr(y, 0, str.c_str());
+    clrtoeol();
+}
+
 void CursesUI::cursor(int y, int x) {
     move(y, x);
 }

@@ -18,6 +18,7 @@ public:
     std::string readNext();
     virtual void draw(int y, int x, char c) override;
     virtual void draw(int y, int x, const std::string& str) override;
+    virtual void fillLine(int y, const std::string& str) override;
     virtual void redraw() override;
 };
 

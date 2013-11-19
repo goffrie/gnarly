@@ -101,6 +101,11 @@ void BasicUI::draw(int y, int x, const std::string& str) {
     screen[y].replace(x, string::npos, str);
 }
 
+void BasicUI::fillLine(int y, const std::string& str) {
+    screen[y] = str;
+    screen[y].resize(79, ' ');
+}
+
 void BasicUI::redraw() {
     for (unsigned y = 0; y < screen.size(); y++) {
         cout << screen[y] << endl;
