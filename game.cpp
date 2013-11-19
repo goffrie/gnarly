@@ -8,6 +8,8 @@
 
 using namespace std;
 
+Game* Game::_instance = 0;
+
 Game::Game() : isDone(false) {
     cout << "Curses? (y/n)" << endl;
     char c;
@@ -94,4 +96,16 @@ void Game::restart() {
 
 void Game::quit() {
     isDone = true;
+}
+
+Game* Game::instance() {
+    if (_instance == 0) {
+        _instance = new Game;
+        atexit(cleanup);
+    }
+    return _instance;
+}
+
+void Game::cleanup() {
+    delete _instance;
 }
