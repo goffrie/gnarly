@@ -18,7 +18,8 @@ class Game : public CommandHandler {
 
     Display display;
 
-    bool isDone;
+    bool hasQuit;
+    bool gameOver;
 
 public:
     void run();

@@ -10,7 +10,7 @@ using namespace std;
 
 Game* Game::_instance = 0;
 
-Game::Game() : isDone(false) {
+Game::Game() : hasQuit(false), gameOver(false) {
     cout << "Curses? (y/n)" << endl;
     char c;
     cin >> c;
@@ -39,7 +39,7 @@ Game::~Game() {
 
 void Game::run() {
     print();
-    while (!isDone) {
+    while (!hasQuit) {
         readCommand();
         print();
     }
@@ -61,6 +61,9 @@ void Game::print() {
 }
 
 void Game::move(Direction d) {
+    if (gameOver) {
+        return UI::instance()->say("You died x.x. Restart or quit.");
+    }
     if (player->moveRelative(d)) {
         // A player action happened, so step.
         step();
@@ -70,6 +73,9 @@ void Game::move(Direction d) {
 }
 
 void Game::attack(Direction d) {
+    if (gameOver) {
+        return UI::instance()->say("You died x.x. Restart or quit.");
+    }
     const int ny = player->getY() + directionDy(d),
               nx = player->getX() + directionDx(d);
     if (level->free(ny, nx)) {
@@ -87,6 +93,9 @@ void Game::attack(Direction d) {
 }
 
 void Game::use(Direction d) {
+    if (gameOver) {
+        return UI::instance()->say("You died x.x. Restart or quit.");
+    }
     UI::instance()->say("There couldn't possibly be anything to use there.");
 }
 
@@ -95,7 +104,12 @@ void Game::restart() {
 }
 
 void Game::quit() {
-    isDone = true;
+    hasQuit = true;
+}
+
+void Game::playerDied() {
+    gameOver = true;
+    UI::instance()->say("You died x.x");
 }
 
 void Game::playerDied() {
