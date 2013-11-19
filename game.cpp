@@ -98,6 +98,11 @@ void Game::quit() {
     isDone = true;
 }
 
+void Game::playerDied() {
+    isDone = true;
+    UI::instance()->say("You died x.x");
+}
+
 Game* Game::instance() {
     if (_instance == 0) {
         _instance = new Game;

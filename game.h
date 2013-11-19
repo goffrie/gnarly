@@ -30,6 +30,7 @@ public:
     void use(Direction d);
     void quit();
     void restart();
+    void playerDied();
 
 private:
     static Game* _instance;

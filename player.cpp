@@ -1,4 +1,5 @@
 #include "player.h"
+#include "game.h"
 
 #include "ui.h"
 #include "level.h"
@@ -8,7 +9,9 @@ Player::~Player() {
 
 void Player::reduceHp(int amt) {
     hp -= amt;
-    // TODO: notify
+    if (hp <= 0) {
+        Game::instance()->playerDied();
+    }
 }
 
 bool Player::canMove(int nY, int nX) {
