@@ -10,27 +10,16 @@
 
 using namespace std;
 
+Monster::Monster(CharAttr c) : Character(c, Team::instance(Team::Name::Monster)) {
+}
+
 void Monster::step() {
     Level* level = getLevel();
-
-    // Look for an adjacent player.
-    struct IsPlayerVisitor : public LevelObjectVisitor {
-        Player* player;
-        void visit(Player& p) {
-            player = &p;
-        }
-    };
-    IsPlayerVisitor v;
-    v.player = 0;
-    vector<LevelObject*> adj = level->neighbours(getY(), getX());
-    for (unsigned int i = 0; i < adj.size(); ++i) {
-        adj[i]->accept(v);
-    }
+    // Attack random enemy.
+    Character* toAttack = chooseTarget(level->neighbours(getY(), getX()));
     // Decide what to do.
-    if (v.player) {
-        // Attack the player.
-        // XXX: check hostile
-        attack(v.player);
+    if (toAttack) {
+        attack(toAttack);
     } else {
         // Wander.
 

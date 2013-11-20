@@ -3,9 +3,15 @@
 #include "ui.h"
 #include "levelobjectvisitor.h"
 
+#include <cstdlib>
+
 using namespace std;
 
-Character::Character(CharAttr c) : LevelObject(0, 0), attributes(new Attributes(Attributes::get(c))), hp(attributes->startingHP()) {
+Character::Character(CharAttr c, Team* t) : 
+  LevelObject(0, 0), 
+  attributes(new Attributes(Attributes::get(c))), 
+  hp(attributes->startingHP()),
+  team(t) {
 }
 
 Character::~Character() {
@@ -36,6 +42,26 @@ void Character::takeDamage(int attack) {
 
 void Character::attack(Character* other) {
     other->takeDamage(atk());
+}
+
+bool Character::isEnemy(Team* t) {
+    return !team->isAllied(t);
+}
+
+Character* Character::chooseTarget(vector<LevelObject*> objs) {
+    vector<Character*> targets;
+    for (unsigned i = 0; i < objs.size(); i++) {
+        if (objs[i]->isEnemy(team)) {
+            targets.push_back(static_cast<Character*>(objs[i]));
+        }
+    }
+
+    if (!targets.empty()) {
+        int i = rand() % targets.size();
+        return targets[i];
+    } else {
+        return 0;
+    }
 }
 
 void Character::accept(LevelObjectVisitor& v) {

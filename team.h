@@ -11,6 +11,7 @@ public:
         Player,
         Monster,
         Merchant,
+        Other,
         NumTeams
     };
 
@@ -21,19 +22,19 @@ private:
     };
     // The array of singletons of teams
     static std::vector<Team*> teams;
-    // Stores alliance status with every other team. Note: alliances are not necessarily bidirectional
+    // Stores alliance status with every other team. Note: alliances are bidirectional
     std::vector<Status> alliances;
     Team::Name _index;
 
     Team(Team::Name i);
-
+    ~Team() { }
 
 public:
 
     bool isAllied(Team * t) const;
     void ally(Team *t);
     void unally(Team *t);
-    Team::Name index();
+    Team::Name index() const;
 
 private:
     // Initializes all teams with default values

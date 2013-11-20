@@ -7,7 +7,7 @@ class Player : public Character {
 protected:
     virtual void reduceHp(int amt) override;
 public:
-    Player(CharAttr c) : Character(c) { }
+    Player(CharAttr c);
 
     virtual ~Player();
 

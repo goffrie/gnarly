@@ -1,6 +1,8 @@
 #include "team.h"
 
-std::vector<Team*> Team::teams;
+using namespace std;
+
+vector<Team*> Team::teams;
 
 Team::Team(Name i) : _index(i) {
     for (int i = 0; i < Name::NumTeams; i++) {
@@ -9,18 +11,20 @@ Team::Team(Name i) : _index(i) {
 }
 
 bool Team::isAllied(Team* t) const {
-    return alliances[t->index()] == Status::Ally;
+    return (alliances[t->index()] == Status::Ally);
 }
 
 void Team::ally(Team* t) {
     alliances[t->index()] = Status::Ally;
+    t->alliances[index()] = Status::Ally;
 }
 
 void Team::unally(Team* t) {
     alliances[t->index()] = Status::Enemy;
+    t->alliances[index()] = Status::Enemy;
 }
 
-Team::Name Team::index() {
+Team::Name Team::index() const{
     return _index;
 }
 
@@ -37,7 +41,7 @@ void Team::cleanup() {
     }
 }
 
-Team* Team::instance(Name n) {
+Team* Team::instance(Team::Name n) {
     if (teams.empty()) {
         init();
         atexit(cleanup);

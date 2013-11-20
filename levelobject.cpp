@@ -36,6 +36,10 @@ void LevelObject::step() {
     
 }
 
+bool LevelObject::isEnemy(Team* t) {
+    return false;
+}
+
 void LevelObject::accept(LevelObjectVisitor& v) {
     v.visit(*this);
 }

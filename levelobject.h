@@ -3,6 +3,7 @@
 
 #include "displayable.h"
 #include "util.h"
+#include "team.h"
 
 // An abstract class representing any object
 // (whether a monster, player, or item)
@@ -38,6 +39,7 @@ public:
     bool moveRelative(Direction d);
     virtual void step();
     virtual bool canMove(int y, int x);
+    virtual bool isEnemy(Team* t);
 
     virtual void accept(LevelObjectVisitor& v);
 };
