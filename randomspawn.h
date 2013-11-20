@@ -4,7 +4,6 @@
 #include "attributes.h"
 #include "monster.h"
 #include "potion.h"
-#include <cstdlib>
 
 inline Monster* randomMonster() {
     switch(rand() % 18) {
