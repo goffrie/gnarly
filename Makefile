@@ -3,23 +3,26 @@ CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11
 LDFLAGS=-lncurses
 EXEC=gnarly
 OBJECTS=\
-	character.o \
+	ui.o \
+	basicui.o \
 	cursesui.o \
+	game.o \
+	dungeon.o \
 	display.o \
 	displayable.o \
-	dungeon.o \
-	game.o \
-	humanplayer.o \
+	playerstatus.o \
+	attributes.o \
+	attributedecorator.o \
 	level.o \
 	levelobject.o \
 	levelobjectvisitor.o \
-	main.o \
+	character.o \
 	player.o \
-	playerstatus.o \
-	basicui.o \
-	attributes.o \
+	humanplayer.o \
 	monster.o \
-	ui.o
+	potion.o \
+	potionbuff.o \
+	main.o
 DEPENDS=${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

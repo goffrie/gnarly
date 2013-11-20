@@ -3,6 +3,7 @@
 #include "player.h"
 #include "ui.h"
 #include "level.h"
+#include "levelobjectvisitor.h"
 
 #include <sstream>
 #include <vector>
@@ -64,4 +65,8 @@ void Monster::attack(Character* target) {
         UI::instance()->say(msg.str());
         target->takeDamage(atk());
     }
+}
+
+void Monster::accept(LevelObjectVisitor& v) {
+    v.visit(*this);
 }

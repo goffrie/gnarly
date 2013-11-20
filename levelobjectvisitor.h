@@ -9,6 +9,7 @@ class LevelObject;
 class Character;
 class Player;
 class Monster;
+class Potion;
 
 class LevelObjectVisitor {
 public:
@@ -16,6 +17,7 @@ public:
     virtual void visit(Character& o);
     virtual void visit(Player& o);
     virtual void visit(Monster& o);
+    virtual void visit(Potion& o);
 };
 
 #endif
