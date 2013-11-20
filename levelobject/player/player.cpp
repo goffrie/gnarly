@@ -52,7 +52,7 @@ void Player::attack(Character* other) {
     }
 }
 
-void Player::changeHP(int amt) {
+void Player::potionChangeHP(int amt) {
     if (amt > 0) {
         addHP(amt);
     } else {

@@ -11,8 +11,8 @@ void Potion::use(Player* target) {
         UI::instance()->say("You cheater elf.");
     }
     switch (type) {
-        case RH: target->changeHP(10); break;
-        case PH: target->changeHP(-10); break;
+        case RH: target->potionChangeHP(10); break;
+        case PH: target->potionChangeHP(-10); break;
         case BA: target->applyBuff(5, 0); break;
         case WA: target->applyBuff(-5, 0); break;
         case BD: target->applyBuff(0, 5); break;

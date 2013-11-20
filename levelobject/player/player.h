@@ -20,7 +20,7 @@ public:
 
     // Potion effect: restore (or remove) HP.
     // Calls into `addHp`.
-    virtual void changeHP(int amt);
+    virtual void potionChangeHP(int amt);
     // Potion effect: change attack/defense.
     virtual void applyBuff(int atk, int def);
     // Adds gold to a player (by picking up or killing baddies)

@@ -6,5 +6,9 @@ ElfPlayer::ElfPlayer() : Player(Elf) {
 }
 
 void ElfPlayer::applyBuff(int a, int d) {
-    attributes = new PotionBuff(attributes, abs(a), abs(d));
+    Player::applyBuff(abs(a), abs(d));
+}
+
+void ElfPlayer::potionChangeHP(int amt) {
+    Player::potionChangeHP(abs(amt));
 }

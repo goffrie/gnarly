@@ -26,8 +26,7 @@ public:
     virtual void use(Player* target);
 
     Type getType() const { return type; }
-    // TODO: change to P after dev
-    virtual char tile() const override { return '!'; }
+    virtual char tile() const override { return 'P'; }
 
     virtual void accept(LevelObjectVisitor& v);
 

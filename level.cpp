@@ -132,13 +132,17 @@ bool Level::free(int y, int x) const {
 }
 
 void Level::stepObjects() {
+    vector<LevelObject*> toStep;
     for (unsigned int y = 0; y < grid.size() ; y++) {
         for (unsigned int x = 0; x < grid[y].size(); x++) {
             if (objects.find(grid[y][x]) != objects.end()) {
-                if (!grid[y][x]->dead()) {
-                    grid[y][x]->step();
-                }
+                toStep.push_back(grid[y][x]);
             }
+        }
+    }
+    for (unsigned int i = 0; i < toStep.size(); i++) {
+        if (!toStep[i]->dead()) {
+            toStep[i]->step();
         }
     }
     removeDead();
