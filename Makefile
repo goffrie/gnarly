@@ -1,30 +1,30 @@
 CXX=g++
-CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11
+CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11 -I. -Ilevelobject -Ilevelobject/related -Ilevelobject/player -Ilevelobject/monster
 LDFLAGS=-lncurses
 EXEC=gnarly
 OBJECTS=\
+	levelobject/related/attributes.o \
+	levelobject/related/attributedecorator.o \
+	levelobject/related/potionbuff.o \
+	levelobject/player/player.o \
+	levelobject/player/humanplayer.o \
+	levelobject/monster/monster.o \
+	levelobject/levelobject.o \
+	levelobject/character.o \
+	levelobject/potion.o \
+	levelobject/gold.o \
 	ui.o \
 	basicui.o \
 	cursesui.o \
+	levelobjectvisitor.o \
 	game.o \
 	dungeon.o \
 	display.o \
 	displayable.o \
 	playerstatus.o \
-	attributes.o \
-	attributedecorator.o \
 	level.o \
-	levelobject.o \
-	levelobjectvisitor.o \
-	character.o \
-	player.o \
-	humanplayer.o \
-	monster.o \
-	potion.o \
-	potionbuff.o \
 	main.o \
-	team.o \
-	gold.o
+	team.o
 DEPENDS=${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
