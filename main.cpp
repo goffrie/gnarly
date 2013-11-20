@@ -3,6 +3,9 @@
 
 int main() {
     srand(time(0));
-    Game* g = Game::instance();
-    g->run();
+    Game* g = 0;
+    do {
+        g = Game::instance(true);
+        g->run();
+    } while(g->shouldRestart());
 }

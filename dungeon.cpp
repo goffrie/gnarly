@@ -29,6 +29,8 @@ inline Tile tileFromChar(char c) {
     }
 }
 
+Dungeon::Dungeon() : roomCount(0) {}
+
 void Dungeon::draw(UI& dgrid) const {
     for (unsigned y = 0; y < grid.size(); ++y) {
         for (unsigned x = 0; x < grid[y].size(); ++x) {

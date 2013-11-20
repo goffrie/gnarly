@@ -18,8 +18,9 @@ class Game : public CommandHandler {
 
     Display display;
 
-    bool hasQuit;
+    bool _quit;
     bool gameOver;
+    bool _shouldRestart;
 
 public:
     void run();
@@ -32,6 +33,7 @@ public:
     void quit();
     void restart();
     void playerDied();
+    bool shouldRestart() { return _shouldRestart; }
 
 private:
     static Game* _instance;
@@ -41,8 +43,8 @@ private:
     static void cleanup();
 
 public:
-    // Gets the game instance, creating if necessary
-    static Game* instance();
+    // Gets the game instance, creating and restarting if necessary
+    static Game* instance(bool reset = false);
 };
 
 #endif

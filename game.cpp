@@ -10,7 +10,7 @@ using namespace std;
 
 Game* Game::_instance = 0;
 
-Game::Game() : hasQuit(false), gameOver(false) {
+Game::Game() : _quit(false), gameOver(false), _shouldRestart(false) {
     cout << "Curses? (y/n)" << endl;
     char c;
     cin >> c;
@@ -39,7 +39,7 @@ Game::~Game() {
 
 void Game::run() {
     print();
-    while (!hasQuit) {
+    while (!_quit) {
         readCommand();
         print();
     }
@@ -100,11 +100,12 @@ void Game::use(Direction d) {
 }
 
 void Game::restart() {
-    UI::instance()->say("Nah.");
+    _shouldRestart = true;
+    _quit = true;
 }
 
 void Game::quit() {
-    hasQuit = true;
+    _quit = true;
 }
 
 void Game::playerDied() {
@@ -112,15 +113,14 @@ void Game::playerDied() {
     UI::instance()->say("You died x.x");
 }
 
-void Game::playerDied() {
-    isDone = true;
-    UI::instance()->say("You died x.x");
-}
-
-Game* Game::instance() {
-    if (_instance == 0) {
+Game* Game::instance(bool reset) {
+    if (_instance == 0 || reset) {
+        if (_instance != 0) {
+            delete _instance;
+        } else {
+            atexit(cleanup);
+        }
         _instance = new Game;
-        atexit(cleanup);
     }
     return _instance;
 }
