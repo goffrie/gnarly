@@ -14,7 +14,13 @@ public:
     virtual bool canMove(int nY, int nX) override;
     virtual void attack(Character* other) override;
 
-    virtual void accept(LevelObjectVisitor& v) override { v.visit(*this); }
+    // Potion effect: restore (or remove) HP.
+    // Calls into `addHp`.
+    virtual void restoreHp(int amt);
+    // Potion effect: change attack/defense.
+    virtual void applyBuff(int atk, int def);
+
+    virtual void accept(LevelObjectVisitor& v) override;
 };
 
 #endif

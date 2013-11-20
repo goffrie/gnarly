@@ -11,7 +11,7 @@ public:
 
     virtual void attack(Character* target) override;
 
-    virtual void accept(LevelObjectVisitor& v) override { v.visit(*this); }
+    virtual void accept(LevelObjectVisitor& v) override;
     virtual void step();
 };
 

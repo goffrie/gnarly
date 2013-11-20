@@ -2,6 +2,7 @@
 #define __ATTRIBUTES_H__
 
 #include <string>
+#include "attributeprovider.h"
 
 enum CharAttr {
     Human,
@@ -17,7 +18,7 @@ enum CharAttr {
     Phoenix
 };
 
-class Attributes {
+class Attributes : public AttributeProvider {
     const int startingHP_, atk_, def_;
     const char tile_;
     const std::string race_;

@@ -2,7 +2,6 @@
 #define __LEVEL_OBJECT_H__
 
 #include "displayable.h"
-#include "levelobjectvisitor.h"
 #include "util.h"
 
 // An abstract class representing any object
@@ -10,6 +9,7 @@
 // that has a position in a Level.
 
 class Level;
+class LevelObjectVisitor;
 
 class LevelObject : public Displayable {
     friend class Level;
@@ -39,7 +39,7 @@ public:
     virtual void step();
     virtual bool canMove(int y, int x);
 
-    virtual void accept(LevelObjectVisitor& v) { v.visit(*this); }
+    virtual void accept(LevelObjectVisitor& v);
 };
 
 #endif

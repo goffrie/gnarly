@@ -1,6 +1,7 @@
 #include "character.h"
 
 #include "ui.h"
+#include "levelobjectvisitor.h"
 
 using namespace std;
 
@@ -20,6 +21,13 @@ void Character::reduceHp(int amt) {
     }
 }
 
+void Character::addHp(int amt) {
+    hp += amt;
+    if (hp > startingHP()) {
+        hp = startingHP();
+    }
+}
+
 void Character::takeDamage(int attack) {
     // damage = ceil( attack * 100 / (100 + defense) )
     const int ratio = 100 + def();
@@ -28,4 +36,8 @@ void Character::takeDamage(int attack) {
 
 void Character::attack(Character* other) {
     other->takeDamage(atk());
+}
+
+void Character::accept(LevelObjectVisitor& v) {
+    v.visit(*this);
 }

@@ -2,6 +2,7 @@
 
 #include "ui.h"
 #include "level.h"
+#include "levelobjectvisitor.h"
 
 LevelObject::~LevelObject() {
     if (level) {
@@ -33,4 +34,8 @@ bool LevelObject::canMove(int nY, int nX) {
 
 void LevelObject::step() {
     
+}
+
+void LevelObject::accept(LevelObjectVisitor& v) {
+    v.visit(*this);
 }

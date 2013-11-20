@@ -3,6 +3,8 @@
 
 #include "ui.h"
 #include "level.h"
+#include "levelobjectvisitor.h"
+#include "potionbuff.h"
 
 Player::~Player() {
 }
@@ -39,4 +41,20 @@ bool Player::canMove(int nY, int nX) {
 void Player::attack(Character* other) {
     UI::instance()->say("You hit the " + other->race() + ".");
     other->takeDamage(atk());
+}
+
+void Player::restoreHp(int amt) {
+    if (amt > 0) {
+        addHp(amt);
+    } else {
+        reduceHp(-amt);
+    }
+}
+
+void Player::applyBuff(int a, int d) {
+    attributes = new PotionBuff(attributes, a, d);
+}
+
+void Player::accept(LevelObjectVisitor& v) {
+    v.visit(*this);
 }
