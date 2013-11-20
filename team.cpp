@@ -4,8 +4,8 @@ using namespace std;
 
 vector<Team*> Team::teams;
 
-Team::Team(Name i) : _index(i) {
-    for (int i = 0; i < Name::NumTeams; i++) {
+Team::Team(TeamName i) : _index(i) {
+    for (int i = 0; i < NumTeams; i++) {
         alliances.push_back(Status::Enemy);
     }
 }
@@ -24,15 +24,15 @@ void Team::unally(Team* t) {
     t->alliances[index()] = Status::Enemy;
 }
 
-Team::Name Team::index() const{
+TeamName Team::index() const{
     return _index;
 }
 
 void Team::init() {
-    for (int i = Player; i < NumTeams; i++) {
-        teams.push_back(new Team(static_cast<Name>(i)));
+    for (int i = Players; i < NumTeams; i++) {
+        teams.push_back(new Team(static_cast<TeamName>(i)));
     }
-    teams[Merchant]->ally(teams[Player]);
+    teams[Merchants]->ally(teams[Players]);
 }
 
 void Team::cleanup() {
@@ -41,7 +41,7 @@ void Team::cleanup() {
     }
 }
 
-Team* Team::instance(Team::Name n) {
+Team* Team::instance(TeamName n) {
     if (teams.empty()) {
         init();
         atexit(cleanup);

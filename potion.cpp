@@ -28,5 +28,6 @@ std::string Potion::name(Type t) {
         case WA: return "wound attack";
         case BD: return "boost defense";
         case WD: return "wound defense";
+        default: std::terminate();
     }
 }

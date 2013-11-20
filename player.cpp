@@ -6,7 +6,7 @@
 #include "levelobjectvisitor.h"
 #include "potionbuff.h"
 
-Player::Player(CharAttr c) : Character(c, Team::instance(Team::Name::Player)) {
+Player::Player(CharAttr c) : Character(c, Players) {
 }
 
 Player::~Player() {

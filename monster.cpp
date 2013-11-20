@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Monster::Monster(CharAttr c) : Character(c, Team::instance(Team::Name::Monster)) {
+Monster::Monster(CharAttr c) : Character(c, Monsters) {
 }
 
 void Monster::step() {

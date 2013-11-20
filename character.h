@@ -19,7 +19,7 @@ protected:
     virtual void addHp(int amt);
 
 public:
-    Character(CharAttr c, Team* t);
+    Character(CharAttr c, TeamName t);
     virtual ~Character() = 0;
 
     int currentHp() const {

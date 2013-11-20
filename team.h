@@ -4,17 +4,16 @@
 #include <vector>
 #include <string>
 
+enum TeamName {
+    Players,
+    Monsters,
+    Merchants,
+    Other,
+    NumTeams
+};
 
+// I think team could be implemented nicer than this probably
 class Team {
-public:
-    enum Name {
-        Player,
-        Monster,
-        Merchant,
-        Other,
-        NumTeams
-    };
-
 private:
     enum Status {
         Ally,
@@ -24,9 +23,9 @@ private:
     static std::vector<Team*> teams;
     // Stores alliance status with every other team. Note: alliances are bidirectional
     std::vector<Status> alliances;
-    Team::Name _index;
+    TeamName _index;
 
-    Team(Team::Name i);
+    Team(TeamName i);
     ~Team() { }
 
 public:
@@ -34,7 +33,7 @@ public:
     bool isAllied(Team * t) const;
     void ally(Team *t);
     void unally(Team *t);
-    Team::Name index() const;
+    TeamName index() const;
 
 private:
     // Initializes all teams with default values
@@ -42,7 +41,7 @@ private:
     static void cleanup();
 
 public:
-    static Team* instance(Team::Name n);
+    static Team* instance(TeamName n);
 };
 
 #endif

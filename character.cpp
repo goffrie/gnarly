@@ -7,11 +7,11 @@
 
 using namespace std;
 
-Character::Character(CharAttr c, Team* t) : 
+Character::Character(CharAttr c, TeamName t) : 
   LevelObject(0, 0), 
   attributes(new Attributes(Attributes::get(c))), 
   hp(attributes->startingHP()),
-  team(t) {
+  team(Team::instance(t)) {
 }
 
 Character::~Character() {
