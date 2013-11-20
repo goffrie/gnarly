@@ -33,6 +33,15 @@ inline Direction viKey(int c) {
     return INVALID_DIRECTION;
 }
 
+// Convert an ncurses key code into a printable representation.
+string printable(int code) {
+    if (code == 0) return "NULL";
+    if (code >= 0 && code < 32) return string("^") + char('A' - 1 + code);
+    if (code == ' ' /* 32 */) return string("(space)");
+    if (code > 32 && code < 127) return string(1, char(code));
+    return string("(unknown)");
+}
+
 CursesUI::CursesUI() : msgLineLength(0) {
     initscr();
     raw();
@@ -58,7 +67,7 @@ void CursesUI::queryCommand(CommandHandler& target) {
             int a = readChar();
             Direction d = viKey(a);
             if (d == INVALID_DIRECTION) {
-                say(string("Unknown direction ") + (char)a + "!");
+                say(string("Unknown direction ") + printable(a) + "!");
             } else {
                 target.attack(d);
             }
@@ -69,7 +78,7 @@ void CursesUI::queryCommand(CommandHandler& target) {
             int a = readChar();
             Direction d = viKey(a);
             if (d == INVALID_DIRECTION) {
-                say(string("Unknown direction ") + (char)a + "!");
+                say(string("Unknown direction ") + printable(a) + "!");
             } else {
                 target.use(d);
             }
@@ -92,7 +101,7 @@ void CursesUI::queryCommand(CommandHandler& target) {
             }
             break;
         default:
-            say(string("Unknown command ") + (char)c + "!");
+            say(string("Unknown command ") + printable(c) + "!");
     }
 }
 
