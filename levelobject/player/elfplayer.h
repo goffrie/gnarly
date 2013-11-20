@@ -6,6 +6,7 @@
 class ElfPlayer : public Player {
 public:
     ElfPlayer();
+    virtual void applyBuff(int atk, int def) override;
 };
 
 #endif

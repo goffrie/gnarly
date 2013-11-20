@@ -2,10 +2,14 @@
 
 #include "levelobjectvisitor.h"
 #include "player.h"
+#include "elfplayer.h"
 #include "ui.h"
 
 void Potion::use(Player* target) {
     UI::instance()->say("You drink a potion of " + name(type) + ".");
+    if (dynamic_cast<ElfPlayer*>(target)) {
+        UI::instance()->say("You cheater elf.");
+    }
     switch (type) {
         case RH: target->changeHP(10); break;
         case PH: target->changeHP(-10); break;
