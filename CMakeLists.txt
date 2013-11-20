@@ -14,6 +14,7 @@ set(gnarly_SOURCES
     displayable.cpp
     dungeon.cpp
     game.cpp
+    gold.cpp
     humanplayer.cpp
     level.cpp
     levelobject.cpp
@@ -24,6 +25,7 @@ set(gnarly_SOURCES
     playerstatus.cpp
     potion.cpp
     potionbuff.cpp
+    team.cpp
     ui.cpp
 )
 
