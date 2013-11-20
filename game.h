@@ -42,6 +42,8 @@ private:
     virtual ~Game();
     static void cleanup();
 
+    void makePlayer();
+
 public:
     // Gets the game instance, creating and restarting if necessary
     static Game* instance(bool reset = false);

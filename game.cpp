@@ -2,6 +2,9 @@
 
 #include "cursesui.h"
 #include "humanplayer.h"
+#include "elfplayer.h"
+#include "dwarfplayer.h"
+#include "orcplayer.h"
 #include "potion.h"
 #include "gold.h"
 
@@ -14,6 +17,10 @@ using namespace std;
 Game* Game::_instance = 0;
 
 Game::Game() : _quit(false), gameOver(false), _shouldRestart(false) {
+    makePlayer();
+    if (_quit) {
+        return;
+    }
     cout << "Curses? (y/n)" << endl;
     char c;
     cin >> c;
@@ -24,7 +31,6 @@ Game::Game() : _quit(false), gameOver(false), _shouldRestart(false) {
     }
     // TODO: class selection?
     level = new Level();
-    player = new HumanPlayer();
     pstatus = new PlayerStatus(*player);
     display.add(pstatus);
     display.add(player, 1);
@@ -150,6 +156,30 @@ Game* Game::instance(bool reset) {
         _instance = new Game;
     }
     return _instance;
+}
+
+void Game::makePlayer() {
+    cout << "Choose your race: " << endl;
+    cout << "(Easy - Elf (e), Easy - Orc(o), Normal - Human (h), Hard - Dwarf (d))" << endl;
+    char c;
+    cin >> c;
+    switch (c) {
+        case 'e':
+            player = new ElfPlayer();
+            break;
+        case 'o':
+            player = new OrcPlayer();
+            break;
+        case 'h':
+            player = new HumanPlayer();
+            break;
+        case 'd':
+            player = new DwarfPlayer();
+            break;
+        default:
+            cout << "Quitting...";
+            _quit = true;
+    }
 }
 
 void Game::cleanup() {

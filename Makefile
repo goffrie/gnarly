@@ -8,6 +8,9 @@ OBJECTS=\
 	levelobject/related/potionbuff.o \
 	levelobject/player/player.o \
 	levelobject/player/humanplayer.o \
+	levelobject/player/dwarfplayer.o \
+	levelobject/player/elfplayer.o \
+	levelobject/player/orcplayer.o \
 	levelobject/monster/monster.o \
 	levelobject/levelobject.o \
 	levelobject/character.o \
