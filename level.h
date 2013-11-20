@@ -24,10 +24,13 @@ class Level {
     // All the items owned by this level.
     // This includes everything except the player.
     std::set<LevelObject*> objects;
+    std::vector<Character*> dying;
 
     int numberGold;
     int numberPotions;
     int numberEnemies;
+
+    void removeDead();
 
 public:
     Level();
@@ -48,6 +51,7 @@ public:
 
     // Move something on this level to the given position.
     void move(LevelObject* i, int y, int x);
+    void notifyDeath(Character* i);
 
     bool valid(int y, int x) const;
 

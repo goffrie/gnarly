@@ -111,6 +111,17 @@ void Level::move(LevelObject* i, int y, int x) {
     i->x = x;
 }
 
+void Level::notifyDeath(Character* i) {
+    dying.push_back(i);
+}
+
+void Level::removeDead() {
+    for (unsigned int i = 0; i < dying.size(); i++) {
+        delete dying[i];
+    }
+    dying.clear();
+}
+
 bool Level::valid(int y, int x) const {
     return !(x < 0 || y < 0 || (unsigned)x >= width() || (unsigned)y >= height());
 }
@@ -128,6 +139,7 @@ void Level::stepObjects() {
             }
         }
     }
+    removeDead();
 }
 
 vector<LevelObject*> Level::neighbours(int y, int x) {

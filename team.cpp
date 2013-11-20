@@ -5,8 +5,12 @@ using namespace std;
 vector<Team*> Team::teams;
 
 Team::Team(TeamName i) : _index(i) {
-    for (int i = 0; i < NumTeams; i++) {
-        alliances.push_back(Status::Enemy);
+    for (int j = 0; j < NumTeams; j++) {
+        if (i == j) {
+            alliances.push_back(Status::Ally);
+        } else {
+            alliances.push_back(Status::Enemy);
+        }
     }
 }
 
@@ -33,6 +37,7 @@ void Team::init() {
         teams.push_back(new Team(static_cast<TeamName>(i)));
     }
     teams[Merchants]->ally(teams[Players]);
+    teams[Merchants]->ally(teams[Monsters]);
 }
 
 void Team::cleanup() {

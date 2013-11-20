@@ -2,6 +2,7 @@
 
 #include "ui.h"
 #include "levelobjectvisitor.h"
+#include "level.h"
 
 #include <cstdlib>
 
@@ -20,10 +21,9 @@ Character::~Character() {
 
 void Character::reduceHP(int amt) {
     hp -= amt;
-    // TODO: notify
     if (hp <= 0) {
         UI::instance()->say("I (" + race() + ") died.");
-        delete this;
+        getLevel()->notifyDeath(this);
     }
 }
 
