@@ -23,7 +23,8 @@ OBJECTS=\
 	potion.o \
 	potionbuff.o \
 	main.o \
-	team.o
+	team.o \
+	gold.o
 DEPENDS=${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

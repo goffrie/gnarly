@@ -26,6 +26,7 @@ class Level {
     // The next LevelObject to look at in a loop. Used if something is removed
     std::vector<LevelObject*>::iterator next;
 
+    int numberGold;
     int numberPotions;
     int numberEnemies;
 

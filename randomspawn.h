@@ -4,6 +4,7 @@
 #include "attributes.h"
 #include "monster.h"
 #include "potion.h"
+#include "gold.h"
 
 inline Monster* randomMonster() {
     switch(rand() % 18) {
@@ -24,6 +25,17 @@ inline Monster* randomMonster() {
 
 inline Potion* randomPotion() {
     return new Potion(static_cast<Potion::Type>(rand() % Potion::numTypes));
+}
+
+inline Gold* randomGold() {
+    switch(rand() % 8) {
+        case 0 ... 4:
+            return new Gold(Gold::Normal);
+        case 5 ... 6:
+            return new Gold(Gold::Small);
+        default:
+            return new Gold(Gold::Dragon);
+    }
 }
 
 #endif

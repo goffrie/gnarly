@@ -12,6 +12,7 @@ Level::Level()
 : dungeon(Dungeon::defaultDungeon()),
   grid(dungeon.height(),
   vector<LevelObject*>(dungeon.width(), 0)),
+  numberGold(10),
   numberPotions(10),
   numberEnemies(20) {
     
@@ -44,7 +45,16 @@ void Level::generate(Player* p) {
         add(pot);
     }
 
-    // TODO: Generate gold.
+    // Generate gold.
+    for (int i = 0; i < numberGold; i++) {
+        do {
+            nextPos = dungeon.randomPlacement();
+        } while (!free(nextPos.first, nextPos.second));
+        Gold* gold = randomGold();
+        gold->y = nextPos.first;
+        gold->x = nextPos.second;
+        add(gold);
+    }
 
     // Generate monsters.
     for (int i = 0; i < numberEnemies; ++i) {
