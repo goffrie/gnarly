@@ -107,6 +107,7 @@ void Game::use(Direction d) {
     if (target) {
         target->use(player);
         delete target;
+        step();
     } else {
         UI::instance()->say("That doesn't appear to be drinkable.");
     }
