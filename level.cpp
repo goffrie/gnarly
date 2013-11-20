@@ -39,8 +39,7 @@ void Level::generate(Player* p) {
             nextPos = dungeon.randomPlacement();
         } while (!free(nextPos.first, nextPos.second));
         Potion* pot = randomPotion();
-        pot->y = nextPos.first;
-        pot->x = nextPos.second;
+        pot->setPos(nextPos.first, nextPos.second);
         add(pot);
     }
 
@@ -50,8 +49,7 @@ void Level::generate(Player* p) {
             nextPos = dungeon.randomPlacement();
         } while (!free(nextPos.first, nextPos.second));
         Gold* gold = randomGold();
-        gold->y = nextPos.first;
-        gold->x = nextPos.second;
+        gold->setPos(nextPos.first, nextPos.second);
         add(gold);
     }
 
@@ -61,8 +59,7 @@ void Level::generate(Player* p) {
         do {
             nextPos = dungeon.randomPlacement();
         } while (!free(nextPos.first, nextPos.second));
-        newEnemy->y = nextPos.first;
-        newEnemy->x = nextPos.second;
+        newEnemy->setPos(nextPos.first, nextPos.second);
         add(newEnemy);
     }
 }
@@ -115,11 +112,22 @@ void Level::notifyDeath(Character* i) {
     dying.push_back(i);
 }
 
+void Level::notifyAdd(Character* i) {
+    adding.push_back(i);
+}
+
 void Level::removeDead() {
     for (unsigned int i = 0; i < dying.size(); i++) {
         delete dying[i];
     }
     dying.clear();
+}
+
+void Level::addStored() {
+    for (unsigned int i = 0; i < adding.size(); i++) {
+        add(adding[i]);
+    }
+    adding.clear();
 }
 
 bool Level::valid(int y, int x) const {

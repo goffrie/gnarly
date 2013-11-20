@@ -4,21 +4,23 @@
 #include <string>
 #include "attributeprovider.h"
 
-enum CharAttr {
-    Human,
-    Dwarf,
-    Elf,
-    Orc,
-    Vampire,
-    Werewolf,
-    Troll,
-    Goblin,
-    Merchant,
-    Dragon,
-    Phoenix
-};
-
 class Attributes : public AttributeProvider {
+public:
+    enum Race {
+        Human,
+        Dwarf,
+        Elf,
+        Orc,
+        Vampire,
+        Werewolf,
+        Troll,
+        Goblin,
+        Merchant,
+        Dragon,
+        Phoenix
+    };
+
+private:
     const int startingHP_, atk_, def_;
     const char tile_;
     const std::string race_;
@@ -32,7 +34,7 @@ public:
     virtual char tile() const { return tile_; }
     virtual std::string race() const { return race_; }
 
-    static Attributes get(CharAttr c);
+    static Attributes get(Attributes::Race c);
 };
 
 #endif

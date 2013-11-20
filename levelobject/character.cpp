@@ -8,7 +8,7 @@
 
 using namespace std;
 
-Character::Character(CharAttr c, TeamName t) : 
+Character::Character(Attributes::Race c, TeamName t) : 
   LevelObject(0, 0), 
   attributes(new Attributes(Attributes::get(c))), 
   hp(attributes->startingHP()),

@@ -18,6 +18,8 @@ class LevelObject : public Displayable {
     // The item's position.
     int y, x;
 
+protected:
+    void setPos(int y, int x);
 
 public:
     // The item's ASCII tile.

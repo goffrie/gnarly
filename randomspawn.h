@@ -9,17 +9,17 @@
 inline Monster* randomMonster() {
     switch(rand() % 18) {
         case 1 ... 4:
-            return new Monster(Werewolf);
+            return new Monster(Attributes::Werewolf);
         case 5 ... 7:
-            return new Monster(Vampire);
+            return new Monster(Attributes::Vampire);
         case 8 ... 12:
-            return new Monster(Goblin);
+            return new Monster(Attributes::Goblin);
         case 13 ... 14:
-            return new Monster(Troll);
+            return new Monster(Attributes::Troll);
         case 15 ... 16:
-            return new Monster(Phoenix);
+            return new Monster(Attributes::Phoenix);
         default:
-            return new Monster(Merchant);
+            return new Monster(Attributes::Merchant);
     }
 }
 

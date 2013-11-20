@@ -9,7 +9,7 @@ class Player : public Character {
 protected:
     virtual void reduceHP(int amt) override;
 public:
-    Player(CharAttr c);
+    Player(Attributes::Race c);
 
     virtual ~Player();
 

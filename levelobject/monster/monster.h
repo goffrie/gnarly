@@ -5,7 +5,7 @@
 
 class Monster : public Character {
 public:
-    Monster(CharAttr c);
+    Monster(Attributes::Race c);
 
     virtual ~Monster() { }
 

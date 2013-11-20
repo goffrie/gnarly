@@ -5,7 +5,7 @@ using namespace std;
 Attributes::Attributes(int hp, int a, int d, char t, const string& r) : startingHP_(hp), atk_(a), def_(d), tile_(t), race_(r) {
 }
 
-Attributes Attributes::get(CharAttr c) {
+Attributes Attributes::get(Attributes::Race c) {
     switch (c) {
         case Human:
             return Attributes(140, 20, 20, '@', "human");

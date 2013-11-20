@@ -6,7 +6,7 @@
 #include "levelobjectvisitor.h"
 #include "potionbuff.h"
 
-Player::Player(CharAttr c) : Character(c, Players), _gold(0) {
+Player::Player(Attributes::Race c) : Character(c, Players), _gold(0) {
 }
 
 Player::~Player() {

@@ -43,3 +43,9 @@ bool LevelObject::isEnemy(Team* t) const {
 void LevelObject::accept(LevelObjectVisitor& v) {
     v.visit(*this);
 }
+
+void LevelObject::setPost(int y, int x) {
+    assert(!level);
+    this->y = y;
+    this->x = x;
+}

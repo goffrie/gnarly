@@ -19,7 +19,7 @@ protected:
     virtual void addHP(int amt);
 
 public:
-    Character(CharAttr c, TeamName t);
+    Character(Attributes::Race c, TeamName t);
     virtual ~Character() = 0;
 
     int currentHP() const {
