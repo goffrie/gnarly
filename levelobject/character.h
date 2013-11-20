@@ -33,8 +33,9 @@ public:
     virtual int startingHP() const { return attributes->startingHP(); }
     virtual char tile() const override { return attributes->tile(); }
     virtual std::string race() const { return attributes->race(); }
+    virtual bool dead() const override;
 
-    virtual bool isEnemy(Team* t);
+    virtual bool isEnemy(Team* t) const;
     virtual Character* chooseTarget(std::vector<LevelObject*> objs);
 
     virtual void accept(LevelObjectVisitor& v) override;

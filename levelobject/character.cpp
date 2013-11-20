@@ -34,6 +34,10 @@ void Character::addHP(int amt) {
     }
 }
 
+bool Character::dead() const {
+    return hp <= 0;
+}
+
 void Character::takeDamage(int attack) {
     // damage = ceil( attack * 100 / (100 + defense) )
     const int ratio = 100 + def();
@@ -44,7 +48,7 @@ void Character::attack(Character* other) {
     other->takeDamage(atk());
 }
 
-bool Character::isEnemy(Team* t) {
+bool Character::isEnemy(Team* t) const {
     return !team->isAllied(t);
 }
 

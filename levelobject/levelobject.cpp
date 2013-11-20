@@ -36,7 +36,7 @@ void LevelObject::step() {
     
 }
 
-bool LevelObject::isEnemy(Team* t) {
+bool LevelObject::isEnemy(Team* t) const {
     return false;
 }
 

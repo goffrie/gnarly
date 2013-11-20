@@ -135,7 +135,9 @@ void Level::stepObjects() {
     for (unsigned int y = 0; y < grid.size() ; y++) {
         for (unsigned int x = 0; x < grid[y].size(); x++) {
             if (objects.find(grid[y][x]) != objects.end()) {
-                grid[y][x]->step();
+                if (!grid[y][x]->dead()) {
+                    grid[y][x]->step();
+                }
             }
         }
     }

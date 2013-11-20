@@ -47,6 +47,9 @@ bool Player::canMove(int nY, int nX) {
 void Player::attack(Character* other) {
     UI::instance()->say("You hit the " + other->race() + ".");
     other->takeDamage(atk());
+    if (other->dead()) {
+        addGold(1);
+    }
 }
 
 void Player::changeHP(int amt) {

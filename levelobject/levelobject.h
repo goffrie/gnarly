@@ -39,8 +39,9 @@ public:
     bool moveRelative(Direction d);
     virtual void step();
     virtual bool canMove(int y, int x);
-    virtual bool isEnemy(Team* t);
+    virtual bool isEnemy(Team* t) const;
     virtual bool canPickUp() { return false; }
+    virtual bool dead() const { return false; }
 
     virtual void accept(LevelObjectVisitor& v);
 };
