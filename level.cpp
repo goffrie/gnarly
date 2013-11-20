@@ -17,8 +17,8 @@ Level::Level()
 }
 
 Level::~Level() {
-    for (unsigned int i = 0; i < objects.size(); ++i) {
-        delete objects[i];
+    while(!objects.empty()) {
+        delete objects[0];
     }
 }
 

@@ -8,15 +8,10 @@ UI* UI::instance() {
     return ui;
 }
 
-void UI::cleanup() {
-    delete ui;
-}
-
 void UI::setInstance(UI* _ui) {
     static bool initialized = false;
     if (!initialized) {
         initialized = true;
-        atexit(cleanup);
     }
     delete ui;
     ui = _ui;

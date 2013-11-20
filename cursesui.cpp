@@ -38,6 +38,7 @@ CursesUI::CursesUI() : msgLineLength(0) {
     raw();
     keypad(stdscr, TRUE);
     noecho();
+    clear();
 }
 
 CursesUI::~CursesUI() {
