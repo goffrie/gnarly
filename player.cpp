@@ -6,13 +6,13 @@
 #include "levelobjectvisitor.h"
 #include "potionbuff.h"
 
-Player::Player(CharAttr c) : Character(c, Players) {
+Player::Player(CharAttr c) : Character(c, Players), _gold(0) {
 }
 
 Player::~Player() {
 }
 
-void Player::reduceHp(int amt) {
+void Player::reduceHP(int amt) {
     hp -= amt;
     if (hp <= 0) {
         Game::instance()->playerDied();
@@ -46,16 +46,20 @@ void Player::attack(Character* other) {
     other->takeDamage(atk());
 }
 
-void Player::restoreHp(int amt) {
+void Player::changeHP(int amt) {
     if (amt > 0) {
-        addHp(amt);
+        addHP(amt);
     } else {
-        reduceHp(-amt);
+        reduceHP(-amt);
     }
 }
 
 void Player::applyBuff(int a, int d) {
     attributes = new PotionBuff(attributes, a, d);
+}
+
+void Player::addGold(int amt) {
+    _gold += amt;
 }
 
 void Player::accept(LevelObjectVisitor& v) {

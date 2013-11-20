@@ -7,8 +7,8 @@
 void Potion::use(Player* target) {
     UI::instance()->say("You drink a potion of " + name(type) + ".");
     switch (type) {
-        case RH: target->restoreHp(10); break;
-        case PH: target->restoreHp(-10); break;
+        case RH: target->changeHP(10); break;
+        case PH: target->changeHP(-10); break;
         case BA: target->applyBuff(10, 0); break;
         case WA: target->applyBuff(-10, 0); break;
         case BD: target->applyBuff(0, 10); break;

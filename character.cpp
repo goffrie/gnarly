@@ -18,7 +18,7 @@ Character::~Character() {
     delete attributes;
 }
 
-void Character::reduceHp(int amt) {
+void Character::reduceHP(int amt) {
     hp -= amt;
     // TODO: notify
     if (hp <= 0) {
@@ -27,7 +27,7 @@ void Character::reduceHp(int amt) {
     }
 }
 
-void Character::addHp(int amt) {
+void Character::addHP(int amt) {
     hp += amt;
     if (hp > startingHP()) {
         hp = startingHP();
@@ -37,7 +37,7 @@ void Character::addHp(int amt) {
 void Character::takeDamage(int attack) {
     // damage = ceil( attack * 100 / (100 + defense) )
     const int ratio = 100 + def();
-    reduceHp((attack * 100 + ratio - 1) / ratio);
+    reduceHP((attack * 100 + ratio - 1) / ratio);
 }
 
 void Character::attack(Character* other) {

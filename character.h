@@ -15,14 +15,14 @@ protected:
     // The team a character is on
     Team* team;
 
-    virtual void reduceHp(int amt);
-    virtual void addHp(int amt);
+    virtual void reduceHP(int amt);
+    virtual void addHP(int amt);
 
 public:
     Character(CharAttr c, TeamName t);
     virtual ~Character() = 0;
 
-    int currentHp() const {
+    int currentHP() const {
         return hp;
     }
 
