@@ -2,6 +2,7 @@
 
 #include "cursesui.h"
 #include "humanplayer.h"
+#include "potion.h"
 
 #include <cstring>
 #include <iostream>
@@ -96,7 +97,19 @@ void Game::use(Direction d) {
     if (gameOver) {
         return UI::instance()->say("You died x.x. Restart or quit.");
     }
-    UI::instance()->say("Later.");
+    const int ny = player->getY() + directionDy(d),
+              nx = player->getX() + directionDx(d);
+    if (level->free(ny, nx)) {
+        UI::instance()->say("You drink an imaginary potion.");
+        return;
+    }
+    Potion* target = dynamic_cast<Potion*>(level->objectAt(ny, nx));
+    if (target) {
+        target->use(player);
+        delete target;
+    } else {
+        UI::instance()->say("That doesn't appear to be drinkable.");
+    }
 }
 
 void Game::restart() {
