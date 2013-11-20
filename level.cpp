@@ -112,7 +112,7 @@ void Level::notifyDeath(Character* i) {
     dying.push_back(i);
 }
 
-void Level::notifyAdd(Character* i) {
+void Level::notifyAdd(LevelObject* i) {
     adding.push_back(i);
 }
 
@@ -154,6 +154,7 @@ void Level::stepObjects() {
         }
     }
     removeDead();
+    addStored();
 }
 
 vector<LevelObject*> Level::neighbours(int y, int x) {

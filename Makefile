@@ -12,6 +12,7 @@ OBJECTS=\
 	levelobject/player/elfplayer.o \
 	levelobject/player/orcplayer.o \
 	levelobject/monster/monster.o \
+	levelobject/monster/merchant.o \
 	levelobject/levelobject.o \
 	levelobject/character.o \
 	levelobject/potion.o \

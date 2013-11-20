@@ -5,8 +5,10 @@
 #include "monster.h"
 #include "potion.h"
 #include "gold.h"
+#include "merchant.h"
 
 inline Monster* randomMonster() {
+            return new Merchant();
     switch(rand() % 18) {
         case 1 ... 4:
             return new Monster(Attributes::Werewolf);
@@ -19,7 +21,7 @@ inline Monster* randomMonster() {
         case 15 ... 16:
             return new Monster(Attributes::Phoenix);
         default:
-            return new Monster(Attributes::Merchant);
+            return new Merchant();
     }
 }
 

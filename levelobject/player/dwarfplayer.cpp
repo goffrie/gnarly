@@ -1,4 +1,4 @@
 #include "dwarfplayer.h"
 
-DwarfPlayer::DwarfPlayer() : Player(Dwarf) {
+DwarfPlayer::DwarfPlayer() : Player(Attributes::Dwarf) {
 }

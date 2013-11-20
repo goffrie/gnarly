@@ -18,9 +18,6 @@ class LevelObject : public Displayable {
     // The item's position.
     int y, x;
 
-protected:
-    void setPos(int y, int x);
-
 public:
     // The item's ASCII tile.
     virtual char tile() const = 0;
@@ -32,6 +29,7 @@ public:
 
     int getY() const { return y; }
     int getX() const { return x; }
+    void setPos(int y, int x);  
 
     Level* getLevel() const { return level; }
 

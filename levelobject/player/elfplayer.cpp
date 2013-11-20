@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "potionbuff.h"
 
-ElfPlayer::ElfPlayer() : Player(Elf) {
+ElfPlayer::ElfPlayer() : Player(Attributes::Elf) {
 }
 
 void ElfPlayer::applyBuff(int a, int d) {

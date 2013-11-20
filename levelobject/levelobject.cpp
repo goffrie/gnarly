@@ -3,6 +3,7 @@
 #include "ui.h"
 #include "level.h"
 #include "levelobjectvisitor.h"
+#include <cassert>
 
 LevelObject::~LevelObject() {
     if (level) {
@@ -44,7 +45,7 @@ void LevelObject::accept(LevelObjectVisitor& v) {
     v.visit(*this);
 }
 
-void LevelObject::setPost(int y, int x) {
+void LevelObject::setPos(int y, int x) {
     assert(!level);
     this->y = y;
     this->x = x;

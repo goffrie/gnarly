@@ -1,4 +1,4 @@
 #include "orcplayer.h"
 
-OrcPlayer::OrcPlayer() : Player(Orc) {
+OrcPlayer::OrcPlayer() : Player(Attributes::Orc) {
 }

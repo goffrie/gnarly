@@ -32,6 +32,7 @@ class Level {
     int numberEnemies;
 
     void removeDead();
+    void addStored();
 
 public:
     Level();
