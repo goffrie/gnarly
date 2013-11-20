@@ -9,10 +9,10 @@ void Potion::use(Player* target) {
     switch (type) {
         case RH: target->changeHP(10); break;
         case PH: target->changeHP(-10); break;
-        case BA: target->applyBuff(10, 0); break;
-        case WA: target->applyBuff(-10, 0); break;
-        case BD: target->applyBuff(0, 10); break;
-        case WD: target->applyBuff(0, -10); break;
+        case BA: target->applyBuff(5, 0); break;
+        case WA: target->applyBuff(-5, 0); break;
+        case BD: target->applyBuff(0, 5); break;
+        case WD: target->applyBuff(0, -5); break;
     }
 }
 
