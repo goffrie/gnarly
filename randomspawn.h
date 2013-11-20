@@ -3,6 +3,7 @@
 
 #include "attributes.h"
 #include "monster.h"
+#include "potion.h"
 #include <cstdlib>
 
 inline Monster* randomMonster() {
@@ -20,6 +21,10 @@ inline Monster* randomMonster() {
         default:
             return new Monster(Merchant);
     }
+}
+
+inline Potion* randomPotion() {
+    return new Potion(static_cast<Potion::Type>(rand() % Potion::numTypes));
 }
 
 #endif

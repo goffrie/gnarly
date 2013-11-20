@@ -24,6 +24,7 @@ class Level {
     // This includes everything except the player.
     std::vector<LevelObject*> objects;
 
+    int numberPotions;
     int numberEnemies;
 
 public:

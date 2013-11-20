@@ -12,6 +12,7 @@ Level::Level()
 : dungeon(Dungeon::defaultDungeon()),
   grid(dungeon.height(),
   vector<LevelObject*>(dungeon.width(), 0)),
+  numberPotions(10),
   numberEnemies(20) {
     
 }
@@ -23,12 +24,30 @@ Level::~Level() {
 }
 
 void Level::generate(Player* p) {
+    // Place the player.
     pair<int, int> nextPos = dungeon.randomPlacement();
     p->y = nextPos.first;
     p->x = nextPos.second;
     add(p, false);
 
-    for (int i = 0; i < numberEnemies; i++) {
+    // TODO: Handle occupied locations more gracefully.
+    // TODO: Place the stairs.
+
+    // Generate potions.
+    for (int i = 0; i < numberPotions; ++i) {
+        do {
+            nextPos = dungeon.randomPlacement();
+        } while (!free(nextPos.first, nextPos.second));
+        Potion* pot = randomPotion();
+        pot->y = nextPos.first;
+        pot->x = nextPos.second;
+        add(pot);
+    }
+
+    // TODO: Generate gold.
+
+    // Generate monsters.
+    for (int i = 0; i < numberEnemies; ++i) {
         Monster* newEnemy = randomMonster();
         do {
             nextPos = dungeon.randomPlacement();

@@ -96,7 +96,7 @@ void Game::use(Direction d) {
     if (gameOver) {
         return UI::instance()->say("You died x.x. Restart or quit.");
     }
-    UI::instance()->say("There couldn't possibly be anything to use there.");
+    UI::instance()->say("Later.");
 }
 
 void Game::restart() {
