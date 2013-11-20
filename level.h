@@ -8,6 +8,7 @@
 #include "randomspawn.h"
 
 #include <vector>
+#include <set>
 
 class LevelObject;
 
@@ -22,9 +23,7 @@ class Level {
 
     // All the items owned by this level.
     // This includes everything except the player.
-    std::vector<LevelObject*> objects;
-    // The next LevelObject to look at in a loop. Used if something is removed
-    std::vector<LevelObject*>::iterator next;
+    std::set<LevelObject*> objects;
 
     int numberGold;
     int numberPotions;

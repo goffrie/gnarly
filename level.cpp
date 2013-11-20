@@ -10,8 +10,7 @@ using namespace std;
 
 Level::Level()
 : dungeon(Dungeon::defaultDungeon()),
-  grid(dungeon.height(),
-  vector<LevelObject*>(dungeon.width(), 0)),
+  grid(dungeon.height(), vector<LevelObject*>(dungeon.width(), 0)),
   numberGold(10),
   numberPotions(10),
   numberEnemies(20) {
@@ -20,7 +19,7 @@ Level::Level()
 
 Level::~Level() {
     while(!objects.empty()) {
-        delete objects[0];
+        delete *(objects.begin());
     }
 }
 
@@ -70,8 +69,8 @@ void Level::generate(Player* p) {
 
 void Level::addAllToDisplay(Display *d) {
     d->add(&dungeon);
-    for (unsigned int i = 0; i < objects.size(); i++) {
-        d->add(objects[i], 1);
+    for (set<LevelObject*>::iterator it = objects.begin(); it != objects.end(); it++) {
+        d->add(*it, 1);
     }
 }
 
@@ -84,7 +83,7 @@ void Level::add(LevelObject* i, bool own) {
     i->level = this;
     grid[i->y][i->x] = i;
     if (own) {
-        objects.push_back(i);
+        objects.insert(i);
     }
 }
 
@@ -92,9 +91,9 @@ void Level::remove(LevelObject* l) {
     if (grid[l->y][l->x] == l) {
         grid[l->y][l->x] = 0;
     }
-    vector<LevelObject*>::iterator it = find(objects.begin(), objects.end(), l);
+    set<LevelObject*>::iterator it = objects.find(l);
     if (it != objects.end()) {
-        next = objects.erase(it);
+        objects.erase(it);
     }
 }
 
@@ -122,10 +121,12 @@ bool Level::free(int y, int x) const {
 }
 
 void Level::stepObjects() {
-    // XXX: steps in the wrong order
-    // needs to do it in grid order
-    for (next = objects.begin(); next != objects.end(); ) {
-        (*(next++))->step();
+    for (unsigned int y = 0; y < grid.size() ; y++) {
+        for (unsigned int x = 0; x < grid[y].size(); x++) {
+            if (objects.find(grid[y][x]) != objects.end()) {
+                grid[y][x]->step();
+            }
+        }
     }
 }
 
