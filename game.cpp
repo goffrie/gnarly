@@ -3,9 +3,11 @@
 #include "cursesui.h"
 #include "humanplayer.h"
 #include "potion.h"
+#include "gold.h"
 
 #include <cstring>
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -64,6 +66,17 @@ void Game::print() {
 void Game::move(Direction d) {
     if (gameOver) {
         return UI::instance()->say("You died x.x. Restart or quit.");
+    }
+    const int ny = player->getY() + directionDy(d),
+              nx = player->getX() + directionDx(d);
+    Gold* target = dynamic_cast<Gold*>(level->objectAt(ny, nx));
+    if (target) {
+        target->use(player);
+        ostringstream line;
+
+        line << "YAY!!! " << target->amount() << " GOLD!!!";
+        UI::instance()->say(line.str());
+        delete target;
     }
     if (player->moveRelative(d)) {
         // A player action happened, so step.

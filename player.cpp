@@ -24,6 +24,9 @@ bool Player::canMove(int nY, int nX) {
         bool ans;
         // TODO: when gold is implemented, check for it
         // also staircases
+        virtual void visit(Gold& o) {
+            ans = true;
+        }
     };
     IsPassableVisitor v;
     v.ans = false;
