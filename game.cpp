@@ -16,7 +16,7 @@ using namespace std;
 
 Game* Game::_instance = 0;
 
-Game::Game() : _quit(false), gameOver(false), _shouldRestart(false) {
+Game::Game() : _quit(false), player(0), gameOver(false), _shouldRestart(false) {
     makePlayer();
     if (_quit) {
         return;
@@ -176,6 +176,7 @@ void Game::makePlayer() {
             break;
         default:
             cout << "Quitting...";
+            // XXX: this crashes
             _quit = true;
     }
 }
