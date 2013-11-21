@@ -2,9 +2,11 @@
 
 #include "dungeon.h"
 #include "levelobject.h"
+#include "staircase.h"
 
 #include <cassert>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 
@@ -27,12 +29,20 @@ Level::~Level() {
 void Level::generate(Player* p) {
     // Place the player.
     pair<int, int> nextPos = dungeon.randomPlacement();
-    p->y = nextPos.first;
-    p->x = nextPos.second;
+    p->setPos(nextPos.first, nextPos.second);
     add(p, false);
 
     // TODO: Handle occupied locations more gracefully.
-    // TODO: Place the stairs.
+    // Place/Generate a staircase
+    Staircase* s = new Staircase;
+    do {
+        nextPos = dungeon.randomPlacement();
+    } while (
+        !free(nextPos.first, nextPos.second)
+        && !dungeon.inSameRoom(nextPos.first, nextPos.second, p->getX(), p->getY())
+    );
+    s->setPos(nextPos.first, nextPos.second);
+    add(s);
 
     // Generate potions.
     for (int i = 0; i < numberPotions; ++i) {
