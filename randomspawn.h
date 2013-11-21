@@ -30,7 +30,6 @@ inline Potion* randomPotion() {
 }
 
 inline Gold* randomGold() {
-            return new DragonGold();
     switch(rand() % 8) {
         case 0 ... 4:
             return new Gold(Gold::Normal);

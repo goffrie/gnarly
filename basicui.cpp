@@ -27,7 +27,7 @@ inline Direction convert(string s) {
     return INVALID_DIRECTION;
 }
 
-BasicUI::BasicUI() {
+BasicUI::BasicUI() : message() {
     for (int y = 0; y < 30; y++) {
         screen.push_back(string(79, '_'));
     }
@@ -61,9 +61,11 @@ void BasicUI::queryCommand(CommandHandler& target) {
         }
     } else if (s == "r") {
         say("Really restart? [yes/no] ");
+        redraw();
         if (readNext() == "yes") target.restart();
     } else if (s == "q") {
         say("Really quit? [yes/no] ");
+        redraw();
         if (readNext() == "yes") target.quit();
     } else {
         say("Unknown command " + s + "!");
@@ -71,8 +73,8 @@ void BasicUI::queryCommand(CommandHandler& target) {
 }
 
 void BasicUI::say(const std::string& msg) {
-    draw(29, 0, msg);
-    redraw();
+    message += " ";
+    message += msg;
 }
 
 int BasicUI::readChar() {
@@ -107,7 +109,10 @@ void BasicUI::fillLine(int y, const std::string& str) {
 }
 
 void BasicUI::redraw() {
+    draw(29, 0, message);
     for (unsigned y = 0; y < screen.size(); y++) {
         cout << screen[y] << endl;
     }
+    screen[29].replace(0, string::npos, 79, 0);
+    message.clear();
 }

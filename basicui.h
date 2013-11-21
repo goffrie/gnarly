@@ -7,6 +7,7 @@
 
 class BasicUI : public UI {
     std::vector<std::string> screen;
+    std::string message;
 
 public:
     BasicUI();
