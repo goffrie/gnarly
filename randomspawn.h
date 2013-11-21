@@ -8,7 +8,6 @@
 #include "merchant.h"
 
 inline Monster* randomMonster() {
-            return new Merchant();
     switch(rand() % 18) {
         case 1 ... 4:
             return new Monster(Attributes::Werewolf);

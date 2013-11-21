@@ -29,14 +29,12 @@ Game::Game() : _quit(false), gameOver(false), _shouldRestart(false) {
     } else {
         UI::setInstance(new BasicUI());
     }
-    // TODO: class selection?
-    level = new Level();
+    level = new Level(&display);
     pstatus = new PlayerStatus(*player);
     display.add(pstatus);
     display.add(player, 1);
 
     level->generate(player);
-    level->addAllToDisplay(&display);
 }
 
 Game::~Game() {

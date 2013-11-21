@@ -8,13 +8,14 @@
 
 using namespace std;
 
-Level::Level()
+Level::Level(Display* d)
 : dungeon(Dungeon::defaultDungeon()),
+  display(d),
   grid(dungeon.height(), vector<LevelObject*>(dungeon.width(), 0)),
   numberGold(10),
   numberPotions(10),
   numberEnemies(20) {
-    
+    display->add(&dungeon);
 }
 
 Level::~Level() {
@@ -64,13 +65,6 @@ void Level::generate(Player* p) {
     }
 }
 
-void Level::addAllToDisplay(Display *d) {
-    d->add(&dungeon);
-    for (set<LevelObject*>::iterator it = objects.begin(); it != objects.end(); it++) {
-        d->add(*it, 1);
-    }
-}
-
 void Level::add(LevelObject* i, bool own) {
     assert(!i->level);
     assert(i->y >= 0 && (unsigned) i->y < height());
@@ -81,6 +75,7 @@ void Level::add(LevelObject* i, bool own) {
     grid[i->y][i->x] = i;
     if (own) {
         objects.insert(i);
+        display->add(i, 1);
     }
 }
 

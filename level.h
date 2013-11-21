@@ -6,6 +6,7 @@
 #include "dungeon.h"
 #include "player.h"
 #include "randomspawn.h"
+#include "display.h"
 
 #include <vector>
 #include <set>
@@ -16,6 +17,7 @@ class LevelObject;
 class Level {
     // The base dungeon layout. Owned by this class.
     Dungeon dungeon;
+    Display* display;
 
     // A catalogue of the things on this level,
     // indexed by their location.
@@ -35,7 +37,7 @@ class Level {
     void addStored();
 
 public:
-    Level();
+    Level(Display* d);
     ~Level();
 
     unsigned int height() const { return grid.size(); }
@@ -43,11 +45,8 @@ public:
 
     void generate(Player* p);
 
-    // Adds all of this level's contents to the display
-    void addAllToDisplay(Display* d);
-
     // Add something to the level. `own` controls whether the level
-    // should take ownership of it.
+    // should take ownership of it. Also, adds to display if owned by level
     void add(LevelObject* i, bool own = true);
     void remove(LevelObject* i);
 
