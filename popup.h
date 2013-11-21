@@ -14,6 +14,7 @@ class PopUp : public Displayable {
     };
     std::vector<std::string> text;
 
+    // Splits up a line of text into multiple lines for display
     static std::vector<std::string> getLines(const std::string& t, int width);
 
 public:

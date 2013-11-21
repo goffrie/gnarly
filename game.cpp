@@ -35,8 +35,6 @@ Game::Game() : player(0), pstatus(0), level(0), _quit(false), gameOver(false), _
     display.add(pstatus);
     display.add(player, 1);
     makeNewLevel();
-    popup = new PopUp("HIHIHIHIHI AUSHFUIAS OIAHSIDOAOSI OAISHFOIWQHOIFH OIQWHFOIHO IWUIHIUAHSIFUHAISUFHIUASHFIUASHUFI", 5, 5, 17, 15);
-    display.add(popup, 2);
 }
 
 Game::~Game() {
@@ -151,6 +149,14 @@ void Game::quit() {
 void Game::playerDied() {
     gameOver = true;
     UI::instance()->say("You died x.x");
+    ostringstream line;
+
+    line << "You Died. After failing to stop the monsters, they escaped to the surface. "
+         "Nations fell before the neverending stream of monsters, and after countless years "
+         "of struggle the entire world was devoured. Nothing ever lived ever again. The end.\n\n"
+         "On the upside, you got " << player->gold() << " gold!";
+    popup = new PopUp(line.str(), 5, 5, 17, 69);
+    display.add(popup, 2);
 }
 
 void Game::makeNewLevel() {
