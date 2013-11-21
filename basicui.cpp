@@ -98,7 +98,7 @@ void BasicUI::draw(int y, int x, char c) {
 }
 
 void BasicUI::draw(int y, int x, const std::string& str) {
-    screen[y].replace(x, string::npos, str);
+    screen[y].replace(x, str.size(), str);
 }
 
 void BasicUI::fillLine(int y, const std::string& str) {

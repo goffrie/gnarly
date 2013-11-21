@@ -6,7 +6,7 @@
 
 using namespace std;
 
-PlayerStatus::PlayerStatus(const Player& p) : player(p) { }
+PlayerStatus::PlayerStatus(const Player& p) : Displayable(), player(p) { }
 
 void PlayerStatus::draw(UI& screen) const {
     ostringstream line;

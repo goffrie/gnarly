@@ -8,6 +8,7 @@
 #include "potion.h"
 #include "gold.h"
 #include "staircase.h"
+#include "superelf.h"
 
 #include <cstring>
 #include <iostream>
@@ -34,6 +35,8 @@ Game::Game() : player(0), pstatus(0), level(0), _quit(false), gameOver(false), _
     display.add(pstatus);
     display.add(player, 1);
     makeNewLevel();
+    popup = new PopUp("HIHIHIHIHI AUSHFUIAS OIAHSIDOAOSI OAISHFOIWQHOIFH OIQWHFOIHO IWUIHIUAHSIFUHAISUFHIUASHFIUASHUFI", 5, 5, 17, 15);
+    display.add(popup, 2);
 }
 
 Game::~Game() {
@@ -41,6 +44,7 @@ Game::~Game() {
     delete pstatus;
     delete player;
     delete level;
+    delete popup;
 }
 
 void Game::run() {
@@ -175,6 +179,7 @@ Game* Game::instance(bool reset) {
 void Game::makePlayer() {
     cout << "Choose your race: " << endl;
     cout << "(Easy - Elf (e), Easy - Orc(o), Normal - Human (h), Hard - Dwarf (d))" << endl;
+    cout << "(Insanely Easy (I don't want to keep trying to survive levels) - SuperElf (E))" << endl;
     char c;
     cin >> c;
     switch (c) {
@@ -189,6 +194,9 @@ void Game::makePlayer() {
             break;
         case 'd':
             player = new DwarfPlayer();
+            break;
+        case 'E':
+            player = new SuperElfPlayer();
             break;
         default:
             cout << "Quitting...";

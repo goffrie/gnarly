@@ -9,12 +9,14 @@
 #include "basicui.h"
 #include "commandhandler.h"
 #include "level.h"
+#include "popup.h"
 
 class Game : public CommandHandler {
     // Has ownership of `player`, `pstatus`, and 'level'.
     Player* player;
     PlayerStatus* pstatus;
     Level* level;
+    PopUp* popup;
 
     Display display;
 

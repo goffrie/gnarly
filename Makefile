@@ -29,7 +29,8 @@ OBJECTS=\
 	playerstatus.o \
 	level.o \
 	main.o \
-	team.o
+	team.o \
+	popup.o
 DEPENDS=${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
