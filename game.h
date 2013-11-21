@@ -32,8 +32,11 @@ public:
     void use(Direction d);
     void quit();
     void restart();
+    // Called when the player has died
     void playerDied();
+    // Returns if the game should be restarted after it ends
     bool shouldRestart() { return _shouldRestart; }
+    void makeNewLevel();
 
 private:
     static Game* _instance;

@@ -6,6 +6,7 @@
 #include "monster.h"
 #include "potion.h"
 #include "gold.h"
+#include "staircase.h"
 
 void LevelObjectVisitor::visit(class Character& o) {
     visit(static_cast<LevelObject&>(o));
@@ -20,5 +21,8 @@ void LevelObjectVisitor::visit(class Potion& o) {
     visit(static_cast<LevelObject&>(o));
 }
 void LevelObjectVisitor::visit(class Gold& o) {
+    visit(static_cast<LevelObject&>(o));
+}
+void LevelObjectVisitor::visit(class Staircase& o) {
     visit(static_cast<LevelObject&>(o));
 }

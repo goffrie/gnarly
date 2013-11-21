@@ -17,6 +17,7 @@ OBJECTS=\
 	levelobject/character.o \
 	levelobject/potion.o \
 	levelobject/gold.o \
+	levelobject/staircase.o \
 	ui.o \
 	basicui.o \
 	cursesui.o \

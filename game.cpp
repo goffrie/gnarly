@@ -16,7 +16,7 @@ using namespace std;
 
 Game* Game::_instance = 0;
 
-Game::Game() : _quit(false), player(0), gameOver(false), _shouldRestart(false) {
+Game::Game() : player(0), pstatus(0), level(0), _quit(false), gameOver(false), _shouldRestart(false) {
     makePlayer();
     if (_quit) {
         return;
@@ -29,12 +29,9 @@ Game::Game() : _quit(false), player(0), gameOver(false), _shouldRestart(false) {
     } else {
         UI::setInstance(new BasicUI());
     }
-    level = new Level(&display);
     pstatus = new PlayerStatus(*player);
     display.add(pstatus);
     display.add(player, 1);
-
-    level->generate(player);
 }
 
 Game::~Game() {
@@ -142,6 +139,15 @@ void Game::quit() {
 void Game::playerDied() {
     gameOver = true;
     UI::instance()->say("You died x.x");
+}
+
+void Game::makeNewLevel() {
+    if (level) {
+        delete level;
+    }
+    level = new Level(&display);
+
+    level->generate(player);
 }
 
 Game* Game::instance(bool reset) {
