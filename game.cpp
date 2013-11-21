@@ -70,7 +70,7 @@ void Game::print() {
 
 void Game::move(Direction d) {
     if (gameOver) {
-        return UI::instance()->say("You died x.x. Restart or quit.");
+        return UI::instance()->say("Game Over. Restart or quit.");
     }
     const int ny = player->getY() + directionDy(d),
               nx = player->getX() + directionDx(d);
@@ -78,7 +78,6 @@ void Game::move(Direction d) {
     Staircase* stair = dynamic_cast<Staircase*>(level->objectAt(ny, nx));
     if (stair) {
         stair->descend();
-        UI::instance()->say("New level. Aren't you proud?");
     }
     Gold* target = dynamic_cast<Gold*>(level->objectAt(ny, nx));
     if (target) {
@@ -99,7 +98,7 @@ void Game::move(Direction d) {
 
 void Game::attack(Direction d) {
     if (gameOver) {
-        return UI::instance()->say("You died x.x. Restart or quit.");
+        return UI::instance()->say("Game Over. Restart or quit.");
     }
     const int ny = player->getY() + directionDy(d),
               nx = player->getX() + directionDx(d);
@@ -119,7 +118,7 @@ void Game::attack(Direction d) {
 
 void Game::use(Direction d) {
     if (gameOver) {
-        return UI::instance()->say("You died x.x. Restart or quit.");
+        return UI::instance()->say("Game Over. Restart or quit.");
     }
     const int ny = player->getY() + directionDy(d),
               nx = player->getX() + directionDx(d);
@@ -148,10 +147,10 @@ void Game::quit() {
 
 void Game::playerDied() {
     gameOver = true;
-    UI::instance()->say("You died x.x");
+    UI::instance()->say("Game Over");
     ostringstream line;
 
-    line << "You Died. After failing to stop the monsters, they escaped to the surface. "
+    line << "You Died x.x After failing to stop the monsters, they escaped to the surface. "
          "Nations fell before the neverending stream of monsters, and after countless years "
          "of struggle the entire world was devoured. Nothing ever lived ever again. The end.\n\n"
          "On the upside, you got " << player->gold() << " gold!";
@@ -160,10 +159,25 @@ void Game::playerDied() {
 }
 
 void Game::makeNewLevel() {
+    if (level->isLastLevel()) {
+        gameOver = true;
+        UI::instance()->say("Game Over");
+        ostringstream line;
+
+        line << "You Win \\(^o^)/ You saved the world! As soon as you succeed, people start reconsidering their lives. "
+             "War ceases to exist and people learn to empathize with each other, and scarcity is solved.  "
+             "Everyone lives happily ever after. The end.\n\n"
+             "You also got " << player->gold() << " gold, though with the new pseudo-communist society "
+             "money is useless";
+        popup = new PopUp(line.str(), 5, 5, 17, 69);
+        display.add(popup, 2);
+        return;
+    }
     if (level) {
         level->remove(player);
         delete level;
     }
+    UI::instance()->say("New level. Aren't you proud?");
     level = new Level(&display);
 
     level->generate(player);

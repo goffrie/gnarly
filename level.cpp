@@ -10,6 +10,8 @@
 
 using namespace std;
 
+int Level::currentLevel = 0;
+
 Level::Level(Display* d)
 : dungeon(Dungeon::defaultDungeon()),
   display(d),
@@ -18,6 +20,7 @@ Level::Level(Display* d)
   numberPotions(10),
   numberEnemies(20) {
     display->add(&dungeon);
+    currentLevel++;
 }
 
 Level::~Level() {

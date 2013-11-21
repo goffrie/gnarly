@@ -15,6 +15,10 @@ class LevelObject;
 
 // Represents a single dungeon floor in the game
 class Level {
+    // The number of the current level (how many levels have passed + 1)
+    static int currentLevel;
+    enum { lastLevel = 8 };
+
     // The base dungeon layout. Owned by this class.
     Dungeon dungeon;
     Display* display;
@@ -66,6 +70,7 @@ public:
 
     void stepObjects();
     std::vector<LevelObject*> neighbours(int y, int x);
+    static bool isLastLevel() { return currentLevel == lastLevel; }
 };
 
 #endif
