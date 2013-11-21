@@ -7,6 +7,7 @@
 #include "orcplayer.h"
 #include "potion.h"
 #include "gold.h"
+#include "staircase.h"
 
 #include <cstring>
 #include <iostream>
@@ -71,6 +72,12 @@ void Game::move(Direction d) {
     }
     const int ny = player->getY() + directionDy(d),
               nx = player->getX() + directionDx(d);
+    // XXX make this more object oriented and elegant
+    Staircase* stair = dynamic_cast<Staircase*>(level->objectAt(ny, nx));
+    if (stair) {
+        stair->descend();
+        UI::instance()->say("New level. Aren't you proud?");
+    }
     Gold* target = dynamic_cast<Gold*>(level->objectAt(ny, nx));
     if (target) {
         target->use(player);
@@ -144,6 +151,7 @@ void Game::playerDied() {
 
 void Game::makeNewLevel() {
     if (level) {
+        level->remove(player);
         delete level;
     }
     level = new Level(&display);

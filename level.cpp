@@ -39,7 +39,7 @@ void Level::generate(Player* p) {
         nextPos = dungeon.randomPlacement();
     } while (
         !free(nextPos.first, nextPos.second)
-        && !dungeon.inSameRoom(nextPos.first, nextPos.second, p->getX(), p->getY())
+        || dungeon.inSameRoom(nextPos.first, nextPos.second, p->getY(), p->getX())
     );
     s->setPos(nextPos.first, nextPos.second);
     add(s);
@@ -93,6 +93,7 @@ void Level::remove(LevelObject* l) {
     if (grid[l->y][l->x] == l) {
         grid[l->y][l->x] = 0;
     }
+    l->level = 0;
     set<LevelObject*>::iterator it = objects.find(l);
     if (it != objects.end()) {
         objects.erase(it);
