@@ -30,6 +30,7 @@ set(gnarly_SOURCES
     levelobject/related/attributedecorator.cpp
     levelobject/related/attributes.cpp
     levelobject/related/potionbuff.cpp
+    levelobject/staircase.cpp
     team.cpp
 )
 
