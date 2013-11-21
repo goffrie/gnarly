@@ -3,6 +3,7 @@
 
 #include "monster.h"
 #include "dragongold.h"
+#include <vector>
 
 class Dragon : public Monster {
     DragonGold* hoard;
@@ -13,6 +14,7 @@ protected:
 public:
     Dragon(DragonGold* hoard);
     virtual void wander() override;
+    virtual Character* chooseTarget(std::vector<LevelObject*> objs);
 };
 
 #endif
