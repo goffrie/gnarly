@@ -35,7 +35,7 @@ public:
     void quit();
     void restart();
     // Called when the player has died
-    void playerDied();
+    void notifyPlayerDeath();
     // Returns if the game should be restarted after it ends
     bool shouldRestart() { return _shouldRestart; }
     void makeNewLevel();

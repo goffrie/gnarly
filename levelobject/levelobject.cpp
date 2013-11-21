@@ -4,6 +4,7 @@
 #include "level.h"
 #include "levelobjectvisitor.h"
 #include <cassert>
+#include <utility>
 
 LevelObject::~LevelObject() {
     if (level) {
@@ -43,6 +44,22 @@ bool LevelObject::isEnemy(Team* t) const {
 
 void LevelObject::accept(LevelObjectVisitor& v) {
     v.visit(*this);
+}
+
+std::vector<std::pair<int, int> > LevelObject::getFreeAdjacent() {
+    // Look for a free location.
+    std::vector<std::pair<int, int> > locations;
+    for (int dy = -1; dy <= 1; ++dy) {
+        for (int dx = -1; dx <= 1; ++dx) {
+            if (dy == 0 && dx == 0) continue;
+            const int ny = getY() + dy,
+                      nx = getX() + dx;
+            if (level->free(ny, nx)) {
+                locations.push_back(std::make_pair(ny, nx));
+            }
+        }
+    }
+    return locations;
 }
 
 void LevelObject::setPos(int y, int x) {

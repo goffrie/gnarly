@@ -15,7 +15,7 @@ Gold::Gold(Hoard h) {
         case Merchant:
             _amount = 4;
             break;
-        case Dragon:
+        case DragonH:
             _amount = 6;
             break;
         default:

@@ -80,7 +80,7 @@ void Game::move(Direction d) {
         stair->descend();
     }
     Gold* target = dynamic_cast<Gold*>(level->objectAt(ny, nx));
-    if (target) {
+    if (target && target->canPickUp()) {
         target->use(player);
         ostringstream line;
 
@@ -145,7 +145,7 @@ void Game::quit() {
     _quit = true;
 }
 
-void Game::playerDied() {
+void Game::notifyPlayerDeath() {
     gameOver = true;
     UI::instance()->say("Game Over");
     ostringstream line;
@@ -174,10 +174,10 @@ void Game::makeNewLevel() {
         return;
     }
     if (level) {
+        UI::instance()->say("New level. Aren't you proud?");
         level->remove(player);
         delete level;
     }
-    UI::instance()->say("New level. Aren't you proud?");
     level = new Level(&display);
 
     level->generate(player);

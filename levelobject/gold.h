@@ -13,7 +13,7 @@ public:
         Normal,
         Small,
         Merchant,
-        Dragon
+        DragonH
     };
 private:
     int _amount;
@@ -24,7 +24,6 @@ public:
     virtual bool canPickUp() { return true; }
     virtual int amount() { return _amount; }
 
-    // TODO: change to P after dev
     virtual char tile() const override { return 'G'; }
 
     virtual void accept(LevelObjectVisitor& v);

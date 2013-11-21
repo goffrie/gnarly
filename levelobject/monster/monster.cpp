@@ -21,27 +21,19 @@ void Monster::step() {
     if (toAttack) {
         attack(toAttack);
     } else {
-        // Wander.
-
-        // Look for a free location.
-        vector<pair<int, int> > locations;
-        for (int dy = -1; dy <= 1; ++dy) {
-            for (int dx = -1; dx <= 1; ++dx) {
-                if (dy == 0 && dx == 0) continue;
-                const int ny = getY() + dy,
-                          nx = getX() + dx;
-                if (level->free(ny, nx)) {
-                    locations.push_back(make_pair(ny, nx));
-                }
-            }
-        }
-
-        // Pick one at random.
-        if (locations.size() > 0) {
-            pair<int, int> newLocation = locations[rand() % locations.size()];
-            moveTo(newLocation.first, newLocation.second);
-        }
+        wander();
     }
+}
+
+void Monster::wander() {
+    vector<pair<int, int> > locations = getFreeAdjacent();
+
+    // Pick one at random.
+    if (locations.size() > 0) {
+        pair<int, int> newLocation = locations[rand() % locations.size()];
+        moveTo(newLocation.first, newLocation.second);
+    }
+
 }
 
 void Monster::attack(Character* target) {

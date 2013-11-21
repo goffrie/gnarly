@@ -5,6 +5,7 @@
 #include "monster.h"
 #include "potion.h"
 #include "gold.h"
+#include "dragongold.h"
 #include "merchant.h"
 
 inline Monster* randomMonster() {
@@ -29,13 +30,14 @@ inline Potion* randomPotion() {
 }
 
 inline Gold* randomGold() {
+            return new DragonGold();
     switch(rand() % 8) {
         case 0 ... 4:
             return new Gold(Gold::Normal);
         case 5 ... 6:
             return new Gold(Gold::Small);
         default:
-            return new Gold(Gold::Dragon);
+            return new DragonGold();
     }
 }
 

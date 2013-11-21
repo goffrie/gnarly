@@ -5,6 +5,8 @@
 #include "util.h"
 #include "team.h"
 
+#include <vector>
+
 // An abstract class representing any object
 // (whether a monster, player, or item)
 // that has a position in a Level.
@@ -17,6 +19,10 @@ class LevelObject : public Displayable {
     Level* level;
     // The item's position.
     int y, x;
+
+protected:
+    // Returns all free adjacent locations
+    virtual std::vector<std::pair<int, int> > getFreeAdjacent();
 
 public:
     // The item's ASCII tile.

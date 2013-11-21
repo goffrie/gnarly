@@ -15,7 +15,7 @@ Player::~Player() {
 void Player::reduceHP(int amt) {
     hp -= amt;
     if (hp <= 0) {
-        Game::instance()->playerDied();
+        Game::instance()->notifyPlayerDeath();
     }
 }
 

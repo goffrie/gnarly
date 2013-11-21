@@ -3,6 +3,8 @@
 #include "dungeon.h"
 #include "levelobject.h"
 #include "staircase.h"
+#include "dragongold.h"
+#include "dragon.h"
 
 #include <cassert>
 #include <algorithm>
@@ -57,18 +59,28 @@ void Level::generate(Player* p) {
         add(pot);
     }
 
+    int numberDragons = 0;
     // Generate gold.
     for (int i = 0; i < numberGold; i++) {
         do {
-            nextPos = dungeon.randomPlacement();
-        } while (!free(nextPos.first, nextPos.second));
-        Gold* gold = randomGold();
-        gold->setPos(nextPos.first, nextPos.second);
-        add(gold);
+            do {
+                nextPos = dungeon.randomPlacement();
+            } while (!free(nextPos.first, nextPos.second));
+            Gold* gold = randomGold();
+            gold->setPos(nextPos.first, nextPos.second);
+            add(gold);
+            DragonGold* dgold = dynamic_cast<DragonGold*>(gold);
+            if (dgold) {
+                if (!dgold->addDragon()) {
+                    continue;
+                }
+                numberDragons++;
+            }
+        } while (false);
     }
 
     // Generate monsters.
-    for (int i = 0; i < numberEnemies; ++i) {
+    for (int i = numberDragons; i < numberEnemies; ++i) {
         Monster* newEnemy = randomMonster();
         do {
             nextPos = dungeon.randomPlacement();
@@ -76,6 +88,7 @@ void Level::generate(Player* p) {
         newEnemy->setPos(nextPos.first, nextPos.second);
         add(newEnemy);
     }
+    assert(objects.size() == (unsigned)(numberEnemies + numberGold + numberPotions + 1));
 }
 
 void Level::add(LevelObject* i, bool own) {

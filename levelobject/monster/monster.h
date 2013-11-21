@@ -13,6 +13,7 @@ public:
 
     virtual void accept(LevelObjectVisitor& v) override;
     virtual void step();
+    virtual void wander();
 };
 
 #endif

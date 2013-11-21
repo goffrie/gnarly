@@ -13,10 +13,12 @@ OBJECTS=\
 	levelobject/player/orcplayer.o \
 	levelobject/monster/monster.o \
 	levelobject/monster/merchant.o \
+	levelobject/monster/dragon.o \
 	levelobject/levelobject.o \
 	levelobject/character.o \
 	levelobject/potion.o \
 	levelobject/gold.o \
+	levelobject/dragongold.o \
 	levelobject/staircase.o \
 	ui.o \
 	basicui.o \
