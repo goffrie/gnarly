@@ -15,7 +15,6 @@ public:
 
     virtual int gold() const { return _gold; }
 
-    virtual bool canMove(int nY, int nX) override;
     virtual void attack(Character* other) override;
 
     // Potion effect: restore (or remove) HP.
