@@ -25,6 +25,8 @@ public:
     virtual void applyBuff(int atk, int def);
     // Adds gold to a player (by picking up or killing baddies)
     virtual void addGold(int amt);
+    // Removes all buffs. Usually called when travelling between levels
+    virtual void stripBuffs();
 
     virtual void accept(LevelObjectVisitor& v) override;
 };

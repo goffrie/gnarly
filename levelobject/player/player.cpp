@@ -68,6 +68,10 @@ void Player::addGold(int amt) {
     _gold += amt;
 }
 
+void Player::stripBuffs() {
+    attributes = attributes->strip();
+}
+
 void Player::accept(LevelObjectVisitor& v) {
     v.visit(*this);
 }

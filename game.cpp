@@ -157,6 +157,7 @@ void Game::makeNewLevel() {
     level = new Level(&display);
 
     level->generate(player);
+    player->stripBuffs();
 }
 
 Game* Game::instance(bool reset) {
