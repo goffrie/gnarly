@@ -95,7 +95,5 @@ Dungeon AggregationGen::gen(int height, int width) {
         tilesFilled += diffuse(m, height, width, y, x, rH, rW);
     }
 
-    Dungeon(m).draw(*UI::instance());
-    UI::instance()->redraw();
     return Dungeon(m);
 }
