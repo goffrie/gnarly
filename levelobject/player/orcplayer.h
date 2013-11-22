@@ -4,8 +4,10 @@
 #include "player.h"
 
 class OrcPlayer : public Player {
+    int goldRemainder;
 public:
     OrcPlayer();
+    virtual void addGold(int amt);
 };
 
 #endif

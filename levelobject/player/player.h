@@ -14,6 +14,7 @@ public:
     virtual ~Player();
 
     virtual int gold() const { return _gold; }
+    virtual int score() const { return gold(); }
 
     virtual void attack(Character* other) override;
 

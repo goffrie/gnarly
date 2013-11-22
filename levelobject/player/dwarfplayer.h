@@ -6,6 +6,7 @@
 class DwarfPlayer : public Player {
 public:
     DwarfPlayer();
+    virtual void addGold(int amt);
 };
 
 #endif

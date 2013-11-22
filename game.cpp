@@ -165,8 +165,7 @@ void Game::makeNewLevel() {
         line << "You Win \\(^o^)/ You saved the world! As soon as you succeed, people start reconsidering their lives. "
              "War ceases to exist and people learn to empathize with each other, and scarcity is solved.  "
              "Everyone lives happily ever after. The end.\n\n"
-             "You also got " << player->gold() << " gold, though with the new pseudo-communist society "
-             "money is useless";
+             "Score: " << player->score();
         popup = new PopUp(line.str(), 5, 5, 17, 69);
         display.add(popup, 2);
         return;

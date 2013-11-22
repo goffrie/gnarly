@@ -6,6 +6,7 @@
 class HumanPlayer : public Player {
 public:
     HumanPlayer();
+    virtual int score() const override;
 };
 
 #endif
