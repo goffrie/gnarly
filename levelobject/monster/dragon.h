@@ -15,6 +15,7 @@ public:
     Dragon(DragonGold* hoard);
     virtual void wander() override;
     virtual Character* chooseTarget(std::vector<LevelObject*> objs);
+    virtual int droppedGold() const { return 0; }
 };
 
 #endif

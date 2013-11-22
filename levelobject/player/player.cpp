@@ -23,7 +23,7 @@ void Player::attack(Character* other) {
     UI::instance()->say("You hit the " + other->race() + ".");
     other->takeDamage(atk());
     if (other->dead()) {
-        addGold(1);
+        addGold(other->droppedGold());
     }
 }
 

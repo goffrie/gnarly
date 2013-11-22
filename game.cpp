@@ -32,6 +32,7 @@ Game::Game() : player(0), pstatus(0), level(0), _quit(false), gameOver(false), _
     pstatus = new PlayerStatus(*player);
     display.add(pstatus);
     display.add(player, 1);
+    Level::resetLevelCount();
     makeNewLevel();
 }
 

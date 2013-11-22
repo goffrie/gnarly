@@ -14,6 +14,7 @@ public:
     virtual void accept(LevelObjectVisitor& v) override;
     virtual void step();
     virtual void wander();
+    virtual int droppedGold() const { return 1; }
 };
 
 #endif

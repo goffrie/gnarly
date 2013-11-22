@@ -23,7 +23,6 @@ Level::Level(Display* d)
   numberPotions(10),
   numberEnemies(20) {
     display->add(&dungeon);
-    currentLevel++;
 }
 
 Level::~Level() {
