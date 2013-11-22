@@ -19,7 +19,7 @@ using namespace std;
 
 Game* Game::_instance = 0;
 
-Game::Game() : player(0), pstatus(0), level(0), _quit(false), gameOver(false), _shouldRestart(false) {
+Game::Game() : player(0), pstatus(0), level(0), popup(0), _quit(false), gameOver(false), _shouldRestart(false) {
     makePlayer();
     if (_quit) {
         return;
