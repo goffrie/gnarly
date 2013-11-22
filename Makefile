@@ -32,7 +32,8 @@ OBJECTS=\
 	level.o \
 	main.o \
 	team.o \
-	popup.o
+	popup.o \
+	commandargs.o
 DEPENDS=${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

@@ -9,6 +9,7 @@
 #include "gold.h"
 #include "staircase.h"
 #include "superelf.h"
+#include "commandargs.h"
 
 #include <cstring>
 #include <iostream>
@@ -23,10 +24,7 @@ Game::Game() : player(0), pstatus(0), level(0), _quit(false), gameOver(false), _
     if (_quit) {
         return;
     }
-    cout << "Curses? (y/n)" << endl;
-    char c;
-    cin >> c;
-    if (c == 'y') {
+    if (useCurses) {
         UI::setInstance(new CursesUI());
     } else {
         UI::setInstance(new BasicUI());
@@ -46,10 +44,9 @@ Game::~Game() {
 }
 
 void Game::run() {
-    print();
     while (!_quit) {
-        readCommand();
         print();
+        readCommand();
     }
 }
 
@@ -199,7 +196,6 @@ Game* Game::instance(bool reset) {
 void Game::makePlayer() {
     cout << "Choose your race: " << endl;
     cout << "(Easy - Elf (e), Easy - Orc(o), Normal - Human (h), Hard - Dwarf (d))" << endl;
-    cout << "(Insanely Easy (I don't want to keep trying to survive levels) - SuperElf (E))" << endl;
     char c;
     cin >> c;
     switch (c) {
@@ -216,11 +212,12 @@ void Game::makePlayer() {
             player = new DwarfPlayer();
             break;
         case 'E':
-            player = new SuperElfPlayer();
-            break;
+            if (dev) {
+                player = new SuperElfPlayer();
+                break;
+            }
         default:
-            cout << "Quitting...";
-            // XXX: this crashes
+            cout << "Quitting..." << endl;
             _quit = true;
     }
 }
