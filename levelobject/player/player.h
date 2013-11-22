@@ -26,6 +26,8 @@ public:
     virtual void addGold(int amt);
     // Removes all buffs. Usually called when travelling between levels
     virtual void stripBuffs();
+    // Players can move on doors and passages
+    virtual bool canMove(int nY, int nX);
 
     virtual void accept(LevelObjectVisitor& v) override;
 };

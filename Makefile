@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11 -I. -Ilevelobject -Ilevelobject/related -Ilevelobject/player -Ilevelobject/monster
+CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11 -I. -Ilevelobject -Ilevelobject/related -Ilevelobject/player -Ilevelobject/monster -Idungeongen
 LDFLAGS=-lncurses
 EXEC=gnarly
 OBJECTS=\
@@ -33,7 +33,8 @@ OBJECTS=\
 	main.o \
 	team.o \
 	popup.o \
-	commandargs.o
+	commandargs.o \
+	dungeongen/bspgen.o
 DEPENDS=${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

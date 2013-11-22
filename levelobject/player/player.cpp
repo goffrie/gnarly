@@ -47,6 +47,10 @@ void Player::stripBuffs() {
     attributes = attributes->strip();
 }
 
+bool Player::canMove(int nY, int nX) {
+    return getLevel()->valid(nY, nX) && getLevel()->free(nY, nX, true);
+}
+
 void Player::accept(LevelObjectVisitor& v) {
     v.visit(*this);
 }

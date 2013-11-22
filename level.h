@@ -62,8 +62,8 @@ public:
     bool valid(int y, int x) const;
 
     // Check if a position is free (i.e. there is
-    // nothing in that location).
-    bool free(int y, int x) const;
+    // nothing in that location). A passage or door usually not free
+    bool free(int y, int x, bool canGoBetweenRooms = false) const;
 
     Tile tileAt(int y, int x) const { return dungeon.tileAt(y, x); }
     LevelObject* objectAt(int y, int x) const { return grid[y][x]; }

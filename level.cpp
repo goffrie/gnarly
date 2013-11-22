@@ -16,7 +16,7 @@ using namespace std;
 int Level::currentLevel = 0;
 
 Level::Level(Display* d)
-: dungeon(BSPGen().gen(25, 79)),
+: dungeon(Dungeon::defaultDungeon()),
   display(d),
   grid(dungeon.height(), vector<LevelObject*>(dungeon.width(), 0)),
   numberGold(10),
@@ -157,9 +157,12 @@ bool Level::valid(int y, int x) const {
     return !(x < 0 || y < 0 || (unsigned)x >= width() || (unsigned)y >= height());
 }
 
-bool Level::free(int y, int x) const {
+bool Level::free(int y, int x, bool canGoBetweenRooms) const {
     Tile t = dungeon.tileAt(y, x);
-    return !grid[y][x] && (t == Floor || t == Passage || t == Door);
+    if (!canGoBetweenRooms) {
+        return !grid[y][x] && (t == Floor);
+    }
+    return !grid[y][x] && (t == Floor || t == Door || t == Passage);
 }
 
 void Level::stepObjects() {
