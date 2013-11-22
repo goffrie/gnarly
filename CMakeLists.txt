@@ -5,20 +5,18 @@ project(gnarly)
 find_package(Curses REQUIRED)
 
 set(gnarly_SOURCES
+    basicui.cpp
+    cursesui.cpp
     display.cpp
     displayable.cpp
-    basicui.cpp
     dungeon.cpp
-    levelobjectvisitor.cpp
-    main.cpp
-    playerstatus.cpp
-    ui.cpp
-    cursesui.cpp
     game.cpp
     level.cpp
     levelobject/character.cpp
+    levelobject/dragongold.cpp
     levelobject/gold.cpp
     levelobject/levelobject.cpp
+    levelobject/monster/dragon.cpp
     levelobject/monster/merchant.cpp
     levelobject/monster/monster.cpp
     levelobject/player/dwarfplayer.cpp
@@ -31,7 +29,13 @@ set(gnarly_SOURCES
     levelobject/related/attributes.cpp
     levelobject/related/potionbuff.cpp
     levelobject/staircase.cpp
+    levelobjectvisitor.cpp
+    main.cpp
+    playerstatus.cpp
+    popup.cpp
+    shadowcasting/intervalset.cpp
     team.cpp
+    ui.cpp
 )
 
 include_directories(gnarly . levelobject levelobject/player levelobject/related levelobject/monster)
