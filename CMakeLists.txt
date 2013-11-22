@@ -10,6 +10,7 @@ set(gnarly_SOURCES
     display.cpp
     displayable.cpp
     dungeon.cpp
+    dungeongen/bspgen.cpp
     game.cpp
     level.cpp
     levelobject/character.cpp

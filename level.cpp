@@ -5,6 +5,7 @@
 #include "staircase.h"
 #include "dragongold.h"
 #include "dragon.h"
+#include "dungeongen/bspgen.h"
 
 #include <cassert>
 #include <algorithm>
@@ -15,7 +16,7 @@ using namespace std;
 int Level::currentLevel = 0;
 
 Level::Level(Display* d)
-: dungeon(Dungeon::defaultDungeon()),
+: dungeon(BSPGen().gen(25, 79)),
   display(d),
   grid(dungeon.height(), vector<LevelObject*>(dungeon.width(), 0)),
   numberGold(10),

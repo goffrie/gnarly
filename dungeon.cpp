@@ -29,7 +29,9 @@ inline Tile tileFromChar(char c) {
     }
 }
 
-Dungeon::Dungeon() : roomCount(0) {}
+Dungeon::Dungeon(vector<vector<Tile> >& m) : grid(m) {
+    loadRooms();
+}
 
 void Dungeon::draw(UI& dgrid) const {
     for (unsigned y = 0; y < grid.size(); ++y) {
@@ -40,7 +42,7 @@ void Dungeon::draw(UI& dgrid) const {
 }
 
 Dungeon Dungeon::defaultDungeon() {
-    return loadDungeon(
+    return Dungeon(
         "|-----------------------------------------------------------------------------|\n"
         "|                                                                             |\n"
         "| |--------------------------|        |-----------------------|               |\n"
@@ -70,8 +72,7 @@ Dungeon Dungeon::defaultDungeon() {
 }
 
 
-Dungeon Dungeon::loadDungeon(const char* str) {
-    Dungeon r;
+Dungeon::Dungeon(const char* str) {
     bool newLine = true;
     for (; *str; ++str) {
         if (*str == '\n') {
@@ -79,14 +80,12 @@ Dungeon Dungeon::loadDungeon(const char* str) {
             continue;
         }
         if (newLine) {
-            r.grid.push_back(std::vector<Tile>());
+            grid.push_back(std::vector<Tile>());
             newLine = false;
         }
-        r.grid.back().push_back(tileFromChar(*str));
+        grid.back().push_back(tileFromChar(*str));
     }
-    r.loadRooms();
-
-    return r;
+    loadRooms();
 }
 
 bool Dungeon::inSameRoom(int y1, int x1, int y2, int x2) {
@@ -109,6 +108,8 @@ pair<int,int> Dungeon::randomPlacement() {
 
 void Dungeon::loadRooms() {
     // Identifies rooms in the dungeon by performing a flood fill.
+    roomCount = 0;
+    rooms.clear();
     for (unsigned int y = 0; y < grid.size(); y++) {
         rooms.push_back(vector<int>(grid[y].size(), -1));
     }

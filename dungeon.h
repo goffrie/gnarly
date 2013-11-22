@@ -20,8 +20,15 @@ class Dungeon : public Displayable {
     std::vector<std::vector<Tile> > grid;
     std::vector<std::vector<int> > rooms;
     int roomCount;
-    Dungeon();
 public:
+    // Initialize a dungeon from a string representation.
+    Dungeon(const char* dungeonStr);
+    // Initialize a dungeon from a matrix of Tiles.
+    Dungeon(std::vector<std::vector<Tile> >& m);
+    // Initialize a dungeon from a passable/not passable map.
+    // Infers walls. Never produces passages.
+    Dungeon(std::vector<std::vector<bool> >& m);
+
     virtual void draw(UI& grid) const override;
 
     unsigned int height() const { return grid.size(); }
@@ -35,7 +42,6 @@ public:
     void floodfill(unsigned int y, unsigned int x, int n);
 
     static Dungeon defaultDungeon();
-    static Dungeon loadDungeon(const char* dungeonStr);
 };
 
 #endif
