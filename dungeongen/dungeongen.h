@@ -3,8 +3,13 @@
 
 class Dungeon;
 class DungeonGen {
-public:
+protected:
+    // May throw GenerationError; in this case, reroll the dungeon.
     virtual Dungeon gen(int height, int width) = 0;
+public:
+    class GenerationError {};
+
+    Dungeon generate(int height, int width);
 };
 
 #endif

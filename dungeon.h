@@ -33,6 +33,7 @@ public:
 
     unsigned int height() const { return grid.size(); }
     unsigned int width() const { return grid[0].size(); }
+    int numRooms() const { return roomCount; }
 
     Tile tileAt(int y, int x) const { return grid[y][x]; }
 

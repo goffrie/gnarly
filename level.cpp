@@ -5,6 +5,7 @@
 #include "staircase.h"
 #include "dragongold.h"
 #include "dragon.h"
+#include "dungeongen/aggregationgen.h"
 #include "dungeongen/bspgen.h"
 
 #include <cassert>
@@ -16,7 +17,7 @@ using namespace std;
 int Level::currentLevel = 0;
 
 Level::Level(Display* d)
-: dungeon(Dungeon::defaultDungeon()),
+: dungeon(AggregationGen().generate(25, 79)),
   display(d),
   grid(dungeon.height(), vector<LevelObject*>(dungeon.width(), 0)),
   numberGold(10),
@@ -44,7 +45,7 @@ void Level::generate(Player* p) {
         nextPos = dungeon.randomPlacement();
     } while (
         !free(nextPos.first, nextPos.second)
-        || dungeon.inSameRoom(nextPos.first, nextPos.second, p->getY(), p->getX())
+        || (dungeon.numRooms() > 1 && dungeon.inSameRoom(nextPos.first, nextPos.second, p->getY(), p->getX()))
     );
     s->setPos(nextPos.first, nextPos.second);
     add(s);

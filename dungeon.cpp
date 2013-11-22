@@ -32,6 +32,16 @@ inline Tile tileFromChar(char c) {
 Dungeon::Dungeon(vector<vector<Tile> >& m) : grid(m) {
     loadRooms();
 }
+Dungeon::Dungeon(vector<vector<bool> >& m) {
+    grid.resize(m.size());
+    for (int y = 0; y < m.size(); ++y) {
+        grid[y].resize(m[y].size());
+        for (int x = 0; x < m[y].size(); ++x) {
+            grid[y][x] = m[y][x] ? Floor : Rock;
+        }
+    }
+    loadRooms();
+}
 
 void Dungeon::draw(UI& dgrid) const {
     for (unsigned y = 0; y < grid.size(); ++y) {

@@ -6,11 +6,14 @@ find_package(Curses REQUIRED)
 
 set(gnarly_SOURCES
     basicui.cpp
+    commandargs.cpp
     cursesui.cpp
     display.cpp
     displayable.cpp
     dungeon.cpp
+    dungeongen/aggregationgen.cpp
     dungeongen/bspgen.cpp
+    dungeongen/dungeongen.cpp
     game.cpp
     level.cpp
     levelobject/character.cpp

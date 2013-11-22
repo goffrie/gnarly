@@ -1,5 +1,4 @@
 #include "bspgen.h"
-#include "ui.h"
 
 #include "dungeon.h"
 #include <iostream>
@@ -9,8 +8,6 @@
 using namespace std;
 
 typedef vector<vector<Tile> > Map;
-
-class GenerationError{};
 
 int rnd(int a, int b) {
     if (a >= b) return a;
@@ -63,7 +60,7 @@ void join(Map& m, int y, int x, int h, int w, int sp) {
         P.push_back(make_pair(dx, make_pair(dy1, dy2)));
         ++dx;
     }
-    if (P.size() == 0) throw GenerationError();
+    if (P.size() == 0) throw DungeonGen::GenerationError();
     int count = (P.size() > 1) ? !(rand() % 3) + 1 : 1;
     for (int i = 0; count > 0 && i < P.size(); ++i) {
         // P(i) = count / (P.size() - i)

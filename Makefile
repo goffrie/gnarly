@@ -20,6 +20,9 @@ OBJECTS=\
 	levelobject/gold.o \
 	levelobject/dragongold.o \
 	levelobject/staircase.o \
+	dungeongen/dungeongen.o \
+	dungeongen/bspgen.o \
+	dungeongen/aggregationgen.o \
 	ui.o \
 	basicui.o \
 	cursesui.o \
