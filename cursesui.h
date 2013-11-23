@@ -5,6 +5,7 @@
 
 class CursesUI : public UI {
     int msgLineLength;
+    int grey;
 public:
     CursesUI();
     virtual ~CursesUI() override;

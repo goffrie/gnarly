@@ -26,6 +26,13 @@ CursesUI::CursesUI() : msgLineLength(0) {
     noecho();
     clear();
     start_color();
+
+    if (can_change_color()) {
+        init_color(8, 500, 500, 500);
+        grey = 8;
+    } else {
+        grey = COLOR_BLACK;
+    }
 }
 
 CursesUI::~CursesUI() {
@@ -132,13 +139,13 @@ void CursesUI::unsetColor(int foreground, int background) {
 }
 
 void CursesUI::setDim() {
-    attron(A_BOLD);
-    setColor(COLOR_BLACK, COLOR_BLACK);
+    if (grey == COLOR_BLACK) attron(A_BOLD);
+    setColor(grey, COLOR_BLACK);
 }
 
 void CursesUI::unsetDim() {
-    attroff(A_BOLD);
-    unsetColor(COLOR_BLACK, COLOR_BLACK);
+    if (grey == COLOR_BLACK) attroff(A_BOLD);
+    unsetColor(grey, COLOR_BLACK);
 }
 
 void CursesUI::draw(int y, int x, char c) {
