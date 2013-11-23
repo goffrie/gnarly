@@ -2,9 +2,11 @@
 
 #include "levelobjectvisitor.h"
 #include "level.h"
+#include "ui.h"
 
 #include <cstdlib>
 #include <cctype>
+#include <ncurses.h>
 
 using namespace std;
 
@@ -17,6 +19,20 @@ Character::Character(Attributes::Race c, TeamName t) :
 
 Character::~Character() {
     delete attributes;
+}
+
+void Character::draw(UI& ui) const {
+    int color;
+    if (hp * 100 / startingHP() >= 67) {
+        color = COLOR_GREEN;
+    } else if (hp * 100 / startingHP() >= 33) {
+        color = COLOR_YELLOW;
+    } else {
+        color = COLOR_RED;
+    }
+    ui.setColor(color, COLOR_BLACK);
+    LevelObject::draw(ui);
+    ui.unsetColor(color, COLOR_BLACK);
 }
 
 void Character::reduceHP(int amt) {

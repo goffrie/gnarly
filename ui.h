@@ -20,6 +20,8 @@ public:
     // Read a line. Always call `say` first, to prompt the user.
     virtual std::string readLine() = 0;
 
+    virtual void setColor(int foreground, int background) { }
+    virtual void unsetColor(int foreground, int background) { }
     // Draw a tile at the given location.
     virtual void draw(int y, int x, char c) = 0;
     // Or a string.

@@ -22,6 +22,8 @@ public:
     Character(Attributes::Race c, TeamName t);
     virtual ~Character() = 0;
 
+    virtual void draw(UI& ui) const override;
+
     int currentHP() const {
         return hp;
     }

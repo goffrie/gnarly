@@ -50,7 +50,7 @@ bool Player::moveRelative(Direction d) {
 void Player::attack(Character* other) {
     ostringstream msg;
     int damage = other->takeDamage(atk());
-    msg << "You did " << damage << " damage to the " << other->name() << " (" << other->currentHP() << " HP).";
+    msg << "You did " << damage << " dmg to the " << other->name() << " (" << other->currentHP() << " HP).";
     UI::instance()->say(msg.str());
     if (other->dead()) {
         addGold(other->droppedGold());

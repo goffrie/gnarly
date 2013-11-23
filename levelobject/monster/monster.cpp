@@ -43,7 +43,7 @@ void Monster::attack(Character* target) {
         UI::instance()->say(msg.str());
     } else {
         int damage = target->takeDamage(atk());
-        msg << "The " << name() << " hits the " << target->name() << " for " << damage << " damage!";
+        msg << "The " << name() << " hits the " << target->name() << " for " << damage << " dmg!";
         UI::instance()->say(msg.str());
     }
 }

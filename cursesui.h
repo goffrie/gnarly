@@ -5,7 +5,6 @@
 
 class CursesUI : public UI {
     int msgLineLength;
-
 public:
     CursesUI();
     virtual ~CursesUI() override;
@@ -13,6 +12,8 @@ public:
     virtual void say(const std::string& msg) override;
     virtual int readChar() override;
     virtual std::string readLine() override;
+    virtual void setColor(int foreground, int background) override;
+    virtual void unsetColor(int foreground, int background) override;
     virtual void draw(int y, int x, char c) override;
     virtual void draw(int y, int x, const std::string& str) override;
     virtual void fillLine(int y, const std::string& str) override;

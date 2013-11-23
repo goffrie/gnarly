@@ -25,6 +25,7 @@ CursesUI::CursesUI() : msgLineLength(0) {
     keypad(stdscr, TRUE);
     noecho();
     clear();
+    start_color();
 }
 
 CursesUI::~CursesUI() {
@@ -120,6 +121,14 @@ string CursesUI::readLine() {
     raw();
     noecho();
     return r;
+}
+
+void CursesUI::setColor(int foreground, int background) {
+    init_pair(foreground * 10 + background, foreground, background);
+    attron(COLOR_PAIR(foreground * 10 + background));
+}
+void CursesUI::unsetColor(int foreground, int background) {
+    attroff(COLOR_PAIR(foreground * 10 + background));
 }
 
 void CursesUI::draw(int y, int x, char c) {
