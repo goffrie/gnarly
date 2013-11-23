@@ -22,6 +22,7 @@ public:
     Displayable();
 
     // Draw this item on the screen.
+    // XXX change these from grid to UI
     virtual void draw(UI& grid) const = 0;
 };
 

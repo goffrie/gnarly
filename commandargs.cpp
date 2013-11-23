@@ -5,13 +5,13 @@
 using namespace std;
 
 string layoutFile = "";
-bool useCurses = false;
+bool gnarly = false;
 bool dev = false;
 
 void processArgs(int argc, char *argv[]) {
     for (int i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-curses") == 0) {
-            useCurses = true;
+        if (strcmp(argv[i], "-gnarly") == 0) {
+            gnarly = true;
         } else if (strcmp(argv[i], "-dev") == 0) {
             dev = true;
         } else if (strcmp(argv[i], "-f") == 0) {

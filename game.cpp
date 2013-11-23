@@ -1,15 +1,12 @@
 #include "game.h"
 
 #include "cursesui.h"
-#include "humanplayer.h"
-#include "elfplayer.h"
-#include "dwarfplayer.h"
-#include "orcplayer.h"
+#include "player.h"
 #include "potion.h"
 #include "gold.h"
 #include "staircase.h"
-#include "superelf.h"
 #include "commandargs.h"
+#include "playerselect.h"
 
 #include <cstring>
 #include <iostream>
@@ -20,14 +17,16 @@ using namespace std;
 Game* Game::_instance = 0;
 
 Game::Game() : player(0), pstatus(0), level(0), popup(0), _quit(false), gameOver(false), _shouldRestart(false) {
-    makePlayer();
-    if (_quit) {
-        return;
-    }
-    if (useCurses) {
+    PlayerSelect ps;
+    if (gnarly) {
         UI::setInstance(new CursesUI());
     } else {
         UI::setInstance(new BasicUI());
+    }
+    player = ps.getPlayer(*UI::instance());
+    if (!player) {
+        _quit = true;
+        return;
     }
     pstatus = new PlayerStatus(*player);
     display.add(pstatus);
@@ -193,35 +192,6 @@ Game* Game::instance(bool reset) {
         _instance = new Game;
     }
     return _instance;
-}
-
-void Game::makePlayer() {
-    cout << "Choose your race: " << endl;
-    cout << "(Easy - Elf (e), Easy - Orc(o), Normal - Human (h), Hard - Dwarf (d))" << endl;
-    char c;
-    cin >> c;
-    switch (c) {
-        case 'e':
-            player = new ElfPlayer();
-            break;
-        case 'o':
-            player = new OrcPlayer();
-            break;
-        case 'h':
-            player = new HumanPlayer();
-            break;
-        case 'd':
-            player = new DwarfPlayer();
-            break;
-        case 'E':
-            if (dev) {
-                player = new SuperElfPlayer();
-                break;
-            }
-        default:
-            cout << "Quitting..." << endl;
-            _quit = true;
-    }
 }
 
 void Game::cleanup() {

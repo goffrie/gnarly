@@ -4,7 +4,7 @@
 #include <string>
 
 extern std::string layoutFile;
-extern bool useCurses;
+extern bool gnarly;
 extern bool dev;
 
 void processArgs(int argc, char *argv[]);
