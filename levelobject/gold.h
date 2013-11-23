@@ -21,8 +21,9 @@ public:
     Gold(Hoard h);
 
     virtual void use(Player* target);
-    virtual bool canPickUp() { return true; }
-    virtual int amount() { return _amount; }
+    virtual bool canPickUp() const { return true; }
+    virtual int amount() const { return _amount; }
+    virtual std::string name() const override;
 
     virtual char tile() const override { return 'G'; }
 

@@ -22,7 +22,7 @@ Character::~Character() {
 void Character::reduceHP(int amt) {
     hp -= amt;
     if (hp <= 0) {
-        UI::instance()->say("I (" + race() + ") died.");
+        UI::instance()->say("I (" + name() + ") died.");
         getLevel()->notifyDeath(this);
     }
 }

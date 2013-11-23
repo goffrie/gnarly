@@ -18,7 +18,7 @@ public:
     virtual int atk() const { return base->atk(); }
     virtual int def() const { return base->def(); }
     virtual char tile() const { return base->tile(); }
-    virtual std::string race() const { return base->race(); }
+    virtual std::string name() const { return base->name(); }
 
     virtual AttributeProvider* strip() override;
 };

@@ -10,6 +10,7 @@ public:
     virtual void descend();
 
     virtual char tile() const override { return '\\'; }
+    virtual std::string name() const override { return "staircase"; }
 
     virtual void accept(LevelObjectVisitor& v);
 };

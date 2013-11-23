@@ -21,18 +21,18 @@ public:
     };
 
 private:
-    const int startingHP_, atk_, def_;
-    const char tile_;
-    const std::string race_;
+    const int _startingHP, _atk, _def;
+    const char _tile;
+    const std::string _name;
 
     Attributes(int hp, int a, int d, char t, const std::string& r);
 public:
     virtual ~Attributes() { }
-    virtual int startingHP() const { return startingHP_; }
-    virtual int atk() const { return atk_; }
-    virtual int def() const { return def_; }
-    virtual char tile() const { return tile_; }
-    virtual std::string race() const { return race_; }
+    virtual int startingHP() const { return _startingHP; }
+    virtual int atk() const { return _atk; }
+    virtual int def() const { return _def; }
+    virtual char tile() const { return _tile; }
+    virtual std::string name() const { return _name; }
 
     static Attributes get(Attributes::Race c);
 };

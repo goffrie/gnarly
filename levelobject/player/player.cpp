@@ -5,6 +5,7 @@
 #include "level.h"
 #include "levelobjectvisitor.h"
 #include "potionbuff.h"
+#include "direction.h"
 
 Player::Player(Attributes::Race c) : Character(c, Players), _gold(0) {
 }
@@ -19,8 +20,16 @@ void Player::reduceHP(int amt) {
     }
 }
 
+bool Player::moveRelative(Direction d) {
+    if (LevelObject::moveRelative(d)) {
+        UI::instance()->say("You moved ");
+        return true;
+    }
+    return false;
+}
+
 void Player::attack(Character* other) {
-    UI::instance()->say("You hit the " + other->race() + ".");
+    UI::instance()->say("You hit the " + other->name() + ".");
     other->takeDamage(atk());
     if (other->dead()) {
         addGold(other->droppedGold());

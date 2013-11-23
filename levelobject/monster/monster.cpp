@@ -39,10 +39,10 @@ void Monster::wander() {
 void Monster::attack(Character* target) {
     ostringstream msg;
     if (rand() % 2 == 0) {
-        msg << "The " << race() << " misses.";
+        msg << "The " << name() << " misses.";
         UI::instance()->say(msg.str());
     } else {
-        msg << "The " << race() << " hits!";
+        msg << "The " << name() << " hits!";
         UI::instance()->say(msg.str());
         target->takeDamage(atk());
     }

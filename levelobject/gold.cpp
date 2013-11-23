@@ -2,6 +2,8 @@
 #include "player.h"
 #include "levelobjectvisitor.h"
 
+#include <sstream>
+
 using namespace std;
 
 Gold::Gold(Hoard h) {
@@ -25,6 +27,12 @@ Gold::Gold(Hoard h) {
 
 void Gold::use(Player* target) {
     target->addGold(_amount);
+}
+
+string Gold::name() const {
+    ostringstream line;
+    line << amount() << " gold";
+    return line.str();
 }
 
 void Gold::accept(LevelObjectVisitor& v) {

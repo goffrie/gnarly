@@ -34,9 +34,9 @@ Dungeon::Dungeon(vector<vector<Tile> >& m) : grid(m) {
 }
 Dungeon::Dungeon(vector<vector<bool> >& m) {
     grid.resize(m.size());
-    for (int y = 0; y < m.size(); ++y) {
+    for (unsigned int y = 0; y < m.size(); ++y) {
         grid[y].resize(m[y].size());
-        for (int x = 0; x < m[y].size(); ++x) {
+        for (unsigned int x = 0; x < m[y].size(); ++x) {
             grid[y][x] = m[y][x] ? Floor : Rock;
         }
     }

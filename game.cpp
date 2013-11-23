@@ -70,8 +70,8 @@ void Game::move(Direction d) {
     if (gameOver) {
         return UI::instance()->say("Game Over. Restart or quit.");
     }
-    const int ny = player->getY() + directionDy(d),
-              nx = player->getX() + directionDx(d);
+    const int ny = player->getY() + d.dy(),
+              nx = player->getX() + d.dx();
     // XXX make this more object oriented and elegant
     Staircase* stair = dynamic_cast<Staircase*>(level->objectAt(ny, nx));
     if (stair) {
@@ -98,8 +98,8 @@ void Game::attack(Direction d) {
     if (gameOver) {
         return UI::instance()->say("Game Over. Restart or quit.");
     }
-    const int ny = player->getY() + directionDy(d),
-              nx = player->getX() + directionDx(d);
+    const int ny = player->getY() + d.dy(),
+              nx = player->getX() + d.dx();
     if (level->free(ny, nx)) {
         UI::instance()->say("You swing at open space.");
         return;
@@ -118,8 +118,8 @@ void Game::use(Direction d) {
     if (gameOver) {
         return UI::instance()->say("Game Over. Restart or quit.");
     }
-    const int ny = player->getY() + directionDy(d),
-              nx = player->getX() + directionDx(d);
+    const int ny = player->getY() + d.dy(),
+              nx = player->getX() + d.dx();
     if (level->free(ny, nx)) {
         UI::instance()->say("You drink an imaginary potion.");
         return;
@@ -135,6 +135,7 @@ void Game::use(Direction d) {
 }
 
 void Game::restart() {
+    Potion::resetUsed();
     _shouldRestart = true;
     _quit = true;
 }

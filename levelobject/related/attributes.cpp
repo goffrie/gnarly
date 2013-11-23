@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Attributes::Attributes(int hp, int a, int d, char t, const string& r) : startingHP_(hp), atk_(a), def_(d), tile_(t), race_(r) {
+Attributes::Attributes(int hp, int a, int d, char t, const string& r) : _startingHP(hp), _atk(a), _def(d), _tile(t), _name(r) {
 }
 
 Attributes Attributes::get(Attributes::Race c) {

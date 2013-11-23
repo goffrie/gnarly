@@ -2,7 +2,7 @@
 #define __LEVEL_OBJECT_H__
 
 #include "displayable.h"
-#include "util.h"
+#include "direction.h"
 #include "team.h"
 
 #include <vector>
@@ -27,6 +27,7 @@ protected:
 public:
     // The item's ASCII tile.
     virtual char tile() const = 0;
+    virtual std::string name() const = 0;
 
     LevelObject(int y = -1, int x = -1) : level(0), y(y), x(x) { }
     virtual ~LevelObject();
@@ -42,7 +43,7 @@ public:
     // TODO: throw an exception instead of returning bool?
     // Returns true if the movement succeeded.
     bool moveTo(int y, int x);
-    bool moveRelative(Direction d);
+    virtual bool moveRelative(Direction d);
     virtual void step();
     virtual bool canMove(int y, int x);
     virtual bool isEnemy(Team* t) const;

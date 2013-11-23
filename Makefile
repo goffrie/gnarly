@@ -37,7 +37,7 @@ OBJECTS=\
 	team.o \
 	popup.o \
 	commandargs.o \
-	dungeongen/bspgen.o
+	direction.o
 DEPENDS=${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

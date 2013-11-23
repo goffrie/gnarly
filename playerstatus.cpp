@@ -11,7 +11,7 @@ PlayerStatus::PlayerStatus(const Player& p) : Displayable(), player(p) { }
 void PlayerStatus::draw(UI& screen) const {
     ostringstream line;
 
-    line << "Race: " << player.race() << " Gold: " << player.gold();
+    line << "Race: " << player.name() << " Gold: " << player.gold();
     screen.fillLine(25, line.str());
     line.str("");
 

@@ -11,7 +11,7 @@ public:
     virtual int atk() const = 0;
     virtual int def() const = 0;
     virtual char tile() const = 0;
-    virtual std::string race() const = 0;
+    virtual std::string name() const = 0;
     // Return the concrete (non-decorator) AttributeProvider
     // underlying this object, and delete all the decorators.
     virtual AttributeProvider* strip() { return this; }

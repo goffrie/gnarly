@@ -4,6 +4,7 @@
 
 #include <cassert>
 #include <utility>
+#include <sstream>
 
 DragonGold::DragonGold() : Gold(Gold::DragonH), dragonLives(true) {
 }
@@ -23,7 +24,13 @@ bool DragonGold::addDragon() {
     return true;
 }
 
-bool DragonGold::canPickUp() {
+std::string DragonGold::name() const {
+    std::ostringstream line;
+    line << amount() << " dragon gold";
+    return line.str();
+}
+
+bool DragonGold::canPickUp() const {
     return !dragonLives;
 }
 

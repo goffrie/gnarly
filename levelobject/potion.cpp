@@ -5,11 +5,11 @@
 #include "elfplayer.h"
 #include "ui.h"
 
+bool Potion::used[6] = {false, false, false, false, false, false};
+
 void Potion::use(Player* target) {
-    UI::instance()->say("You drink a potion of " + name(type) + ".");
-    if (dynamic_cast<ElfPlayer*>(target)) {
-        UI::instance()->say("You cheater elf.");
-    }
+    used[type] = true;
+    UI::instance()->say("You drink a " + name() + ".");
     switch (type) {
         case RH: target->potionChangeHP(10); break;
         case PH: target->potionChangeHP(-10); break;
@@ -24,14 +24,23 @@ void Potion::accept(LevelObjectVisitor& v) {
     v.visit(*this);
 }
 
-std::string Potion::name(Type t) {
-    switch (t) {
-        case RH: return "restore health";
-        case PH: return "poison health";
-        case BA: return "boost attack";
-        case WA: return "wound attack";
-        case BD: return "boost defense";
-        case WD: return "wound defense";
+std::string Potion::name() const {
+    if (!used[type]) {
+        return "unknown potion";
+    }
+    switch (type) {
+        case RH: return "potion of restore health";
+        case PH: return "potion of poison health";
+        case BA: return "potion of boost attack";
+        case WA: return "potion of wound attack";
+        case BD: return "potion of boost defense";
+        case WD: return "potion of wound defense";
         default: std::terminate();
+    }
+}
+
+void Potion::resetUsed() {
+    for (int i = 0; i < numTypes; i++) {
+        used[i] = false;
     }
 }

@@ -1,7 +1,6 @@
 #ifndef __UI_H__
 #define __UI_H__
 
-#include "util.h"
 #include "commandhandler.h"
 
 #include <string>

@@ -10,29 +10,6 @@ using namespace std;
 // message line, not including the " --more--"
 const int maxMsgLineLength = 70;
 
-inline Direction viKey(int c) {
-    switch (c) {
-        case 'h': return WEST;
-        case 'j': return SOUTH;
-        case 'k': return NORTH;
-        case 'l': return EAST;
-        case 'y': return NW;
-        case 'u': return NE;
-        case 'b': return SW;
-        case 'n': return SE;
-        case KEY_UP: return NORTH;
-        case KEY_DOWN: return SOUTH;
-        case KEY_LEFT: return WEST;
-        case KEY_RIGHT: return EAST;
-        case KEY_A1: return NW;
-        case KEY_A3: return NE;
-        case KEY_C1: return SW;
-        case KEY_C3: return SE;
-    }
-
-    return INVALID_DIRECTION;
-}
-
 // Convert an ncurses key code into a printable representation.
 string printable(int code) {
     if (code == 0) return "NULL";
@@ -61,12 +38,14 @@ void CursesUI::queryCommand(CommandHandler& target) {
         case 'y': case 'u': case 'b': case 'n':
         case KEY_UP: case KEY_DOWN: case KEY_LEFT: case KEY_RIGHT:
         case KEY_A1: case KEY_A3: case KEY_C1: case KEY_C3:
-            target.move(viKey(c));
+        case '1': case '2': case '3': case '4':
+        case '6': case '7': case '8': case '9':
+            target.move(Direction::get(c));
             break;
         case 'a': {
             int a = readChar();
-            Direction d = viKey(a);
-            if (d == INVALID_DIRECTION) {
+            Direction d = Direction::get(a);
+            if (d.valid()) {
                 say(string("Unknown direction ") + printable(a) + "!");
             } else {
                 target.attack(d);
@@ -76,8 +55,8 @@ void CursesUI::queryCommand(CommandHandler& target) {
         case 'q': { // quaff
             // XXX
             int a = readChar();
-            Direction d = viKey(a);
-            if (d == INVALID_DIRECTION) {
+            Direction d = Direction::get(a);
+            if (d.valid()) {
                 say(string("Unknown direction ") + printable(a) + "!");
             } else {
                 target.use(d);

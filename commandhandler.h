@@ -1,7 +1,7 @@
 #ifndef __COMMANDHANDLER_H__
 #define __COMMANDHANDLER_H__
 
-#include "util.h"
+#include "direction.h"
 
 class CommandHandler {
 public:

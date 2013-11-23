@@ -11,8 +11,9 @@ public:
 
     // Adds a dragon attached to the gold. Returns true if sucessfull
     virtual bool addDragon();
-    virtual bool canPickUp();
+    virtual bool canPickUp() const;
     virtual void notifyDragonDied();
+    virtual std::string name() const override;
 };
 
 #endif

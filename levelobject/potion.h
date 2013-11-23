@@ -18,6 +18,7 @@ public:
         WD
     };
     enum { numTypes = 6 };
+    static bool used[6];
 private:
     Type type;
 public:
@@ -27,10 +28,11 @@ public:
 
     Type getType() const { return type; }
     virtual char tile() const override { return 'P'; }
+    virtual std::string name() const override;
 
     virtual void accept(LevelObjectVisitor& v);
 
-    static std::string name(Type t);
+    static void resetUsed();
 };
 
 #endif
