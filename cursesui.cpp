@@ -45,7 +45,7 @@ void CursesUI::queryCommand(CommandHandler& target) {
         case 'a': {
             int a = readChar();
             Direction d = Direction::get(a);
-            if (d.valid()) {
+            if (!d.valid()) {
                 say(string("Unknown direction ") + printable(a) + "!");
             } else {
                 target.attack(d);
@@ -56,7 +56,7 @@ void CursesUI::queryCommand(CommandHandler& target) {
             // XXX
             int a = readChar();
             Direction d = Direction::get(a);
-            if (d.valid()) {
+            if (!d.valid()) {
                 say(string("Unknown direction ") + printable(a) + "!");
             } else {
                 target.use(d);

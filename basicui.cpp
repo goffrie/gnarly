@@ -23,7 +23,7 @@ void BasicUI::queryCommand(CommandHandler& target) {
     } else if (s == "a") {
         string a = readNext();
         Direction d = Direction::basicGet(a);
-        if (d.valid()) {
+        if (!d.valid()) {
             string msg = "Unknown direction " + a + "!";
             say(msg);
         } else {
@@ -32,7 +32,7 @@ void BasicUI::queryCommand(CommandHandler& target) {
     } else if (s == "u") {
         string u = readNext();
         Direction d = Direction::basicGet(u);
-        if (d.valid()) {
+        if (!d.valid()) {
             string msg = "Unknown direction " + u + "!";
             say(msg);
         } else {

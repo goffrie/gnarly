@@ -70,6 +70,7 @@ public:
 
     void stepObjects();
     std::vector<LevelObject*> neighbours(int y, int x);
+    static int levelCount() { return currentLevel; }
     static void resetLevelCount() { currentLevel = 0; }
     static bool isLastLevel() { return currentLevel == lastLevel; }
 };

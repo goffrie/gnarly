@@ -26,7 +26,7 @@ public:
         return hp;
     }
 
-    void takeDamage(int attack);
+    int takeDamage(int attack);
     virtual void attack(Character* other);
     virtual int atk() const { return attributes->atk(); }
     virtual int def() const { return attributes->def(); }

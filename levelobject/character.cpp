@@ -1,10 +1,10 @@
 #include "character.h"
 
-#include "ui.h"
 #include "levelobjectvisitor.h"
 #include "level.h"
 
 #include <cstdlib>
+#include <cctype>
 
 using namespace std;
 
@@ -22,7 +22,6 @@ Character::~Character() {
 void Character::reduceHP(int amt) {
     hp -= amt;
     if (hp <= 0) {
-        UI::instance()->say("I (" + name() + ") died.");
         getLevel()->notifyDeath(this);
     }
 }
@@ -38,10 +37,12 @@ bool Character::dead() const {
     return hp <= 0;
 }
 
-void Character::takeDamage(int attack) {
+int Character::takeDamage(int attack) {
     // damage = ceil( attack * 100 / (100 + defense) )
     const int ratio = 100 + def();
-    reduceHP((attack * 100 + ratio - 1) / ratio);
+    int damage = (attack * 100 + ratio - 1) / ratio;
+    reduceHP(damage);
+    return damage;
 }
 
 void Character::attack(Character* other) {

@@ -7,6 +7,7 @@
 #include "dragon.h"
 #include "dungeongen/aggregationgen.h"
 #include "dungeongen/bspgen.h"
+#include "ui.h"
 
 #include <cassert>
 #include <algorithm>
@@ -17,13 +18,14 @@ using namespace std;
 int Level::currentLevel = 0;
 
 Level::Level(Display* d)
-: dungeon(AggregationGen().generate(25, 79)),
+: dungeon(Dungeon::defaultDungeon()),
   display(d),
   grid(dungeon.height(), vector<LevelObject*>(dungeon.width(), 0)),
   numberGold(10),
   numberPotions(10),
   numberEnemies(20) {
     display->add(&dungeon);
+    currentLevel++;
 }
 
 Level::~Level() {
@@ -141,6 +143,9 @@ void Level::notifyAdd(LevelObject* i) {
 
 void Level::removeDead() {
     for (unsigned int i = 0; i < dying.size(); i++) {
+        string n = dying[i]->name();
+        n[0] = toupper(n[0]);
+        UI::instance()->say(n + " died.");
         delete dying[i];
     }
     dying.clear();

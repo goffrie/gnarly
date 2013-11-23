@@ -39,12 +39,12 @@ void Monster::wander() {
 void Monster::attack(Character* target) {
     ostringstream msg;
     if (rand() % 2 == 0) {
-        msg << "The " << name() << " misses.";
+        msg << "The " << name() << " misses the " << target->name() << ".";
         UI::instance()->say(msg.str());
     } else {
-        msg << "The " << name() << " hits!";
+        int damage = target->takeDamage(atk());
+        msg << "The " << name() << " hits the " << target->name() << " for " << damage << " damage!";
         UI::instance()->say(msg.str());
-        target->takeDamage(atk());
     }
 }
 

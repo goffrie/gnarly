@@ -76,6 +76,7 @@ void Game::move(Direction d) {
     Staircase* stair = dynamic_cast<Staircase*>(level->objectAt(ny, nx));
     if (stair) {
         stair->descend();
+        return;
     }
     Gold* target = dynamic_cast<Gold*>(level->objectAt(ny, nx));
     if (target && target->canPickUp()) {
@@ -172,7 +173,7 @@ void Game::makeNewLevel() {
         return;
     }
     if (level) {
-        UI::instance()->say("New level. Aren't you proud?");
+        UI::instance()->say("You descended a level.");
         level->remove(player);
         delete level;
     }
