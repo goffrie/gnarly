@@ -8,6 +8,9 @@
 #include "dungeongen/aggregationgen.h"
 #include "dungeongen/bspgen.h"
 #include "ui.h"
+#include "memory.h"
+
+#include "shadowcasting/shadowcast.h"
 
 #include <cassert>
 #include <algorithm>
@@ -24,7 +27,7 @@ Level::Level(Display* d)
   numberGold(10),
   numberPotions(10),
   numberEnemies(20) {
-    display->add(&dungeon);
+    //display->add(&dungeon);
     currentLevel++;
 }
 
@@ -104,7 +107,7 @@ void Level::add(LevelObject* i, bool own) {
     grid[i->y][i->x] = i;
     if (own) {
         objects.insert(i);
-        display->add(i, 1);
+        //display->add(i, 1);
     }
 }
 
@@ -168,6 +171,36 @@ bool Level::free(int y, int x, bool canGoBetweenRooms) const {
         return !grid[y][x] && (t == Floor);
     }
     return !grid[y][x] && (t == Floor || t == Door || t == Passage);
+}
+
+void Level::drawPOV(int y, int x, int radius, UI& ui, Memory& mem) {
+    struct IsOpaque {
+        Level& l;
+        IsOpaque(Level& l): l(l) { }
+        bool operator()(int y, int x) {
+            if (y < 0 || x < 0 || y >= l.height() || x >= l.width()) return true;
+            Tile tile = l.tileAt(y, x);
+            return !(tile == Floor || tile == Door || tile == Passage);
+        }
+    } isOpaque(*this);
+    struct Show {
+        Level& l;
+        UI& ui;
+        Memory& mem;
+        Show(Level& l, UI& ui, Memory& mem): l(l), ui(ui), mem(mem) { }
+        void operator()(int y, int x) {
+            if (y < 0 || x < 0 || y >= l.height() || x >= l.width()) return;
+            char tile = tileChar(l.tileAt(y, x));
+            ui.draw(y, x, tile);
+            mem.set(y, x, tile);
+            LevelObject* obj = l.objectAt(y, x);
+            if (obj) {
+                obj->draw(ui);
+                mem.set(y, x, obj->tile());
+            }
+        }
+    } show(*this, ui, mem);
+    shadowcast(y, x, radius, isOpaque, show);
 }
 
 void Level::stepObjects() {

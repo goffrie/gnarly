@@ -10,12 +10,14 @@
 #include "commandhandler.h"
 #include "level.h"
 #include "popup.h"
+#include "memory.h"
 
 class Game : public CommandHandler {
     // Has ownership of `player`, `pstatus`, and 'level'.
     Player* player;
     PlayerStatus* pstatus;
     Level* level;
+    Memory mem;
     PopUp* popup;
 
     Display display;

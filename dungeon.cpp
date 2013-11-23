@@ -5,7 +5,7 @@
 
 using namespace std;
 
-inline char tileChar(Tile t) {
+char tileChar(Tile t) {
     switch (t) {
         case Floor: return '.';
         case WallV: return '|';

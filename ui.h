@@ -22,6 +22,8 @@ public:
 
     virtual void setColor(int foreground, int background) { }
     virtual void unsetColor(int foreground, int background) { }
+    virtual void setDim() { }
+    virtual void unsetDim() { }
     // Draw a tile at the given location.
     virtual void draw(int y, int x, char c) = 0;
     // Or a string.

@@ -15,6 +15,8 @@ enum Tile {
     Rock
 };
 
+char tileChar(Tile t);
+
 // A dungeon layout.
 class Dungeon : public Displayable {
     std::vector<std::vector<Tile> > grid;

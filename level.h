@@ -12,6 +12,7 @@
 #include <set>
 
 class LevelObject;
+class Memory;
 
 // Represents a single dungeon floor in the game
 class Level {
@@ -67,6 +68,9 @@ public:
 
     Tile tileAt(int y, int x) const { return dungeon.tileAt(y, x); }
     LevelObject* objectAt(int y, int x) const { return grid[y][x]; }
+
+    // Draw the level as seen from the given point of view.
+    void drawPOV(int y, int x, int radius, UI& ui, Memory& mem);
 
     void stepObjects();
     std::vector<LevelObject*> neighbours(int y, int x);

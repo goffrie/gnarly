@@ -8,6 +8,7 @@ set(gnarly_SOURCES
     basicui.cpp
     commandargs.cpp
     cursesui.cpp
+    direction.cpp
     display.cpp
     displayable.cpp
     dungeon.cpp
@@ -35,7 +36,9 @@ set(gnarly_SOURCES
     levelobject/staircase.cpp
     levelobjectvisitor.cpp
     main.cpp
+    memory.cpp
     playerstatus.cpp
+    playerselect.cpp
     popup.cpp
     shadowcasting/intervalset.cpp
     team.cpp

@@ -16,7 +16,7 @@ using namespace std;
 
 Game* Game::_instance = 0;
 
-Game::Game() : player(0), pstatus(0), level(0), popup(0), _quit(false), gameOver(false), _shouldRestart(false) {
+Game::Game() : player(0), pstatus(0), level(0), mem(25, 79), popup(0), _quit(false), gameOver(false), _shouldRestart(false) {
     PlayerSelect ps;
     if (gnarly) {
         UI::setInstance(new CursesUI());
@@ -59,10 +59,12 @@ void Game::step() {
 }
 
 void Game::print() {
-    UI* ui = UI::instance();
-    display.draw(*ui);
-    ui->cursor(player->getY(), player->getX());
-    ui->redraw();
+    UI& ui = *UI::instance();
+    display.draw(ui);
+    mem.draw(ui);
+    level->drawPOV(player->getY(), player->getX(), 20, ui, mem);
+    ui.cursor(player->getY(), player->getX());
+    ui.redraw();
 }
 
 void Game::move(Direction d) {
@@ -177,6 +179,7 @@ void Game::makeNewLevel() {
         delete level;
     }
     level = new Level(&display);
+    mem = Memory(25, 79);
 
     level->generate(player);
     player->stripBuffs();

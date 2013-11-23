@@ -124,11 +124,21 @@ string CursesUI::readLine() {
 }
 
 void CursesUI::setColor(int foreground, int background) {
-    init_pair(foreground * 10 + background, foreground, background);
-    attron(COLOR_PAIR(foreground * 10 + background));
+    init_pair(foreground * 10 + background + 1, foreground, background);
+    attron(COLOR_PAIR(foreground * 10 + background + 1));
 }
 void CursesUI::unsetColor(int foreground, int background) {
-    attroff(COLOR_PAIR(foreground * 10 + background));
+    attroff(COLOR_PAIR(foreground * 10 + background + 1));
+}
+
+void CursesUI::setDim() {
+    attron(A_BOLD);
+    setColor(COLOR_BLACK, COLOR_BLACK);
+}
+
+void CursesUI::unsetDim() {
+    attroff(A_BOLD);
+    unsetColor(COLOR_BLACK, COLOR_BLACK);
 }
 
 void CursesUI::draw(int y, int x, char c) {

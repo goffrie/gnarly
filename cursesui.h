@@ -14,6 +14,8 @@ public:
     virtual std::string readLine() override;
     virtual void setColor(int foreground, int background) override;
     virtual void unsetColor(int foreground, int background) override;
+    virtual void setDim() override;
+    virtual void unsetDim() override;
     virtual void draw(int y, int x, char c) override;
     virtual void draw(int y, int x, const std::string& str) override;
     virtual void fillLine(int y, const std::string& str) override;

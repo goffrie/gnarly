@@ -23,6 +23,7 @@ OBJECTS=\
 	dungeongen/dungeongen.o \
 	dungeongen/bspgen.o \
 	dungeongen/aggregationgen.o \
+	shadowcasting/intervalset.o \
 	ui.o \
 	basicui.o \
 	cursesui.o \
@@ -33,6 +34,7 @@ OBJECTS=\
 	displayable.o \
 	playerstatus.o \
 	level.o \
+	memory.o \
 	main.o \
 	team.o \
 	popup.o \
