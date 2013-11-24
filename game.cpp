@@ -12,6 +12,7 @@
 #include "level.h"
 #include "popup.h"
 #include "memory.h"
+#include "target.h"
 
 #include <cstring>
 #include <iostream>
@@ -52,6 +53,12 @@ Game::~Game() {
 void Game::run() {
     while (!_quit) {
         print();
+        Target t(player->getY(), player->getX(), 5);
+        pair<int,int> tar = t.getTarget();
+        string tmp;
+        ostringstream line;
+        line << tar.first << ' ' << tar.second;
+        UI::instance()->say(line.str());
         readCommand();
     }
 }
@@ -162,6 +169,10 @@ void Game::restart() {
 
 void Game::quit() {
     _quit = true;
+}
+
+void Game::confirm() {
+
 }
 
 void Game::notifyPlayerDeath() {

@@ -75,6 +75,9 @@ void CursesUI::queryCommand(CommandHandler& target) {
         case FirstSkill: case SecondSkill: case ThirdSkill: case FourthSkill:
             target.skill(Skill::getSkillNumber(c));
             break;
+        case ' ': case 's':
+            target.confirm();
+            break;
         case 'R': // restart
             say("Really restart? [yes/no] ");
             if (readLine() == "yes") {

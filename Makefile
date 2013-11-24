@@ -49,7 +49,8 @@ OBJECTS=\
 	popup.o \
 	commandargs.o \
 	direction.o \
-	playerselect.o
+	playerselect.o \
+	target.o
 DEPENDS=${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

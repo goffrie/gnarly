@@ -41,6 +41,8 @@ void BasicUI::queryCommand(CommandHandler& target) {
         }
     } else if (s[0] == FirstSkill || s[0] == SecondSkill || s[0] == ThirdSkill || s[0] == FourthSkill) {
         target.skill(Skill::getSkillNumber(s[0]));
+    } else if (s == "s") {
+        target.confirm();
     } else if (s == "r") {
         say("Really restart? [yes/no] ");
         redraw();

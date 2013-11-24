@@ -36,6 +36,7 @@ public:
     void skill(int i);
     void quit();
     void restart();
+    void confirm();
     // Called when the player has died
     void notifyPlayerDeath();
     // Returns if the game should be restarted after it ends
