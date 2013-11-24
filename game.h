@@ -1,16 +1,15 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
-#include "player.h"
 #include "display.h"
-#include "dungeon.h"
-#include "playerstatus.h"
-#include "cursesui.h"
-#include "basicui.h"
 #include "commandhandler.h"
-#include "level.h"
-#include "popup.h"
-#include "memory.h"
+#include "direction.h"
+
+class Player;
+class PlayerStatus;
+class Level;
+class Memory;
+class PopUp;
 
 class Game : public CommandHandler {
     // `Game` owns these objects.

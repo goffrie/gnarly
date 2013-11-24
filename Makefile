@@ -3,12 +3,16 @@ CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11 -I. -Ilevelobject -Ilevelobject/related -
 LDFLAGS=-lncurses
 EXEC=gnarly
 OBJECTS=\
+	levelobject/related/skills/skill.o \
 	levelobject/related/skills/stealth.o \
+	levelobject/related/skills/heal.o \
+	levelobject/related/skills/divinemight.o \
 	levelobject/related/attributes.o \
 	levelobject/related/attributedecorator.o \
-	levelobject/related/potionbuff.o \
+	levelobject/related/basicbuff.o \
 	levelobject/related/class.o \
 	levelobject/related/thief.o \
+	levelobject/related/paladin.o \
 	levelobject/player/player.o \
 	levelobject/player/humanplayer.o \
 	levelobject/player/dwarfplayer.o \

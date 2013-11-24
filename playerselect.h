@@ -18,7 +18,8 @@ class PlayerSelect : public Displayable {
     };
     enum PlayerClass {
         None = 'n',
-        ThiefClass = 't'
+        ThiefClass = 't',
+        PaladinClass = 'p'
     };
     Class* playerClass;
     Player* player;

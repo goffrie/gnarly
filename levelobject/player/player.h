@@ -23,7 +23,7 @@ public:
 
     // Potion effect: restore (or remove) HP.
     // Calls into `addHp`.
-    virtual void potionChangeHP(int amt);
+    virtual void heal(int amt);
     // Potion effect: change attack/defense.
     virtual void applyBuff(int atk, int def);
     // Adds gold to a player (by picking up or killing baddies)
@@ -38,6 +38,7 @@ public:
 
     virtual void setClass(Class* c);
     virtual std::string name() const override;
+    virtual void drawClass(Surface& target) const;
 
     virtual void accept(LevelObjectVisitor& v) override;
 };

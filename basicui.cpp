@@ -1,5 +1,6 @@
 #include "basicui.h"
 #include "direction.h"
+#include "skill.h"
 
 #include <iostream>
 #include <cctype>
@@ -38,14 +39,8 @@ void BasicUI::queryCommand(CommandHandler& target) {
         } else {
             target.use(d);
         }
-    } else if (s == "!") {
-        target.skill(0);
-    } else if (s == "@") {
-        target.skill(1);
-    } else if (s == "#") {
-        target.skill(2);
-    } else if (s == "$") {
-        target.skill(3);
+    } else if (s[0] == FirstSkill || s[0] == SecondSkill || s[0] == ThirdSkill || s[0] == FourthSkill) {
+        target.skill(Skill::getSkillNumber(s[0]));
     } else if (s == "r") {
         say("Really restart? [yes/no] ");
         redraw();

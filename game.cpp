@@ -1,12 +1,17 @@
 #include "game.h"
 
-#include "cursesui.h"
-#include "player.h"
 #include "potion.h"
 #include "gold.h"
 #include "staircase.h"
 #include "commandargs.h"
 #include "playerselect.h"
+#include "dungeon.h"
+#include "playerstatus.h"
+#include "cursesui.h"
+#include "basicui.h"
+#include "level.h"
+#include "popup.h"
+#include "memory.h"
 
 #include <cstring>
 #include <iostream>

@@ -6,7 +6,7 @@
 class ElfPlayer : public Player {
 public:
     ElfPlayer();
-    virtual void potionChangeHP(int amt) override;
+    virtual void heal(int amt) override;
     virtual void applyBuff(int atk, int def) override;
 };
 

@@ -5,6 +5,13 @@
 
 class Player;
 
+enum SkillHotkeys {
+    FirstSkill = '!',
+    SecondSkill = '@',
+    ThirdSkill = '#',
+    FourthSkill = '$'
+};
+
 class Skill {
 public:
     Skill() { }
@@ -16,6 +23,9 @@ public:
     virtual void step(Player* p) { };
     virtual std::string name() const = 0;
     virtual std::string description() const = 0;
+    virtual std::string display() const { return ""; }
+    static int getSkillNumber(char h);
+    static SkillHotkeys getHotkey(int i);
 };
 
 #endif

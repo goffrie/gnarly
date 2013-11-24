@@ -3,10 +3,11 @@
 
 #include <vector>
 #include "skill.h"
+#include "displayable.h"
 
 class Player;
 
-class Class {
+class Class : public Displayable {
 protected:
     std::vector<Skill*> skills;
 
@@ -19,6 +20,7 @@ public:
     virtual void step(Player* p);
     virtual std::vector<Skill*> getSkills();
     virtual std::string name() { return ""; };
+    virtual void draw(Surface& target) const override;
 };
 
 #endif

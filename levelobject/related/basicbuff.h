@@ -1,12 +1,12 @@
-#ifndef __POTION_BUFF__
-#define __POTION_BUFF__
+#ifndef __BASICBUFF_H__
+#define __BASICBUFF_H__
 
 #include "attributedecorator.h"
-class PotionBuff : public AttributeDecorator {
+class BasicBuff : public AttributeDecorator {
     // The value of the buff on attack/defense.
     int atkDelta, defDelta;
 public:
-    PotionBuff(AttributeProvider* base, int atk, int def);
+    BasicBuff(AttributeProvider* base, int atk, int def);
 
     virtual int atk() const;
     virtual int def() const;

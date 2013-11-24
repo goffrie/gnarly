@@ -33,4 +33,6 @@ void PlayerStatus::draw(Surface& target) const {
     line << "Floor " << Level::levelCount();
     target.draw(25, 69, line.str());
     line.str("");
+
+    player.drawClass(target);
 }

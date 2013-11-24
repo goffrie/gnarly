@@ -2,6 +2,7 @@
 #include "player.h"
 
 #include "ui.h"
+#include <sstream>
 
 std::vector<Team::Status> Stealth::allAlly;
 
@@ -18,7 +19,7 @@ void Stealth::use(Player* p) {
     storedAlliances = t->getAlliances();
     t->setAlliances(allAlly);
     currentDuration = duration;
-    UI::instance()->say("You activated stealth.");
+    UI::instance()->say("You used " + name() + ".");
 }
 
 void Stealth::removeStealth(Player* p) {
@@ -46,4 +47,10 @@ std::string Stealth::name() const{
 
 std::string Stealth::description() const {
     return "Turns you (and all your allies) invisible";
+}
+
+std::string Stealth::display() const {
+    std::ostringstream line;
+    line << ": " << (currentDuration > 0 ? currentDuration : 0) << " turns remaining";
+    return line.str();
 }

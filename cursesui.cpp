@@ -1,4 +1,5 @@
 #include "cursesui.h"
+#include "skill.h"
 
 #include <ncurses.h>
 #include <cctype>
@@ -71,17 +72,8 @@ void CursesUI::queryCommand(CommandHandler& target) {
             }
             break;
         }
-        case '!':
-            target.skill(0);
-            break;
-        case '@':
-            target.skill(1);
-            break;
-        case '#':
-            target.skill(2);
-            break;
-        case '$':
-            target.skill(3);
+        case FirstSkill: case SecondSkill: case ThirdSkill: case FourthSkill:
+            target.skill(Skill::getSkillNumber(c));
             break;
         case 'R': // restart
             say("Really restart? [yes/no] ");

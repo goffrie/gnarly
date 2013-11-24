@@ -19,6 +19,7 @@ public:
     virtual void step(Player* p) override;
     virtual std::string name() const override;
     virtual std::string description() const override;
+    virtual std::string display() const override;
 };
 
 #endif

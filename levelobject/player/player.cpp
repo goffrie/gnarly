@@ -4,7 +4,7 @@
 #include "ui.h"
 #include "level.h"
 #include "levelobjectvisitor.h"
-#include "potionbuff.h"
+#include "basicbuff.h"
 #include "direction.h"
 #include "class.h"
 #include <sstream>
@@ -61,7 +61,7 @@ void Player::attack(Character* other) {
     }
 }
 
-void Player::potionChangeHP(int amt) {
+void Player::heal(int amt) {
     if (amt > 0) {
         addHP(amt);
     } else {
@@ -70,7 +70,7 @@ void Player::potionChangeHP(int amt) {
 }
 
 void Player::applyBuff(int a, int d) {
-    attributes = new PotionBuff(attributes, a, d);
+    attributes = new BasicBuff(attributes, a, d);
 }
 
 void Player::addGold(int amt) {
@@ -97,6 +97,10 @@ bool Player::useSkill(int i) {
 
 void Player::setClass(Class* c) {
     playerClass = c;
+}
+
+void Player::drawClass(Surface& target) const {
+    playerClass->draw(target);
 }
 
 std::string Player::name() const {
