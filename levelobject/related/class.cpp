@@ -12,8 +12,7 @@ bool Class::useSkill(unsigned int i, Player* p) {
     if (i >= skills.size()) {
         return false;
     }
-    skills[i]->use(p);
-    return true;
+    return skills[i]->use(p);
 }
 
 void Class::notifyAttack(Player* p) {

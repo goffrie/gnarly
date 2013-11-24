@@ -53,12 +53,6 @@ Game::~Game() {
 void Game::run() {
     while (!_quit) {
         print();
-        Target t(player->getY(), player->getX(), 5);
-        pair<int,int> tar = t.getTarget();
-        string tmp;
-        ostringstream line;
-        line << tar.first << ' ' << tar.second;
-        UI::instance()->say(line.str());
         readCommand();
     }
 }
@@ -157,7 +151,7 @@ void Game::skill(int i) {
     if (player->useSkill(i)) {
         step();
     } else {
-        UI::instance()->say("Invalid Skill.");
+        UI::instance()->say("Invalid Skill or targeting cancelled.");
     }
 }
 
@@ -173,6 +167,12 @@ void Game::quit() {
 
 void Game::confirm() {
 
+}
+
+LevelObject* Game::getTarget(int range) {
+    Target t(player->getY(), player->getX(), range);
+    pair<int,int> tar = t.getTarget();
+    return level->objectAt(tar.first, tar.second);
 }
 
 void Game::notifyPlayerDeath() {

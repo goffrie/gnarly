@@ -14,12 +14,13 @@ Stealth::Stealth() : currentDuration(-1) {
     }
 }
 
-void Stealth::use(Player* p) {
+bool Stealth::use(Player* p) {
     Team* t = p->getTeam();
     storedAlliances = t->getAlliances();
     t->setAlliances(allAlly);
     currentDuration = duration;
     UI::instance()->say("You used " + name() + ".");
+    return true;
 }
 
 void Stealth::removeStealth(Player* p) {
@@ -29,7 +30,10 @@ void Stealth::removeStealth(Player* p) {
 }
 
 void Stealth::notifyAttack(Player* p) {
-    removeStealth(p);
+    if (currentDuration > 0) {
+        removeStealth(p);
+        currentDuration = -1;
+    }
 }
 
 void Stealth::step(Player* p) {

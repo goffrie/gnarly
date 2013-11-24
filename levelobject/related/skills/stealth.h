@@ -7,14 +7,14 @@
 class Stealth : public Skill {
     static std::vector<Team::Status> allAlly;
     std::vector<Team::Status> storedAlliances;
-    enum { duration = 8 };
+    enum { duration = 12 };
     int currentDuration;
 
     void removeStealth(Player* p);
 
 public:
     Stealth();
-    virtual void use(Player* p) override;
+    virtual bool use(Player* p) override;
     virtual void notifyAttack(Player* p) override;
     virtual void step(Player* p) override;
     virtual std::string name() const override;

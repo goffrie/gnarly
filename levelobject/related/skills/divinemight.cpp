@@ -2,9 +2,10 @@
 #include "ui.h"
 #include "player.h"
 
-void DivineMight::use(Player* p) {
+bool DivineMight::use(Player* p) {
     p->applyBuff(20, 30);
     UI::instance()->say("You used " + name() + ".");
+    return true;
 }
 
 std::string DivineMight::name() const{

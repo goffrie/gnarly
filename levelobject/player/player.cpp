@@ -51,6 +51,9 @@ bool Player::moveRelative(Direction d) {
 }
 
 void Player::attack(Character* other) {
+    if (other->dead()) {
+        return UI::instance()->say("Target is already dead.");
+    }
     playerClass->notifyAttack(this);
     ostringstream msg;
     int damage = other->takeDamage(atk());

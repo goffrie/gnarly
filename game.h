@@ -10,6 +10,7 @@ class PlayerStatus;
 class Level;
 class Memory;
 class PopUp;
+class LevelObject;
 
 class Game : public CommandHandler {
     // `Game` owns these objects.
@@ -30,18 +31,19 @@ public:
     void readCommand();
     void step();
     void print();
-    void move(Direction d);
-    void attack(Direction d);
-    void use(Direction d);
-    void skill(int i);
-    void quit();
-    void restart();
-    void confirm();
+    void move(Direction d) override;
+    void attack(Direction d) override;
+    void use(Direction d) override;
+    void skill(int i) override;
+    void quit() override;
+    void restart() override;
+    void confirm() override;
     // Called when the player has died
     void notifyPlayerDeath();
     // Returns if the game should be restarted after it ends
     bool shouldRestart() { return _shouldRestart; }
     void makeNewLevel();
+    LevelObject* getTarget(int range);
 
 private:
     static Game* _instance;

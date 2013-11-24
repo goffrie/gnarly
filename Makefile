@@ -7,6 +7,7 @@ OBJECTS=\
 	levelobject/related/skills/stealth.o \
 	levelobject/related/skills/heal.o \
 	levelobject/related/skills/divinemight.o \
+	levelobject/related/skills/doublestrike.o \
 	levelobject/related/attributes.o \
 	levelobject/related/attributedecorator.o \
 	levelobject/related/basicbuff.o \

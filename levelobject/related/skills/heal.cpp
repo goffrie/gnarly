@@ -2,9 +2,10 @@
 #include "player.h"
 #include "ui.h"
 
-void Heal::use(Player* p) {
+bool Heal::use(Player* p) {
     p->heal(50);
     UI::instance()->say("You used " + name() + ".");
+    return true;
 }
 
 std::string Heal::name() const{

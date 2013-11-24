@@ -16,7 +16,7 @@ class Skill {
 public:
     Skill() { }
     virtual ~Skill () { }
-    virtual void use(Player* p) = 0;
+    virtual bool use(Player* p) = 0;
     virtual void notifyAttack(Player* p) { }
     virtual void notifyMove(Player* p) { }
     virtual void notifyUse(Player* p) { }

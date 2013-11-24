@@ -1,9 +1,9 @@
-#ifndef __HEAL_H__
-#define __HEAL_H__
+#ifndef __DOUBLESTRIKE_H__
+#define __DOUBLESTRIKE_H__
 
 #include "skill.h"
 
-class Heal : public Skill {
+class DoubleStrike : public Skill {
 public:
     virtual bool use(Player* p) override;
     virtual std::string name() const override;
