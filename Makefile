@@ -8,12 +8,15 @@ OBJECTS=\
 	levelobject/related/skills/heal.o \
 	levelobject/related/skills/divinemight.o \
 	levelobject/related/skills/doublestrike.o \
+	levelobject/related/skills/fireball.o \
+	levelobject/related/skills/mindcontrol.o \
 	levelobject/related/attributes.o \
 	levelobject/related/attributedecorator.o \
 	levelobject/related/basicbuff.o \
 	levelobject/related/class.o \
 	levelobject/related/thief.o \
 	levelobject/related/paladin.o \
+	levelobject/related/wizard.o \
 	levelobject/player/player.o \
 	levelobject/player/humanplayer.o \
 	levelobject/player/dwarfplayer.o \

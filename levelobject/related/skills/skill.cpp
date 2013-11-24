@@ -1,4 +1,10 @@
 #include "skill.h"
+#include "ui.h"
+
+bool Skill::use(Player* p) {
+    UI::instance()->say("You used " + name() + "!");
+    return true;
+}
 
 int Skill::getSkillNumber(char h) {
     switch (h) {

@@ -11,6 +11,7 @@
 #include "class.h"
 #include "thief.h"
 #include "paladin.h"
+#include "wizard.h"
 
 #include <iostream>
 #include <sstream>
@@ -88,6 +89,9 @@ Player* PlayerSelect::getPlayer(UI& ui) {
             case PaladinClass:
                 swapClass(new Paladin());
                 break;
+            case WizardClass:
+                swapClass(new Wizard());
+                break;
             case None:
                 swapClass(new Class());
                 break;
@@ -143,6 +147,6 @@ void PlayerSelect::draw(Surface& target) const {
     target.fillLine(23, "Choose your race:");
     target.fillLine(24, "Easy - Elf <e>, Easy - Orc <o>, Normal - Human <h>, Hard - Dwarf <d>");
     target.fillLine(25, "Choose your class:");
-    target.fillLine(26, "None <n>, Thief <t>, Paladin <p>");
+    target.fillLine(26, "None <n>, Thief <t>, Paladin <p>, Wizard <w>");
     target.unsetColor(COLOR_GREEN, COLOR_BLACK);
 }

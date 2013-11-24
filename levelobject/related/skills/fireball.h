@@ -1,10 +1,10 @@
-#ifndef __DOUBLESTRIKE_H__
-#define __DOUBLESTRIKE_H__
+#ifndef __FIREBALL_H__
+#define __FIREBALL_H__
 
 #include "skill.h"
 
-class DoubleStrike : public Skill {
-    enum { range = 1 };
+class Fireball : public Skill {
+    enum { damage = 60, range = 5 };
 public:
     virtual bool use(Player* p) override;
     virtual std::string name() const override;

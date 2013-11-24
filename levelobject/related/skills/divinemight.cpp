@@ -4,7 +4,7 @@
 
 bool DivineMight::use(Player* p) {
     p->applyBuff(20, 30);
-    UI::instance()->say("You used " + name() + ".");
+    Skill::use(p);
     return true;
 }
 

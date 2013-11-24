@@ -19,7 +19,7 @@ bool Stealth::use(Player* p) {
     storedAlliances = t->getAlliances();
     t->setAlliances(allAlly);
     currentDuration = duration;
-    UI::instance()->say("You used " + name() + ".");
+    Skill::use(p);
     return true;
 }
 

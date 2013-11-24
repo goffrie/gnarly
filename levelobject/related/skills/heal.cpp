@@ -4,7 +4,7 @@
 
 bool Heal::use(Player* p) {
     p->heal(50);
-    UI::instance()->say("You used " + name() + ".");
+    Skill::use(p);
     return true;
 }
 

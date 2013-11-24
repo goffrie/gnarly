@@ -19,6 +19,9 @@ public:
     virtual int gold() const { return _gold; }
     virtual int score() const { return gold(); }
     virtual bool moveRelative(Direction d) override;
+    // Does damage to a character
+    virtual void damage(Character* other, int d);
+    // Default attack. Calls damage()
     virtual void attack(Character* other) override;
 
     // Potion effect: restore (or remove) HP.
