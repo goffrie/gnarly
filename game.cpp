@@ -55,6 +55,7 @@ void Game::readCommand() {
 }
 
 void Game::step() {
+    player->step();
     level->stepObjects();
 }
 
@@ -133,6 +134,17 @@ void Game::use(Direction d) {
         step();
     } else {
         UI::instance()->say("That doesn't appear to be drinkable.");
+    }
+}
+
+void Game::skill(int i) {
+    if (gameOver) {
+        return UI::instance()->say("Game Over. Restart or quit.");
+    }
+    if (player->useSkill(i)) {
+        step();
+    } else {
+        UI::instance()->say("Invalid Skill.");
     }
 }
 

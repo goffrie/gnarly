@@ -6,14 +6,16 @@
 #include "levelobjectvisitor.h"
 #include "potionbuff.h"
 #include "direction.h"
+#include "class.h"
 #include <sstream>
 
 using namespace std;
 
-Player::Player(Attributes::Race c) : Character(c, Players), _gold(0) {
+Player::Player(Attributes::Race r) : Character(r, Players), playerClass(0), _gold(0) {
 }
 
 Player::~Player() {
+    delete playerClass;
 }
 
 void Player::reduceHP(int amt) {
@@ -25,6 +27,7 @@ void Player::reduceHP(int amt) {
 
 bool Player::moveRelative(Direction d) {
     if (LevelObject::moveRelative(d)) {
+        playerClass->notifyMove(this);
         ostringstream msg;
         msg << "You moved " << d.name() << " and see ";
         vector<LevelObject*> neighbours = getLevel()->neighbours(getY(), getX());
@@ -48,6 +51,7 @@ bool Player::moveRelative(Direction d) {
 }
 
 void Player::attack(Character* other) {
+    playerClass->notifyAttack(this);
     ostringstream msg;
     int damage = other->takeDamage(atk());
     msg << "You did " << damage << " dmg to the " << other->name() << " (" << other->currentHP() << " HP).";
@@ -79,6 +83,27 @@ void Player::stripBuffs() {
 
 bool Player::canMove(int nY, int nX) {
     return getLevel()->valid(nY, nX) && getLevel()->free(nY, nX, true);
+}
+
+void Player::step() {
+    Character::step();
+    playerClass->step(this);
+}
+
+bool Player::useSkill(int i) {
+    return playerClass->useSkill(i, this);
+    return false;
+}
+
+void Player::setClass(Class* c) {
+    playerClass = c;
+}
+
+std::string Player::name() const {
+    if (playerClass->name() != "") {
+        return Character::name() + " " + playerClass->name();
+    }
+    return Character::name();
 }
 
 void Player::accept(LevelObjectVisitor& v) {

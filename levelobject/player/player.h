@@ -3,15 +3,18 @@
 
 #include "character.h"
 
+class Class;
+
 class Player : public Character {
+    Class* playerClass;
     int _gold;
 
 protected:
     virtual void reduceHP(int amt) override;
 public:
-    Player(Attributes::Race c);
+    Player(Attributes::Race r);
 
-    virtual ~Player();
+    virtual ~Player() = 0;
 
     virtual int gold() const { return _gold; }
     virtual int score() const { return gold(); }
@@ -29,6 +32,12 @@ public:
     virtual void stripBuffs();
     // Players can move on doors and passages
     virtual bool canMove(int nY, int nX);
+    virtual void step();
+    // Uses a skill, and returns true if it was successful
+    virtual bool useSkill(int i);
+
+    virtual void setClass(Class* c);
+    virtual std::string name() const override;
 
     virtual void accept(LevelObjectVisitor& v) override;
 };

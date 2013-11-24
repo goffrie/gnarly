@@ -8,6 +8,8 @@
 #include "orcplayer.h"
 #include "superelf.h"
 #include "game.h"
+#include "class.h"
+#include "thief.h"
 
 #include <iostream>
 #include <sstream>
@@ -23,14 +25,15 @@ Player* PlayerSelect::getBasicPlayer() {
     cout << "(Easy - Elf (e), Easy - Orc(o), Normal - Human (h), Hard - Dwarf (d))" << endl;
     char c;
     cin >> c;
+    Player* p;
     switch (c) {
-        case Elf: return new ElfPlayer();
-        case Orc: return new OrcPlayer();
-        case Human: return new HumanPlayer();
-        case Dwarf: return new DwarfPlayer();
+        case Elf: p = new ElfPlayer(); p->setClass(new Class); return p;
+        case Orc: p = new OrcPlayer(); p->setClass(new Class); return p;
+        case Human: p = new HumanPlayer(); p->setClass(new Class); return p;
+        case Dwarf: p = new DwarfPlayer(); p->setClass(new Class); return p;
         case SuperElf:
             if (dev) {
-                return new SuperElfPlayer();
+                p = new SuperElfPlayer(); p->setClass(new Class); return p;
             }
         default:
             cout << "Quitting..." << endl;
@@ -38,11 +41,27 @@ Player* PlayerSelect::getBasicPlayer() {
     }
 }
 
+void PlayerSelect::swapPlayer(Player* p) {
+    player->setClass(0);
+    delete player;
+    player = p;
+    player->setClass(playerClass);
+}
+
+void PlayerSelect::swapClass(Class* c) {
+    delete playerClass;
+    playerClass = c;
+    player->setClass(playerClass);
+}
+
 Player* PlayerSelect::getPlayer(UI& ui) {
     if (!gnarly) {
         return getBasicPlayer();
     }
+    playerClass = new Thief();
     player = new HumanPlayer();
+    player->setClass(playerClass);
+
     curs_set(0);
     int c;
     while (true) {
@@ -51,28 +70,29 @@ Player* PlayerSelect::getPlayer(UI& ui) {
         c = ui.readChar();
         switch (c) {
             case Elf:
-                delete player;
-                player = new ElfPlayer();
+                swapPlayer(new ElfPlayer());
                 break;
             case Orc:
-                delete player;
-                player = new OrcPlayer();
+                swapPlayer(new OrcPlayer());
                 break;
             case Human:
-                delete player;
-                player = new HumanPlayer();
+                swapPlayer(new HumanPlayer());
                 break;
             case Dwarf:
-                delete player;
-                player = new DwarfPlayer();
+                swapPlayer(new DwarfPlayer());
+                break;
+            case ThiefClass:
+                swapClass(new Thief());
+                break;
+            case None:
+                swapClass(new Class());
                 break;
             case SuperElf:
                 if (dev) {
-                    delete player;
-                    player = new SuperElfPlayer();
+                    swapPlayer(new SuperElfPlayer());
                     break;
                 }
-            case ' ':
+            case ' ': case 's':
                 curs_set(1);
                 return player;
             case 'q':
@@ -118,5 +138,7 @@ void PlayerSelect::draw(Surface& target) const {
     target.setColor(COLOR_GREEN, COLOR_BLACK);
     target.fillLine(23, "Choose your race:");
     target.fillLine(24, "Easy - Elf <e>, Easy - Orc <o>, Normal - Human <h>, Hard - Dwarf <d>");
+    target.fillLine(25, "Choose your class:");
+    target.fillLine(26, "None <n>, Thief <t>");
     target.unsetColor(COLOR_GREEN, COLOR_BLACK);
 }

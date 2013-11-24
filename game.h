@@ -34,6 +34,7 @@ public:
     void move(Direction d);
     void attack(Direction d);
     void use(Direction d);
+    void skill(int i);
     void quit();
     void restart();
     // Called when the player has died

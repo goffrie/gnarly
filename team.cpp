@@ -28,6 +28,20 @@ void Team::unally(Team* t) {
     t->alliances[index()] = Status::Enemy;
 }
 
+std::vector<Team::Status> Team::Team::getAlliances() const {
+    return alliances;
+}
+
+void Team::setAlliances(std::vector<Team::Status> a) {
+    for (int i = 0; i < NumTeams; i++) {
+        if (a[i] == Status::Ally) {
+            ally(Team::instance(static_cast<TeamName>(i)));
+        } else if (a[i] == Status::Enemy) {
+            unally(Team::instance(static_cast<TeamName>(i)));
+        }
+    }
+}
+
 TeamName Team::index() const{
     return _index;
 }

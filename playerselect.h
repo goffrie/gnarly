@@ -3,6 +3,7 @@
 
 #include "displayable.h"
 
+class Class;
 class Player;
 class UI;
 
@@ -15,8 +16,15 @@ class PlayerSelect : public Displayable {
         Orc = 'o',
         SuperElf = 'E'
     };
+    enum PlayerClass {
+        None = 'n',
+        ThiefClass = 't'
+    };
+    Class* playerClass;
     Player* player;
     Player* getBasicPlayer();
+    void swapPlayer(Player* p);
+    void swapClass(Class* c);
 
 public:
     PlayerSelect();

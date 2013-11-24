@@ -38,6 +38,14 @@ void BasicUI::queryCommand(CommandHandler& target) {
         } else {
             target.use(d);
         }
+    } else if (s == "!") {
+        target.skill(0);
+    } else if (s == "@") {
+        target.skill(1);
+    } else if (s == "#") {
+        target.skill(2);
+    } else if (s == "$") {
+        target.skill(3);
     } else if (s == "r") {
         say("Really restart? [yes/no] ");
         redraw();

@@ -14,11 +14,13 @@ enum TeamName {
 
 // I think team could be implemented nicer than this probably
 class Team {
-private:
+public:
     enum Status {
         Ally,
         Enemy
     };
+
+private:
     // The array of singletons of teams
     static std::vector<Team*> teams;
     // Stores alliance status with every other team. Note: alliances are bidirectional
@@ -33,6 +35,8 @@ public:
     bool isAllied(Team * t) const;
     void ally(Team *t);
     void unally(Team *t);
+    std::vector<Team::Status> getAlliances() const;
+    void setAlliances(std::vector<Team::Status> a);
     TeamName index() const;
 
 private:

@@ -35,6 +35,7 @@ public:
     virtual int startingHP() const { return attributes->startingHP(); }
     virtual char tile() const override { return attributes->tile(); }
     virtual std::string name() const override { return attributes->name(); }
+    virtual Team* getTeam() const { return team; }
     virtual int droppedGold() const { return 0; }
     virtual bool dead() const override;
 

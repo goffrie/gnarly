@@ -71,6 +71,18 @@ void CursesUI::queryCommand(CommandHandler& target) {
             }
             break;
         }
+        case '!':
+            target.skill(0);
+            break;
+        case '@':
+            target.skill(1);
+            break;
+        case '#':
+            target.skill(2);
+            break;
+        case '$':
+            target.skill(3);
+            break;
         case 'R': // restart
             say("Really restart? [yes/no] ");
             if (readLine() == "yes") {

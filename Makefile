@@ -1,11 +1,14 @@
 CXX=g++
-CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11 -I. -Ilevelobject -Ilevelobject/related -Ilevelobject/player -Ilevelobject/monster -Idungeongen
+CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11 -I. -Ilevelobject -Ilevelobject/related -Ilevelobject/player -Ilevelobject/monster -Idungeongen -Ilevelobject/related/skills
 LDFLAGS=-lncurses
 EXEC=gnarly
 OBJECTS=\
+	levelobject/related/skills/stealth.o \
 	levelobject/related/attributes.o \
 	levelobject/related/attributedecorator.o \
 	levelobject/related/potionbuff.o \
+	levelobject/related/class.o \
+	levelobject/related/thief.o \
 	levelobject/player/player.o \
 	levelobject/player/humanplayer.o \
 	levelobject/player/dwarfplayer.o \

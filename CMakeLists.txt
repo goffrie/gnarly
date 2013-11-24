@@ -30,6 +30,9 @@ set(gnarly_SOURCES
     levelobject/player/orcplayer.cpp
     levelobject/player/player.cpp
     levelobject/potion.cpp
+    levelobject/related/skills/stealth.cpp
+    levelobject/related/class.cpp
+    levelobject/related/thief.cpp
     levelobject/related/attributedecorator.cpp
     levelobject/related/attributes.cpp
     levelobject/related/potionbuff.cpp
@@ -47,6 +50,6 @@ set(gnarly_SOURCES
     ui.cpp
 )
 
-include_directories(gnarly . levelobject levelobject/player levelobject/related levelobject/monster)
+include_directories(gnarly . levelobject levelobject/player levelobject/related levelobject/monster levelobject/related/skills)
 add_executable(gnarly ${gnarly_SOURCES})
 target_link_libraries(gnarly ${CURSES_LIBRARIES})
