@@ -11,14 +11,14 @@ using namespace std;
 
 // Index into a 2d vector with bounds checking (returns true by default).
 bool ix(const vector<vector<bool> >& a, int y, int x) {
-    if (y < 0 || y >= a.size()) return true;
-    if (x < 0 || x >= a[y].size()) return true;
+    if (y < 0 || y >= (signed)a.size()) return true;
+    if (x < 0 || x >= (signed)a[y].size()) return true;
     return a[y][x];
 }
 // Set an index in a 2d vector with bounds checking.
 void setIx(vector<vector<bool> >& a, int y, int x, bool val) {
-    if (y < 0 || y >= a.size()) return;
-    if (x < 0 || x >= a[y].size()) return;
+    if (y < 0 || y >= (signed)a.size()) return;
+    if (x < 0 || x >= (signed)a[y].size()) return;
     a[y][x] = val;
 }
 
