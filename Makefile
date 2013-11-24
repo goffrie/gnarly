@@ -24,6 +24,8 @@ OBJECTS=\
 	dungeongen/bspgen.o \
 	dungeongen/aggregationgen.o \
 	shadowcasting/intervalset.o \
+	shadowcasting/shadowcast.o \
+	surface.o \
 	ui.o \
 	basicui.o \
 	cursesui.o \

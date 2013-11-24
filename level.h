@@ -2,11 +2,9 @@
 #define __LEVEL_H__
 
 #include "displayable.h"
-#include "display.h"
 #include "dungeon.h"
 #include "player.h"
 #include "randomspawn.h"
-#include "display.h"
 
 #include <vector>
 #include <set>
@@ -15,18 +13,21 @@ class LevelObject;
 class Memory;
 
 // Represents a single dungeon floor in the game
-class Level {
+class Level : public Displayable {
     // The number of the current level (how many levels have passed + 1)
     static int currentLevel;
     enum { lastLevel = 8 };
 
     // The base dungeon layout. Owned by this class.
     Dungeon dungeon;
-    Display* display;
 
     // A catalogue of the things on this level,
     // indexed by their location.
     std::vector<std::vector<LevelObject*> > grid;
+
+    // What tiles are currently visible by the player?
+    // Needs to be kept up-to-date using `computeFOV`.
+    std::vector<std::vector<bool> > fov;
 
     // All the items owned by this level.
     // This includes everything except the player.
@@ -42,8 +43,8 @@ class Level {
     void addStored();
 
 public:
-    Level(Display* d);
-    ~Level();
+    Level();
+    virtual ~Level();
 
     unsigned int height() const { return grid.size(); }
     unsigned int width() const { return grid[0].size(); }
@@ -51,7 +52,7 @@ public:
     void generate(Player* p);
 
     // Add something to the level. `own` controls whether the level
-    // should take ownership of it. Also, adds to display if owned by level
+    // should take ownership of it.
     void add(LevelObject* i, bool own = true);
     void remove(LevelObject* i);
 
@@ -69,8 +70,11 @@ public:
     Tile tileAt(int y, int x) const { return dungeon.tileAt(y, x); }
     LevelObject* objectAt(int y, int x) const { return grid[y][x]; }
 
-    // Draw the level as seen from the given point of view.
-    void drawPOV(int y, int x, int radius, Surface& target, Memory& mem);
+    // Update the field of view for the player at position (y, x).
+    // This method needs to be called before the next two.
+    void computeFOV(int y, int x, int radius);
+    // Draw the parts of the level that the player can see.
+    void draw(Surface& target) const override;
 
     void stepObjects();
     std::vector<LevelObject*> neighbours(int y, int x);

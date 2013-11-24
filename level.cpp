@@ -20,14 +20,12 @@ using namespace std;
 
 int Level::currentLevel = 0;
 
-Level::Level(Display* d)
+Level::Level()
 : dungeon(Dungeon::defaultDungeon()),
-  display(d),
   grid(dungeon.height(), vector<LevelObject*>(dungeon.width(), 0)),
   numberGold(10),
   numberPotions(10),
   numberEnemies(20) {
-    //display->add(&dungeon);
     currentLevel++;
 }
 
@@ -107,7 +105,6 @@ void Level::add(LevelObject* i, bool own) {
     grid[i->y][i->x] = i;
     if (own) {
         objects.insert(i);
-        //display->add(i, 1);
     }
 }
 
@@ -173,34 +170,32 @@ bool Level::free(int y, int x, bool canGoBetweenRooms) const {
     return !grid[y][x] && (t == Floor || t == Door || t == Passage);
 }
 
-void Level::drawPOV(int y, int x, int radius, Surface& target, Memory& mem) {
-    struct IsOpaque {
-        Level& l;
-        IsOpaque(Level& l): l(l) { }
-        bool operator()(int y, int x) {
-            if (y < 0 || x < 0 || y >= l.height() || x >= l.width()) return true;
-            Tile tile = l.tileAt(y, x);
-            return !(tile == Floor || tile == Door || tile == Passage);
+void Level::computeFOV(int pY, int pX, int radius) {
+    const int h = height(), w = width();
+    // Determine which tiles are opaque.
+    vector<vector<bool> > opaque(h, vector<bool>(w, true));
+    for (int y = 0; y < h; ++y) {
+        for (int x = 0; x < w; ++x) {
+            Tile tile = tileAt(y, x);
+            opaque[y][x] = !(tile == Floor || tile == Door || tile == Passage);
         }
-    } isOpaque(*this);
-    struct Show {
-        Level& l;
-        Surface& target;
-        Memory& mem;
-        Show(Level& l, Surface& target, Memory& mem): l(l), target(target), mem(mem) { }
-        void operator()(int y, int x) {
-            if (y < 0 || x < 0 || y >= l.height() || x >= l.width()) return;
-            char tile = tileChar(l.tileAt(y, x));
+    }
+    // Now compute the field of view.
+    shadowcast(pY, pX, radius, opaque, fov);
+}
+
+void Level::draw(Surface& target) const {
+    const int h = height(), w = width();
+    for (int y = 0; y < h; ++y) {
+        for (int x = 0; x < w; ++x) {
+            if (!fov[y][x]) continue;
+            char tile = tileChar(tileAt(y, x));
             target.draw(y, x, tile);
-            mem.set(y, x, tile);
-            LevelObject* obj = l.objectAt(y, x);
-            if (obj) {
-                obj->draw(target);
-                mem.set(y, x, obj->tile());
-            }
+
+            LevelObject* obj = objectAt(y, x);
+            if (obj) obj->draw(target);
         }
-    } show(*this, target, mem);
-    shadowcast(y, x, radius, isOpaque, show);
+    }
 }
 
 void Level::stepObjects() {

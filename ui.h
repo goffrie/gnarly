@@ -21,6 +21,9 @@ public:
     // Read a line. Always call `say` first, to prompt the user.
     virtual std::string readLine() = 0;
 
+    // Refreshes the display (by reprinting or curses)
+    virtual void redraw() = 0;
+
 // A kind of singleton, where the instance is chosen at runtime.
 private:
     static UI* ui;

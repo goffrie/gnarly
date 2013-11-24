@@ -41,6 +41,8 @@ set(gnarly_SOURCES
     playerselect.cpp
     popup.cpp
     shadowcasting/intervalset.cpp
+    shadowcasting/shadowcast.cpp
+    surface.cpp
     team.cpp
     ui.cpp
 )

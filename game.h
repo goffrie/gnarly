@@ -13,11 +13,11 @@
 #include "memory.h"
 
 class Game : public CommandHandler {
-    // Has ownership of `player`, `pstatus`, and 'level'.
+    // `Game` owns these objects.
     Player* player;
     PlayerStatus* pstatus;
     Level* level;
-    Memory mem;
+    Memory* mem;
     PopUp* popup;
 
     Display display;

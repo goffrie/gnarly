@@ -16,7 +16,7 @@ using namespace std;
 
 Game* Game::_instance = 0;
 
-Game::Game() : player(0), pstatus(0), level(0), mem(25, 79), popup(0), _quit(false), gameOver(false), _shouldRestart(false) {
+Game::Game() : player(0), pstatus(0), level(0), mem(0), popup(0), _quit(false), gameOver(false), _shouldRestart(false) {
     PlayerSelect ps;
     if (gnarly) {
         UI::setInstance(new CursesUI());
@@ -30,7 +30,7 @@ Game::Game() : player(0), pstatus(0), level(0), mem(25, 79), popup(0), _quit(fal
     }
     pstatus = new PlayerStatus(*player);
     display.add(pstatus);
-    display.add(player, 1);
+    display.add(player, 2);
     Level::resetLevelCount();
     makeNewLevel();
 }
@@ -60,9 +60,9 @@ void Game::step() {
 
 void Game::print() {
     UI& ui = *UI::instance();
+    level->computeFOV(player->getY(), player->getX(), 20);
     display.draw(ui);
-    mem.draw(ui);
-    level->drawPOV(player->getY(), player->getX(), 20, ui, mem);
+    level->draw(*mem);
     ui.cursor(player->getY(), player->getX());
     ui.redraw();
 }
@@ -156,7 +156,7 @@ void Game::notifyPlayerDeath() {
          "of struggle the entire world was devoured. Nothing ever lived ever again. The end.\n\n"
          "On the upside, you got " << player->gold() << " gold!";
     popup = new PopUp(line.str(), 5, 5, 17, 69);
-    display.add(popup, 2);
+    display.add(popup, 3);
 }
 
 void Game::makeNewLevel() {
@@ -170,7 +170,7 @@ void Game::makeNewLevel() {
              "Everyone lives happily ever after. The end.\n\n"
              "Score: " << player->score();
         popup = new PopUp(line.str(), 5, 5, 17, 69);
-        display.add(popup, 2);
+        display.add(popup, 3);
         return;
     }
     if (level) {
@@ -178,8 +178,13 @@ void Game::makeNewLevel() {
         level->remove(player);
         delete level;
     }
-    level = new Level(&display);
-    mem = Memory(25, 79);
+    if (mem) {
+        delete mem;
+    }
+    level = new Level();
+    mem = new Memory(level->height(), level->width());
+    display.add(mem, 0);
+    display.add(level, 1);
 
     level->generate(player);
     player->stripBuffs();
