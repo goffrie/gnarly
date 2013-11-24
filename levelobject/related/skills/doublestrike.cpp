@@ -6,7 +6,6 @@
 bool DoubleStrike::use(Player* p) {
     Character* target = dynamic_cast<Character*>(Game::instance()->getTarget(range));
     if (!target) {
-        UI::instance()->say("Invalid target for " + name() + ".");
         return false;
     }
     Skill::use(p);

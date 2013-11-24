@@ -21,6 +21,7 @@ public:
     virtual void quit() override;
     virtual void confirm() override;
     virtual std::pair<int,int> getTarget();
+    static bool validTarget(std::pair<int,int> p);
 };
 
 #endif

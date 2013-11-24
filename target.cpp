@@ -52,3 +52,7 @@ pair<int,int> Target::getTarget() {
     }
     return make_pair(-1, -1);
 }
+
+bool Target::validTarget(pair<int,int> p) {
+    return !(p.first == -1 && p.second == -1);
+}

@@ -151,7 +151,7 @@ void Game::skill(int i) {
     if (player->useSkill(i)) {
         step();
     } else {
-        UI::instance()->say("Invalid Skill or targeting cancelled.");
+        UI::instance()->say(" Invalid skill or target.");
     }
 }
 
@@ -172,7 +172,13 @@ void Game::confirm() {
 LevelObject* Game::getTarget(int range) {
     Target t(player->getY(), player->getX(), range);
     pair<int,int> tar = t.getTarget();
-    return level->objectAt(tar.first, tar.second);
+    if (Target::validTarget(tar)) {
+        print();
+        return level->objectAt(tar.first, tar.second);
+    } else {
+        print();
+        return 0;
+    }
 }
 
 void Game::notifyPlayerDeath() {
