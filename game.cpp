@@ -41,6 +41,7 @@ Game::~Game() {
     delete player;
     delete level;
     delete popup;
+    delete mem;
 }
 
 void Game::run() {

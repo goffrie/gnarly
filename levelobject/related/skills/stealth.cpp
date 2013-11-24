@@ -5,7 +5,7 @@
 
 std::vector<Team::Status> Stealth::allAlly;
 
-Stealth::Stealth() : currentDuration(0) {
+Stealth::Stealth() : currentDuration(-1) {
     if (allAlly.empty()) {
         for (int i = 0; i < NumTeams; i++) {
             allAlly.push_back(Team::Ally);
@@ -32,7 +32,7 @@ void Stealth::notifyAttack(Player* p) {
 }
 
 void Stealth::step(Player* p) {
-    if (currentDuration > 0) {
+    if (currentDuration >= 0) {
         currentDuration--;
     }
     if (currentDuration == 0) {
