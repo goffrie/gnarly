@@ -32,11 +32,11 @@ public:
     LevelObject(int y = -1, int x = -1) : level(0), y(y), x(x) { }
     virtual ~LevelObject();
 
-    virtual void draw(UI& ui) const override;
+    virtual void draw(Surface& target) const override;
 
     int getY() const { return y; }
     int getX() const { return x; }
-    void setPos(int y, int x);  
+    void setPos(int y, int x);
 
     Level* getLevel() const { return level; }
 

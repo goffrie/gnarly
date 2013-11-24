@@ -1,5 +1,5 @@
 #include "popup.h"
-#include "ui.h"
+#include "surface.h"
 
 #include <cassert>
 #include <iostream>
@@ -41,7 +41,7 @@ vector<string> PopUp::getLines(const string& t, int width) {
     return lines;
 }
 
-void PopUp::draw(UI& grid) const {
+void PopUp::draw(Surface& target) const {
     assert(text.size() < (unsigned)(height - ybuffer * 2));
     for (int dy = y; dy < y + height; dy++) {
         for (int dx = x; dx < x + width; dx++) {
@@ -49,10 +49,10 @@ void PopUp::draw(UI& grid) const {
             if (y == dy || x == dx || dy == y + height - 1 || dx == x + width - 1) {
                 c = '=';
             }
-            grid.draw(dy, dx, c);
+            target.draw(dy, dx, c);
         }
     }
     for (unsigned int i = 0; i < text.size(); i++) {
-        grid.draw(y + i + ybuffer, x + xbuffer, text[i]);
+        target.draw(y + i + ybuffer, x + xbuffer, text[i]);
     }
 }

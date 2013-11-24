@@ -2,13 +2,14 @@
 #define __UI_H__
 
 #include "commandhandler.h"
+#include "surface.h"
 
 #include <string>
 
 // An abstract class for input/output, to provide pluggable implementations.
-class UI {
+class UI : public Surface {
 public:
-    virtual ~UI() {};
+    virtual ~UI() { }
 
     // Ask for (and wait on) a command from the user.
     virtual void queryCommand(CommandHandler& target) = 0;
@@ -19,24 +20,6 @@ public:
     virtual int readChar() = 0;
     // Read a line. Always call `say` first, to prompt the user.
     virtual std::string readLine() = 0;
-
-    virtual void setColor(int foreground, int background) { }
-    virtual void unsetColor(int foreground, int background) { }
-    virtual void setDim() { }
-    virtual void unsetDim() { }
-    // Draw a tile at the given location.
-    virtual void draw(int y, int x, char c) = 0;
-    // Or a string.
-    virtual void draw(int y, int x, const std::string& c) = 0;
-    // Fill a whole line with a string.
-    // This clears the rest of the line.
-    virtual void fillLine(int y, const std::string& str) = 0;
-
-    // Move the cursor here, if possible.
-    virtual void cursor(int y, int x) { }
-
-    // Refreshes the display (by reprinting or curses)
-    virtual void redraw() = 0;
 
 // A kind of singleton, where the instance is chosen at runtime.
 private:

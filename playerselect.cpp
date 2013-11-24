@@ -84,39 +84,39 @@ Player* PlayerSelect::getPlayer(UI& ui) {
     }
 }                                              
 
-void PlayerSelect::draw(UI& ui) const {
-    ui.setColor(COLOR_RED, COLOR_BLACK);
-    ui.fillLine(0, "   _____                          _                                      ");
-    ui.fillLine(1, "  / ____|                        | |                        ##           ");
-    ui.fillLine(2, " | |  __   _ __     __ _   _ __  | |  _   _               ;=x# ;         ");
-    ui.fillLine(3, " | | |_ | | '_ \\   / _` | | '__| | | | | | |             #### ..         ");
-    ui.fillLine(4, " | |__| | | | | | | (_| | | |    | | | |_| |           ###= ;=+          ");
-    ui.fillLine(5, "  \\_____| |_| |_|  \\__,_| |_|    |_|  \\__, |          ##  ====# +        ");
-    ui.fillLine(6, "                                       __/ |         x# .====+##,        ");
-    ui.fillLine(7, "                  ;+###          x# = |___/        ,-#,--===..###        ");
-    ui.fillLine(8, "                 xx#+.##-       +#+ =           X. ##++=-===  +#x        ");
-    ui.fillLine(9, "                 ##x;-=###      #x--==####x    #x##X+ ,=====-#####       ");
-    ui.fillLine(10, "                ##+==.==,####  #====-= ####,  #X;=x ,=== -=. X#;#x       ");
-    ui.fillLine(11, "               ##===;====.##.##;====-;-,####.#X# ,= ======= #x#####+     ");
-    ui.fillLine(12, "      -       ##=;-=======   ;XX ===-;.  ##,# # =-=;==;;===###=####-    ");
-    ui.fillLine(13, "     X ###  =##==;-.=-=-=-==-= x# =--+X###+#X+ ==,;-==;-==-+##,####X=   ");
-    ui.fillLine(14, "    . =.=X#x+#=--;-.-;,========.#..x+##x..x..=-=-=;===;====#=+######;    ");
-    ui.fillLine(15, "   +#x,=;X##+==,,= -.,+x====;===.#-X= - ;= ;, ==-;==-=;===-+# x#=X###=   ");
-    ui.fillLine(16, "  #+#,.=XX=x= - === x+##X====-= = =.   =.==,=.-===.;==;=.=;=,###+#####   ");
-    ui.fillLine(17, " ,-#=,===X - ===.=;   ,# ;=====    .=,==  .;==-  ==.====    x-####-##x   ");
-    ui.fillLine(18, "=,# . - ==    ===       .. ===        =. =- ==    -.  =        ## X,#;   ");
+void PlayerSelect::draw(Surface& target) const {
+    target.setColor(COLOR_RED, COLOR_BLACK);
+    target.fillLine(0, "   _____                          _                                      ");
+    target.fillLine(1, "  / ____|                        | |                        ##           ");
+    target.fillLine(2, " | |  __   _ __     __ _   _ __  | |  _   _               ;=x# ;         ");
+    target.fillLine(3, " | | |_ | | '_ \\   / _` | | '__| | | | | | |             #### ..         ");
+    target.fillLine(4, " | |__| | | | | | | (_| | | |    | | | |_| |           ###= ;=+          ");
+    target.fillLine(5, "  \\_____| |_| |_|  \\__,_| |_|    |_|  \\__, |          ##  ====# +        ");
+    target.fillLine(6, "                                       __/ |         x# .====+##,        ");
+    target.fillLine(7, "                  ;+###          x# = |___/        ,-#,--===..###        ");
+    target.fillLine(8, "                 xx#+.##-       +#+ =           X. ##++=-===  +#x        ");
+    target.fillLine(9, "                 ##x;-=###      #x--==####x    #x##X+ ,=====-#####       ");
+    target.fillLine(10, "                ##+==.==,####  #====-= ####,  #X;=x ,=== -=. X#;#x       ");
+    target.fillLine(11, "               ##===;====.##.##;====-;-,####.#X# ,= ======= #x#####+     ");
+    target.fillLine(12, "      -       ##=;-=======   ;XX ===-;.  ##,# # =-=;==;;===###=####-    ");
+    target.fillLine(13, "     X ###  =##==;-.=-=-=-==-= x# =--+X###+#X+ ==,;-==;-==-+##,####X=   ");
+    target.fillLine(14, "    . =.=X#x+#=--;-.-;,========.#..x+##x..x..=-=-=;===;====#=+######;    ");
+    target.fillLine(15, "   +#x,=;X##+==,,= -.,+x====;===.#-X= - ;= ;, ==-;==-=;===-+# x#=X###=   ");
+    target.fillLine(16, "  #+#,.=XX=x= - === x+##X====-= = =.   =.==,=.-===.;==;=.=;=,###+#####   ");
+    target.fillLine(17, " ,-#=,===X - ===.=;   ,# ;=====    .=,==  .;==-  ==.====    x-####-##x   ");
+    target.fillLine(18, "=,# . - ==    ===       .. ===        =. =- ==    -.  =        ## X,#;   ");
 
-    ui.unsetColor(COLOR_RED, COLOR_BLACK);
-    ui.fillLine(19, "");
-    ui.fillLine(20, "");
+    target.unsetColor(COLOR_RED, COLOR_BLACK);
+    target.fillLine(19, "");
+    target.fillLine(20, "");
     ostringstream line;
     string n = player->name();
     n[0] = toupper(n[0]);
     line << "    Currently: " << n << "       Press <Space> to Begin, <q> to quit";
-    ui.fillLine(21, line.str());
-    ui.fillLine(22, "");
-    ui.setColor(COLOR_GREEN, COLOR_BLACK);
-    ui.fillLine(23, "Choose your race:");
-    ui.fillLine(24, "Easy - Elf <e>, Easy - Orc <o>, Normal - Human <h>, Hard - Dwarf <d>");
-    ui.unsetColor(COLOR_GREEN, COLOR_BLACK);
+    target.fillLine(21, line.str());
+    target.fillLine(22, "");
+    target.setColor(COLOR_GREEN, COLOR_BLACK);
+    target.fillLine(23, "Choose your race:");
+    target.fillLine(24, "Easy - Elf <e>, Easy - Orc <o>, Normal - Human <h>, Hard - Dwarf <d>");
+    target.unsetColor(COLOR_GREEN, COLOR_BLACK);
 }

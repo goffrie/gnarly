@@ -21,10 +21,10 @@ void Display::remove(Displayable* item) {
     item->disp = 0;
 }
 
-void Display::draw(UI& grid) const {
+void Display::draw(Surface& target) const {
     for (std::set<std::pair<int, Displayable*> >::const_iterator p = items.begin();
             p != items.end();
             ++p) {
-        p->second->draw(grid);
+        p->second->draw(target);
     }
 }

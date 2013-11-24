@@ -19,7 +19,7 @@ private:
     int _amount;
 public:
     Gold(Hoard h);
-    virtual void draw(UI& ui) const override;
+    virtual void draw(Surface& target) const override;
 
     virtual void use(Player* target);
     virtual bool canPickUp() const { return true; }

@@ -20,7 +20,7 @@ class PopUp : public Displayable {
 public:
     PopUp(const std::string& t, int y, int x, int height, int width);
     virtual ~PopUp() {}
-    virtual void draw(UI& grid) const override;
+    virtual void draw(Surface& target) const override;
 };
 
 #endif

@@ -21,7 +21,7 @@ class PlayerSelect : public Displayable {
 public:
     PlayerSelect();
     Player* getPlayer(UI& ui);
-    virtual void draw(UI& ui) const;
+    virtual void draw(Surface& target) const;
 };
 
 #endif

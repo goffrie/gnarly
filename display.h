@@ -17,8 +17,8 @@ public:
     void add(Displayable* item, int z = 0);
     void remove(Displayable* item);
 
-    // Draw the display on the given grid.
-    void draw(UI& grid) const override;
+    // Draw the display on the given surface.
+    void draw(Surface& target) const override;
 };
 
 #endif

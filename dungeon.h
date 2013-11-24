@@ -31,7 +31,7 @@ public:
     // Infers walls. Never produces passages.
     Dungeon(std::vector<std::vector<bool> >& m);
 
-    virtual void draw(UI& grid) const override;
+    virtual void draw(Surface& target) const override;
 
     unsigned int height() const { return grid.size(); }
     unsigned int width() const { return grid[0].size(); }

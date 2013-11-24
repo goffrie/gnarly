@@ -11,7 +11,7 @@ class Memory : public Displayable {
 public:
     Memory(int height, int width);
     void set(int y, int x, char c);
-    virtual void draw(UI& ui) const override;
+    virtual void draw(Surface& target) const override;
 };
 
 #endif

@@ -2,7 +2,7 @@
 #define __DISPLAYABLE_H__
 
 class Display;
-class UI;
+class Surface;
 
 class Displayable {
     friend class Display;
@@ -22,8 +22,7 @@ public:
     Displayable();
 
     // Draw this item on the screen.
-    // XXX change these from grid to UI
-    virtual void draw(UI& grid) const = 0;
+    virtual void draw(Surface& target) const = 0;
 };
 
 #endif

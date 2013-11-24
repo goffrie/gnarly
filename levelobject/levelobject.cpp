@@ -1,6 +1,6 @@
 #include "levelobject.h"
 
-#include "ui.h"
+#include "surface.h"
 #include "level.h"
 #include "levelobjectvisitor.h"
 #include <cassert>
@@ -12,8 +12,8 @@ LevelObject::~LevelObject() {
     }
 }
 
-void LevelObject::draw(UI& ui) const {
-    ui.draw(y, x, tile());
+void LevelObject::draw(Surface& target) const {
+    target.draw(y, x, tile());
 }
 
 bool LevelObject::moveTo(int nY, int nX) {

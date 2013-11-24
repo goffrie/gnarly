@@ -1,7 +1,7 @@
 #include "dungeon.h"
 
 #include <cstdlib>
-#include "ui.h"
+#include "surface.h"
 
 using namespace std;
 
@@ -43,10 +43,10 @@ Dungeon::Dungeon(vector<vector<bool> >& m) {
     loadRooms();
 }
 
-void Dungeon::draw(UI& dgrid) const {
+void Dungeon::draw(Surface& target) const {
     for (unsigned y = 0; y < grid.size(); ++y) {
         for (unsigned x = 0; x < grid[y].size(); ++x) {
-            dgrid.draw(y, x, tileChar(grid[y][x]));
+            target.draw(y, x, tileChar(grid[y][x]));
         }
     }
 }

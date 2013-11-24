@@ -2,7 +2,7 @@
 
 #include "levelobjectvisitor.h"
 #include "level.h"
-#include "ui.h"
+#include "surface.h"
 
 #include <cstdlib>
 #include <cctype>
@@ -21,7 +21,7 @@ Character::~Character() {
     delete attributes;
 }
 
-void Character::draw(UI& ui) const {
+void Character::draw(Surface& target) const {
     int color;
     if (hp * 100 / startingHP() >= 67) {
         color = COLOR_GREEN;
@@ -30,9 +30,9 @@ void Character::draw(UI& ui) const {
     } else {
         color = COLOR_RED;
     }
-    ui.setColor(color, COLOR_BLACK);
-    LevelObject::draw(ui);
-    ui.unsetColor(color, COLOR_BLACK);
+    target.setColor(color, COLOR_BLACK);
+    LevelObject::draw(target);
+    target.unsetColor(color, COLOR_BLACK);
 }
 
 void Character::reduceHP(int amt) {

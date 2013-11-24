@@ -1,6 +1,6 @@
 #include "memory.h"
 
-#include "ui.h"
+#include "surface.h"
 
 using namespace std;
 
@@ -11,10 +11,10 @@ void Memory::set(int y, int x, char c) {
     grid[y][x] = c;
 }
 
-void Memory::draw(UI& ui) const {
-    ui.setDim();
+void Memory::draw(Surface& target) const {
+    target.setDim();
     for (unsigned int y = 0; y < grid.size(); ++y) {
-        ui.draw(y, 0, grid[y]);
+        target.draw(y, 0, grid[y]);
     }
-    ui.unsetDim();
+    target.unsetDim();
 }

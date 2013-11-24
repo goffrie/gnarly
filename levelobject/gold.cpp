@@ -1,7 +1,7 @@
 #include "gold.h"
 #include "player.h"
 #include "levelobjectvisitor.h"
-#include "ui.h"
+#include "surface.h"
 
 #include <sstream>
 #include <ncurses.h>
@@ -27,10 +27,10 @@ Gold::Gold(Hoard h) {
     }
 }
 
-void Gold::draw(UI& ui) const {
-    ui.setColor(COLOR_YELLOW, COLOR_BLACK);
-    LevelObject::draw(ui);
-    ui.unsetColor(COLOR_YELLOW, COLOR_BLACK);
+void Gold::draw(Surface& target) const {
+    target.setColor(COLOR_YELLOW, COLOR_BLACK);
+    LevelObject::draw(target);
+    target.unsetColor(COLOR_YELLOW, COLOR_BLACK);
 }
 
 void Gold::use(Player* target) {

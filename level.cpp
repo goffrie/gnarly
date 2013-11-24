@@ -173,7 +173,7 @@ bool Level::free(int y, int x, bool canGoBetweenRooms) const {
     return !grid[y][x] && (t == Floor || t == Door || t == Passage);
 }
 
-void Level::drawPOV(int y, int x, int radius, UI& ui, Memory& mem) {
+void Level::drawPOV(int y, int x, int radius, Surface& target, Memory& mem) {
     struct IsOpaque {
         Level& l;
         IsOpaque(Level& l): l(l) { }
@@ -185,21 +185,21 @@ void Level::drawPOV(int y, int x, int radius, UI& ui, Memory& mem) {
     } isOpaque(*this);
     struct Show {
         Level& l;
-        UI& ui;
+        Surface& target;
         Memory& mem;
-        Show(Level& l, UI& ui, Memory& mem): l(l), ui(ui), mem(mem) { }
+        Show(Level& l, Surface& target, Memory& mem): l(l), target(target), mem(mem) { }
         void operator()(int y, int x) {
             if (y < 0 || x < 0 || y >= l.height() || x >= l.width()) return;
             char tile = tileChar(l.tileAt(y, x));
-            ui.draw(y, x, tile);
+            target.draw(y, x, tile);
             mem.set(y, x, tile);
             LevelObject* obj = l.objectAt(y, x);
             if (obj) {
-                obj->draw(ui);
+                obj->draw(target);
                 mem.set(y, x, obj->tile());
             }
         }
-    } show(*this, ui, mem);
+    } show(*this, target, mem);
     shadowcast(y, x, radius, isOpaque, show);
 }
 
