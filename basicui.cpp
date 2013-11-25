@@ -9,7 +9,7 @@ using namespace std;
 
 BasicUI::BasicUI() : message() {
     for (int y = 0; y < 30; y++) {
-        screen.push_back(string(79, '_'));
+        screen.push_back(string(79, ' '));
     }
 }
 
@@ -57,6 +57,9 @@ void BasicUI::queryCommand(CommandHandler& target) {
 }
 
 void BasicUI::say(const std::string& msg) {
+    if (message.empty()) {
+        message += "Action:";
+    }
     message += " ";
     message += msg;
 }
