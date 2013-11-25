@@ -39,6 +39,7 @@ OBJECTS=\
 	shadowcasting/shadowcast.o \
 	surface.o \
 	ui.o \
+	util.o \
 	basicui.o \
 	cursesui.o \
 	levelobjectvisitor.o \

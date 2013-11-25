@@ -11,6 +11,7 @@ set(gnarly_SOURCES
     display.cpp
     displayable.cpp
     ui.cpp
+    util.cpp
     target.cpp
     popup.cpp
     memory.cpp

@@ -1,5 +1,7 @@
 #include "cursesui.h"
+
 #include "skill.h"
+#include "util.h"
 
 #include <ncurses.h>
 #include <cctype>
@@ -100,6 +102,14 @@ void CursesUI::queryCommand(CommandHandler& target) {
 }
 
 void CursesUI::say(const std::string& msg) {
+    if (msg.size() > maxMsgLineLength) {
+        vector<string> lines = getLines(msg, maxMsgLineLength);
+        for (int i = 0; i < lines.size(); ++i) {
+            assert(lines[i].size() <= maxMsgLineLength);
+            say(lines[i]);
+        }
+        return;
+    }
     assert(msg.size() <= maxMsgLineLength);
     if (msgLineLength + msg.size() > maxMsgLineLength) {
         mvaddstr(29, msgLineLength, " --more--");
