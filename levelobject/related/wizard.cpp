@@ -9,5 +9,5 @@ Wizard::Wizard() : Class() {
 }
 
 AttributeProvider* Wizard::getClassBuff(AttributeProvider* a) const {
-    return new ClassBuff(a, -5, -5, -20);
+    return new ClassBuff(a, -5, -5, -20, 20);
 }
