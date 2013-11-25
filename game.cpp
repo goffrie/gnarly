@@ -38,6 +38,7 @@ Game::Game() : player(0), pstatus(0), level(0), mem(0), popup(0), _quit(false), 
     display.add(pstatus);
     display.add(player, 2);
     Level::resetLevelCount();
+    Team::resetAlliances();
     makeNewLevel();
 }
 

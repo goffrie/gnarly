@@ -55,7 +55,8 @@ OBJECTS=\
 	commandargs.o \
 	direction.o \
 	playerselect.o \
-	target.o
+	target.o \
+	basicspawn.o
 DEPENDS=${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

@@ -4,7 +4,6 @@
 #include "displayable.h"
 #include "dungeon.h"
 #include "player.h"
-#include "randomspawn.h"
 
 #include <vector>
 #include <set>
@@ -49,6 +48,7 @@ public:
     unsigned int height() const { return grid.size(); }
     unsigned int width() const { return grid[0].size(); }
 
+    void loadLayout(Player* p);
     void generate(Player* p);
 
     // Add something to the level. `own` controls whether the level

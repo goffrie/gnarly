@@ -67,3 +67,7 @@ Team* Team::instance(TeamName n) {
     }
     return teams[n];
 }
+
+void Team::resetAlliances() {
+    teams[Merchants]->ally(teams[Players]);
+}

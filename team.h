@@ -46,6 +46,7 @@ private:
 
 public:
     static Team* instance(TeamName n);
+    static void resetAlliances();
 };
 
 #endif

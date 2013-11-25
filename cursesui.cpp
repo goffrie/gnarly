@@ -141,6 +141,7 @@ void CursesUI::setColor(int foreground, int background) {
     init_pair(foreground * 10 + background + 1, foreground, background);
     attron(COLOR_PAIR(foreground * 10 + background + 1));
 }
+
 void CursesUI::unsetColor(int foreground, int background) {
     attroff(COLOR_PAIR(foreground * 10 + background + 1));
 }

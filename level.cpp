@@ -9,6 +9,9 @@
 #include "dungeongen/bspgen.h"
 #include "ui.h"
 #include "memory.h"
+#include "commandargs.h"
+#include "basicspawn.h"
+#include "potion.h"
 
 #include "shadowcasting/shadowcast.h"
 
@@ -35,7 +38,15 @@ Level::~Level() {
     }
 }
 
+void Level::loadLayout(Player* p) {
+
+}
+
 void Level::generate(Player* p) {
+    if (!layoutFile.empty()) {
+        return loadLayout(p);
+    }
+    BasicSpawn b;
     // Place the player.
     pair<int, int> nextPos = dungeon.randomPlacement();
     p->setPos(nextPos.first, nextPos.second);
@@ -58,7 +69,7 @@ void Level::generate(Player* p) {
         do {
             nextPos = dungeon.randomPlacement();
         } while (!free(nextPos.first, nextPos.second));
-        Potion* pot = randomPotion();
+        Potion* pot = b.randomPotion();
         pot->setPos(nextPos.first, nextPos.second);
         add(pot);
     }
@@ -70,7 +81,7 @@ void Level::generate(Player* p) {
             do {
                 nextPos = dungeon.randomPlacement();
             } while (!free(nextPos.first, nextPos.second));
-            Gold* gold = randomGold();
+            Gold* gold = b.randomGold();
             gold->setPos(nextPos.first, nextPos.second);
             add(gold);
             DragonGold* dgold = dynamic_cast<DragonGold*>(gold);
@@ -85,7 +96,7 @@ void Level::generate(Player* p) {
 
     // Generate monsters.
     for (int i = numberDragons; i < numberEnemies; ++i) {
-        Monster* newEnemy = randomMonster();
+        Monster* newEnemy = b.randomMonster();
         do {
             nextPos = dungeon.randomPlacement();
         } while (!free(nextPos.first, nextPos.second));
