@@ -7,6 +7,8 @@ class Thief : public Class {
 public:
     Thief();
     virtual std::string name() { return "thief"; }
+    // Modifiers used when creating class
+    virtual AttributeProvider* getClassBuff(AttributeProvider* a) const;
 };
 
 #endif

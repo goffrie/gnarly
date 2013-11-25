@@ -85,7 +85,7 @@ void Player::addGold(int amt) {
 }
 
 void Player::stripBuffs() {
-    attributes = attributes->strip();
+    attributes = attributes->strip(false);
 }
 
 bool Player::canMove(int nY, int nX) {
@@ -103,7 +103,12 @@ bool Player::useSkill(int i) {
 }
 
 void Player::setClass(Class* c) {
+    attributes = attributes->strip(true);
     playerClass = c;
+    if (playerClass) {
+        attributes = playerClass->getClassBuff(attributes);
+        hp = attributes->startingHP();
+    }
 }
 
 void Player::drawClass(Surface& target) const {

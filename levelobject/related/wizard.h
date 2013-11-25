@@ -7,6 +7,8 @@ class Wizard : public Class {
 public:
     Wizard();
     virtual std::string name() { return "wizard"; }
+    // Modifiers used when creating class
+    virtual AttributeProvider* getClassBuff(AttributeProvider* a) const;
 };
 
 #endif

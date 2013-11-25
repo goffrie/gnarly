@@ -30,8 +30,8 @@ public:
 
     int takeDamage(int attack);
     virtual void attack(Character* other);
-    virtual int atk() const { return attributes->atk(); }
-    virtual int def() const { return attributes->def(); }
+    virtual int atk() const;
+    virtual int def() const;
     virtual int startingHP() const { return attributes->startingHP(); }
     virtual char tile() const override { return attributes->tile(); }
     virtual std::string name() const override { return attributes->name(); }

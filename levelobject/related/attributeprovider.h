@@ -14,7 +14,7 @@ public:
     virtual std::string name() const = 0;
     // Return the concrete (non-decorator) AttributeProvider
     // underlying this object, and delete all the decorators.
-    virtual AttributeProvider* strip() { return this; }
+    virtual AttributeProvider* strip(bool force) { return this; }
 };
 
 #endif

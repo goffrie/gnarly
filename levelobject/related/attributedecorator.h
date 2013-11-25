@@ -20,7 +20,7 @@ public:
     virtual char tile() const { return base->tile(); }
     virtual std::string name() const { return base->name(); }
 
-    virtual AttributeProvider* strip() override;
+    virtual AttributeProvider* strip(bool force) override;
 };
 
 #endif

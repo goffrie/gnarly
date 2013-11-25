@@ -6,10 +6,12 @@
 #include "displayable.h"
 
 class Player;
+class AttributeProvider;
 
 class Class : public Displayable {
 protected:
     std::vector<Skill*> skills;
+    int mana;
 
 public:
     Class() { }
@@ -20,6 +22,8 @@ public:
     virtual void step(Player* p);
     virtual std::vector<Skill*> getSkills();
     virtual std::string name() { return ""; };
+    // Modifiers used when creating class
+    virtual AttributeProvider* getClassBuff(AttributeProvider* a) const;
     virtual void draw(Surface& target) const override;
 };
 

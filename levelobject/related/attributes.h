@@ -28,9 +28,9 @@ private:
     Attributes(int hp, int a, int d, char t, const std::string& r);
 public:
     virtual ~Attributes() { }
-    virtual int startingHP() const { return _startingHP; }
-    virtual int atk() const { return _atk; }
-    virtual int def() const { return _def; }
+    virtual int startingHP() const override { return _startingHP; }
+    virtual int atk() const override { return _atk; }
+    virtual int def() const override { return _def; }
     virtual char tile() const { return _tile; }
     virtual std::string name() const { return _name; }
 

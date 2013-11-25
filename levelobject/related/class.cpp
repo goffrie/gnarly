@@ -1,6 +1,7 @@
 #include "class.h"
 #include "surface.h"
 #include <sstream>
+#include "classbuff.h"
 
 Class::~Class() {
     for (unsigned int i = 0; i < skills.size(); i++) {
@@ -35,6 +36,10 @@ void Class::step(Player* p) {
 
 std::vector<Skill*> Class::getSkills() {
     return skills;
+}
+
+AttributeProvider* Class::getClassBuff(AttributeProvider* a) const {
+    return new ClassBuff(a);
 }
 
 void Class::draw(Surface& target) const {

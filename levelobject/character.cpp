@@ -65,6 +65,16 @@ void Character::attack(Character* other) {
     other->takeDamage(atk());
 }
 
+int Character::atk() const {
+    int _atk = attributes->atk();
+    return _atk < 0 ? 0 : _atk;
+}
+
+int Character::def() const {
+    int _def = attributes->def();
+    return _def < 0 ? 0 : _def;
+}
+
 bool Character::isEnemy(Team* t) const {
     return !team->isAllied(t);
 }

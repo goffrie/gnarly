@@ -13,6 +13,7 @@ OBJECTS=\
 	levelobject/related/attributes.o \
 	levelobject/related/attributedecorator.o \
 	levelobject/related/basicbuff.o \
+	levelobject/related/classbuff.o \
 	levelobject/related/class.o \
 	levelobject/related/thief.o \
 	levelobject/related/paladin.o \
