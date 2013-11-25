@@ -1,8 +1,10 @@
 #include "skill.h"
+#include "player.h"
 #include "ui.h"
 
 bool Skill::use(Player* p) {
     UI::instance()->say("You used " + name() + "!");
+    p->reduceMP(mpCost());
     return true;
 }
 

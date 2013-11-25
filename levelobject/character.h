@@ -11,7 +11,7 @@
 class Character : public LevelObject {
 protected:
     AttributeProvider* attributes;
-    int hp;
+    int hp, mp;
     // The team a character is on
     Team* team;
 
@@ -24,15 +24,16 @@ public:
 
     virtual void draw(Surface& target) const override;
 
-    int currentHP() const {
-        return hp;
-    }
+    int currentHP() const { return hp; }
+    int currentMP() const { return mp; }
+    virtual void reduceMP(int amt);
 
     int takeDamage(int attack);
     virtual void attack(Character* other);
     virtual int atk() const;
     virtual int def() const;
     virtual int startingHP() const { return attributes->startingHP(); }
+    virtual int startingMP() const { return attributes->startingMP(); }
     virtual char tile() const override { return attributes->tile(); }
     virtual std::string name() const override { return attributes->name(); }
     virtual Team* getTeam() const { return team; }

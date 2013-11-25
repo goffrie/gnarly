@@ -1,5 +1,4 @@
 #include "divinemight.h"
-#include "ui.h"
 #include "player.h"
 
 bool DivineMight::use(Player* p) {

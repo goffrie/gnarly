@@ -108,6 +108,7 @@ void Player::setClass(Class* c) {
     if (playerClass) {
         attributes = playerClass->getClassBuff(attributes);
         hp = attributes->startingHP();
+        mp = attributes->startingMP();
     }
 }
 

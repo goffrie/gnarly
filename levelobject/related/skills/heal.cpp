@@ -1,6 +1,5 @@
 #include "heal.h"
 #include "player.h"
-#include "ui.h"
 
 bool Heal::use(Player* p) {
     p->heal(50);

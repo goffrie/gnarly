@@ -1,5 +1,4 @@
 #include "mindcontrol.h"
-#include "ui.h"
 #include "player.h"
 #include "game.h"
 

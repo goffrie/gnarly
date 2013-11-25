@@ -14,6 +14,7 @@ Character::Character(Attributes::Race c, TeamName t) :
   LevelObject(0, 0), 
   attributes(new Attributes(Attributes::get(c))), 
   hp(attributes->startingHP()),
+  mp(attributes->startingMP()),
   team(Team::instance(t)) {
 }
 
@@ -47,6 +48,10 @@ void Character::addHP(int amt) {
     if (hp > startingHP()) {
         hp = startingHP();
     }
+}
+
+void Character::reduceMP(int amt) {
+    mp -= amt;
 }
 
 bool Character::dead() const {

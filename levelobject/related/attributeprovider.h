@@ -8,6 +8,7 @@ class AttributeProvider {
 public:
     virtual ~AttributeProvider() { }
     virtual int startingHP() const = 0;
+    virtual int startingMP() const = 0;
     virtual int atk() const = 0;
     virtual int def() const = 0;
     virtual char tile() const = 0;

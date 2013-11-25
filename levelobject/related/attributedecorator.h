@@ -15,6 +15,7 @@ public:
 
     // Default to passing everything through as-is.
     virtual int startingHP() const { return base->startingHP(); }
+    virtual int startingMP() const { return base->startingMP(); }
     virtual int atk() const { return base->atk(); }
     virtual int def() const { return base->def(); }
     virtual char tile() const { return base->tile(); }

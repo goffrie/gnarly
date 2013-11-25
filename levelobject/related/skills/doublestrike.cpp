@@ -1,6 +1,5 @@
 #include "doublestrike.h"
 #include "game.h"
-#include "ui.h"
 #include "player.h"
 
 bool DoubleStrike::use(Player* p) {

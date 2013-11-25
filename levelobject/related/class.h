@@ -11,7 +11,7 @@ class AttributeProvider;
 class Class : public Displayable {
 protected:
     std::vector<Skill*> skills;
-    int mana;
+    int _startingMP;
 
 public:
     Class() { }

@@ -6,7 +6,7 @@
 
 std::vector<Team::Status> Stealth::allAlly;
 
-Stealth::Stealth() : currentDuration(-1) {
+Stealth::Stealth() : Skill(4), currentDuration(-1) {
     if (allAlly.empty()) {
         for (int i = 0; i < NumTeams; i++) {
             allAlly.push_back(Team::Ally);

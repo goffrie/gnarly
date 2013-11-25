@@ -1,7 +1,9 @@
 #include "class.h"
 #include "surface.h"
 #include <sstream>
+#include "ui.h"
 #include "classbuff.h"
+#include "player.h"
 
 Class::~Class() {
     for (unsigned int i = 0; i < skills.size(); i++) {
@@ -11,6 +13,10 @@ Class::~Class() {
 
 bool Class::useSkill(unsigned int i, Player* p) {
     if (i >= skills.size()) {
+        return false;
+    }
+    if (skills[i]->mpCost() > p->currentMP()) {
+        UI::instance()->say("Insufficient mana.");
         return false;
     }
     return skills[i]->use(p);

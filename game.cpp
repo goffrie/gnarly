@@ -151,7 +151,7 @@ void Game::skill(int i) {
     if (player->useSkill(i)) {
         step();
     } else {
-        UI::instance()->say(" Invalid skill or target.");
+        UI::instance()->say(" Skill failed.");
     }
 }
 

@@ -3,6 +3,7 @@
 #include "surface.h"
 #include "player.h"
 #include "level.h"
+#include "commandargs.h"
 #include <sstream>
 #include <cctype>
 
@@ -19,6 +20,9 @@ void PlayerStatus::draw(Surface& target) const {
     line.str("");
 
     line << "HP: " << player.currentHP();
+    if (gnarly) {
+        line << "/" << player.startingHP() << " MP: " << player.currentMP() << "/" << player.startingMP();
+    }
     target.fillLine(26, line.str());
     line.str("");
 
