@@ -51,7 +51,7 @@ AttributeProvider* Class::getClassBuff(AttributeProvider* a) const {
 void Class::draw(Surface& target) const {
     for (unsigned int i = 0; i < skills.size(); i++) {
         std::ostringstream line;
-        line << skills[i]->name() << " <" << (char)Skill::getHotkey(i) << ">" << skills[i]->display();
+        line << "(" << skills[i]->mpCost() << "MP) " << skills[i]->name() << " <" << (char)Skill::getHotkey(i) << ">" << skills[i]->display();
         target.draw(26 + i, 30, line.str());
     }
 }
