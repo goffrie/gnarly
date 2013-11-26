@@ -40,7 +40,8 @@ public:
     virtual bool useSkill(int i);
 
     virtual void setClass(Class* c);
-    virtual std::string name() const override;
+    virtual std::string basicName() const override { return name(NoArticle); }
+    virtual std::string name(Article a) const override;
     virtual void drawClass(Surface& target) const;
 
     virtual void accept(LevelObjectVisitor& v) override;

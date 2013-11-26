@@ -12,6 +12,7 @@
 #include "commandargs.h"
 #include "basicspawn.h"
 #include "potion.h"
+#include "util.h"
 
 #include "shadowcasting/shadowcast.h"
 
@@ -194,9 +195,7 @@ void Level::notifyAdd(LevelObject* i) {
 
 void Level::removeDead() {
     for (unsigned int i = 0; i < dying.size(); i++) {
-        string n = dying[i]->name();
-        n[0] = toupper(n[0]);
-        UI::instance()->say(n + " died.");
+        UI::instance()->say(capitalize(dying[i]->name(Definite)) + " died.");
         delete dying[i];
     }
     dying.clear();
@@ -247,6 +246,33 @@ void Level::draw(Surface& target) const {
             if (obj) obj->draw(target);
         }
     }
+}
+
+// XXX dupe code
+vector<LevelObject*> Level::getVisible(int pY, int pX, int radius) const {
+    const int h = height(), w = width();
+    // Determine which tiles are opaque.
+    vector<vector<bool> > opaque(h, vector<bool>(w, true));
+    for (int y = 0; y < h; ++y) {
+        for (int x = 0; x < w; ++x) {
+            Tile tile = tileAt(y, x);
+            opaque[y][x] = !(tile == Floor || tile == Door || tile == Passage);
+        }
+    }
+    // Now compute the field of view.
+    vector<vector<bool> > field;
+    shadowcast(pY, pX, radius, opaque, field);
+
+    vector<LevelObject*> objects;
+    for (int y = 0; y < h; ++y) {
+        for (int x = 0; x < w; ++x) {
+            if (field[y][x]) {
+                LevelObject* o = objectAt(y, x);
+                if (o) objects.push_back(o);
+            }
+        }
+    }
+    return objects;
 }
 
 void Level::stepObjects() {

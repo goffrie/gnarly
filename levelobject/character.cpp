@@ -10,12 +10,11 @@
 
 using namespace std;
 
-Character::Character(Attributes::Race c, TeamName t) : 
-  LevelObject(0, 0), 
-  attributes(new Attributes(Attributes::get(c))), 
-  hp(attributes->startingHP()),
-  mp(attributes->startingMP()),
-  team(Team::instance(t)) {
+Character::Character(Attributes::Race c, TeamName t)
+ : attributes(new Attributes(Attributes::get(c))),
+   hp(attributes->startingHP()),
+   mp(attributes->startingMP()),
+   team(Team::instance(t)) {
 }
 
 Character::~Character() {

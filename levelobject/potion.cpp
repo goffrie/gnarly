@@ -5,11 +5,11 @@
 #include "elfplayer.h"
 #include "ui.h"
 
-bool Potion::used[6] = { 0 };
+bool Potion::used[6] = {false, false, false, false, false, false};
 
 void Potion::use(Player* target) {
     used[type] = true;
-    UI::instance()->say("You drink a " + name() + ".");
+    UI::instance()->say("You drink " + name(Indefinite) + ".");
     switch (type) {
         case RH: target->heal(10); break;
         case PH: target->heal(-10); break;
@@ -24,7 +24,7 @@ void Potion::accept(LevelObjectVisitor& v) {
     v.visit(*this);
 }
 
-std::string Potion::name() const {
+std::string Potion::basicName() const {
     if (!used[type]) {
         return "unknown potion";
     }

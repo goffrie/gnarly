@@ -22,10 +22,7 @@ using namespace std;
 
 Game* Game::_instance = 0;
 
-Game::Game() : player(0), pstatus(0), level(0), mem(0), popup(0), gameOver(false) {
-}
-
-void Game::startGame() {
+Game::Game() : player(0), pstatus(0), level(0), mem(0), popup(0), _quit(false), gameOver(false), _shouldRestart(false) {
     // Initialize the UI.
     if (gnarly) {
         UI::setInstance(new CursesUI());
@@ -40,6 +37,10 @@ void Game::startGame() {
     // Ask the user to select their player.
     PlayerSelect ps;
     player = ps.getPlayer(*UI::instance());
+    if (!player) {
+        _quit = true;
+        return;
+    }
 
     // Initialize the display.
     pstatus = new PlayerStatus(*player);
@@ -62,7 +63,7 @@ Game::~Game() {
 }
 
 void Game::run() {
-    while (true) {
+    while (!_quit) {
         print();
         readCommand();
     }
@@ -106,7 +107,7 @@ void Game::move(Direction d) {
         target->use(player);
         ostringstream line;
 
-        line << "YAY!!! " << target->amount() << " GOLD!!!";
+        line << target->amount() << " gold.";
         UI::instance()->say(line.str());
         delete target;
     }
@@ -170,11 +171,13 @@ void Game::skill(int i) {
 }
 
 void Game::restart() {
-    throw RestartGameException();
+    Potion::resetUsed();
+    _shouldRestart = true;
+    _quit = true;
 }
 
 void Game::quit() {
-    throw QuitGameException();
+    _quit = true;
 }
 
 void Game::confirm() {
@@ -195,8 +198,8 @@ LevelObject* Game::getTarget(int range) {
 }
 
 void Game::notifyPlayerDeath() {
+    if (gameOver) return;
     gameOver = true;
-    UI::instance()->say("Game Over");
     ostringstream line;
 
     line << "You Died x.x After failing to stop the monsters, they escaped to the surface. "
@@ -207,9 +210,9 @@ void Game::notifyPlayerDeath() {
 }
 
 void Game::makeNewLevel() {
+    if (gameOver) return;
     if (level->isLastLevel()) {
         gameOver = true;
-        UI::instance()->say("Game Over");
         ostringstream line;
 
         line << "You Win \\(^o^)/ You saved the world! As soon as you succeed, people start reconsidering their lives. "

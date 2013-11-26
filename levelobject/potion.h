@@ -28,7 +28,7 @@ public:
 
     Type getType() const { return type; }
     virtual char tile() const override { return 'P'; }
-    virtual std::string name() const override;
+    virtual std::string basicName() const override;
 
     virtual void accept(LevelObjectVisitor& v);
 

@@ -4,6 +4,7 @@
 #include "levelobject.h"
 #include "attributeprovider.h"
 #include "attributes.h"
+#include "team.h"
 #include <string>
 #include <vector>
 
@@ -35,7 +36,7 @@ public:
     virtual int startingHP() const { return attributes->startingHP(); }
     virtual int startingMP() const { return attributes->startingMP(); }
     virtual char tile() const override { return attributes->tile(); }
-    virtual std::string name() const override { return attributes->name(); }
+    virtual std::string basicName() const override { return attributes->name(); }
     virtual Team* getTeam() const { return team; }
     virtual void setTeam(Team* t) { team = t; }
     virtual int droppedGold() const { return 0; }

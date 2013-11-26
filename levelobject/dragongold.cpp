@@ -24,9 +24,9 @@ bool DragonGold::addDragon() {
     return true;
 }
 
-std::string DragonGold::name() const {
+std::string DragonGold::basicName() const {
     std::ostringstream line;
-    line << amount() << " dragon gold";
+    line << "dragon horde (" << amount() << " gold)";
     return line.str();
 }
 

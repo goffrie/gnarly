@@ -8,14 +8,14 @@ Direction::Direction(Orientation o) : orientation(o), _dy(directionDy(o)), _dx(d
 
 string Direction::name() const {
     switch (orientation) {
-        case NORTH: return "North";
-        case SOUTH: return "South";
-        case EAST: return "East";
-        case WEST: return "West";
-        case NE: return "Northeast";
-        case NW: return "Northwest";
-        case SE: return "Southeast";
-        case SW: return "Southwest";
+        case NORTH: return "north";
+        case SOUTH: return "south";
+        case EAST: return "east";
+        case WEST: return "west";
+        case NE: return "northeast";
+        case NW: return "northwest";
+        case SE: return "southeast";
+        case SW: return "southwest";
         default: std::terminate();
     }
 }

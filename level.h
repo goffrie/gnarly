@@ -78,6 +78,8 @@ public:
     // Draw the parts of the level that the player can see.
     void draw(Surface& target) const override;
 
+    std::vector<LevelObject*> getVisible(int y, int x, int radius) const;
+
     void stepObjects();
     std::vector<LevelObject*> neighbours(int y, int x);
     static int levelCount() { return currentLevel; }

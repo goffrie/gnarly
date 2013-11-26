@@ -3,9 +3,10 @@
 
 #include "displayable.h"
 #include "direction.h"
-#include "team.h"
+#include "language.h"
 
 #include <vector>
+#include <string>
 
 // An abstract class representing any object
 // (whether a monster, player, or item)
@@ -13,6 +14,7 @@
 
 class Level;
 class LevelObjectVisitor;
+class Team;
 
 class LevelObject : public Displayable {
     friend class Level;
@@ -21,15 +23,20 @@ class LevelObject : public Displayable {
     int y, x;
 
 protected:
-    // Returns all free adjacent locations
+    // Returns all free adjacent locations.
     virtual std::vector<std::pair<int, int> > getFreeAdjacent();
+
+    // Returns a basic name
+    virtual std::string basicName() const = 0;
 
 public:
     // The item's ASCII tile.
     virtual char tile() const = 0;
-    virtual std::string name() const = 0;
+    // Return a name for the object with the given parameters.
+    // By default, constructs something using basicName.
+    virtual std::string name(Article a) const;
 
-    LevelObject(int y = -1, int x = -1) : level(0), y(y), x(x) { }
+    LevelObject() : level(0), y(-1), x(-1) { }
     virtual ~LevelObject();
 
     virtual void draw(Surface& target) const override;

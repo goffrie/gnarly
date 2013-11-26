@@ -32,3 +32,27 @@ vector<string> getLines(const string& t, int width) {
     }
     return lines;
 }
+
+string capitalize(const string& t) {
+    string s = t;
+    if (s.size() > 0) s[0] = toupper(s[0]);
+    return s;
+}
+
+string titleCase(const string& t) {
+    string s = t;
+    bool cap = true;
+    for (unsigned int i = 0; i < s.size(); ++i) {
+        if (isspace(s[i])) {
+            cap = true;
+        } else if (cap) {
+            s[i] = toupper(s[i]);
+            cap = false;
+        }
+    }
+    return s;
+}
+
+bool isVowel(char c) {
+    return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+}
