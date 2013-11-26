@@ -30,10 +30,6 @@ class Game : public CommandHandler {
     bool gameOver;
 
 public:
-    // Set up the game.
-    // May throw a QuitGameException.
-    void startGame();
-
     void run();
     void readCommand();
     void step();
