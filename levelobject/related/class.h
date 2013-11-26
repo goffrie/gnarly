@@ -24,6 +24,7 @@ public:
     virtual std::string name() { return ""; };
     // Modifiers used when creating class
     virtual AttributeProvider* getClassBuff(AttributeProvider* a) const;
+    virtual AttributeProvider* getLevelBuff(AttributeProvider* a) const;
     virtual void draw(Surface& target) const override;
 };
 

@@ -7,11 +7,13 @@
 #include "basicbuff.h"
 #include "direction.h"
 #include "class.h"
+#include "commandargs.h"
 #include <sstream>
 
 using namespace std;
 
-Player::Player(Attributes::Race r) : Character(r, Players), playerClass(0), _gold(0) {
+Player::Player(Attributes::Race r) : 
+Character(r, Players), playerClass(0), _gold(0), _currentXP(0), _targetXP(targetXPForLevel(2)), _xpLevel(1) {
 }
 
 Player::~Player() {
@@ -65,6 +67,10 @@ void Player::damage(Character* other, int d) {
     UI::instance()->say(msg.str());
     if (other->dead()) {
         addGold(other->droppedGold());
+        msg.str("");
+        msg << "You gained " << other->xp() << " xp!";
+        UI::instance()->say(msg.str());
+        addXP(other->xp());
     }
 }
 
@@ -135,4 +141,25 @@ std::string Player::name(Article a) const {
 
 void Player::accept(LevelObjectVisitor& v) {
     v.visit(*this);
+}
+
+void Player::addXP(int xp) {
+    _currentXP += xp;
+    if (_currentXP >= _targetXP && gnarly) {
+        levelUp();
+    }
+}
+
+int Player::targetXPForLevel(int l) {
+    return (l - 1) * 100;
+}
+
+void Player::levelUp() {
+    UI::instance()->say("You Leveled Up!");
+    attributes = playerClass->getLevelBuff(attributes);
+    hp = attributes->startingHP();
+    mp = attributes->startingMP();
+    _currentXP = 0;
+    _xpLevel++;
+    _targetXP = targetXPForLevel(_xpLevel + 1);
 }

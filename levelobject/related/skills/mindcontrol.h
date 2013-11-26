@@ -6,7 +6,7 @@
 class MindControl : public Skill {
     enum { range = 5 };
 public:
-    MindControl() : Skill(10) { }
+    MindControl() : Skill(15) { }
     virtual bool use(Player* p) override;
     virtual std::string name() const override;
     virtual std::string description() const override;

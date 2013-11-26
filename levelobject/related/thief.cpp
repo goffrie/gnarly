@@ -11,3 +11,7 @@ Thief::Thief() : Class() {
 AttributeProvider* Thief::getClassBuff(AttributeProvider* a) const {
     return new ClassBuff(a, 20, -10, -20);
 }
+
+AttributeProvider* Thief::getLevelBuff(AttributeProvider* a) const {
+    return new ClassBuff(a, 20, 5, 15, 10);
+}

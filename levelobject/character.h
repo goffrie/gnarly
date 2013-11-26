@@ -33,6 +33,7 @@ public:
     virtual void attack(Character* other);
     virtual int atk() const;
     virtual int def() const;
+    virtual int xp() const {return attributes->xp(); }
     virtual int startingHP() const { return attributes->startingHP(); }
     virtual int startingMP() const { return attributes->startingMP(); }
     virtual char tile() const override { return attributes->tile(); }

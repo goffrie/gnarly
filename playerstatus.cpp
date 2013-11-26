@@ -15,6 +15,9 @@ PlayerStatus::PlayerStatus(const Player& p) : Displayable(), player(p) { }
 void PlayerStatus::draw(Surface& target) const {
     ostringstream line;
     line << "Race: " << titleCase(player.name(NoArticle)) << "   Gold: " << player.gold();
+    if (gnarly) {
+        line << "   Level: " << player.xpLevel() << "   XP: " << player.currentXP() << "/" << player.targetXP();
+    }
     target.fillLine(25, line.str());
     line.str("");
 

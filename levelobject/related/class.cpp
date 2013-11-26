@@ -48,6 +48,10 @@ AttributeProvider* Class::getClassBuff(AttributeProvider* a) const {
     return new ClassBuff(a);
 }
 
+AttributeProvider* Class::getLevelBuff(AttributeProvider* a) const {
+    return new ClassBuff(a);
+}
+
 void Class::draw(Surface& target) const {
     for (unsigned int i = 0; i < skills.size(); i++) {
         std::ostringstream line;

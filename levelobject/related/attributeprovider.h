@@ -11,6 +11,7 @@ public:
     virtual int startingMP() const = 0;
     virtual int atk() const = 0;
     virtual int def() const = 0;
+    virtual int xp() const = 0;
     virtual char tile() const = 0;
     virtual std::string name() const = 0;
     // Return the concrete (non-decorator) AttributeProvider

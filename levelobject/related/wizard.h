@@ -9,6 +9,7 @@ public:
     virtual std::string name() { return "wizard"; }
     // Modifiers used when creating class
     virtual AttributeProvider* getClassBuff(AttributeProvider* a) const;
+    virtual AttributeProvider* getLevelBuff(AttributeProvider* a) const;
 };
 
 #endif

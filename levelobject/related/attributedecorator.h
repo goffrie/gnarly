@@ -18,6 +18,7 @@ public:
     virtual int startingMP() const { return base->startingMP(); }
     virtual int atk() const { return base->atk(); }
     virtual int def() const { return base->def(); }
+    virtual int xp() const { return base->xp(); }
     virtual char tile() const { return base->tile(); }
     virtual std::string name() const { return base->name(); }
 

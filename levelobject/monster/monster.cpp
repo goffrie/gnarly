@@ -40,7 +40,7 @@ void Monster::moveToward(Character* c) {
     pair<int, int> best = make_pair(getY(), getX());
     int bestDist = abs(cY - best.first) + abs(cX - best.second);
 
-    for (int i = 0; i < locations.size(); ++i) {
+    for (unsigned int i = 0; i < locations.size(); ++i) {
         int dist = abs(cY - locations[i].first) + abs(cX - locations[i].second);
         if (dist < bestDist) {
             best = locations[i];

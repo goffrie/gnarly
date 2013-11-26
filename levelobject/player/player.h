@@ -8,14 +8,25 @@ class Class;
 class Player : public Character {
     Class* playerClass;
     int _gold;
+    int _currentXP;
+    int _targetXP;
+    int _xpLevel;
+
+    static int targetXPForLevel(int l);
 
 protected:
     virtual void reduceHP(int amt) override;
+    virtual void levelUp();
+
 public:
     Player(Attributes::Race r);
 
     virtual ~Player() = 0;
 
+    virtual void addXP(int xp);
+    virtual int xpLevel() const { return _xpLevel; }
+    virtual int currentXP() const { return _currentXP; }
+    virtual int targetXP() const { return _targetXP; }
     virtual int gold() const { return _gold; }
     virtual int score() const { return gold(); }
     virtual bool moveRelative(Direction d) override;
