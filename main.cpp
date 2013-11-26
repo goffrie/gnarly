@@ -16,7 +16,9 @@ int main(int argc, char *argv[]) {
         while (true) {
             try {
                 // Reset the game and run it.
-                Game::instance(true)->run();
+                Game* g = Game::instance(true);
+                g->startGame();
+                g->run();
             } catch (RestartGameException&) {
             }
         }
