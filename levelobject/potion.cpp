@@ -5,7 +5,7 @@
 #include "elfplayer.h"
 #include "ui.h"
 
-bool Potion::used[6] = { 0 };
+bool Potion::used[6] = {false, false, false, false, false, false};
 
 void Potion::use(Player* target) {
     used[type] = true;

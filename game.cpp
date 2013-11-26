@@ -22,7 +22,7 @@ using namespace std;
 
 Game* Game::_instance = 0;
 
-Game::Game() : player(0), pstatus(0), level(0), mem(0), popup(0), gameOver(false) {
+Game::Game() : player(0), pstatus(0), level(0), mem(0), popup(0), _quit(false), gameOver(false), _shouldRestart(false) {
     // Initialize the UI.
     if (gnarly) {
         UI::setInstance(new CursesUI());
@@ -37,6 +37,10 @@ Game::Game() : player(0), pstatus(0), level(0), mem(0), popup(0), gameOver(false
     // Ask the user to select their player.
     PlayerSelect ps;
     player = ps.getPlayer(*UI::instance());
+    if (!player) {
+        _quit = true;
+        return;
+    }
 
     // Initialize the display.
     pstatus = new PlayerStatus(*player);
@@ -59,7 +63,7 @@ Game::~Game() {
 }
 
 void Game::run() {
-    while (true) {
+    while (!_quit) {
         print();
         readCommand();
     }
@@ -167,11 +171,13 @@ void Game::skill(int i) {
 }
 
 void Game::restart() {
-    throw RestartGameException();
+    Potion::resetUsed();
+    _shouldRestart = true;
+    _quit = true;
 }
 
 void Game::quit() {
-    throw QuitGameException();
+    _quit = true;
 }
 
 void Game::confirm() {

@@ -12,11 +12,6 @@ class Memory;
 class PopUp;
 class LevelObject;
 
-// An exception signalling that the game should be quit.
-class QuitGameException { };
-// An exception signalling that the game should be restarted.
-class RestartGameException { };
-
 class Game : public CommandHandler {
     // `Game` owns these objects.
     Player* player;
@@ -27,7 +22,9 @@ class Game : public CommandHandler {
 
     Display display;
 
+    bool _quit;
     bool gameOver;
+    bool _shouldRestart;
 
 public:
     void run();
@@ -44,6 +41,7 @@ public:
     // Called when the player has died
     void notifyPlayerDeath();
     // Returns if the game should be restarted after it ends
+    bool shouldRestart() { return _shouldRestart; }
     void makeNewLevel();
     LevelObject* getTarget(int range);
 
