@@ -14,6 +14,7 @@ public:
     virtual bool canPickUp() const;
     virtual void notifyDragonDied();
     virtual std::string basicName() const override;
+    virtual std::string name(Article a) const override;
 };
 
 #endif
