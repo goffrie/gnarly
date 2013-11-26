@@ -37,10 +37,19 @@ void Gold::use(Player* target) {
     target->addGold(_amount);
 }
 
-string Gold::name() const {
+string Gold::basicName() const {
     ostringstream line;
-    line << amount() << " gold";
+    line << "pile of " << amount() << " gold";
     return line.str();
+}
+
+string Gold::name(Article a) const {
+    if (a == Indefinite) {
+        ostringstream line;
+        line << amount() << " gold";
+        return line.str();
+    }
+    return LevelObject::name(a);
 }
 
 void Gold::accept(LevelObjectVisitor& v) {

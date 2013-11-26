@@ -13,7 +13,7 @@ public:
     virtual bool addDragon();
     virtual bool canPickUp() const;
     virtual void notifyDragonDied();
-    virtual std::string name() const override;
+    virtual std::string basicName() const override;
 };
 
 #endif

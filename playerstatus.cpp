@@ -4,6 +4,7 @@
 #include "player.h"
 #include "level.h"
 #include "commandargs.h"
+#include "util.h"
 #include <sstream>
 #include <cctype>
 
@@ -13,9 +14,7 @@ PlayerStatus::PlayerStatus(const Player& p) : Displayable(), player(p) { }
 
 void PlayerStatus::draw(Surface& target) const {
     ostringstream line;
-    string n = player.name();
-    n[0] = toupper(n[0]);
-    line << "Race: " << n << " Gold: " << player.gold();
+    line << "Race: " << titleCase(player.name(NoArticle)) << "   Gold: " << player.gold();
     target.fillLine(25, line.str());
     line.str("");
 

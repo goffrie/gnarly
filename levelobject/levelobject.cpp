@@ -3,12 +3,30 @@
 #include "surface.h"
 #include "level.h"
 #include "levelobjectvisitor.h"
+#include "util.h"
 #include <cassert>
 #include <utility>
+
+using namespace std;
 
 LevelObject::~LevelObject() {
     if (level) {
         level->remove(this);
+    }
+}
+
+string LevelObject::name(Article a) const {
+    string r = basicName();
+    switch (a) {
+        case Definite: return "the " + r;
+        case Indefinite:
+            if (r.size() > 0 && isVowel(r[0])) {
+                return "an " + r;
+            } else {
+                return "a " + r;
+            }
+        default:
+            return r;
     }
 }
 
@@ -46,16 +64,16 @@ void LevelObject::accept(LevelObjectVisitor& v) {
     v.visit(*this);
 }
 
-std::vector<std::pair<int, int> > LevelObject::getFreeAdjacent() {
+vector<pair<int, int> > LevelObject::getFreeAdjacent() {
     // Look for a free location.
-    std::vector<std::pair<int, int> > locations;
+    vector<pair<int, int> > locations;
     for (int dy = -1; dy <= 1; ++dy) {
         for (int dx = -1; dx <= 1; ++dx) {
             if (dy == 0 && dx == 0) continue;
             const int ny = getY() + dy,
                       nx = getX() + dx;
             if (level->free(ny, nx)) {
-                locations.push_back(std::make_pair(ny, nx));
+                locations.push_back(make_pair(ny, nx));
             }
         }
     }

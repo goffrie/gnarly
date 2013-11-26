@@ -12,6 +12,7 @@
 #include "commandargs.h"
 #include "basicspawn.h"
 #include "potion.h"
+#include "util.h"
 
 #include "shadowcasting/shadowcast.h"
 
@@ -194,9 +195,7 @@ void Level::notifyAdd(LevelObject* i) {
 
 void Level::removeDead() {
     for (unsigned int i = 0; i < dying.size(); i++) {
-        string n = dying[i]->name();
-        n[0] = toupper(n[0]);
-        UI::instance()->say(n + " died.");
+        UI::instance()->say(capitalize(dying[i]->name(Definite)) + " died.");
         delete dying[i];
     }
     dying.clear();

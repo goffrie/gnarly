@@ -24,7 +24,8 @@ public:
     virtual void use(Player* target);
     virtual bool canPickUp() const { return true; }
     virtual int amount() const { return _amount; }
-    virtual std::string name() const override;
+    virtual std::string basicName() const override;
+    virtual std::string name(Article a) const override;
 
     virtual char tile() const override { return 'G'; }
 

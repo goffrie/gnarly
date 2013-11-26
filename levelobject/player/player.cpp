@@ -29,17 +29,21 @@ bool Player::moveRelative(Direction d) {
     if (LevelObject::moveRelative(d)) {
         playerClass->notifyMove(this);
         ostringstream msg;
-        msg << "You moved " << d.name() << " and see ";
+        msg << "You move " << d.name();
         vector<LevelObject*> neighbours = getLevel()->neighbours(getY(), getX());
-        if (neighbours.empty()) {
-            msg << "nothing";
-        } else {
-            msg << "a " <<neighbours[0]->name();
-            for (unsigned int i = 1; i < neighbours.size(); i++) {
-                if (i == neighbours.size() - 1) {
-                    msg << " and a " << neighbours[i]->name();
-                } else {
-                    msg << ", a " << neighbours[i]->name();
+        if (!neighbours.empty()) {
+            msg << " and see " << neighbours[0]->name(Indefinite);
+            if (neighbours.size() == 2) {
+                // You see A and B.
+                msg << " and " << neighbours[1]->name(Indefinite);
+            } else {
+                // You see A, B, and C.
+                for (unsigned int i = 1; i < neighbours.size(); i++) {
+                    if (i == neighbours.size() - 1) {
+                        msg << ", and " << neighbours[i]->name(Indefinite);
+                    } else {
+                        msg << ", " << neighbours[i]->name(Indefinite);
+                    }
                 }
             }
         }
@@ -57,7 +61,7 @@ void Player::damage(Character* other, int d) {
     playerClass->notifyAttack(this);
     ostringstream msg;
     int dmg = other->takeDamage(d);
-    msg << "You did " << dmg << " dmg to the " << other->name() << " (" << other->currentHP() << " HP).";
+    msg << "You did " << dmg << " dmg to " << other->name(Definite) << " (" << other->currentHP() << " HP).";
     UI::instance()->say(msg.str());
     if (other->dead()) {
         addGold(other->droppedGold());
@@ -116,11 +120,17 @@ void Player::drawClass(Surface& target) const {
     playerClass->draw(target);
 }
 
-std::string Player::name() const {
-    if (playerClass->name() != "") {
-        return Character::name() + " " + playerClass->name();
+std::string Player::name(Article a) const {
+    switch (a) {
+        case Definite:
+        case Indefinite:
+            return "you";
+        default:
+            if (playerClass->name() != "") {
+                return Character::basicName() + " " + playerClass->name();
+            }
+            return Character::basicName();
     }
-    return Character::name();
 }
 
 void Player::accept(LevelObjectVisitor& v) {

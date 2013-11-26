@@ -106,7 +106,7 @@ void Game::move(Direction d) {
         target->use(player);
         ostringstream line;
 
-        line << "YAY!!! " << target->amount() << " GOLD!!!";
+        line << target->amount() << " gold.";
         UI::instance()->say(line.str());
         delete target;
     }
@@ -194,8 +194,8 @@ LevelObject* Game::getTarget(int range) {
 }
 
 void Game::notifyPlayerDeath() {
+    if (gameOver) return;
     gameOver = true;
-    UI::instance()->say("Game Over");
     ostringstream line;
 
     line << "You Died x.x After failing to stop the monsters, they escaped to the surface. "
@@ -207,9 +207,9 @@ void Game::notifyPlayerDeath() {
 }
 
 void Game::makeNewLevel() {
+    if (gameOver) return;
     if (level->isLastLevel()) {
         gameOver = true;
-        UI::instance()->say("Game Over");
         ostringstream line;
 
         line << "You Win \\(^o^)/ You saved the world! As soon as you succeed, people start reconsidering their lives. "

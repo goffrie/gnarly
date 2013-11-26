@@ -4,6 +4,7 @@
 #include "ui.h"
 #include "level.h"
 #include "levelobjectvisitor.h"
+#include "util.h"
 
 #include <sstream>
 #include <vector>
@@ -33,17 +34,16 @@ void Monster::wander() {
         pair<int, int> newLocation = locations[rand() % locations.size()];
         moveTo(newLocation.first, newLocation.second);
     }
-
 }
 
 void Monster::attack(Character* target) {
     ostringstream msg;
     if (rand() % 2 == 0) {
-        msg << "The " << name() << " misses the " << target->name() << ".";
+        msg << capitalize(name(Definite)) << " misses " << target->name(Definite) << ".";
         UI::instance()->say(msg.str());
     } else {
         int damage = target->takeDamage(atk());
-        msg << "The " << name() << " hits the " << target->name() << " for " << damage << " dmg!";
+        msg << capitalize(name(Definite)) << " hits " << target->name(Definite) << " for " << damage << " dmg!";
         UI::instance()->say(msg.str());
     }
 }

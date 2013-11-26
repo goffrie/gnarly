@@ -3,8 +3,11 @@
 
 #include "ui.h"
 #include <sstream>
+#include <algorithm>
 
-std::vector<Team::Status> Stealth::allAlly;
+using namespace std;
+
+vector<Team::Status> Stealth::allAlly;
 
 Stealth::Stealth() : Skill(4), currentDuration(-1) {
     if (allAlly.empty()) {
@@ -45,16 +48,17 @@ void Stealth::step(Player* p) {
     }
 }
 
-std::string Stealth::name() const{
+string Stealth::name() const{
     return "Stealth";
 }
 
-std::string Stealth::description() const {
+string Stealth::description() const {
     return "Turns you (and all your allies) invisible";
 }
 
-std::string Stealth::display() const {
-    std::ostringstream line;
-    line << ": " << (currentDuration > 0 ? currentDuration : 0) << " turns remaining";
+string Stealth::display() const {
+    ostringstream line;
+    int remaining = max(0, currentDuration);
+    line << ": " << remaining << " " << (remaining == 1 ? "turn" : "turns") << " remaining";
     return line.str();
 }

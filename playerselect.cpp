@@ -136,7 +136,7 @@ void PlayerSelect::draw(Surface& target) const {
     target.fillLine(19, "");
     target.fillLine(20, "");
     ostringstream line;
-    string n = player->name();
+    string n = player->name(NoArticle);
     n[0] = toupper(n[0]);
     line << "    Currently: " << n << "       Press <Space> to Begin, <q> to quit";
     target.fillLine(21, line.str());
