@@ -23,6 +23,7 @@ int Level::currentLevel = 0;
 Level::Level()
 : dungeon(Dungeon::defaultDungeon()),
   grid(dungeon.height(), vector<LevelObject*>(dungeon.width(), 0)),
+  fov(dungeon.height(), vector<bool>(dungeon.width(), true)),
   numberGold(10),
   numberPotions(10),
   numberEnemies(20) {

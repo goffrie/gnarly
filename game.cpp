@@ -68,7 +68,10 @@ void Game::step() {
 
 void Game::print() {
     UI& ui = *UI::instance();
-    level->computeFOV(player->getY(), player->getX(), 20);
+    if (gnarly) {
+        // Don't compute FOV in basic mode.
+        level->computeFOV(player->getY(), player->getX(), 20);
+    }
     display.draw(ui);
     level->draw(*mem);
     ui.cursor(player->getY(), player->getX());
