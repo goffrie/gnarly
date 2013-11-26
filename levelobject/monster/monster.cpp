@@ -33,18 +33,30 @@ void Monster::step() {
     }
 }
 
+int dist(pair<int, int> a, pair<int, int> b) {
+    return max(abs(a.first - b.first), abs(a.second - b.second));
+}
+int mdist(pair<int, int> a, pair<int, int> b) {
+    return abs(a.first - b.first) + abs(a.second - b.second);
+}
+
 void Monster::moveToward(Character* c) {
-    const int cY = c->getY(), cX = c->getX();
+    const pair<int, int> target(c->getY(), c->getX());
 
     vector<pair<int, int> > locations = getFreeAdjacent();
-    pair<int, int> best = make_pair(getY(), getX());
-    int bestDist = abs(cY - best.first) + abs(cX - best.second);
+    pair<int, int> best(getY(), getX());
+    int bestDist = dist(target, best);
+    int bestMdist = mdist(target, best);
 
     for (unsigned int i = 0; i < locations.size(); ++i) {
-        int dist = abs(cY - locations[i].first) + abs(cX - locations[i].second);
-        if (dist < bestDist) {
+        int d = dist(target, locations[i]);
+        int md = mdist(target, locations[i]);
+        if (d < bestDist ||
+                (d == bestDist && (md < bestMdist ||
+                    (md == bestMdist && rand() % 2)))) {
             best = locations[i];
-            bestDist = dist;
+            bestDist = d;
+            bestMdist = md;
         }
     }
 
