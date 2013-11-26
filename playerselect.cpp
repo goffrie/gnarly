@@ -39,7 +39,7 @@ Player* PlayerSelect::getBasicPlayer() {
             }
         default:
             cout << "Quitting..." << endl;
-            return 0;
+            throw QuitGameException();
     }
 }
 
@@ -105,7 +105,7 @@ Player* PlayerSelect::getPlayer(UI& ui) {
                 return player;
             case 'q':
                 delete player;
-                return 0;
+                throw QuitGameException();
         }
     }
 }
