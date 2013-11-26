@@ -39,9 +39,11 @@ public:
     void setAlliances(std::vector<Team::Status> a);
     TeamName index() const;
 
-private:
+
+// Multiton:
     // Initializes all teams with default values
     static void init();
+private:
     static void cleanup();
 
 public:

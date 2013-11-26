@@ -47,6 +47,8 @@ TeamName Team::index() const{
 }
 
 void Team::init() {
+    cleanup();
+
     for (int i = Players; i < NumTeams; i++) {
         teams.push_back(new Team(static_cast<TeamName>(i)));
     }
@@ -58,6 +60,7 @@ void Team::cleanup() {
     for (unsigned int i = 0; i < teams.size(); i++) {
         delete teams[i];
     }
+    teams.clear();
 }
 
 Team* Team::instance(TeamName n) {
