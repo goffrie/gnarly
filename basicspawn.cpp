@@ -59,7 +59,6 @@ LevelObject* BasicSpawn::getFromTile(char t) {
         case 'X': return new Monster(Attributes::Phoenix);
         case 'T': return new Monster(Attributes::Troll);
         case 'M': return new Merchant();
-        default: std::terminate();
-            return 0;
+        default: return 0;
     }
 }
