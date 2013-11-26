@@ -30,6 +30,11 @@ std::string DragonGold::basicName() const {
     return line.str();
 }
 
+std::string DragonGold::name(Article a) const {
+    // Use the default implementation in LevelObject, not Gold's override.
+    return LevelObject::name(a);
+}
+
 bool DragonGold::canPickUp() const {
     return !dragonLives;
 }
