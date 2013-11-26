@@ -2,7 +2,7 @@ CXX=g++
 CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11
 LDFLAGS=
 EXEC=shadowcast_test
-OBJECTS=shadowcast_test.o intervalset.o
+OBJECTS=shadowcast_test.o shadowcast.o intervalset.o
 DEPENDS=${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

@@ -30,7 +30,7 @@ template<int myy, int myx, int mxy, int mxx>
 void shadowcastOctant(int y, int x, int radius,
         const vector<vector<bool> >& opaque,
         vector<vector<bool> >& visible,
-        vector<bool>& covered) {
+        vector<int>& covered) {
 
     const int r2 = radius * radius;
 
@@ -48,11 +48,12 @@ void shadowcastOctant(int y, int x, int radius,
                 // Any of the three points are enough to make it visible.
                 if (!covered[dx*2] || !covered[dx*2+1] || !covered[dx*2+2]) {
                     setIx(visible, ny, nx, true);
+                    shadowed.add(Interval(dx / double(dy + 1), (dx + 1) / double(dy + 1)));
                 }
-                shadowed.add(Interval(dx / double(dy + 1), (dx + 1) / double(dy + 1)));
             } else {
                 // The centre point and one corner must be visible.
-                if (!covered[dx*2+1] && (!covered[dx*2] || !covered[dx*2+2])) {
+                // Being on the boundary of an interval is good enough.
+                if (covered[dx*2+1] <= 1) {
                     setIx(visible, ny, nx, true);
                 }
             }
@@ -82,7 +83,7 @@ void shadowcast(int y, int x, int radius,
 
     // Initialize the scratch vector.
     // This is shared between `shadowcastOctant` calls.
-    vector<bool> covered;
+    vector<int> covered;
     covered.reserve(radius * 2 + 3);
 
     // Perform the shadowcast.
