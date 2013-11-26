@@ -33,6 +33,10 @@ void Game::startGame() {
         UI::setInstance(new BasicUI());
     }
 
+    // Do per-game initialization.
+    Team::init();
+    Potion::resetUsed();
+
     // Ask the user to select their player.
     PlayerSelect ps;
     player = ps.getPlayer(*UI::instance());
@@ -45,10 +49,6 @@ void Game::startGame() {
     // Set up the first dungeon level.
     Level::resetLevelCount();
     makeNewLevel();
-
-    // Do per-game initialization.
-    Team::init();
-    Potion::resetUsed();
 }
 
 Game::~Game() {
