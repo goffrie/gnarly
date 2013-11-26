@@ -104,7 +104,7 @@ void CursesUI::queryCommand(CommandHandler& target) {
 void CursesUI::say(const std::string& msg) {
     if (msg.size() > maxMsgLineLength) {
         vector<string> lines = getLines(msg, maxMsgLineLength);
-        for (int i = 0; i < lines.size(); ++i) {
+        for (unsigned int i = 0; i < lines.size(); ++i) {
             assert(lines[i].size() <= maxMsgLineLength);
             say(lines[i]);
         }

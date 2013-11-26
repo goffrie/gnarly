@@ -178,7 +178,8 @@ void Game::quit() {
 }
 
 void Game::confirm() {
-
+    delete popup;
+    popup = 0;
 }
 
 LevelObject* Game::getTarget(int range) {
@@ -202,8 +203,7 @@ void Game::notifyPlayerDeath() {
          "Nations fell before the neverending stream of monsters, and after countless years "
          "of struggle the entire world was devoured. Nothing ever lived ever again. The end.\n\n"
          "On the upside, you got " << player->gold() << " gold!";
-    popup = new PopUp(line.str(), 5, 5, 17, 69);
-    display.add(popup, 3);
+    PopUp::make(line.str());
 }
 
 void Game::makeNewLevel() {
@@ -216,8 +216,7 @@ void Game::makeNewLevel() {
              "War ceases to exist and people learn to empathize with each other, and scarcity is solved.  "
              "Everyone lives happily ever after. The end.\n\n"
              "Score: " << player->score();
-        popup = new PopUp(line.str(), 5, 5, 17, 69);
-        display.add(popup, 3);
+        PopUp::make(line.str());
         return;
     }
     if (level) {
