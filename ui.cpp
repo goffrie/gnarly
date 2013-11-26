@@ -9,10 +9,6 @@ UI* UI::instance() {
 }
 
 void UI::setInstance(UI* _ui) {
-    static bool initialized = false;
-    if (!initialized) {
-        initialized = true;
-    }
     delete ui;
     ui = _ui;
 }

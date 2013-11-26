@@ -22,21 +22,31 @@ using namespace std;
 
 Game* Game::_instance = 0;
 
-Game::Game() : player(0), pstatus(0), level(0), mem(0), popup(0), _quit(false), gameOver(false), _shouldRestart(false) {
-    PlayerSelect ps;
+Game::Game() : player(0), pstatus(0), level(0), mem(0), popup(0), gameOver(false) {
+}
+
+void Game::startGame() {
+    // Initialize the UI.
     if (gnarly) {
         UI::setInstance(new CursesUI());
     } else {
         UI::setInstance(new BasicUI());
     }
+
+    // Do per-game initialization.
+    Team::init();
+    Potion::resetUsed();
+
+    // Ask the user to select their player.
+    PlayerSelect ps;
     player = ps.getPlayer(*UI::instance());
-    if (!player) {
-        _quit = true;
-        return;
-    }
+
+    // Initialize the display.
     pstatus = new PlayerStatus(*player);
     display.add(pstatus);
     display.add(player, 2);
+
+    // Set up the first dungeon level.
     Level::resetLevelCount();
     Team::resetAlliances();
     makeNewLevel();
@@ -52,7 +62,7 @@ Game::~Game() {
 }
 
 void Game::run() {
-    while (!_quit) {
+    while (true) {
         print();
         readCommand();
     }
@@ -69,7 +79,10 @@ void Game::step() {
 
 void Game::print() {
     UI& ui = *UI::instance();
-    level->computeFOV(player->getY(), player->getX(), 20);
+    if (gnarly) {
+        // Don't compute FOV in basic mode.
+        level->computeFOV(player->getY(), player->getX(), 20);
+    }
     display.draw(ui);
     level->draw(*mem);
     ui.cursor(player->getY(), player->getX());
@@ -157,13 +170,11 @@ void Game::skill(int i) {
 }
 
 void Game::restart() {
-    Potion::resetUsed();
-    _shouldRestart = true;
-    _quit = true;
+    throw RestartGameException();
 }
 
 void Game::quit() {
-    _quit = true;
+    throw QuitGameException();
 }
 
 void Game::confirm() {

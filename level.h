@@ -71,7 +71,9 @@ public:
     LevelObject* objectAt(int y, int x) const { return grid[y][x]; }
 
     // Update the field of view for the player at position (y, x).
-    // This method needs to be called before the next two.
+    // This method should be called before drawing the level.
+    // However, if it is never called, then the whole level
+    // will be considered in view.
     void computeFOV(int y, int x, int radius);
     // Draw the parts of the level that the player can see.
     void draw(Surface& target) const override;

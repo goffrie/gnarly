@@ -39,7 +39,7 @@ Player* PlayerSelect::getBasicPlayer() {
             }
         default:
             cout << "Quitting..." << endl;
-            return 0;
+            throw QuitGameException();
     }
 }
 
@@ -98,19 +98,17 @@ Player* PlayerSelect::getPlayer(UI& ui) {
             case SuperElf:
                 if (dev) {
                     swapPlayer(new SuperElfPlayer());
-                    break;
                 }
+                break;
             case ' ': case 's':
                 curs_set(1);
                 return player;
             case 'q':
                 delete player;
-                return 0;
-            default:
-                continue;
+                throw QuitGameException();
         }
     }
-}                                              
+}
 
 void PlayerSelect::draw(Surface& target) const {
     target.setColor(COLOR_RED, COLOR_BLACK);
@@ -126,8 +124,8 @@ void PlayerSelect::draw(Surface& target) const {
     target.fillLine(9, "                 ##x;-=###      #x--==####x    #x##X+ ,=====-#####       ");
     target.fillLine(10, "                ##+==.==,####  #====-= ####,  #X;=x ,=== -=. X#;#x       ");
     target.fillLine(11, "               ##===;====.##.##;====-;-,####.#X# ,= ======= #x#####+     ");
-    target.fillLine(12, "      -       ##=;-=======   ;XX ===-;.  ##,# # =-=;==;;===###=####-    ");
-    target.fillLine(13, "     X ###  =##==;-.=-=-=-==-= x# =--+X###+#X+ ==,;-==;-==-+##,####X=   ");
+    target.fillLine(12, "      -       ##=;-=======   ;XX ===-;.  ##,# # =-=;==;;===###=####-     ");
+    target.fillLine(13, "     X ###  =##==;-.=-=-=-==-= x# =--+X###+#X+ ==,;-==;-==-+##,####X=    ");
     target.fillLine(14, "    . =.=X#x+#=--;-.-;,========.#..x+##x..x..=-=-=;===;====#=+######;    ");
     target.fillLine(15, "   +#x,=;X##+==,,= -.,+x====;===.#-X= - ;= ;, ==-;==-=;===-+# x#=X###=   ");
     target.fillLine(16, "  #+#,.=XX=x= - === x+##X====-= = =.   =.==,=.-===.;==;=.=;=,###+#####   ");

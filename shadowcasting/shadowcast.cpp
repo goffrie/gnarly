@@ -30,7 +30,7 @@ template<int myy, int myx, int mxy, int mxx>
 void shadowcastOctant(int y, int x, int radius,
         const vector<vector<bool> >& opaque,
         vector<vector<bool> >& visible,
-        vector<bool>& covered) {
+        vector<int>& covered) {
 
     const int r2 = radius * radius;
 
@@ -44,15 +44,28 @@ void shadowcastOctant(int y, int x, int radius,
 
             const int ny = y + myy * dy + myx * dx;
             const int nx = x + mxy * dy + mxx * dx;
+            // If the previous line didn't have the nearby cells visible,
+            // don't allow this cell to be visible either.
+            // Avoids strange disconnected lit regions.
+            if ((dx == dy || (!ix(visible, ny - myy, nx - mxy) || ix(opaque, ny - myy, nx - mxy)))
+                && ((dx == 0 || (!ix(visible, ny - myy - myx, nx - mxy - mxx)
+                                || ix(opaque, ny - myy - myx, nx - mxy - mxx))))) {
+                continue;
+            }
             if (ix(opaque, ny, nx)) {
+                bool left  = covered[dx*2]   == 0,
+                     mid   = covered[dx*2+1] == 0,
+                     right = covered[dx*2+2] == 0;
                 // Any of the three points are enough to make it visible.
-                if (!covered[dx*2] || !covered[dx*2+1] || !covered[dx*2+2]) {
+                if (left || mid || right) {
                     setIx(visible, ny, nx, true);
+                    shadowed.add(Interval(dx / double(dy + 1), (dx + 1) / double(dy + 1)));
                 }
-                shadowed.add(Interval(dx / double(dy + 1), (dx + 1) / double(dy + 1)));
             } else {
-                // The centre point and one corner must be visible.
-                if (!covered[dx*2+1] && (!covered[dx*2] || !covered[dx*2+2])) {
+                // The centre point must be visible.
+                // Being on the boundary of an interval is good enough.
+                bool mid   = covered[dx*2+1] <= 1;
+                if (mid) {
                     setIx(visible, ny, nx, true);
                 }
             }
@@ -82,7 +95,7 @@ void shadowcast(int y, int x, int radius,
 
     // Initialize the scratch vector.
     // This is shared between `shadowcastOctant` calls.
-    vector<bool> covered;
+    vector<int> covered;
     covered.reserve(radius * 2 + 3);
 
     // Perform the shadowcast.
