@@ -1,6 +1,7 @@
 #include "intervalset.h"
 
 #include <algorithm>
+#include <cmath>
 
 using namespace std;
 
@@ -45,17 +46,30 @@ void IntervalSet::add(Interval i) {
     } while (merged);
 }
 
+bool integer(double a) {
+    return floor(a) == a;
+}
+
 // Queries whether the points (0/n, 1/n, ..., n/n) are in the set,
-// returning them in a vector<bool>.
-void IntervalSet::resolveIntervals(int n, vector<bool>& v) const {
-    v.assign(n + 1, false);
+// returning them in a vector<int>, where 0 means not in any interval,
+// 1 means on the boundary of an interval,
+// and 2 means within an interval.
+void IntervalSet::resolveIntervals(int n, vector<int>& v) const {
+    v.assign(n + 1, 0);
     for (ISet::const_iterator p = intervals.begin(); p != intervals.end(); ++p) {
         // Mark the points overlapping this interval.
-        int begin = ceil(p->first * n);
-        int end = floor(p->second * n);
+        int begin = floor(p->first * n) + 1;
+        int end = ceil(p->second * n) - 1;
+        // Are there points exactly on the ends of the interval?
+        if (double(begin-1) / n == p->first) {
+            v[begin-1] = 1;
+        }
+        if (double(end+1) / n == p->second) {
+            v[end+1] = 1;
+        }
         // Clamp values to be within the vector's range.
         if (begin < 0) begin = 0;
         if (end > n) end = n;
-        fill(v.begin() + begin, v.begin() + end + 1, true);
+        fill(v.begin() + begin, v.begin() + end + 1, 2);
     }
 }
