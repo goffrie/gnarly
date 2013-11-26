@@ -151,7 +151,7 @@ void Player::addXP(int xp) {
 }
 
 int Player::targetXPForLevel(int l) {
-    return (l - 1) * 100;
+    return (l - 1) * 200;
 }
 
 void Player::levelUp() {

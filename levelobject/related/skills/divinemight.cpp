@@ -2,7 +2,7 @@
 #include "player.h"
 
 bool DivineMight::use(Player* p) {
-    p->applyBuff(20, 30);
+    p->applyBuff(10, 20);
     Skill::use(p);
     return true;
 }
@@ -12,5 +12,5 @@ std::string DivineMight::name() const{
 }
 
 std::string DivineMight::description() const {
-    return "Gain 20 atk and 30 def";
+    return "Gain 10 atk and 20 def";
 }
