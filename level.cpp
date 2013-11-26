@@ -248,6 +248,33 @@ void Level::draw(Surface& target) const {
     }
 }
 
+// XXX dupe code
+vector<LevelObject*> Level::getVisible(int pY, int pX, int radius) const {
+    const int h = height(), w = width();
+    // Determine which tiles are opaque.
+    vector<vector<bool> > opaque(h, vector<bool>(w, true));
+    for (int y = 0; y < h; ++y) {
+        for (int x = 0; x < w; ++x) {
+            Tile tile = tileAt(y, x);
+            opaque[y][x] = !(tile == Floor || tile == Door || tile == Passage);
+        }
+    }
+    // Now compute the field of view.
+    vector<vector<bool> > field;
+    shadowcast(pY, pX, radius, opaque, field);
+
+    vector<LevelObject*> objects;
+    for (int y = 0; y < h; ++y) {
+        for (int x = 0; x < w; ++x) {
+            if (field[y][x]) {
+                LevelObject* o = objectAt(y, x);
+                if (o) objects.push_back(o);
+            }
+        }
+    }
+    return objects;
+}
+
 void Level::stepObjects() {
     vector<LevelObject*> toStep;
     for (unsigned int y = 0; y < grid.size() ; y++) {
