@@ -23,18 +23,18 @@ set(gnarly_SOURCES
     levelobject/related/skills/skill.cpp
     levelobject/related/skills/stealth.cpp
     levelobject/related/attributedecorator.cpp
+    levelobject/related/classbuff.cpp
     levelobject/related/attributes.cpp
     levelobject/related/class.cpp
-    levelobject/related/classbuff.cpp
     levelobject/related/paladin.cpp
     levelobject/related/thief.cpp
     levelobject/related/wizard.cpp
     levelobject/staircase.cpp
     levelobject/character.cpp
-    levelobject/dragongold.cpp
     levelobject/gold.cpp
     levelobject/levelobject.cpp
     levelobject/potion.cpp
+    levelobject/dragongold.cpp
     levelobjectvisitor.cpp
     shadowcasting/intervalset.cpp
     shadowcasting/shadowcast.cpp
@@ -47,21 +47,21 @@ set(gnarly_SOURCES
     surface.cpp
     target.cpp
     basicui.cpp
-    popup.cpp
     ui.cpp
     basicspawn.cpp
     commandargs.cpp
-    cursesui.cpp
     team.cpp
     direction.cpp
-    playerstatus.cpp
     util.cpp
-    game.cpp
     main.cpp
     playerselect.cpp
     level.cpp
+    cursesui.cpp
+    game.cpp
+    playerstatus.cpp
+    popup/popup.cpp
 )
 
-include_directories(gnarly . levelobject levelobject/player levelobject/related levelobject/monster levelobject/related/skills)
+include_directories(gnarly . levelobject levelobject/player levelobject/related levelobject/monster levelobject/related/skills popup)
 add_executable(gnarly ${gnarly_SOURCES})
 target_link_libraries(gnarly ${CURSES_LIBRARIES})
