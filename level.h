@@ -9,7 +9,7 @@
 #include <set>
 
 class LevelObject;
-class Memory;
+struct LevelImpl;
 
 // Represents a single dungeon floor in the game
 class Level : public Displayable {
@@ -17,26 +17,8 @@ class Level : public Displayable {
     static int currentLevel;
     enum { lastLevel = 8 };
 
-    // The base dungeon layout. Owned by this class.
-    Dungeon dungeon;
-
-    // A catalogue of the things on this level,
-    // indexed by their location.
-    std::vector<std::vector<LevelObject*> > grid;
-
-    // What tiles are currently visible by the player?
-    // Needs to be kept up-to-date using `computeFOV`.
-    std::vector<std::vector<bool> > fov;
-
-    // All the items owned by this level.
-    // This includes everything except the player.
-    std::set<LevelObject*> objects;
-    std::vector<Character*> dying;
-    std::vector<LevelObject*> adding;
-
-    int numberGold;
-    int numberPotions;
-    int numberEnemies;
+    // pointer-to-implementation
+    LevelImpl* d;
 
     void removeDead();
     void addStored();
@@ -45,11 +27,20 @@ public:
     Level(Dungeon layout);
     virtual ~Level();
 
-    unsigned int height() const { return grid.size(); }
-    unsigned int width() const { return grid[0].size(); }
+    // Accessor methods.
+    unsigned int height() const;
+    unsigned int width() const;
 
-    const Dungeon& getDungeon() const { return dungeon; }
+    const Dungeon& getDungeon() const;
 
+    Tile tileAt(int y, int x) const;
+    LevelObject* objectAt(int y, int x) const;
+
+    // A convenience method: check if the given point
+    // lies in [0, height()) x [0, width()).
+    bool valid(int y, int x) const;
+
+    // XXX take param
     void loadLayout(Player* p);
 
     // Add something to the level. `own` controls whether the level
@@ -62,14 +53,9 @@ public:
     void notifyDeath(Character* i);
     void notifyAdd(LevelObject* i);
 
-    bool valid(int y, int x) const;
-
     // Check if a position is free (i.e. there is
     // nothing in that location). A passage or door usually not free
     bool free(int y, int x, bool canGoBetweenRooms = false) const;
-
-    Tile tileAt(int y, int x) const { return dungeon.tileAt(y, x); }
-    LevelObject* objectAt(int y, int x) const { return grid[y][x]; }
 
     // Update the field of view for the player at position (y, x).
     // This method should be called before drawing the level.

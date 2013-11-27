@@ -2,16 +2,11 @@
 
 #include "dungeon.h"
 #include "levelobject.h"
-#include "staircase.h"
 #include "dragongold.h"
 #include "dragon.h"
-#include "dungeongen/aggregationgen.h"
-#include "dungeongen/bspgen.h"
 #include "ui.h"
-#include "memory.h"
 #include "commandargs.h"
 #include "basicspawn.h"
-#include "potion.h"
 #include "util.h"
 
 #include "shadowcasting/shadowcast.h"
@@ -22,24 +17,67 @@
 
 using namespace std;
 
+struct LevelImpl {
+    // The base dungeon layout. Owned by this class.
+    Dungeon dungeon;
+
+    // A catalogue of the things on this level,
+    // indexed by their location.
+    std::vector<std::vector<LevelObject*> > grid;
+
+    // What tiles are currently visible by the player?
+    // Needs to be kept up-to-date using `computeFOV`.
+    std::vector<std::vector<bool> > fov;
+
+    // All the items owned by this level.
+    // This includes everything except the player.
+    std::set<LevelObject*> objects;
+    std::vector<Character*> dying;
+    std::vector<LevelObject*> adding;
+
+    LevelImpl(Dungeon layout) : dungeon(layout),
+        grid(dungeon.height(), vector<LevelObject*>(dungeon.width(), 0)),
+        fov(dungeon.height(), vector<bool>(dungeon.width(), true)) {
+    }
+};
+
 int Level::currentLevel = 0;
 
-Level::Level(Dungeon layout)
-: dungeon(layout),
-  grid(dungeon.height(), vector<LevelObject*>(dungeon.width(), 0)),
-  fov(dungeon.height(), vector<bool>(dungeon.width(), true)),
-  numberGold(10),
-  numberPotions(10),
-  numberEnemies(20) {
+Level::Level(Dungeon layout) : d(new LevelImpl(layout)) {
     currentLevel++;
 }
 
 Level::~Level() {
-    while(!objects.empty()) {
-        delete *(objects.begin());
+    while (!d->objects.empty()) {
+        delete *d->objects.begin();
     }
+    delete d;
 }
 
+// Accessor methods.
+unsigned int Level::height() const {
+    return d->grid.size();
+}
+unsigned int Level::width() const {
+    return d->grid[0].size();
+}
+
+const Dungeon& Level::getDungeon() const {
+    return d->dungeon;
+}
+Tile Level::tileAt(int y, int x) const {
+    return d->dungeon.tileAt(y, x);
+}
+LevelObject* Level::objectAt(int y, int x) const {
+    return d->grid[y][x];
+}
+
+bool Level::valid(int y, int x) const {
+    return !(x < 0 || y < 0 || (unsigned)x >= width() || (unsigned)y >= height());
+}
+
+// Load the layout specified on the command line.
+// XXX XXX
 void Level::loadLayout(Player* p) {
     vector<string> grid;
     BasicSpawn b;
@@ -87,34 +125,34 @@ void Level::add(LevelObject* i, bool own) {
     assert(!i->level);
     assert(i->y >= 0 && (unsigned) i->y < height());
     assert(i->x >= 0 && (unsigned) i->x < width());
-    assert(!grid[i->y][i->x]);
+    assert(!d->grid[i->y][i->x]);
 
     i->level = this;
-    grid[i->y][i->x] = i;
+    d->grid[i->y][i->x] = i;
     if (own) {
-        objects.insert(i);
+        d->objects.insert(i);
     }
 }
 
 void Level::remove(LevelObject* l) {
-    if (grid[l->y][l->x] == l) {
-        grid[l->y][l->x] = 0;
+    if (d->grid[l->y][l->x] == l) {
+        d->grid[l->y][l->x] = 0;
     }
     l->level = 0;
-    set<LevelObject*>::iterator it = objects.find(l);
-    if (it != objects.end()) {
-        objects.erase(it);
+    set<LevelObject*>::iterator it = d->objects.find(l);
+    if (it != d->objects.end()) {
+        d->objects.erase(it);
     }
 }
 
 void Level::move(LevelObject* i, int y, int x) {
     // Sanity checks.
-    assert(grid[y][x] == 0 || grid[y][x] == i);
-    assert(grid[i->y][i->x] == i);
+    assert(d->grid[y][x] == 0 || d->grid[y][x] == i);
+    assert(d->grid[i->y][i->x] == i);
 
     // Update the grid.
-    grid[i->y][i->x] = 0;
-    grid[y][x] = i;
+    d->grid[i->y][i->x] = 0;
+    d->grid[y][x] = i;
 
     // Update the item.
     i->y = y;
@@ -122,38 +160,34 @@ void Level::move(LevelObject* i, int y, int x) {
 }
 
 void Level::notifyDeath(Character* i) {
-    dying.push_back(i);
+    d->dying.push_back(i);
 }
 
 void Level::notifyAdd(LevelObject* i) {
-    adding.push_back(i);
+    d->adding.push_back(i);
 }
 
 void Level::removeDead() {
-    for (unsigned int i = 0; i < dying.size(); i++) {
-        UI::instance()->say(capitalize(dying[i]->name(Definite)) + " died.");
-        delete dying[i];
+    for (unsigned int i = 0; i < d->dying.size(); i++) {
+        UI::instance()->say(capitalize(d->dying[i]->name(Definite)) + " died.");
+        delete d->dying[i];
     }
-    dying.clear();
+    d->dying.clear();
 }
 
 void Level::addStored() {
-    for (unsigned int i = 0; i < adding.size(); i++) {
-        add(adding[i]);
+    for (unsigned int i = 0; i < d->adding.size(); i++) {
+        add(d->adding[i]);
     }
-    adding.clear();
-}
-
-bool Level::valid(int y, int x) const {
-    return !(x < 0 || y < 0 || (unsigned)x >= width() || (unsigned)y >= height());
+    d->adding.clear();
 }
 
 bool Level::free(int y, int x, bool canGoBetweenRooms) const {
-    Tile t = dungeon.tileAt(y, x);
+    Tile t = tileAt(y, x);
     if (!canGoBetweenRooms) {
-        return !grid[y][x] && (t == Floor);
+        return !d->grid[y][x] && (t == Floor);
     }
-    return !grid[y][x] && (t == Floor || t == Door || t == Passage);
+    return !d->grid[y][x] && (t == Floor || t == Door || t == Passage);
 }
 
 void Level::computeFOV(int pY, int pX, int radius) {
@@ -167,14 +201,14 @@ void Level::computeFOV(int pY, int pX, int radius) {
         }
     }
     // Now compute the field of view.
-    shadowcast(pY, pX, radius, opaque, fov);
+    shadowcast(pY, pX, radius, opaque, d->fov);
 }
 
 void Level::draw(Surface& target) const {
     const int h = height(), w = width();
     for (int y = 0; y < h; ++y) {
         for (int x = 0; x < w; ++x) {
-            if (!fov[y][x]) continue;
+            if (!d->fov[y][x]) continue;
             char tile = tileChar(tileAt(y, x));
             target.draw(y, x, tile);
 
@@ -213,10 +247,10 @@ vector<LevelObject*> Level::getVisible(int pY, int pX, int radius) const {
 
 void Level::stepObjects() {
     vector<LevelObject*> toStep;
-    for (unsigned int y = 0; y < grid.size() ; y++) {
-        for (unsigned int x = 0; x < grid[y].size(); x++) {
-            if (objects.find(grid[y][x]) != objects.end()) {
-                toStep.push_back(grid[y][x]);
+    for (unsigned int y = 0; y < d->grid.size() ; y++) {
+        for (unsigned int x = 0; x < d->grid[y].size(); x++) {
+            if (d->objects.find(d->grid[y][x]) != d->objects.end()) {
+                toStep.push_back(d->grid[y][x]);
             }
         }
     }
@@ -234,7 +268,7 @@ vector<LevelObject*> Level::neighbours(int y, int x) {
     for (int dy = -1; dy <= 1; dy++) {
         for (int dx = -1; dx <= 1; dx ++) {
             if (valid(y + dy, x + dx) && (dy != 0 || dx !=0)) {
-                LevelObject* o = grid[y + dy][x + dx];
+                LevelObject* o = d->grid[y + dy][x + dx];
                 if (o) adjacent.push_back(o);
             }
         }
