@@ -10,7 +10,7 @@ using namespace std;
 Dungeon ForestGen::gen() {
     vector<vector<Tile> > m(height, vector<Tile>(width, Floor));
 
-    const int numTrees = height * width / 20;
+    const int numTrees = height * width / 8;
     for (int i = 0; i < numTrees; ++i) {
         m[rand() % height][rand() % width] = Tree;
     }
