@@ -37,6 +37,7 @@ OBJECTS=\
 	dungeongen/aggregationgen.o \
 	shadowcasting/intervalset.o \
 	shadowcasting/shadowcast.o \
+	popup/popupcreator.o \
 	popup/popup.o \
 	surface.o \
 	ui.o \

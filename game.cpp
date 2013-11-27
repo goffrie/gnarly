@@ -10,7 +10,7 @@
 #include "cursesui.h"
 #include "basicui.h"
 #include "level.h"
-#include "popup.h"
+#include "popupcreator.h"
 #include "memory.h"
 #include "target.h"
 
@@ -22,7 +22,7 @@ using namespace std;
 
 Game* Game::_instance = 0;
 
-Game::Game() : player(0), pstatus(0), level(0), mem(0), popup(0), _quit(false), gameOver(false), _shouldRestart(false) {
+Game::Game() : player(0), pstatus(0), level(0), mem(0), _quit(false), gameOver(false), _shouldRestart(false) {
     // Initialize the UI.
     if (gnarly) {
         UI::setInstance(new CursesUI());
@@ -58,7 +58,6 @@ Game::~Game() {
     delete pstatus;
     delete player;
     delete level;
-    delete popup;
     delete mem;
 }
 
@@ -181,8 +180,6 @@ void Game::quit() {
 }
 
 void Game::confirm() {
-    delete popup;
-    popup = 0;
 }
 
 LevelObject* Game::getTarget(int range) {
@@ -200,26 +197,14 @@ LevelObject* Game::getTarget(int range) {
 void Game::notifyPlayerDeath() {
     if (gameOver) return;
     gameOver = true;
-    ostringstream line;
-
-    line << "You Died x.x After failing to stop the monsters, they escaped to the surface. "
-         "Nations fell before the neverending stream of monsters, and after countless years "
-         "of struggle the entire world was devoured. Nothing ever lived ever again. The end.\n\n"
-         "On the upside, you got " << player->gold() << " gold!";
-    PopUp::make(line.str());
+    PopUpCreator::defeat(player->score());
 }
 
 void Game::makeNewLevel() {
     if (gameOver) return;
     if (level->isLastLevel()) {
         gameOver = true;
-        ostringstream line;
-
-        line << "You Win \\(^o^)/ You saved the world! As soon as you succeed, people start reconsidering their lives. "
-             "War ceases to exist and people learn to empathize with each other, and scarcity is solved.  "
-             "Everyone lives happily ever after. The end.\n\n"
-             "Score: " << player->score();
-        PopUp::make(line.str());
+        PopUpCreator::victory(player->score());
         return;
     }
     if (level) {

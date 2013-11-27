@@ -9,7 +9,6 @@ class Player;
 class PlayerStatus;
 class Level;
 class Memory;
-class PopUp;
 class LevelObject;
 
 class Game : public CommandHandler {
@@ -18,7 +17,6 @@ class Game : public CommandHandler {
     PlayerStatus* pstatus;
     Level* level;
     Memory* mem;
-    PopUp* popup;
 
     Display display;
 

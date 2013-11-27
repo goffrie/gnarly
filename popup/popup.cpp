@@ -3,6 +3,7 @@
 #include "util.h"
 #include "ui.h"
 
+#include <curses.h>
 #include <cassert>
 #include <iostream>
 using namespace std;
@@ -11,28 +12,19 @@ PopUp::PopUp(const string& t, int y, int x, int h, int w) :
   y(y), x(x), height(h), width(w), text(getLines(t, w - xbuffer * 2)), submit(false) {
 }
 
-void PopUp::move(Direction d) { }
-void PopUp::attack(Direction d) { }
-void PopUp::use(Direction d) { }
-void PopUp::skill(int i) { }
-void PopUp::restart() { }
-void PopUp::quit() { }
-
-void PopUp::confirm() {
-    submit = true;
-}
-
 void PopUp::draw(Surface& target) const {
     assert(text.size() < (unsigned)(height - ybuffer * 2 - 2));
+    target.setColor(COLOR_BLUE, COLOR_BLACK);
     for (int dy = y; dy < y + height; dy++) {
         for (int dx = x; dx < x + width; dx++) {
             char c = ' ';
             if (y == dy || x == dx || dy == y + height - 1 || dx == x + width - 1) {
-                c = '=';
+                c = '#';
             }
             target.draw(dy, dx, c);
         }
     }
+    target.unsetColor(COLOR_BLUE, COLOR_BLACK);
     for (unsigned int i = 0; i < text.size(); i++) {
         target.draw(y + i + ybuffer, x + xbuffer, text[i]);
     }
@@ -44,6 +36,13 @@ void PopUp::make(const string& t) {
     p.draw(*UI::instance());
     UI::instance()->redraw();
     while (!p.submit) {
-        UI::instance()->queryCommand(p);
+        switch (UI::instance()->readChar()) {
+            case ' ':
+                p.submit = true;
+                break;
+            case 's':
+                p.submit = true;
+                break;
+        }
     }
 }

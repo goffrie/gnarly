@@ -12,6 +12,8 @@
 #include "thief.h"
 #include "paladin.h"
 #include "wizard.h"
+#include "util.h"
+#include "popupcreator.h"
 
 #include <iostream>
 #include <sstream>
@@ -100,6 +102,9 @@ Player* PlayerSelect::getPlayer(UI& ui) {
                     swapPlayer(new SuperElfPlayer());
                 }
                 break;
+            case '?':
+                PopUpCreator::tutorial();
+                break;
             case ' ': case 's':
                 curs_set(1);
                 return player;
@@ -136,9 +141,7 @@ void PlayerSelect::draw(Surface& target) const {
     target.fillLine(19, "");
     target.fillLine(20, "");
     ostringstream line;
-    string n = player->name(NoArticle);
-    n[0] = toupper(n[0]);
-    line << "    Currently: " << n << "       Press <Space> to Begin, <q> to quit";
+    line << "  Currently: " << titleCase(player->name(NoArticle)) << "     Press <Space> to Begin, <q> to quit, <?> for help";
     target.fillLine(21, line.str());
     target.fillLine(22, "");
     target.setColor(COLOR_GREEN, COLOR_BLACK);

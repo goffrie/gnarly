@@ -2,6 +2,7 @@
 
 #include "skill.h"
 #include "util.h"
+#include "popupcreator.h"
 
 #include <ncurses.h>
 #include <cctype>
@@ -95,6 +96,9 @@ void CursesUI::queryCommand(CommandHandler& target) {
             } else {
                 say("Never mind.");
             }
+            break;
+        case '?':
+            PopUpCreator::tutorial();
             break;
         default:
             say(string("Unknown command ") + printable(c) + "!");
