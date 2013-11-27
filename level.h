@@ -42,14 +42,15 @@ class Level : public Displayable {
     void addStored();
 
 public:
-    Level();
+    Level(Dungeon layout);
     virtual ~Level();
 
     unsigned int height() const { return grid.size(); }
     unsigned int width() const { return grid[0].size(); }
 
+    const Dungeon& getDungeon() const { return dungeon; }
+
     void loadLayout(Player* p);
-    void generate(Player* p);
 
     // Add something to the level. `own` controls whether the level
     // should take ownership of it.

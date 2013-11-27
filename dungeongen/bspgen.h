@@ -5,7 +5,9 @@
 
 class BSPGen : public DungeonGen {
 protected:
-    virtual Dungeon gen(int height, int width) override;
+    virtual Dungeon gen() override;
+public:
+    BSPGen(int h, int w) : DungeonGen(h, w) { }
 };
 
 #endif

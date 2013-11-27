@@ -68,7 +68,7 @@ gen:
     return n;
 }
 
-Dungeon AggregationGen::gen(int height, int width) {
+Dungeon AggregationGen::gen() {
     assert(height > 12 && width > 12);
     // Initialize with all rock.
     Map m(height, vector<bool>(width, false));

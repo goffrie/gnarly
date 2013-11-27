@@ -110,7 +110,7 @@ void partition(Map& m, int y, int x, int h, int w) {
     }
 }
 
-Dungeon BSPGen::gen(int height, int width) {
+Dungeon BSPGen::gen() {
     while (1) {
         try {
             Map grid(height, vector<Tile>(width, Rock));

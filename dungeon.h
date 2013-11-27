@@ -39,8 +39,8 @@ public:
 
     Tile tileAt(int y, int x) const { return grid[y][x]; }
 
-    bool inSameRoom(int y1, int x1, int y2, int x2);
-    std::pair<int,int> randomPlacement();
+    bool inSameRoom(int y1, int x1, int y2, int x2) const;
+    std::pair<int,int> randomPlacement() const;
     void loadRooms();
     void floodfill(unsigned int y, unsigned int x, int n);
 

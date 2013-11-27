@@ -98,11 +98,11 @@ Dungeon::Dungeon(const char* str) {
     loadRooms();
 }
 
-bool Dungeon::inSameRoom(int y1, int x1, int y2, int x2) {
+bool Dungeon::inSameRoom(int y1, int x1, int y2, int x2) const {
     return rooms[y1][x1] == rooms[y2][x2];
 }
 
-pair<int,int> Dungeon::randomPlacement() {
+pair<int,int> Dungeon::randomPlacement() const {
     // Pick a room.
     int roomNum = rand() % roomCount;
     // Pick a spot in the room.
