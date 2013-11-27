@@ -2,9 +2,9 @@
 
 #include "surface.h"
 #include "player.h"
-#include "level.h"
 #include "commandargs.h"
 #include "util.h"
+#include "game.h"
 #include <sstream>
 #include <cctype>
 
@@ -36,7 +36,7 @@ void PlayerStatus::draw(Surface& target) const {
     target.fillLine(28, line.str());
     line.str("");
 
-    line << "Floor " << Level::levelCount();
+    line << "Floor " << Game::instance()->dungeonLevel();
     target.draw(25, 69, line.str());
     line.str("");
 

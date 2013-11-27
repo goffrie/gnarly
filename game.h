@@ -24,6 +24,9 @@ class Game : public CommandHandler {
     bool gameOver;
     bool _shouldRestart;
 
+    // The current dungeon level.
+    int dlvl;
+
 public:
     void run();
     void readCommand();
@@ -42,6 +45,9 @@ public:
     bool shouldRestart() { return _shouldRestart; }
     void makeNewLevel();
     LevelObject* getTarget(int range);
+
+
+    int dungeonLevel() const { return dlvl; }
 
 private:
     static Game* _instance;

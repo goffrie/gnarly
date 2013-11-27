@@ -13,11 +13,7 @@ struct LevelImpl;
 
 // Represents a single dungeon floor in the game
 class Level : public Displayable {
-    // The number of the current level (how many levels have passed + 1)
-    static int currentLevel;
-    enum { lastLevel = 8 };
-
-    // pointer-to-implementation
+    // pointer to implementation
     LevelImpl* d;
 
     void removeDead();
@@ -69,9 +65,6 @@ public:
 
     void stepObjects();
     std::vector<LevelObject*> neighbours(int y, int x);
-    static int levelCount() { return currentLevel; }
-    static void resetLevelCount() { currentLevel = 0; }
-    static bool isLastLevel() { return currentLevel == lastLevel; }
 };
 
 #endif

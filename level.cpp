@@ -41,10 +41,7 @@ struct LevelImpl {
     }
 };
 
-int Level::currentLevel = 0;
-
 Level::Level(Dungeon layout) : d(new LevelImpl(layout)) {
-    currentLevel++;
 }
 
 Level::~Level() {

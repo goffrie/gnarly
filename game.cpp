@@ -24,6 +24,8 @@
 
 using namespace std;
 
+const int lastLevel = 8;
+
 Game* Game::_instance = 0;
 
 Game::Game() : player(0), pstatus(0), level(0), mem(0), _quit(false), gameOver(false), _shouldRestart(false) {
@@ -52,7 +54,7 @@ Game::Game() : player(0), pstatus(0), level(0), mem(0), _quit(false), gameOver(f
     display.add(player, 2);
 
     // Set up the first dungeon level.
-    Level::resetLevelCount();
+    dlvl = 0;
     Team::resetAlliances();
     makeNewLevel();
 }
@@ -206,7 +208,7 @@ void Game::notifyPlayerDeath() {
 
 void Game::makeNewLevel() {
     if (gameOver) return;
-    if (level->isLastLevel()) {
+    if (dlvl == lastLevel) {
         gameOver = true;
         PopUpCreator::victory(player->score());
         return;
@@ -228,6 +230,7 @@ void Game::makeNewLevel() {
     mem = new Memory(level->height(), level->width());
     display.add(mem, 0);
     display.add(level, 1);
+    ++dlvl;
 
     player->stripBuffs();
 }
