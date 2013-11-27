@@ -13,6 +13,7 @@ char tileChar(Tile t) {
         case Door: return '+';
         case Passage: return '#';
         case Rock: return ' ';
+        case Tree: return '%';
     }
     return ' ';
 }
@@ -25,6 +26,7 @@ inline Tile tileFromChar(char c) {
         case '+': return Door;
         case '#': return Passage;
         case ' ': return Rock;
+        case '%': return Tree;
         default: std::terminate();
     }
 }

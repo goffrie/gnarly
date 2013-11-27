@@ -12,7 +12,8 @@ enum Tile {
     WallH,
     Door,
     Passage,
-    Rock
+    Rock,
+    Tree
 };
 
 char tileChar(Tile t);

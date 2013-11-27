@@ -35,6 +35,7 @@ OBJECTS=\
 	levelgen/levelgen.o \
 	levelgen/bspgen.o \
 	levelgen/aggregationgen.o \
+	levelgen/forestgen.o \
 	shadowcasting/intervalset.o \
 	shadowcasting/shadowcast.o \
 	popup/popupcreator.o \

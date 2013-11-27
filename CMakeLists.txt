@@ -41,6 +41,7 @@ set(gnarly_SOURCES
     levelgen/bspgen.cpp
     levelgen/levelgen.cpp
     levelgen/aggregationgen.cpp
+    levelgen/forestgen.cpp
     display.cpp
     dungeon.cpp
     memory.cpp

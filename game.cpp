@@ -14,8 +14,7 @@
 #include "memory.h"
 #include "target.h"
 
-
-#include "levelgen/aggregationgen.h"
+#include "levelgen/forestgen.h"
 
 #include <cstring>
 #include <iostream>
@@ -225,7 +224,7 @@ void Game::makeNewLevel() {
         level = new Level(Dungeon::defaultDungeon());
         level->loadLayout(player);
     } else {
-        level = AggregationGen(25, 79).generateLevel(player);
+        level = ForestGen(25, 79).generateLevel(player);
     }
     mem = new Memory(level->height(), level->width());
     display.add(mem, 0);
