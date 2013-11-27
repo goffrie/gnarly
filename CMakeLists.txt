@@ -61,6 +61,7 @@ set(gnarly_SOURCES
     game.cpp
     playerstatus.cpp
     popup/popup.cpp
+    popup/popupcreator.cpp
 )
 
 include_directories(gnarly . levelobject levelobject/player levelobject/related levelobject/monster levelobject/related/skills popup)
