@@ -2,6 +2,7 @@
 #include <cstring>
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ void processArgs(int argc, char *argv[]) {
             }
             layoutFile = argv[i+1];
             i++;
-            ifstream file(layoutFile);
+            ifstream file(layoutFile.c_str());
             string next;
             while (getline(file, next)) {
                 levelLayout.push_back(next);

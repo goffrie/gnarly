@@ -1,5 +1,7 @@
 #include "team.h"
 
+#include <cstdlib>
+
 using namespace std;
 
 vector<Team*> Team::teams;
@@ -7,25 +9,25 @@ vector<Team*> Team::teams;
 Team::Team(TeamName i) : _index(i) {
     for (int j = 0; j < NumTeams; j++) {
         if (i == j) {
-            alliances.push_back(Status::Ally);
+            alliances.push_back(Ally);
         } else {
-            alliances.push_back(Status::Enemy);
+            alliances.push_back(Enemy);
         }
     }
 }
 
 bool Team::isAllied(Team* t) const {
-    return (alliances[t->index()] == Status::Ally);
+    return (alliances[t->index()] == Ally);
 }
 
 void Team::ally(Team* t) {
-    alliances[t->index()] = Status::Ally;
-    t->alliances[index()] = Status::Ally;
+    alliances[t->index()] = Ally;
+    t->alliances[index()] = Ally;
 }
 
 void Team::unally(Team* t) {
-    alliances[t->index()] = Status::Enemy;
-    t->alliances[index()] = Status::Enemy;
+    alliances[t->index()] = Enemy;
+    t->alliances[index()] = Enemy;
 }
 
 std::vector<Team::Status> Team::Team::getAlliances() const {
@@ -34,9 +36,9 @@ std::vector<Team::Status> Team::Team::getAlliances() const {
 
 void Team::setAlliances(std::vector<Team::Status> a) {
     for (int i = 0; i < NumTeams; i++) {
-        if (a[i] == Status::Ally) {
+        if (a[i] == Ally) {
             ally(Team::instance(static_cast<TeamName>(i)));
-        } else if (a[i] == Status::Enemy) {
+        } else if (a[i] == Enemy) {
             unally(Team::instance(static_cast<TeamName>(i)));
         }
     }

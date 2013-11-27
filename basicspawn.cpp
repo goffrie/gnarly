@@ -7,6 +7,9 @@
 #include "dragon.h"
 #include "basicspawn.h"
 
+#include <cstdlib>
+using namespace std;
+
 Monster* BasicSpawn::randomMonster() {
     switch(rand() % 18) {
         case 1 ... 4:
