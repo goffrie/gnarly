@@ -14,6 +14,9 @@
 #include "memory.h"
 #include "target.h"
 
+
+#include "dungeongen/aggregationgen.h"
+
 #include <cstring>
 #include <iostream>
 #include <sstream>
@@ -230,12 +233,16 @@ void Game::makeNewLevel() {
     if (mem) {
         delete mem;
     }
-    level = new Level();
+    if (!layoutFile.empty()) {
+        level = new Level(Dungeon::defaultDungeon());
+        level->loadLayout(player);
+    } else {
+        level = AggregationGen(25, 79).generateLevel(player);
+    }
     mem = new Memory(level->height(), level->width());
     display.add(mem, 0);
     display.add(level, 1);
 
-    level->generate(player);
     player->stripBuffs();
 }
 

@@ -24,8 +24,8 @@ using namespace std;
 
 int Level::currentLevel = 0;
 
-Level::Level()
-: dungeon(Dungeon::defaultDungeon()),
+Level::Level(Dungeon layout)
+: dungeon(layout),
   grid(dungeon.height(), vector<LevelObject*>(dungeon.width(), 0)),
   fov(dungeon.height(), vector<bool>(dungeon.width(), true)),
   numberGold(10),
@@ -81,70 +81,6 @@ void Level::loadLayout(Player* p) {
             }
         }
     }
-}
-
-void Level::generate(Player* p) {
-    if (!layoutFile.empty()) {
-        return loadLayout(p);
-    }
-    BasicSpawn b;
-    // Place the player.
-    pair<int, int> nextPos = dungeon.randomPlacement();
-    p->setPos(nextPos.first, nextPos.second);
-    add(p, false);
-
-    // TODO: Handle occupied locations more gracefully.
-    // Place/Generate a staircase
-    Staircase* s = new Staircase;
-    do {
-        nextPos = dungeon.randomPlacement();
-    } while (
-        !free(nextPos.first, nextPos.second)
-        || (dungeon.numRooms() > 1 && dungeon.inSameRoom(nextPos.first, nextPos.second, p->getY(), p->getX()))
-    );
-    s->setPos(nextPos.first, nextPos.second);
-    add(s);
-
-    // Generate potions.
-    for (int i = 0; i < numberPotions; ++i) {
-        do {
-            nextPos = dungeon.randomPlacement();
-        } while (!free(nextPos.first, nextPos.second));
-        Potion* pot = b.randomPotion();
-        pot->setPos(nextPos.first, nextPos.second);
-        add(pot);
-    }
-
-    int numberDragons = 0;
-    // Generate gold.
-    for (int i = 0; i < numberGold; i++) {
-        do {
-            do {
-                nextPos = dungeon.randomPlacement();
-            } while (!free(nextPos.first, nextPos.second));
-            Gold* gold = b.randomGold();
-            gold->setPos(nextPos.first, nextPos.second);
-            add(gold);
-            DragonGold* dgold = dynamic_cast<DragonGold*>(gold);
-            if (dgold) {
-                if (!dgold->addDragon()) {
-                    continue;
-                }
-                numberDragons++;
-            }
-        } while (false);
-    }
-
-    // Generate monsters.
-    for (int i = numberDragons; i < numberEnemies; ++i) {
-        Monster* newEnemy = b.randomMonster();
-        do {
-            nextPos = dungeon.randomPlacement();
-        } while (!free(nextPos.first, nextPos.second));
-        newEnemy->setPos(nextPos.first, nextPos.second);
-        add(newEnemy);
-    }
-    assert(objects.size() == (unsigned)(numberEnemies + numberGold + numberPotions + 1));
 }
 
 void Level::add(LevelObject* i, bool own) {
