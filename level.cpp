@@ -25,7 +25,7 @@ using namespace std;
 int Level::currentLevel = 0;
 
 Level::Level()
-: dungeon(Dungeon::defaultDungeon()),
+: dungeon(AggregationGen().generate(25, 79)),
   grid(dungeon.height(), vector<LevelObject*>(dungeon.width(), 0)),
   fov(dungeon.height(), vector<bool>(dungeon.width(), true)),
   numberGold(10),
