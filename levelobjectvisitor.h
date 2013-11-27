@@ -9,7 +9,8 @@ class LevelObject;
 class Character;
 class Player;
 class Monster;
-class Potion;
+class PotionAdapter;
+class ItemAdapter;
 class Gold;
 class Staircase;
 
@@ -19,7 +20,8 @@ public:
     virtual void visit(Character& o);
     virtual void visit(Player& o);
     virtual void visit(Monster& o);
-    virtual void visit(Potion& o);
+    virtual void visit(ItemAdapter& o);
+    virtual void visit(PotionAdapter& o);
     virtual void visit(Gold& o);
     virtual void visit(Staircase& o);
 };

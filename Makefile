@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11 -I. -Ilevelobject -Ilevelobject/related -Ilevelobject/player -Ilevelobject/monster -Ilevelgen -Ilevelobject/related/skills -Ipopup
+CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11 -I. -Ilevelobject -Ilevelobject/related -Ilevelobject/player -Ilevelobject/monster -Ilevelgen -Ilevelobject/related/skills -Ipopup -Iitem
 LDFLAGS=-lncurses
 EXEC=gnarly
 OBJECTS=\
@@ -28,7 +28,8 @@ OBJECTS=\
 	levelobject/monster/dragon.o \
 	levelobject/levelobject.o \
 	levelobject/character.o \
-	levelobject/potion.o \
+	levelobject/potionadapter.o \
+	levelobject/itemadapter.o \
 	levelobject/gold.o \
 	levelobject/dragongold.o \
 	levelobject/staircase.o \
@@ -40,6 +41,7 @@ OBJECTS=\
 	shadowcasting/shadowcast.o \
 	popup/popupcreator.o \
 	popup/popup.o \
+	item/potion.o \
 	surface.o \
 	ui.o \
 	util.o \
@@ -59,7 +61,8 @@ OBJECTS=\
 	direction.o \
 	playerselect.o \
 	target.o \
-	basicspawn.o
+	basicspawn.o \
+	object.o
 DEPENDS=${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

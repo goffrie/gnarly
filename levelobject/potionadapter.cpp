@@ -1,0 +1,2 @@
+#include "potionadapter.h"
+

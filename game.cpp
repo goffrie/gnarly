@@ -1,6 +1,6 @@
 #include "game.h"
 
-#include "potion.h"
+#include "potionadapter.h"
 #include "gold.h"
 #include "staircase.h"
 #include "commandargs.h"
@@ -153,10 +153,9 @@ void Game::use(Direction d) {
         UI::instance()->say("You drink an imaginary potion.");
         return;
     }
-    Potion* target = dynamic_cast<Potion*>(level->objectAt(ny, nx));
+    PotionAdapter* target = dynamic_cast<PotionAdapter*>(level->objectAt(ny, nx));
     if (target) {
-        target->use(player);
-        delete target;
+        player->addToInventory(target);
         step();
     } else {
         UI::instance()->say("That doesn't appear to be drinkable.");

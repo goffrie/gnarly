@@ -15,21 +15,6 @@ LevelObject::~LevelObject() {
     }
 }
 
-string LevelObject::name(Article a) const {
-    string r = basicName();
-    switch (a) {
-        case Definite: return "the " + r;
-        case Indefinite:
-            if (r.size() > 0 && isVowel(r[0])) {
-                return "an " + r;
-            } else {
-                return "a " + r;
-            }
-        default:
-            return r;
-    }
-}
-
 void LevelObject::draw(Surface& target) const {
     target.draw(y, x, tile());
 }

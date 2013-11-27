@@ -1,13 +1,10 @@
 #ifndef __POTION_H__
 #define __POTION_H__
 
-#include "levelobject.h"
+#include "item.h"
 #include <string>
 
-class Player;
-
-// XXX: Maybe have a UsableObject class, if we want more usables?
-class Potion : public LevelObject {
+class Potion : public Item {
 public:
     enum Type {
         RH = 0,
@@ -25,12 +22,7 @@ public:
     Potion(Type t) : type(t) { }
 
     virtual void use(Player* target);
-
-    Type getType() const { return type; }
-    virtual char tile() const override { return 'P'; }
     virtual std::string basicName() const override;
-
-    virtual void accept(LevelObjectVisitor& v);
 
     static void resetUsed();
 };

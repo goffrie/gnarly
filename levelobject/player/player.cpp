@@ -8,6 +8,7 @@
 #include "direction.h"
 #include "class.h"
 #include "commandargs.h"
+#include "itemadapter.h"
 #include <sstream>
 
 using namespace std;
@@ -124,6 +125,11 @@ void Player::setClass(Class* c) {
 
 void Player::drawClass(Surface& target) const {
     playerClass->draw(target);
+}
+
+void Player::addToInventory(ItemAdapter* i) {
+    i->removeItem()->use(this);
+    delete i;
 }
 
 std::string Player::name(Article a) const {

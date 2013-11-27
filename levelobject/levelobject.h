@@ -4,6 +4,7 @@
 #include "displayable.h"
 #include "direction.h"
 #include "language.h"
+#include "object.h"
 
 #include <vector>
 #include <string>
@@ -16,7 +17,7 @@ class Level;
 class LevelObjectVisitor;
 class Team;
 
-class LevelObject : public Displayable {
+class LevelObject : public Displayable, public Object {
     friend class Level;
     Level* level;
     // The item's position.
@@ -26,15 +27,9 @@ protected:
     // Returns all free adjacent locations.
     virtual std::vector<std::pair<int, int> > getFreeAdjacent();
 
-    // Returns a basic name
-    virtual std::string basicName() const = 0;
-
 public:
     // The item's ASCII tile.
     virtual char tile() const = 0;
-    // Return a name for the object with the given parameters.
-    // By default, constructs something using basicName.
-    virtual std::string name(Article a) const;
 
     LevelObject() : level(0), y(-1), x(-1) { }
     virtual ~LevelObject();
@@ -55,6 +50,7 @@ public:
     virtual bool canMove(int y, int x);
     virtual bool isEnemy(Team* t) const;
     virtual bool canPickUp() { return false; }
+    virtual bool isItem() { return false; }
     virtual bool dead() const { return false; }
 
     virtual void accept(LevelObjectVisitor& v);

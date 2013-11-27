@@ -1,8 +1,6 @@
 #include "potion.h"
 
-#include "levelobjectvisitor.h"
 #include "player.h"
-#include "elfplayer.h"
 #include "ui.h"
 
 bool Potion::used[6] = {false, false, false, false, false, false};
@@ -18,10 +16,6 @@ void Potion::use(Player* target) {
         case BD: target->applyBuff(0, 5); break;
         case WD: target->applyBuff(0, -5); break;
     }
-}
-
-void Potion::accept(LevelObjectVisitor& v) {
-    v.visit(*this);
 }
 
 std::string Potion::basicName() const {

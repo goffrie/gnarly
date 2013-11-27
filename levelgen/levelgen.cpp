@@ -4,7 +4,7 @@
 #include "level.h"
 #include "staircase.h"
 #include "basicspawn.h"
-#include "potion.h"
+#include "potionadapter.h"
 #include "gold.h"
 #include "dragongold.h"
 #include "monster.h"
@@ -78,7 +78,7 @@ Level* LevelGen::genLevel(Player* player) {
             gate();
             nextPos = dungeon.randomPlacement();
         } while (!lvl->free(nextPos.first, nextPos.second));
-        Potion* pot = b.randomPotion();
+        PotionAdapter* pot = b.randomPotion();
         pot->setPos(nextPos.first, nextPos.second);
         lvl->add(pot);
     }

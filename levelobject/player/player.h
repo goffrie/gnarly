@@ -4,6 +4,7 @@
 #include "character.h"
 
 class Class;
+class ItemAdapter;
 
 class Player : public Character {
     Class* playerClass;
@@ -51,6 +52,9 @@ public:
     virtual bool useSkill(int i);
 
     virtual void setClass(Class* c);
+
+    virtual void addToInventory(ItemAdapter* i);
+
     virtual std::string basicName() const override { return name(NoArticle); }
     virtual std::string name(Article a) const override;
     virtual void drawClass(Surface& target) const;
