@@ -17,6 +17,7 @@ enum Tile {
 };
 
 char tileChar(Tile t);
+void drawTile(Tile t, Surface& target, unsigned y, unsigned x);
 
 // A dungeon layout.
 class Dungeon : public Displayable {

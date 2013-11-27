@@ -206,8 +206,7 @@ void Level::draw(Surface& target) const {
     for (int y = 0; y < h; ++y) {
         for (int x = 0; x < w; ++x) {
             if (!d->fov[y][x]) continue;
-            char tile = tileChar(tileAt(y, x));
-            target.draw(y, x, tile);
+            drawTile(tileAt(y, x), target, y, x);
 
             LevelObject* obj = objectAt(y, x);
             if (obj) obj->draw(target);

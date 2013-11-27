@@ -1,6 +1,7 @@
 #include "dungeon.h"
 
 #include <cstdlib>
+#include <ncurses.h>
 #include "surface.h"
 
 using namespace std;
@@ -31,6 +32,14 @@ inline Tile tileFromChar(char c) {
     }
 }
 
+inline int color(Tile t) {
+    switch (t) {
+        case Tree: return COLOR_GREEN;
+        default: return COLOR_WHITE;
+    }
+};
+
+
 Dungeon::Dungeon(vector<vector<Tile> >& m) : grid(m) {
     loadRooms();
 }
@@ -45,10 +54,16 @@ Dungeon::Dungeon(vector<vector<bool> >& m) {
     loadRooms();
 }
 
+void drawTile(Tile t, Surface& target, unsigned y, unsigned x) {
+    target.setColor(color(t), COLOR_BLACK);
+    target.draw(y, x, tileChar(t));
+    target.unsetColor(color(t), COLOR_BLACK);
+}
+
 void Dungeon::draw(Surface& target) const {
     for (unsigned y = 0; y < grid.size(); ++y) {
         for (unsigned x = 0; x < grid[y].size(); ++x) {
-            target.draw(y, x, tileChar(grid[y][x]));
+            drawTile(grid[y][x], target, y, x);
         }
     }
 }
