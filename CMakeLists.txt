@@ -38,9 +38,9 @@ set(gnarly_SOURCES
     levelobjectvisitor.cpp
     shadowcasting/intervalset.cpp
     shadowcasting/shadowcast.cpp
-    dungeongen/bspgen.cpp
-    dungeongen/dungeongen.cpp
-    dungeongen/aggregationgen.cpp
+    levelgen/bspgen.cpp
+    levelgen/levelgen.cpp
+    levelgen/aggregationgen.cpp
     display.cpp
     dungeon.cpp
     memory.cpp

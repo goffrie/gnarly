@@ -1,4 +1,4 @@
-#include "dungeongen.h"
+#include "levelgen.h"
 
 #include "dungeon.h"
 #include "level.h"
@@ -22,12 +22,12 @@ struct Gate {
     void operator()() {
         if (--max <= 0) {
             // We tried too many times. Give up.
-            throw DungeonGen::GenerationError();
+            throw LevelGen::GenerationError();
         }
     }
 };
 
-Level* DungeonGen::generateLevel(Player* player) {
+Level* LevelGen::generateLevel(Player* player) {
     Gate gate(100);
     while (1) {
         try {
@@ -39,7 +39,7 @@ Level* DungeonGen::generateLevel(Player* player) {
     }
 }
 
-Level* DungeonGen::genLevel(Player* player) {
+Level* LevelGen::genLevel(Player* player) {
     Level* lvl = new Level(gen());
 
     const Dungeon& dungeon = lvl->getDungeon();

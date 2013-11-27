@@ -60,7 +60,7 @@ void join(Map& m, int y, int x, int h, int w, int sp) {
         P.push_back(make_pair(dx, make_pair(dy1, dy2)));
         ++dx;
     }
-    if (P.size() == 0) throw DungeonGen::GenerationError();
+    if (P.size() == 0) throw LevelGen::GenerationError();
     int count = (P.size() > 1) ? !(rand() % 3) + 1 : 1;
     for (int i = 0; count > 0 && i < P.size(); ++i) {
         // P(i) = count / (P.size() - i)

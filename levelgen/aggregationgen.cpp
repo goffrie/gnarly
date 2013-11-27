@@ -23,7 +23,7 @@ int diffuse(Map& m, int h, int w, int y, int x, int rH, int rW) {
     }
     while (1) {
         if (--limit <= 0) {
-            throw DungeonGen::GenerationError();
+            throw LevelGen::GenerationError();
         }
         int cy, cx;
         // Pick a direction.

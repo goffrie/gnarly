@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11 -I. -Ilevelobject -Ilevelobject/related -Ilevelobject/player -Ilevelobject/monster -Idungeongen -Ilevelobject/related/skills -Ipopup
+CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11 -I. -Ilevelobject -Ilevelobject/related -Ilevelobject/player -Ilevelobject/monster -Ilevelgen -Ilevelobject/related/skills -Ipopup
 LDFLAGS=-lncurses
 EXEC=gnarly
 OBJECTS=\
@@ -32,9 +32,9 @@ OBJECTS=\
 	levelobject/gold.o \
 	levelobject/dragongold.o \
 	levelobject/staircase.o \
-	dungeongen/dungeongen.o \
-	dungeongen/bspgen.o \
-	dungeongen/aggregationgen.o \
+	levelgen/levelgen.o \
+	levelgen/bspgen.o \
+	levelgen/aggregationgen.o \
 	shadowcasting/intervalset.o \
 	shadowcasting/shadowcast.o \
 	popup/popupcreator.o \

@@ -1,13 +1,13 @@
 #ifndef __AGGREGATION_GEN_H__
 #define __AGGREGATION_GEN_H__
 
-#include "dungeongen.h"
+#include "levelgen.h"
 
-class AggregationGen : public DungeonGen {
+class AggregationGen : public LevelGen {
 protected:
     virtual Dungeon gen() override;
 public:
-    AggregationGen(int h, int w) : DungeonGen(h, w) { }
+    AggregationGen(int h, int w) : LevelGen(h, w) { }
 };
 
 #endif

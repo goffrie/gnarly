@@ -1,10 +1,10 @@
-#ifndef __DUNGEON_GEN_H__
-#define __DUNGEON_GEN_H__
+#ifndef __LEVEL_GEN_H__
+#define __LEVEL_GEN_H__
 
 class Dungeon;
 class Level;
 class Player;
-class DungeonGen {
+class LevelGen {
 protected:
     int height, width;
 
@@ -18,8 +18,8 @@ protected:
 public:
     class GenerationError {};
 
-    DungeonGen(int h, int w) : height(h), width(w) { }
-    virtual ~DungeonGen() { }
+    LevelGen(int h, int w) : height(h), width(w) { }
+    virtual ~LevelGen() { }
 
     // Just generate a dungeon.
     // XXX

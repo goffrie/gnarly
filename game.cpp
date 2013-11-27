@@ -15,7 +15,7 @@
 #include "target.h"
 
 
-#include "dungeongen/aggregationgen.h"
+#include "levelgen/aggregationgen.h"
 
 #include <cstring>
 #include <iostream>
