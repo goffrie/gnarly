@@ -11,6 +11,7 @@ public:
         Dwarf,
         Elf,
         Orc,
+        Halfling,
         Vampire,
         Werewolf,
         Troll,

@@ -21,6 +21,7 @@ OBJECTS=\
 	levelobject/related/wizard.o \
 	levelobject/player/player.o \
 	levelobject/player/humanplayer.o \
+	levelobject/player/halflingplayer.o \
 	levelobject/player/dwarfplayer.o \
 	levelobject/player/elfplayer.o \
 	levelobject/player/orcplayer.o \

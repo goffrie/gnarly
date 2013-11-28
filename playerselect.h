@@ -14,6 +14,7 @@ class PlayerSelect : public Displayable {
         Elf = 'e',
         Dwarf = 'd',
         Orc = 'o',
+        Halfling = 'a',
         SuperElf = 'E'
     };
     enum PlayerClass {

@@ -29,7 +29,7 @@ public:
     int currentMP() const { return mp; }
     virtual void reduceMP(int amt);
 
-    int takeDamage(int attack);
+    virtual int takeDamage(int attack);
     virtual void attack(Character* other);
     virtual int atk() const;
     virtual int def() const;

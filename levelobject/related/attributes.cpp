@@ -22,6 +22,8 @@ Attributes Attributes::get(Attributes::Race c) {
             return Attributes(140, 20, 30, 10, 0, '@', "elf");
         case Orc:
             return Attributes(180, 20, 30, 25, 0, '@', "orc");
+        case Halfling:
+            return Attributes(100, 20, 30, 20, 0, '@', "halfling");
         case Merchant:
             return Attributes(30, 0, 70, 5, 10, 'M', "merchant");
         case Dragon:

@@ -5,6 +5,7 @@
 #include "humanplayer.h"
 #include "elfplayer.h"
 #include "dwarfplayer.h"
+#include "halflingplayer.h"
 #include "orcplayer.h"
 #include "superelf.h"
 #include "game.h"
@@ -85,6 +86,9 @@ Player* PlayerSelect::getPlayer(UI& ui) {
             case Dwarf:
                 swapPlayer(new DwarfPlayer());
                 break;
+            case Halfling:
+                swapPlayer(new HalflingPlayer());
+                break;
             case ThiefClass:
                 swapClass(new Thief());
                 break;
@@ -141,12 +145,14 @@ void PlayerSelect::draw(Surface& target) const {
     target.fillLine(19, "");
     target.fillLine(20, "");
     ostringstream line;
-    line << "  Currently: " << titleCase(player->name(NoArticle)) << "     Press <Space> to Begin, <q> to quit, <?> for help";
+    line << "  Currently: " << titleCase(player->name(NoArticle));
     target.fillLine(21, line.str());
-    target.fillLine(22, "");
+    line.str("");
+    line << "     Press <Space> to Begin, <q> to quit, <?> for help";
+    target.fillLine(22, line.str());
     target.setColor(COLOR_GREEN, COLOR_BLACK);
     target.fillLine(23, "Choose your race:");
-    target.fillLine(24, "Easy - Elf <e>, Easy - Orc <o>, Normal - Human <h>, Hard - Dwarf <d>");
+    target.fillLine(24, "Easy - Elf <e>, Easy - Orc <o>, Normal - Human <h>, Normal - Halfling <a>, Hard - Dwarf <d>");
     target.fillLine(25, "Choose your class:");
     target.fillLine(26, "None <n>, Thief <t>, Paladin <p>, Wizard <w>");
     target.unsetColor(COLOR_GREEN, COLOR_BLACK);
