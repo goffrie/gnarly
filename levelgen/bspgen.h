@@ -8,6 +8,7 @@ protected:
     virtual Dungeon gen() override;
 public:
     BSPGen(int h, int w) : LevelGen(h, w) { }
+    virtual int amtEnemies() const { return 30; }
 };
 
 #endif

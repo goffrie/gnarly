@@ -108,7 +108,7 @@ Level* LevelGen::genLevel(Player* player, int dungeonLevel) {
     }
 
     // Generate monsters.
-    const int numberEnemies = amtGold() - numberDragons;
+    const int numberEnemies = amtEnemies() - numberDragons;
     for (int i = 0; i < numberEnemies; ++i) {
         Monster* newEnemy = b.randomMonster();
         do {
