@@ -4,21 +4,26 @@
 #include "item.h"
 #include "language.h"
 #include <sstream>
+#include <iomanip>
 
 using namespace std;
 
+string InventoryPopUp::getText(vector<Item*> items) {
+    ostringstream txt;
+    txt << "Inventory:" << endl;
+    for (unsigned int i = 0; i < items.size(); i += 2) {
+        txt << '<' << (char)(i + 'a') << '>' << ": " << left << setw(25) << items[i]->name(NoArticle);
+        if (i + 1 < items.size()) {
+            txt << "<" << (char)(i + 1 + 'a') << '>' << ": " << left << setw(25) << items[i]->name(NoArticle);
+        }
+        txt << endl;
+    }
+    return txt.str();
+}
+
 void InventoryPopUp::make(Player* p, Inventory* inv) {
     vector<Item*> items = inv->getItems();
-    ostringstream text;
-    text << "Inventory:" << endl;
-    for (unsigned int i = 0; i < items.size(); i += 2) {
-        text << '<' << (char)(i + 'a') << '>' << ": " << items[i]->name(NoArticle);
-        if (i + 1 < items.size()) {
-            text << "             <" << (char)(i + 1 + 'a') << '>' << ": " << items[i]->name(NoArticle);
-        }
-        text << endl;
-    }
-    InventoryPopUp pop(text.str());
+    InventoryPopUp pop(getText(items));
     pop.draw(*UI::instance());
     UI::instance()->redraw();
     while (!pop.submit) {
@@ -33,13 +38,8 @@ void InventoryPopUp::make(Player* p, Inventory* inv) {
                 break;
             default:
                 if (inv->useItem(p, ch - 'a')) {
-                    text.str("");
                     items = inv->getItems();
-                    text << "Inventory:" << endl;
-                    for (unsigned int i = 0; i < items.size(); i++) {
-                        text << '<' << (char)(i + 'a') << '>' << ": " << items[i]->name(NoArticle) << endl;
-                    }
-                    pop.setText(text.str());
+                    pop.setText(getText(items));
                     pop.draw(*UI::instance());
                     UI::instance()->redraw();
                 } else {
