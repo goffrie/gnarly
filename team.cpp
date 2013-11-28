@@ -49,6 +49,9 @@ TeamName Team::index() const{
 }
 
 void Team::init() {
+    if (teams.empty()) {
+        atexit(cleanup);
+    }
     cleanup();
 
     for (int i = Players; i < NumTeams; i++) {
@@ -68,7 +71,6 @@ void Team::cleanup() {
 Team* Team::instance(TeamName n) {
     if (teams.empty()) {
         init();
-        atexit(cleanup);
     }
     return teams[n];
 }
