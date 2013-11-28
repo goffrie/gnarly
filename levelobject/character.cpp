@@ -38,6 +38,7 @@ void Character::draw(Surface& target) const {
 void Character::reduceHP(int amt) {
     hp -= amt;
     if (hp <= 0) {
+        hp = 0;
         getLevel()->notifyDeath(this);
     }
 }
