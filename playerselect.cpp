@@ -152,8 +152,10 @@ void PlayerSelect::draw(Surface& target) const {
     target.fillLine(22, line.str());
     target.setColor(COLOR_GREEN, COLOR_BLACK);
     target.fillLine(23, "Choose your race:");
-    target.fillLine(24, "Easy - Elf <e>, Easy - Orc <o>, Normal - Human <h>, Normal - Halfling <a>, Hard - Dwarf <d>");
-    target.fillLine(25, "Choose your class:");
-    target.fillLine(26, "None <n>, Thief <t>, Paladin <p>, Wizard <w>");
+    target.fillLine(24, "Easy - Elf <e>, Easy - Orc <o>, Normal - Human <h>");
+    target.fillLine(25, "Normal - Halfling <a>, Hard - Dwarf <d>");
+    target.fillLine(26, "");
+    target.fillLine(27, "Choose your class:");
+    target.fillLine(28, "None <n>, Thief <t>, Paladin <p>, Wizard <w>");
     target.unsetColor(COLOR_GREEN, COLOR_BLACK);
 }

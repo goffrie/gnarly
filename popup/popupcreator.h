@@ -9,6 +9,7 @@ public:
     static void defeat(int score);
     static void tutorial();
     static void controlTutorial();
+    static void raceTutorial();
     static void classTutorial();
 };
 

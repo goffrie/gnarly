@@ -30,6 +30,7 @@ void PopUpCreator::defeat(int score) {
 
 void PopUpCreator::tutorial() {
     controlTutorial();
+    raceTutorial();
     classTutorial();
 }
 
@@ -49,6 +50,17 @@ void PopUpCreator::controlTutorial() {
             "|--------|--------|---------|\n"
             "\n"
             "When a skill requires targeting, you enter targeting mode. Then, use direction keys to select target, and <space> to confirm";
+    PopUp::make(line.str());
+}
+
+void PopUpCreator::raceTutorial() {
+    ostringstream line;
+    line << "Races:\n"
+            "     Human: 50% increased score, average stats\n"
+            "     Orc: Higher stats, half gold\n"
+            "     Elf: High attack, low defence, potions are always positive\n"
+            "     Dwarf: Weak stats, but double gold\n"
+            "     Halfling: Weak stats, but dodges 20% of attacks\n";
     PopUp::make(line.str());
 }
 
