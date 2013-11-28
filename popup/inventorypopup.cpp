@@ -14,7 +14,7 @@ void InventoryPopUp::make(Player* p, Inventory* inv) {
     for (unsigned int i = 0; i < items.size(); i += 2) {
         text << '<' << (char)(i + 'a') << '>' << ": " << items[i]->name(NoArticle);
         if (i + 1 < items.size()) {
-            text << "                  <" << (char)(i + 'a') << '>' << ": " << items[i]->name(NoArticle);
+            text << "             <" << (char)(i + 1 + 'a') << '>' << ": " << items[i]->name(NoArticle);
         }
         text << endl;
     }
