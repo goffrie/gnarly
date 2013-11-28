@@ -6,6 +6,7 @@ find_package(Curses REQUIRED)
 
 set(gnarly_SOURCES
     displayable.cpp
+    rand.cpp
     levelobject/monster/dragon.cpp
     levelobject/monster/merchant.cpp
     levelobject/monster/monster.cpp

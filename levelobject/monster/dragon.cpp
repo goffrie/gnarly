@@ -2,6 +2,7 @@
 #include "attributes.h"
 #include "dragongold.h"
 #include "level.h"
+#include "rand.h"
 
 #include <algorithm>
 
@@ -31,8 +32,7 @@ Character* Dragon::chooseTarget(vector<LevelObject*> objs) {
     }
 
     if (!targets.empty()) {
-        int i = rand() % targets.size();
-        return targets[i];
+        return targets[rnd(0, targets.size())];
     } else {
         return 0;
     }

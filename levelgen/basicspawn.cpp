@@ -1,3 +1,4 @@
+#include "basicspawn.h"
 #include "attributes.h"
 #include "monster.h"
 #include "potion.h"
@@ -6,13 +7,13 @@
 #include "dragongold.h"
 #include "merchant.h"
 #include "dragon.h"
-#include "basicspawn.h"
 
-#include <cstdlib>
+#include "rand.h"
+
 using namespace std;
 
 Monster* BasicSpawn::randomMonster() {
-    switch(rand() % 18) {
+    switch (rnd(0, 18)) {
         case 1 ... 4:
             return new Monster(Attributes::Werewolf);
         case 5 ... 7:
@@ -29,11 +30,11 @@ Monster* BasicSpawn::randomMonster() {
 }
 
 PotionAdapter* BasicSpawn::randomPotion() {
-    return new PotionAdapter(new Potion(static_cast<Potion::Type>(rand() % Potion::numTypes)));
+    return new PotionAdapter(new Potion(static_cast<Potion::Type>(rnd(0, Potion::numTypes))));
 }
 
 Gold* BasicSpawn::randomGold() {
-    switch(rand() % 8) {
+    switch(rnd(0, 8)) {
         case 0 ... 4:
             return new Gold(Gold::Normal);
         case 5 ... 6:

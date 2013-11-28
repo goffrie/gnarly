@@ -5,10 +5,10 @@
 #include "level.h"
 #include "levelobjectvisitor.h"
 #include "util.h"
+#include "rand.h"
 
 #include <sstream>
 #include <vector>
-#include <cstdlib>
 
 using namespace std;
 
@@ -53,7 +53,7 @@ void Monster::moveToward(Character* c) {
         int md = mdist(target, locations[i]);
         if (d < bestDist ||
                 (d == bestDist && (md < bestMdist ||
-                    (md == bestMdist && rand() % 2)))) {
+                    (md == bestMdist && rnd(0, 2))))) {
             best = locations[i];
             bestDist = d;
             bestMdist = md;
@@ -68,14 +68,14 @@ void Monster::wander() {
 
     // Pick one at random.
     if (locations.size() > 0) {
-        pair<int, int> newLocation = locations[rand() % locations.size()];
+        pair<int, int> newLocation = locations[rnd(0, locations.size())];
         moveTo(newLocation.first, newLocation.second);
     }
 }
 
 void Monster::attack(Character* target) {
     ostringstream msg;
-    if (rand() % 2 == 0) {
+    if (rnd(0, 2) == 0) {
         msg << capitalize(name(Definite)) << " misses " << target->name(Definite) << ".";
         UI::instance()->say(msg.str());
     } else {

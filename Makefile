@@ -48,6 +48,7 @@ OBJECTS=\
 	surface.o \
 	ui.o \
 	util.o \
+	rand.o \
 	basicui.o \
 	cursesui.o \
 	levelobjectvisitor.o \

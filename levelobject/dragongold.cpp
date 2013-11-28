@@ -1,11 +1,11 @@
 #include "dragongold.h"
 #include "dragon.h"
 #include "level.h"
+#include "rand.h"
 
 #include <cassert>
 #include <utility>
 #include <sstream>
-#include <cstdlib>
 
 using namespace std;
 
@@ -20,7 +20,7 @@ bool DragonGold::addDragon() {
         return false;
     }
     // Pick one at random.
-    pair<int, int> newLocation = locations[rand() % locations.size()];
+    pair<int, int> newLocation = locations[rnd(0, locations.size())];
     Dragon* dragon = new Dragon(this);
     dragon->setPos(newLocation.first, newLocation.second);
     getLevel()->add(dragon);

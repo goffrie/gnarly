@@ -1,8 +1,8 @@
 #include "dungeon.h"
-
-#include <cstdlib>
-#include <ncurses.h>
 #include "surface.h"
+#include "rand.h"
+
+#include <ncurses.h>
 
 using namespace std;
 
@@ -121,12 +121,12 @@ bool Dungeon::inSameRoom(int y1, int x1, int y2, int x2) const {
 
 pair<int,int> Dungeon::randomPlacement() const {
     // Pick a room.
-    int roomNum = rand() % roomCount;
+    int roomNum = rnd(0, roomCount);
     // Pick a spot in the room.
     // XXX: pick a spot that isn't empty. make sure that such a spot exists.
     while (true) {
-        int y = rand() % grid.size();
-        int x = rand() % grid[y].size();
+        int y = rnd(0, grid.size());
+        int x = rnd(0, grid[y].size());
         if (rooms[y][x] == roomNum) {
             return make_pair(y, x);
         }

@@ -3,8 +3,8 @@
 #include "levelobjectvisitor.h"
 #include "level.h"
 #include "surface.h"
+#include "rand.h"
 
-#include <cstdlib>
 #include <cctype>
 #include <ncurses.h>
 
@@ -93,7 +93,7 @@ Character* Character::chooseTarget(vector<LevelObject*> objs) {
     }
 
     if (!targets.empty()) {
-        int i = rand() % targets.size();
+        int i = rnd(0, targets.size());
         return targets[i];
     } else {
         return 0;

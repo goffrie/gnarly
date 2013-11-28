@@ -1,9 +1,9 @@
 #include "aggregationgen.h"
 
 #include "dungeon.h"
+#include "rand.h"
 #include <iostream>
 #include <vector>
-#include <cstdlib>
 #include <cassert>
 #include "ui.h"
 
@@ -27,7 +27,7 @@ int diffuse(Map& m, int h, int w, int y, int x, int rH, int rW) {
         }
         int cy, cx;
         // Pick a direction.
-        switch (rand() % 4) {
+        switch (rnd(0, 4)) {
             case 0: cy = -1; cx = 0; break; // up
             case 1: cy = 1; cx = 0; break; // down
             case 2: cy = 0; cx = -1; break; // left
@@ -81,17 +81,17 @@ Dungeon AggregationGen::gen() {
     while (tilesFilled < (height * width) / 2) {
         // rectangle size
         int rH, rW;
-        switch (rand() % 3) {
+        switch (rnd(0, 3)) {
             case 0: // horizontal corridor
-                rH = 1; rW = rand() % 6; break;
+                rH = 1; rW = rnd(0, 6); break;
             case 1: // vertical corridor
-                rW = 1; rH = rand() % 6; break;
+                rW = 1; rH = rnd(0, 6); break;
             case 2: // room
-                rW = rand() % 8 + 3; rH = rand() % 8 + 3; break;
+                rW = rnd(3, 11); rH = rnd(3, 11); break;
         }
         // initial position
-        int y = rand() % (height - rH - 2) + 1;
-        int x = rand() % (width - rW - 2) + 1;
+        int y = rnd(1, height - rH - 1);
+        int x = rnd(1, width - rW - 1);
         tilesFilled += diffuse(m, height, width, y, x, rH, rW);
     }
 

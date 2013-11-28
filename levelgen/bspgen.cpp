@@ -1,18 +1,13 @@
 #include "bspgen.h"
 
 #include "dungeon.h"
+#include "rand.h"
 #include <iostream>
 #include <vector>
-#include <cstdlib>
 
 using namespace std;
 
 typedef vector<vector<Tile> > Map;
-
-int rnd(int a, int b) {
-    if (a >= b) return a;
-    return rand() % (b - a) + a;
-}
 
 int tw(int s) {
     if (s <= 4) return s;
@@ -23,11 +18,11 @@ void room(Map& m, int y, int x, int h, int w) {
     // twiddle the width
     int twiddle = tw(w);
     w -= twiddle;
-    if (twiddle > 0) x += rand() % twiddle + 1;
+    if (twiddle > 0) x += rnd(1, twiddle + 1);
     // twiddle the height
     twiddle = tw(h);
     h -= twiddle;
-    if (twiddle > 0) y += rand() % twiddle + 1;
+    if (twiddle > 0) y += rnd(1, twiddle + 1);
     for (int dy = 0; dy < h; ++dy) {
         for (int dx = 0; dx < w; ++dx) {
             const int ny = y + dy, nx = x + dx;
@@ -61,10 +56,10 @@ void join(Map& m, int y, int x, int h, int w, int sp) {
         ++dx;
     }
     if (P.size() == 0) throw LevelGen::GenerationError();
-    int count = (P.size() > 1) ? !(rand() % 3) + 1 : 1;
+    int count = (P.size() > 1) ? !(rnd(0, 3)) + 1 : 1;
     for (int i = 0; count > 0 && i < P.size(); ++i) {
         // P(i) = count / (P.size() - i)
-        if (rand() % (P.size() - i) < count) {
+        if (rnd(0, P.size() - i) < count) {
             int dx = P[i].first;
             int dy1 = P[i].second.first;
             int dy2 = P[i].second.second;
@@ -89,13 +84,13 @@ void joinH(Map& m, int y, int x, int h, int w, int sp) {
 }
 
 void partition(Map& m, int y, int x, int h, int w) {
-    if (h * w < rand() % 150 + 200) {
+    if (h * w < rnd(200, 350)) {
         room(m, y, x, h, w);
         return;
     }
     // h * w >= 150
-    int splitAmt = rand() % 30 + 35;
-    if (h > 12 && h * 5 + rand() % 70 > w * 3 + rand() % 30) {
+    int splitAmt = rnd(35, 65);
+    if (h > 12 && h * 5 + rnd(0, 70) > w * 3 + rnd(0, 30)) {
         // room is tall: split vertically
         int sp = h * splitAmt / 100;
         partition(m, y, x, sp, w);
