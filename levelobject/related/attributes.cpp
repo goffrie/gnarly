@@ -33,23 +33,23 @@ Attributes Attributes::get(Attributes::Race c) {
         case Phoenix:
             return Attributes(50, 0, 35, 20, 20, 'X', "phoenix");
         case Unicorn:
-            return Attributes(80, 0, 30, 15, 25, 'U', "unicorn");
+            return Attributes(80, 0, 30, 15, 30, 'U', "unicorn");
         case Zombie:
-            return Attributes(180, 0, 15, 0, 25, 'Z', "zombie");
+            return Attributes(180, 0, 15, 0, 30, 'Z', "zombie");
         case Kelpie:
-            return Attributes(100, 0, 20, 5, 25, 'K', "kelpie");
+            return Attributes(100, 0, 20, 5, 30, 'K', "kelpie");
         case Werewolf:
-            return Attributes(120, 0, 30, 5, 30, 'W', "werewolf");
+            return Attributes(120, 0, 30, 5, 40, 'W', "werewolf");
         case Troll:
-            return Attributes(120, 0, 25, 15, 30, 'T', "troll");
+            return Attributes(120, 0, 25, 15, 40, 'T', "troll");
         case Roc:
-            return Attributes(160, 0, 30, 30, 40, 'R', "roc");
+            return Attributes(160, 0, 30, 30, 50, 'R', "roc");
         case Yukionna:
-            return Attributes(100, 0, 60, 20, 40, 'Y', "yuki-onna");
+            return Attributes(100, 0, 60, 20, 60, 'Y', "yuki-onna");
         case Justicator:
-            return Attributes(100, 0, 40, 70, 50, 'J', "justicator");
+            return Attributes(100, 0, 40, 70, 60, 'J', "justicator");
         case Lich:
-            return Attributes(120, 0, 90, 0, 70, 'L', "lich");
+            return Attributes(120, 0, 90, 0, 80, 'L', "lich");
         case Cyclops:
             return Attributes(200, 0, 45, 50, 90, 'C', "cyclops");
         case Ent:
