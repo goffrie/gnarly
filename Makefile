@@ -1,7 +1,7 @@
 CXX=g++
 CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11 -I. -Ilevelobject -Ilevelobject/related -Ilevelobject/player -Ilevelobject/monster -Ilevelgen -Ilevelobject/related/skills -Ipopup -Iitem
 LDFLAGS=-lncurses
-EXEC=gnarly
+EXEC=cc3k
 OBJECTS=\
 	levelobject/related/skills/skill.o \
 	levelobject/related/skills/stealth.o \
@@ -63,7 +63,7 @@ OBJECTS=\
 	direction.o \
 	playerselect.o \
 	target.o \
-	basicspawn.o \
+	levelgen/basicspawn.o \
 	object.o
 DEPENDS=${OBJECTS:.o=.d}
 
