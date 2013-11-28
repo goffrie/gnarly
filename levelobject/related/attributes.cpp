@@ -22,20 +22,42 @@ Attributes Attributes::get(Attributes::Race c) {
             return Attributes(140, 20, 30, 10, 0, '@', "elf");
         case Orc:
             return Attributes(180, 20, 30, 25, 0, '@', "orc");
-        case Vampire:
-            return Attributes(50, 0, 25, 25, 20, 'V', "vampire");
-        case Werewolf:
-            return Attributes(120, 0, 30, 5, 30, 'W', "werewolf");
-        case Troll:
-            return Attributes(120, 0, 25, 15, 30, 'T', "troll");
-        case Goblin:
-            return Attributes(70, 0, 5, 10, 10, 'N', "goblin");
         case Merchant:
             return Attributes(30, 0, 70, 5, 10, 'M', "merchant");
         case Dragon:
             return Attributes(150, 0, 20, 20, 20, 'D', "dragon");
+        case Goblin:
+            return Attributes(70, 0, 5, 10, 10, 'N', "goblin");
+        case Vampire:
+            return Attributes(50, 0, 25, 25, 20, 'V', "vampire");
         case Phoenix:
             return Attributes(50, 0, 35, 20, 20, 'X', "phoenix");
+        case Werewolf:
+            return Attributes(120, 0, 30, 5, 30, 'W', "werewolf");
+        case Troll:
+            return Attributes(120, 0, 25, 15, 30, 'T', "troll");
+        case Roc:
+            return Attributes(160, 0, 30, 30, 40, 'R', "roc");
+        case Yuki-onna:
+            return Attributes(100, 0, 60, 20, 40, 'Y', "yuki-onna");
+        case Justicator:
+            return Attributes(100, 0, 40, 70, 50, 'J', "justicator");
+        case Lich:
+            return Attributes(120, 0, 90, 0, 70, 'L', "lich");
+        case Cyclops:
+            return Attributes(200, 0, 45, 50, 90, 'C', "cyclops");
+        case Ent:
+            return Attributes(220, 0, 50, 100, 100, 'E', "ents");
+        case Basilisk:
+            return Attributes(160, 0, 90, 60, 120, 'B', "basilisk");
+        case Archon:
+            return Attributes(200, 0, 80, 80, 150, 'A', "archon");
+        case Felldrake:
+            return Attributes(200, 0, 85, 140, 180, 'F', "felldrake");
+        case Shoggoth:
+            return Attributes(300, 0, 50, 200, 220, 'S', "shoggoth");
+        case Quetzalcoatl:
+            return Attributes(300, 0, 100, 100, 300, 'Q', "quetzalcoatl");
         default:
             terminate();
     }
