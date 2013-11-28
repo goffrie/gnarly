@@ -14,12 +14,15 @@ class PopUp : public Displayable {
         xbuffer = 2
     };
     std::vector<std::string> text;
+
+protected:
     bool submit;
 
     PopUp(const std::string& t, int y = 2, int x = 5, int height = 22, int width = 69);
 
 public:
     virtual ~PopUp() {}
+    virtual void setText(const std::string& t);
     virtual void draw(Surface& target) const override;
     static void make(const std::string& t);
 };

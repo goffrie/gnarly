@@ -17,6 +17,7 @@ public:
     virtual void attack(Direction d) override;
     virtual void use(Direction d) override;
     virtual void skill(int i) override;
+    virtual void inventory() override;
     virtual void restart() override;
     virtual void quit() override;
     virtual void confirm() override;

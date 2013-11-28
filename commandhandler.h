@@ -9,6 +9,7 @@ public:
     virtual void attack(Direction d) = 0;
     virtual void use(Direction d) = 0;
     virtual void skill(int i) = 0;
+    virtual void inventory() = 0;
     virtual void restart() = 0;
     virtual void quit() = 0;
     virtual void confirm() = 0;

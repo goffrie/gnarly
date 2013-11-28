@@ -183,6 +183,12 @@ void Game::quit() {
     _quit = true;
 }
 
+void Game::inventory() {
+    if (gnarly) {
+        player->viewInventory();
+    }
+}
+
 void Game::confirm() {
 }
 

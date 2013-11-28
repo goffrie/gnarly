@@ -34,6 +34,10 @@ void Target::restart() {
     UI::instance()->say("Currently targeting, press Q to quit");
 }
 
+void Target::inventory() {
+    UI::instance()->say("Currently targeting, press Q to quit");
+}
+
 void Target::quit() {
     _quit = true;
 }

@@ -43,8 +43,12 @@ CursesUI::~CursesUI() {
     endwin();
 }
 
-void CursesUI::queryCommand(CommandHandler& target) {
+void CursesUI::clearMsg() {
     msgLineLength = 0;
+}
+
+void CursesUI::queryCommand(CommandHandler& target) {
+    clearMsg();
     switch (int c = readChar()) {
         case 'h': case 'j': case 'k': case 'l':
         case 'y': case 'u': case 'b': case 'n':
@@ -80,6 +84,9 @@ void CursesUI::queryCommand(CommandHandler& target) {
             break;
         case ' ': case 's':
             target.confirm();
+            break;
+        case 'i':
+            target.inventory();
             break;
         case 'R': // restart
             say("Really restart? [yes/no] ");

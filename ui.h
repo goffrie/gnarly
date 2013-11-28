@@ -11,6 +11,8 @@ class UI : public Surface {
 public:
     virtual ~UI() { }
 
+    virtual void clearMsg() { }
+
     // Ask for (and wait on) a command from the user.
     virtual void queryCommand(CommandHandler& target) = 0;
 

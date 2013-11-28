@@ -9,6 +9,7 @@
 #include "class.h"
 #include "commandargs.h"
 #include "itemadapter.h"
+#include "inventory.h"
 #include <sstream>
 
 using namespace std;
@@ -128,8 +129,19 @@ void Player::drawClass(Surface& target) const {
 }
 
 void Player::addToInventory(ItemAdapter* i) {
-    i->removeItem()->use(this);
+    if (!gnarly) {
+        i->removeItem()->use(this);
+        delete i;
+        return;
+    }
+    Item* item = i->removeItem();
+    UI::instance()->say("You pick up " + item->name(Indefinite) + ".");
+    inventory.addItem(item);
     delete i;
+}
+
+void Player::viewInventory() {
+    inventory.view(this);
 }
 
 std::string Player::name(Article a) const {

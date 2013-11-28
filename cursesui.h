@@ -9,6 +9,7 @@ class CursesUI : public UI {
 public:
     CursesUI();
     virtual ~CursesUI() override;
+    virtual void clearMsg();
     virtual void queryCommand(CommandHandler& target) override;
     virtual void say(const std::string& msg) override;
     virtual int readChar() override;

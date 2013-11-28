@@ -36,6 +36,7 @@ public:
     void attack(Direction d) override;
     void use(Direction d) override;
     void skill(int i) override;
+    void inventory() override;
     void quit() override;
     void restart() override;
     void confirm() override;

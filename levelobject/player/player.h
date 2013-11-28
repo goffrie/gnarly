@@ -2,12 +2,14 @@
 #define __PLAYER_H__
 
 #include "character.h"
+#include "inventory.h"
 
 class Class;
 class ItemAdapter;
 
 class Player : public Character {
     Class* playerClass;
+    Inventory inventory;
     int _gold;
     int _currentXP;
     int _targetXP;
@@ -54,6 +56,7 @@ public:
     virtual void setClass(Class* c);
 
     virtual void addToInventory(ItemAdapter* i);
+    virtual void viewInventory();
 
     virtual std::string basicName() const override { return name(NoArticle); }
     virtual std::string name(Article a) const override;

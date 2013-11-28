@@ -17,6 +17,7 @@ OBJECTS=\
 	levelobject/related/class.o \
 	levelobject/related/thief.o \
 	levelobject/related/paladin.o \
+	levelobject/related/inventory.o \
 	levelobject/related/wizard.o \
 	levelobject/player/player.o \
 	levelobject/player/humanplayer.o \
@@ -40,6 +41,7 @@ OBJECTS=\
 	shadowcasting/intervalset.o \
 	shadowcasting/shadowcast.o \
 	popup/popupcreator.o \
+	popup/inventorypopup.o \
 	popup/popup.o \
 	item/potion.o \
 	surface.o \
