@@ -225,16 +225,16 @@ void Game::makeNewLevel() {
     if (mem) {
         delete mem;
     }
+    dlvl++;
     if (!layoutFile.empty()) {
         level = new Level(Dungeon::defaultDungeon());
         level->loadLayout(player);
     } else {
-        level = ForestGen(25, 79).generateLevel(player);
+        level = ForestGen(25, 79).generateLevel(player, dlvl);
     }
     mem = new Memory(level->height(), level->width());
     display.add(mem, 0);
     display.add(level, 1);
-    ++dlvl;
 
     player->stripBuffs();
 }

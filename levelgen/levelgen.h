@@ -10,7 +10,7 @@ protected:
 
     // May throw GenerationError; in this case, reroll the dungeon.
     virtual Dungeon gen() = 0;
-    virtual Level* genLevel(Player* player); // returns a new'd Level
+    virtual Level* genLevel(Player* player, int dungeonLevel); // returns a new'd Level
 
     virtual int amtGold() const { return 10; }
     virtual int amtPotions() const { return 10; }
@@ -25,7 +25,7 @@ public:
     // XXX
     Dungeon generateLayout();
     // Generate a whole level, allocated on the heap.
-    Level* generateLevel(Player* player);
+    Level* generateLevel(Player* player, int dungeonLevel);
 };
 
 #endif

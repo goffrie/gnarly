@@ -32,13 +32,19 @@ Attributes Attributes::get(Attributes::Race c) {
             return Attributes(50, 0, 25, 25, 20, 'V', "vampire");
         case Phoenix:
             return Attributes(50, 0, 35, 20, 20, 'X', "phoenix");
+        case Unicorn:
+            return Attributes(80, 0, 30, 15, 25, 'U', "unicorn");
+        case Zombie:
+            return Attributes(180, 0, 15, 0, 25, 'Z', "zombie");
+        case Kelpie:
+            return Attributes(100, 0, 20, 5, 25, 'K', "kelpie");
         case Werewolf:
             return Attributes(120, 0, 30, 5, 30, 'W', "werewolf");
         case Troll:
             return Attributes(120, 0, 25, 15, 30, 'T', "troll");
         case Roc:
             return Attributes(160, 0, 30, 30, 40, 'R', "roc");
-        case Yuki-onna:
+        case Yukionna:
             return Attributes(100, 0, 60, 20, 40, 'Y', "yuki-onna");
         case Justicator:
             return Attributes(100, 0, 40, 70, 50, 'J', "justicator");

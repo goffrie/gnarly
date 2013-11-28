@@ -17,7 +17,21 @@ public:
         Goblin,
         Merchant,
         Dragon,
-        Phoenix
+        Phoenix,
+        Unicorn,
+        Zombie,
+        Kelpie,
+        Roc,
+        Yukionna,
+        Justicator,
+        Lich,
+        Cyclops,
+        Ent,
+        Basilisk,
+        Archon,
+        Felldrake,
+        Shoggoth,
+        Quetzalcoatl
     };
 
 private:

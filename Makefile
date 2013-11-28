@@ -64,6 +64,7 @@ OBJECTS=\
 	playerselect.o \
 	target.o \
 	levelgen/basicspawn.o \
+	levelgen/gnarlyspawn.o \
 	object.o
 DEPENDS=${OBJECTS:.o=.d}
 

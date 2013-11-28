@@ -3,7 +3,7 @@
 #include "dungeon.h"
 #include "level.h"
 #include "staircase.h"
-#include "basicspawn.h"
+#include "gnarlyspawn.h"
 #include "potionadapter.h"
 #include "gold.h"
 #include "dragongold.h"
@@ -27,11 +27,11 @@ struct Gate {
     }
 };
 
-Level* LevelGen::generateLevel(Player* player) {
+Level* LevelGen::generateLevel(Player* player, int dungeonLevel) {
     Gate gate(100);
     while (1) {
         try {
-            return genLevel(player);
+            return genLevel(player, dungeonLevel);
         } catch (GenerationError&) {
             // retry
         }
@@ -39,11 +39,11 @@ Level* LevelGen::generateLevel(Player* player) {
     }
 }
 
-Level* LevelGen::genLevel(Player* player) {
+Level* LevelGen::genLevel(Player* player, int dungeonLevel) {
     Level* lvl = new Level(gen());
 
     const Dungeon& dungeon = lvl->getDungeon();
-    BasicSpawn b;
+    GnarlySpawn b(dungeonLevel);
     Gate gate;
 
     // Place the player.
