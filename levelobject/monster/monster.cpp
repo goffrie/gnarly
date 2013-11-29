@@ -6,6 +6,7 @@
 #include "levelobjectvisitor.h"
 #include "util.h"
 #include "rand.h"
+#include "commandargs.h"
 
 #include <sstream>
 #include <vector>
@@ -23,8 +24,12 @@ void Monster::step() {
     if (toAttack) {
         attack(toAttack);
     } else {
-        vector<LevelObject*> visible = level->getVisible(getY(), getX(), 5);
-        Character* toFollow = chooseTarget(visible);
+        Character* toFollow = 0;
+        // In basic mode, only wander; don't follow.
+        if (gnarly) {
+            vector<LevelObject*> visible = level->getVisible(getY(), getX(), 5);
+            toFollow = chooseTarget(visible);
+        }
         if (toFollow) {
             moveToward(toFollow);
         } else {
