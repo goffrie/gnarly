@@ -14,9 +14,10 @@
 #include "memory.h"
 #include "target.h"
 
-#include "forestgen.h"
-#include "bspgen.h"
-#include "aggregationgen.h"
+#include "levelgen/forestgen.h"
+#include "levelgen/bspgen.h"
+#include "levelgen/aggregationgen.h"
+#include "levelgen/roomsgen.h"
 
 #include <cstring>
 #include <iostream>
@@ -232,12 +233,15 @@ void Game::makeNewLevel() {
         level = new Level(Dungeon::defaultDungeon());
         level->loadLayout(player);
     } else {
-        switch (dlvl % 3) {
+        switch (dlvl % 4) {
             case 1:
-                level = BSPGen(25, 79).generateLevel(player, dlvl);
+                level = RoomsGen(25, 79).generateLevel(player, dlvl);
                 break;
             case 2:
                 level = AggregationGen(25, 79).generateLevel(player, dlvl);
+                break;
+            case 3:
+                level = RoomsGen(25, 79, true).generateLevel(player, dlvl);
                 break;
             case 0:
                 level = ForestGen(25, 79).generateLevel(player, dlvl);

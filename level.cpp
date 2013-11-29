@@ -6,7 +6,7 @@
 #include "dragon.h"
 #include "ui.h"
 #include "commandargs.h"
-#include "basicspawn.h"
+#include "levelgen/basicspawn.h"
 #include "util.h"
 
 #include "shadowcasting/shadowcast.h"

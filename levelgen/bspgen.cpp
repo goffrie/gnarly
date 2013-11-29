@@ -5,6 +5,8 @@
 #include <iostream>
 #include <vector>
 
+#include "util.h"
+
 using namespace std;
 
 typedef vector<vector<Tile> > Map;
@@ -23,18 +25,12 @@ void room(Map& m, int y, int x, int h, int w) {
     twiddle = tw(h);
     h -= twiddle;
     if (twiddle > 0) y += rnd(1, twiddle + 1);
-    for (int dy = 0; dy < h; ++dy) {
-        for (int dx = 0; dx < w; ++dx) {
-            const int ny = y + dy, nx = x + dx;
-            if (dx == 0 || dx == w-1) {
-                m[ny][nx] = WallV;
-            } else if (dy == 0 || dy == h-1) {
-                m[ny][nx] = WallH;
-            } else {
-                m[ny][nx] = Floor;
-            }
-        }
-    }
+
+    rect(m, y, x, h, w, Floor);
+    rect(m, y, x, 1, w, WallH);
+    rect(m, y+h-1, x, 1, w, WallH);
+    rect(m, y, x, h, 1, WallV);
+    rect(m, y, x+w-1, h, 1, WallV);
 }
 
 template<int yy, int yx, int xy, int xx>

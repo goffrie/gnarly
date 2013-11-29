@@ -21,6 +21,7 @@ set(gnarly_SOURCES
     levelgen/forestgen.cpp
     levelgen/gnarlyspawn.cpp
     levelgen/levelgen.cpp
+    levelgen/roomsgen.cpp
     levelobject/character.cpp
     levelobject/dragongold.cpp
     levelobject/gold.cpp
@@ -72,6 +73,6 @@ set(gnarly_SOURCES
     util.cpp
 )
 
-include_directories(gnarly . levelobject levelobject/player levelobject/related levelobject/monster levelobject/related/skills popup item levelgen)
+include_directories(gnarly . levelobject levelobject/player levelobject/related levelobject/monster levelobject/related/skills popup item)
 add_executable(gnarly ${gnarly_SOURCES})
 target_link_libraries(gnarly ${CURSES_LIBRARIES})

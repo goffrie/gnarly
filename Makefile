@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11 -I. -Ilevelobject -Ilevelobject/related -Ilevelobject/player -Ilevelobject/monster -Ilevelgen -Ilevelobject/related/skills -Ipopup -Iitem
+CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11 -I. -Ilevelobject -Ilevelobject/related -Ilevelobject/player -Ilevelobject/monster -Ilevelobject/related/skills -Ipopup -Iitem
 LDFLAGS=-lncurses
 EXEC=cc3k
 OBJECTS=\
@@ -39,6 +39,7 @@ OBJECTS=\
 	levelgen/bspgen.o \
 	levelgen/aggregationgen.o \
 	levelgen/forestgen.o \
+	levelgen/roomsgen.o \
 	shadowcasting/intervalset.o \
 	shadowcasting/shadowcast.o \
 	popup/popupcreator.o \
