@@ -14,10 +14,7 @@
 #include "memory.h"
 #include "target.h"
 
-#include "levelgen/forestgen.h"
-#include "levelgen/bspgen.h"
-#include "levelgen/aggregationgen.h"
-#include "levelgen/roomsgen.h"
+#include "levelgen/levelgen.h"
 
 #include <cstring>
 #include <iostream>
@@ -54,6 +51,13 @@ Game::Game() : player(0), pstatus(0), level(0), mem(0), _quit(false), gameOver(f
     pstatus = new PlayerStatus(*player);
     display.add(pstatus);
     display.add(player, 2);
+
+    // Select the level plan.
+    if (gnarly) {
+        plan = LevelPlan::gnarlyPlan();
+    } else {
+        plan = LevelPlan::basicPlan();
+    }
 
     // Set up the first dungeon level.
     dlvl = 0;
@@ -215,7 +219,7 @@ void Game::notifyPlayerDeath() {
 
 void Game::makeNewLevel() {
     if (gameOver) return;
-    if (dlvl == lastLevel) {
+    if (dlvl >= plan.levels.size()) {
         gameOver = true;
         PopUpCreator::victory(player->score());
         return;
@@ -230,23 +234,11 @@ void Game::makeNewLevel() {
     }
     dlvl++;
     if (!layoutFile.empty()) {
+        // XXX: this is broken with levelplans
         level = new Level(Dungeon::defaultDungeon());
         level->loadLayout(player);
     } else {
-        switch (dlvl % 4) {
-            case 1:
-                level = RoomsGen(25, 79).generateLevel(player, dlvl);
-                break;
-            case 2:
-                level = AggregationGen(25, 79).generateLevel(player, dlvl);
-                break;
-            case 3:
-                level = RoomsGen(25, 79, true).generateLevel(player, dlvl);
-                break;
-            case 0:
-                level = ForestGen(25, 79).generateLevel(player, dlvl);
-                break;
-        }
+        level = plan.levels[dlvl - 1]->generateLevel(player, dlvl);
     }
     mem = new Memory(level->height(), level->width());
     display.add(mem, 0);

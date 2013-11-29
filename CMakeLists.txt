@@ -22,6 +22,7 @@ set(gnarly_SOURCES
     levelgen/gnarlyspawn.cpp
     levelgen/levelgen.cpp
     levelgen/roomsgen.cpp
+    levelgen/levelplan.cpp
     levelobject/character.cpp
     levelobject/dragongold.cpp
     levelobject/gold.cpp

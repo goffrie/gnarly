@@ -4,6 +4,7 @@
 #include "display.h"
 #include "commandhandler.h"
 #include "direction.h"
+#include "levelgen/levelplan.h"
 
 class Player;
 class PlayerStatus;
@@ -17,6 +18,8 @@ class Game : public CommandHandler {
     PlayerStatus* pstatus;
     Level* level;
     Memory* mem;
+
+    LevelPlan plan;
 
     Display display;
 
