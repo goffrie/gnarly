@@ -117,6 +117,13 @@ void Game::move(Direction d) {
         makeNewLevel();
         return;
     }
+    if (gnarly) {
+        // Move-to-attack.
+        Character* ch = dynamic_cast<Character*>(obj);
+        if (ch && ch->isEnemy(Team::instance(Players))) {
+            return attack(d);
+        }
+    }
     Gold* target = dynamic_cast<Gold*>(obj);
     if (target && target->canPickUp()) {
         target->use(player);
@@ -125,6 +132,7 @@ void Game::move(Direction d) {
         line << target->amount() << " gold.";
         UI::instance()->say(line.str());
         delete target;
+        obj = 0;
     }
     if (player->moveRelative(d)) {
         // A player action happened, so step.
