@@ -162,8 +162,9 @@ void Game::use(Direction d) {
     }
     PotionAdapter* target = dynamic_cast<PotionAdapter*>(level->objectAt(ny, nx));
     if (target) {
-        player->addToInventory(target);
-        step();
+        if (player->addToInventory(target)) {
+            step();
+        }
     } else {
         UI::instance()->say("That doesn't appear to be drinkable.");
     }

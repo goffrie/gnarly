@@ -3,30 +3,61 @@
 #include "ui.h"
 #include "inventorypopup.h"
 
-Inventory::~Inventory() {
-    for (unsigned int i = 0; i < items.size(); i++) {
-        delete items[i];
+using namespace std;
+
+Inventory::Inventory() {
+    for (char s = 'a' + maxInventory - 1; s >= 'a'; --s) {
+        slots.push(s);
     }
 }
 
-bool Inventory::useItem(Player* p, unsigned int i) {
-    if (i >= items.size()) {
+Inventory::~Inventory() {
+    for (iterator p = items.begin(); p != items.end(); ++p) {
+        delete p->second;
+    }
+}
+
+bool Inventory::full() const {
+    return slots.empty();
+}
+
+bool Inventory::useItem(Player& p, char i) {
+    iterator it = items.find(i);
+    if (it == items.end()) {
+        // not found
         return false;
     }
-    items[i]->use(p);
-    delete items[i];
-    items.erase(items.begin() + i);
+    it->second->use(&p);
+    delete it->second;
+    items.erase(it);
+    slots.push(i);
     return true;
 }
 
-void Inventory::addItem(Item* i) {
-    items.push_back(i);
+char Inventory::addItem(Item* i) {
+    if (slots.empty()) return 0;
+    char slot = slots.top();
+    slots.pop();
+    items.insert(make_pair(slot, i));
+    return slot;
 }
 
-void Inventory::view(Player* p) {
-    InventoryPopUp::make(p, this);
+void Inventory::view(Player& p) {
+    InventoryPopUp::make(p, *this);
 }
 
-std::vector<Item*> Inventory::getItems() {
-    return items;
+Inventory::iterator Inventory::begin() {
+    return items.begin();
+}
+
+Inventory::const_iterator Inventory::begin() const {
+    return items.begin();
+}
+
+Inventory::iterator Inventory::end() {
+    return items.end();
+}
+
+Inventory::const_iterator Inventory::end() const {
+    return items.end();
 }

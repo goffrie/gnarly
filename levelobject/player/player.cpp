@@ -129,20 +129,25 @@ void Player::drawClass(Surface& target) const {
     playerClass->draw(target);
 }
 
-void Player::addToInventory(ItemAdapter* i) {
+bool Player::addToInventory(ItemAdapter* i) {
     if (!gnarly) {
         i->removeItem()->use(this);
         delete i;
-        return;
+        return true;
+    }
+    if (inventory.full()) {
+        UI::instance()->say("Your inventory is full.");
+        return false;
     }
     Item* item = i->removeItem();
-    UI::instance()->say("You pick up " + item->name(Indefinite) + ".");
-    inventory.addItem(item);
+    char r = inventory.addItem(item);
+    UI::instance()->say("You pick up " + item->name(Indefinite) + " <" + r + ">.");
     delete i;
+    return true;
 }
 
 void Player::viewInventory() {
-    inventory.view(this);
+    inventory.view(*this);
 }
 
 std::string Player::name(Article a) const {

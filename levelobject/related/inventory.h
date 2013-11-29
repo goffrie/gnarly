@@ -1,22 +1,38 @@
 #ifndef __INVENTORY_H__
 #define __INVENTORY_H__
 
-#include <vector>
+#include <map>
+#include <stack>
 
 class Player;
 class Item;
 
-class Inventory {
-    enum { maxInventory = 15 };
-    std::vector<Item*> items;
-
-
+class Inventory final {
+    enum { maxInventory = 18 };
+    typedef std::map<char, Item*> invMap;
+    invMap items;
+    std::stack<char> slots;
 public:
-    virtual ~Inventory();
-    virtual void addItem(Item* i);
-    virtual bool useItem(Player* p, unsigned int i);
-    virtual std::vector<Item*> getItems();
-    virtual void view(Player* p);
+    typedef invMap::iterator iterator;
+    typedef invMap::const_iterator const_iterator;
+
+    Inventory();
+    ~Inventory();
+
+    bool full() const;
+
+    // Add an item to the inventory. Returns 0 if it failed
+    // (i.e. the inventory is full).
+    // Otherwise, takes ownership of the item, and returns its slot.
+    char addItem(Item* i);
+
+    bool useItem(Player& p, char i);
+    void view(Player& p);
+
+    iterator begin();
+    const_iterator begin() const;
+    iterator end();
+    const_iterator end() const;
 };
 
 #endif

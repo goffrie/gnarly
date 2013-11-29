@@ -55,7 +55,7 @@ public:
 
     virtual void setClass(Class* c);
 
-    virtual void addToInventory(ItemAdapter* i);
+    virtual bool addToInventory(ItemAdapter* i);
     virtual void viewInventory();
 
     virtual std::string basicName() const override { return name(NoArticle); }
