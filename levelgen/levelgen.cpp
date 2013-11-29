@@ -10,6 +10,7 @@
 #include "monster.h"
 
 #include <vector>
+#include <memory>
 
 using namespace std;
 
@@ -40,7 +41,7 @@ Level* LevelGen::generateLevel(Player* player, int dungeonLevel) {
 }
 
 Level* LevelGen::genLevel(Player* player, int dungeonLevel) {
-    Level* lvl = new Level(gen());
+    auto_ptr<Level> lvl(new Level(gen()));
 
     const Dungeon& dungeon = lvl->getDungeon();
     GnarlySpawn b(dungeonLevel);
@@ -54,7 +55,6 @@ Level* LevelGen::genLevel(Player* player, int dungeonLevel) {
     // TODO: Handle occupied locations more gracefully.
     {
         // Place/Generate a staircase
-        Staircase* stairs = new Staircase;
         while (1) {
             gate();
             nextPos = dungeon.randomPlacement();
@@ -67,6 +67,7 @@ Level* LevelGen::genLevel(Player* player, int dungeonLevel) {
 
             break;
         }
+        Staircase* stairs = new Staircase;
         stairs->setPos(nextPos.first, nextPos.second);
         lvl->add(stairs);
     }
@@ -88,37 +89,31 @@ Level* LevelGen::genLevel(Player* player, int dungeonLevel) {
     const int numberGold = amtGold();
     for (int i = 0; i < numberGold; i++) {
         do {
-            do {
-                gate();
-                nextPos = dungeon.randomPlacement();
-            } while (!lvl->free(nextPos.first, nextPos.second));
-            Gold* gold = b.randomGold();
-            gold->setPos(nextPos.first, nextPos.second);
-            lvl->add(gold);
+            gate();
+            nextPos = dungeon.randomPlacement();
+        } while (!lvl->free(nextPos.first, nextPos.second));
+        Gold* gold = b.randomGold();
+        gold->setPos(nextPos.first, nextPos.second);
+        lvl->add(gold);
 
-            // If it was a dragon horde, add a dragon, if possible.
-            DragonGold* dgold = dynamic_cast<DragonGold*>(gold);
-            if (dgold) {
-                if (!dgold->addDragon()) {
-                    continue;
-                }
-                numberDragons++;
-            }
-        } while (false);
+        // If it was a dragon horde, add a dragon, if possible.
+        DragonGold* dgold = dynamic_cast<DragonGold*>(gold);
+        if (dgold && dgold->addDragon()) {
+            numberDragons++;
+        }
     }
 
     // Generate monsters.
     const int numberEnemies = amtEnemies() - numberDragons;
     for (int i = 0; i < numberEnemies; ++i) {
-        Monster* newEnemy = b.randomMonster();
         do {
             gate();
             nextPos = dungeon.randomPlacement();
         } while (!lvl->free(nextPos.first, nextPos.second));
+        Monster* newEnemy = b.randomMonster();
         newEnemy->setPos(nextPos.first, nextPos.second);
         lvl->add(newEnemy);
     }
-    //assert(objects.size() == (unsigned)(numberEnemies + numberGold + numberPotions + 1));
 
-    return lvl;
+    return lvl.release();
 }
