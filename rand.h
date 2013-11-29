@@ -1,7 +1,7 @@
 #ifndef __RAND_H__
 #define __RAND_H__
 
-#include <cstdint>
+#include <stdint.h>
 
 class Rand {
     uint64_t state;

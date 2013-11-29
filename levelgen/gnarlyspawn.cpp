@@ -8,7 +8,7 @@
 #include "dragon.h"
 #include "gnarlyspawn.h"
 
-#include <cstdlib>
+#include "rand.h"
 using namespace std;
 
 GnarlySpawn::GnarlySpawn(int l) : level(l) { }
@@ -40,7 +40,7 @@ Monster* GnarlySpawn::getMonster(int i) {
 
 Monster* GnarlySpawn::randomMonster() {
     int monsterIndex = level * 4;
-    switch(rand() % 100) {
+    switch(rnd(0, 100)) {
         case 0 ... 4: monsterIndex = 0; break;
         case 5 ... 14: monsterIndex -= 3; break;
         case 15 ... 24: monsterIndex -= 2; break;
@@ -55,11 +55,11 @@ Monster* GnarlySpawn::randomMonster() {
 }
 
 PotionAdapter* GnarlySpawn::randomPotion() {
-    return new PotionAdapter(new Potion(static_cast<Potion::Type>(rand() % Potion::numTypes)));
+    return new PotionAdapter(new Potion(static_cast<Potion::Type>(rnd(0, Potion::numTypes))));
 }
 
 Gold* GnarlySpawn::randomGold() {
-    switch(rand() % 8) {
+    switch(rnd(0, 8)) {
         case 0 ... 4:
             return new Gold(Gold::Normal);
         case 5 ... 6:

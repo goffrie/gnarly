@@ -1,12 +1,12 @@
 #include "halflingplayer.h"
 #include "ui.h"
-#include <cstdlib>
+#include "rand.h"
 
 HalflingPlayer::HalflingPlayer() : Player(Attributes::Halfling) {
 }
 
 int HalflingPlayer::takeDamage(int attack) {
-    if (rand() % 5 == 0) {
+    if (rnd(0, 5) == 0 /* 20% chance */) {
         UI::instance()->say("You avoided the attack!");
         return 0;
     }

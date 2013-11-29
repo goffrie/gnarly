@@ -32,6 +32,7 @@ int diffuse(Map& m, int h, int w, int y, int x, int rH, int rW) {
             case 1: cy = 1; cx = 0; break; // down
             case 2: cy = 0; cx = -1; break; // left
             case 3: cy = 0; cx = 1; break; // right
+            default: terminate(); // impossible
         }
         // Sanity check.
         if (y + cy < 1 || x + cx < 1 || y + cy + rH >= h - 1 || x + cx + rW >= w - 1) {
@@ -88,6 +89,7 @@ Dungeon AggregationGen::gen() {
                 rW = 1; rH = rnd(0, 6); break;
             case 2: // room
                 rW = rnd(3, 11); rH = rnd(3, 11); break;
+            default: terminate(); // impossible
         }
         // initial position
         int y = rnd(1, height - rH - 1);

@@ -79,7 +79,7 @@ Dungeon RoomsGen::gen() {
                 w = rnd(6, 17);
                 h = rnd(4, w * 3 / 5 + 2);
                 break;
-            case 1 ... 39: // medium-sized room
+            default: // medium-sized room
                 w = smallRnd(12, 23);
                 h = smallRnd(8, w * 4 / 5);
                 break;
