@@ -107,13 +107,17 @@ void Game::move(Direction d) {
     }
     const int ny = player->getY() + d.dy(),
               nx = player->getX() + d.dx();
+
+    LevelObject* obj = level->objectAt(ny, nx);
+
     // XXX make this more object oriented and elegant
-    Staircase* stair = dynamic_cast<Staircase*>(level->objectAt(ny, nx));
+    Staircase* stair = dynamic_cast<Staircase*>(obj);
     if (stair) {
-        stair->descend();
+        // Go downstairs.
+        makeNewLevel();
         return;
     }
-    Gold* target = dynamic_cast<Gold*>(level->objectAt(ny, nx));
+    Gold* target = dynamic_cast<Gold*>(obj);
     if (target && target->canPickUp()) {
         target->use(player);
         ostringstream line;
@@ -156,6 +160,7 @@ void Game::use(Direction d) {
     }
     const int ny = player->getY() + d.dy(),
               nx = player->getX() + d.dx();
+    // XXX these messages are wrong
     if (level->free(ny, nx)) {
         UI::instance()->say("You drink an imaginary potion.");
         return;

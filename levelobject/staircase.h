@@ -6,9 +6,6 @@
 
 class Staircase : public LevelObject {
 public:
-    // Moves down the staircase (and thus to a new level)
-    virtual void descend();
-
     virtual char tile() const override { return '\\'; }
     virtual std::string basicName() const override { return "staircase"; }
 
