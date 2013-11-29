@@ -45,10 +45,24 @@ Dungeon::Dungeon(vector<vector<Tile> >& m) : grid(m) {
 }
 Dungeon::Dungeon(vector<vector<bool> >& m) {
     grid.resize(m.size());
+    const int height = m.size(),
+              width = m[0].size();
     for (unsigned int y = 0; y < m.size(); ++y) {
         grid[y].resize(m[y].size());
         for (unsigned int x = 0; x < m[y].size(); ++x) {
-            grid[y][x] = m[y][x] ? Floor : Rock;
+            if (m[y][x]) {
+                grid[y][x] = Floor;
+                continue;
+            }
+            // Check for surroundings.
+            const bool left = x > 0, right = x+1 < width, top = y > 0, bottom = y+1 < height;
+            if ((left && m[y][x-1]) || (right && m[y][x+1])) grid[y][x] = WallV;
+            else if ((top && m[y-1][x]) || (bottom && m[y+1][x])) grid[y][x] = WallH;
+            else if ((top && left && m[y-1][x-1])
+                  || (top && right && m[y-1][x+1])
+                  || (bottom && left && m[y+1][x-1])
+                  || (bottom && right && m[y+1][x+1])) grid[y][x] = WallV;
+            else grid[y][x] = Rock;
         }
     }
     loadRooms();
