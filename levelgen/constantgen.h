@@ -2,6 +2,7 @@
 #define __CONSTANT_GEN_H__
 
 #include "levelgen.h"
+#include "dungeon.h"
 
 class ConstantGen : public LevelGen {
     const Dungeon& d;

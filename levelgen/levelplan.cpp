@@ -6,6 +6,7 @@
 #include "bspgen.h"
 #include "aggregationgen.h"
 #include "roomsgen.h"
+#include "finalgen.h"
 
 using namespace std;
 
@@ -48,10 +49,11 @@ const LevelPlan& LevelPlan::gnarlyPlan() {
     static AggregationGen cave(25, 79);
     static RoomsGen outdoor(25, 79, true);
     static ForestGen forest(25, 79);
-    static LevelGen* gens[8] = {
-        &rooms, &cave, &outdoor, &forest, &rooms, &cave, &outdoor, &forest
+    static FinalGen final;
+    static LevelGen* gens[5] = {
+        &rooms, &cave, &outdoor, &forest, &final
     };
-    static LevelPlan plan(vector<LevelGen*>(gens, gens+8));
+    static LevelPlan plan(vector<LevelGen*>(gens, gens+5));
 
     return plan;
 }

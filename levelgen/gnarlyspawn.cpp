@@ -11,7 +11,7 @@
 #include "rand.h"
 using namespace std;
 
-GnarlySpawn::GnarlySpawn(int l) : level(l) { }
+GnarlySpawn::GnarlySpawn(int l, bool r) : level(l), reallyRandom(r) { }
 
 Monster* GnarlySpawn::getMonster(int i) {
     switch(i) {
@@ -39,6 +39,9 @@ Monster* GnarlySpawn::getMonster(int i) {
 }
 
 Monster* GnarlySpawn::randomMonster() {
+    if (reallyRandom) {
+        return getMonster(rnd(0,20));
+    }
     int monsterIndex = level * 4;
     switch(rnd(0, 100)) {
         case 0 ... 4: monsterIndex = 0; break;

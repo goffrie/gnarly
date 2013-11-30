@@ -32,7 +32,8 @@ public:
         Archon,
         Felldrake,
         Shoggoth,
-        Quetzalcoatl
+        Quetzalcoatl,
+        Altar
     };
 
 private:

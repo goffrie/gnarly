@@ -55,7 +55,7 @@ Dungeon::Dungeon(vector<vector<bool> >& m) {
                 continue;
             }
             // Check for surroundings.
-            const bool left = x > 0, right = x+1 < width, top = y > 0, bottom = y+1 < height;
+            const bool left = x > 0, right = (signed)x + 1 < width, top = y > 0, bottom = (signed)y + 1 < height;
             if ((left && m[y][x-1]) || (right && m[y][x+1])) grid[y][x] = WallV;
             else if ((top && m[y-1][x]) || (bottom && m[y+1][x])) grid[y][x] = WallH;
             else if ((top && left && m[y-1][x-1])

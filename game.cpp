@@ -233,7 +233,7 @@ void Game::notifyPlayerDeath() {
 
 void Game::makeNewLevel() {
     if (gameOver) return;
-    if (dlvl >= plan.levels.size()) {
+    if (dlvl >= (signed)plan.levels.size()) {
         gameOver = true;
         PopUpCreator::victory(player->score());
         return;

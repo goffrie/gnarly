@@ -66,6 +66,8 @@ Attributes Attributes::get(Attributes::Race c) {
             return Attributes(300, 0, 50, 200, 220, 'S', "shoggoth");
         case Quetzalcoatl:
             return Attributes(300, 0, 100, 100, 300, 'Q', "quetzalcoatl");
+        case Altar:
+            return Attributes(300, 0, 0, 0, 0, '&', "altar");
         default:
             terminate();
     }
