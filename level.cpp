@@ -73,51 +73,6 @@ bool Level::valid(int y, int x) const {
     return !(x < 0 || y < 0 || (unsigned)x >= width() || (unsigned)y >= height());
 }
 
-// Load the layout specified on the command line.
-// XXX XXX
-void Level::loadLayout(Player* p) {
-    vector<string> grid;
-    BasicSpawn b;
-    for (unsigned int y = 0; y < levelLayout.size(); y++) {
-        for (unsigned int x = 0; x < levelLayout[y].size(); x++) {
-            if (levelLayout[y][x] == '@') {
-                p->setPos(y,x);
-                add(p,false);
-                continue;
-            }
-            LevelObject* l = b.getFromTile(levelLayout[y][x]);
-            if (l) {
-                l->setPos(y, x);
-                add(l);
-            }
-        }
-    }
-    // XXX fix this maybe
-    for (unsigned int y = 0; y < levelLayout.size(); y++) {
-        for (unsigned int x = 0; x < levelLayout[y].size(); x++) {
-            if (levelLayout[y][x] == 'D') {
-                bool placed = false;
-                for (int dy = -1; dy <= 1 && !placed; dy++) {
-                    for (int dx = -1; dx <= 1 && !placed; dx ++) {
-                        if (dy == 0 && dx == 0) {
-                            continue;
-                        }
-                        if (levelLayout[y + dy][x + dx] == '9') {
-                            DragonGold* dgold = dynamic_cast<DragonGold*>(objectAt(y + dy, x + dx));
-                            if (dgold) {
-                                Dragon* d = new Dragon(dgold);
-                                d->setPos(y, x);
-                                add(d);
-                                placed = true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
 void Level::add(LevelObject* i, bool own) {
     assert(!i->level);
     assert(i->y >= 0 && (unsigned) i->y < height());

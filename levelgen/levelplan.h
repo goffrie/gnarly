@@ -2,6 +2,7 @@
 #define __LEVEL_PLAN_H__
 
 #include <vector>
+#include <string>
 
 class LevelGen;
 

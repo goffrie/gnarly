@@ -17,6 +17,7 @@ enum Tile {
 };
 
 char tileChar(Tile t);
+Tile tileFromChar(char c);
 void drawTile(Tile t, Surface& target, unsigned y, unsigned x);
 
 // A dungeon layout.
@@ -45,8 +46,6 @@ public:
     std::pair<int,int> randomPlacement() const;
     void loadRooms();
     void floodfill(unsigned int y, unsigned int x, int n);
-
-    static Dungeon defaultDungeon();
 };
 
 #endif

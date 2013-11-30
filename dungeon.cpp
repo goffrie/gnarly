@@ -19,7 +19,7 @@ char tileChar(Tile t) {
     return ' ';
 }
 
-inline Tile tileFromChar(char c) {
+Tile tileFromChar(char c) {
     switch (c) {
         case '.': return Floor;
         case '|': return WallV;
@@ -28,7 +28,7 @@ inline Tile tileFromChar(char c) {
         case '#': return Passage;
         case ' ': return Rock;
         case '%': return Tree;
-        default: std::terminate();
+        default: return Floor;
     }
 }
 
@@ -67,52 +67,6 @@ Dungeon::Dungeon(vector<vector<bool> >& m) {
     }
     loadRooms();
 }
-
-void drawTile(Tile t, Surface& target, unsigned y, unsigned x) {
-    target.setColor(color(t), COLOR_BLACK);
-    target.draw(y, x, tileChar(t));
-    target.unsetColor(color(t), COLOR_BLACK);
-}
-
-void Dungeon::draw(Surface& target) const {
-    for (unsigned y = 0; y < grid.size(); ++y) {
-        for (unsigned x = 0; x < grid[y].size(); ++x) {
-            drawTile(grid[y][x], target, y, x);
-        }
-    }
-}
-
-Dungeon Dungeon::defaultDungeon() {
-    return Dungeon(
-        "|-----------------------------------------------------------------------------|\n"
-        "|                                                                             |\n"
-        "| |--------------------------|        |-----------------------|               |\n"
-        "| |..........................|        |.......................|               |\n"
-        "| |..........................+########+.......................|-------|       |\n"
-        "| |..........................|   #    |...............................|--|    |\n"
-        "| |..........................|   #    |..................................|--| |\n"
-        "| |----------+---------------|   #    |----+----------------|...............| |\n"
-        "|            #                 #############                |...............| |\n"
-        "|            #                 #     |-----+------|         |...............| |\n"
-        "|            #                 #     |............|         |...............| |\n"
-        "|            ###################     |............|   ######+...............| |\n"
-        "|            #                 #     |............|   #     |...............| |\n"
-        "|            #                 #     |-----+------|   #     |--------+------| |\n"
-        "|  |---------+-----------|     #           #          #              #        |\n"
-        "|  |.....................|     #           #          #         |----+------| |\n"
-        "|  |.....................|     ########################         |...........| |\n"
-        "|  |.....................|     #           #                    |...........| |\n"
-        "|  |.....................|     #    |------+--------------------|...........| |\n"
-        "|  |.....................|     #    |.......................................| |\n"
-        "|  |.....................+##########+.......................................| |\n"
-        "|  |.....................|          |.......................................| |\n"
-        "|  |---------------------|          |---------------------------------------| |\n"
-        "|                                                                             |\n"
-        "|-----------------------------------------------------------------------------|\n"
-    );
-}
-
-
 Dungeon::Dungeon(const char* str) {
     bool newLine = true;
     for (; *str; ++str) {
@@ -127,6 +81,21 @@ Dungeon::Dungeon(const char* str) {
         grid.back().push_back(tileFromChar(*str));
     }
     loadRooms();
+}
+
+
+void drawTile(Tile t, Surface& target, unsigned y, unsigned x) {
+    target.setColor(color(t), COLOR_BLACK);
+    target.draw(y, x, tileChar(t));
+    target.unsetColor(color(t), COLOR_BLACK);
+}
+
+void Dungeon::draw(Surface& target) const {
+    for (unsigned y = 0; y < grid.size(); ++y) {
+        for (unsigned x = 0; x < grid[y].size(); ++x) {
+            drawTile(grid[y][x], target, y, x);
+        }
+    }
 }
 
 bool Dungeon::inSameRoom(int y1, int x1, int y2, int x2) const {
@@ -166,7 +135,7 @@ void Dungeon::loadRooms() {
 }
 
 void Dungeon::floodfill(unsigned int y, unsigned int x, int n) {
-    if (x < 0 || y < 0 || y >= grid.size() || x >= grid[y].size() || rooms[y][x] != -1 || grid[y][x] != Floor) {
+    if (y >= grid.size() || x >= grid[y].size() || rooms[y][x] != -1 || grid[y][x] != Floor) {
         return;
     }
     rooms[y][x] = n;

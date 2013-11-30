@@ -36,9 +36,6 @@ public:
     // lies in [0, height()) x [0, width()).
     bool valid(int y, int x) const;
 
-    // XXX take param
-    void loadLayout(Player* p);
-
     // Add something to the level. `own` controls whether the level
     // should take ownership of it.
     void add(LevelObject* i, bool own = true);

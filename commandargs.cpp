@@ -4,10 +4,13 @@
 #include <fstream>
 #include <cstdlib>
 
+#include "levelgen/filegen.h"
+#include "levelgen/levelplan.h"
+
 using namespace std;
 
-string layoutFile = "";
-vector<string> levelLayout;
+bool haveLayout = false;
+LevelPlan levelLayout;
 bool gnarly = false;
 bool dev = false;
 
@@ -22,12 +25,22 @@ void processArgs(int argc, char *argv[]) {
                 cout << "Invalid number of arguments. -f must be followed with a file" << endl;
                 exit(1);
             }
-            layoutFile = argv[i+1];
+            haveLayout = true;
             i++;
-            ifstream file(layoutFile.c_str());
-            string next;
-            while (getline(file, next)) {
-                levelLayout.push_back(next);
+            ifstream file(argv[i]);
+            static vector<FileGen> gens;
+            while (file) {
+                vector<string> layout;
+                for (int i = 0; i < 25; ++i) {
+                    string next;
+                    if (!getline(file, next)) break;
+                    layout.push_back(next);
+                }
+                if (layout.size() < 25) break;
+                gens.push_back(FileGen(layout));
+            }
+            for (int i = 0; i < gens.size(); ++i) {
+                levelLayout.levels.push_back(&gens[i]);
             }
         } else {
             cout << "Invalid argument " << argv[i] << endl;

@@ -53,7 +53,9 @@ Game::Game() : player(0), pstatus(0), level(0), mem(0), _quit(false), gameOver(f
     display.add(player, 2);
 
     // Select the level plan.
-    if (gnarly) {
+    if (haveLayout) {
+        plan = levelLayout;
+    } else if (gnarly) {
         plan = LevelPlan::gnarlyPlan();
     } else {
         plan = LevelPlan::basicPlan();
@@ -247,13 +249,7 @@ void Game::makeNewLevel() {
         delete mem;
     }
     dlvl++;
-    if (!layoutFile.empty()) {
-        // XXX: this is broken with levelplans
-        level = new Level(Dungeon::defaultDungeon());
-        level->loadLayout(player);
-    } else {
-        level = plan.levels[dlvl - 1]->generateLevel(player, dlvl);
-    }
+    level = plan.levels[dlvl - 1]->generateLevel(player, dlvl);
     mem = new Memory(level->height(), level->width());
     display.add(mem, 0);
     display.add(level, 1);

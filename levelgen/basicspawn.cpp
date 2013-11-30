@@ -7,6 +7,7 @@
 #include "dragongold.h"
 #include "merchant.h"
 #include "dragon.h"
+#include "staircase.h"
 
 #include "rand.h"
 
@@ -64,6 +65,7 @@ LevelObject* BasicSpawn::getFromTile(char t) {
         case 'X': return new Monster(Attributes::Phoenix);
         case 'T': return new Monster(Attributes::Troll);
         case 'M': return new Merchant();
+        case '\\': return new Staircase();
         default: return 0;
     }
 }

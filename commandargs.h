@@ -4,8 +4,10 @@
 #include <string>
 #include <vector>
 
-extern std::string layoutFile;
-extern std::vector<std::string> levelLayout;
+struct LevelPlan;
+
+extern bool haveLayout;
+extern LevelPlan levelLayout;
 extern bool gnarly;
 extern bool dev;
 
