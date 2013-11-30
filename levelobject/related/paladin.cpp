@@ -13,5 +13,5 @@ AttributeProvider* Paladin::getClassBuff(AttributeProvider* a) const {
 }
 
 AttributeProvider* Paladin::getLevelBuff(AttributeProvider* a) const {
-    return new ClassBuff(a, 10, 20, 30, 10);
+    return new ClassBuff(a, 5, 20, 30, 10);
 }

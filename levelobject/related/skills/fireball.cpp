@@ -10,7 +10,7 @@ bool Fireball::use(Player* p) {
         return false;
     }
     Skill::use(p);
-    p->damage(target, damage);
+    p->damage(target, p->startingMP());
     return true;
 }
 
@@ -20,6 +20,6 @@ std::string Fireball::name() const{
 
 std::string Fireball::description() const {
     std::ostringstream line;
-    line << "Deals " << damage << " damage, with range " << range; 
+    line << "Deals damage equal to your mana, with range " << range; 
     return line.str();
 }

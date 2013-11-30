@@ -1,11 +1,11 @@
 #include "thief.h"
 #include "stealth.h"
-#include "doublestrike.h"
+#include "triplestrike.h"
 #include "classbuff.h"
 
 Thief::Thief() : Class() {
     skills.push_back(new Stealth());
-    skills.push_back(new DoubleStrike());
+    skills.push_back(new TripleStrike());
 }
 
 AttributeProvider* Thief::getClassBuff(AttributeProvider* a) const {

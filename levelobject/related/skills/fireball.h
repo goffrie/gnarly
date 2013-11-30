@@ -4,7 +4,7 @@
 #include "skill.h"
 
 class Fireball : public Skill {
-    enum { damage = 60, range = 5 };
+    enum { range = 5 };
 public:
     Fireball() : Skill(5) { }
     virtual bool use(Player* p) override;
