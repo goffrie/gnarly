@@ -26,6 +26,10 @@ void Team::ally(Team* t) {
 }
 
 void Team::unally(Team* t) {
+    if (t == this) {
+        // A team can't be unallied with itself.
+        return;
+    }
     alliances[t->index()] = Enemy;
     t->alliances[index()] = Enemy;
 }
