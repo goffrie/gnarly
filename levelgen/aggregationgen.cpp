@@ -2,10 +2,9 @@
 
 #include "dungeon.h"
 #include "rand.h"
-#include <iostream>
+
 #include <vector>
 #include <cassert>
-#include "ui.h"
 
 using namespace std;
 
@@ -14,14 +13,15 @@ typedef vector<vector<bool> > Map;
 
 int diffuse(Map& m, int h, int w, int y, int x, int rH, int rW) {
     int limit = 1000000;
-    bool diffuse = true;
+    bool stick = false;
+    // Check if we're already colliding. If so, then aggregate immediately.
     for (int dy = 0; dy < rH; ++dy) for (int dx = 0; dx < rW; ++dx) {
         if (m[y+dy][x+dx]) {
-            diffuse = false;
+            stick = true;
             break;
         }
     }
-    while (diffuse) {
+    while (!stick) {
         if (--limit <= 0) {
             throw LevelGen::GenerationError();
         }
@@ -34,18 +34,17 @@ int diffuse(Map& m, int h, int w, int y, int x, int rH, int rW) {
             case 3: cy = 0; cx = 1; break; // right
             default: terminate(); // impossible
         }
-        // Sanity check.
+        // Sanity check: don't go off the edge.
         if (y + cy < 1 || x + cx < 1 || y + cy + rH >= h - 1 || x + cx + rW >= w - 1) {
             // try again
             continue;
         }
-        // Check for aggregation.
+        // Check if we collided with something.
         int off = (cy == 0) ? (cx < 0) ? x-1 : (x+rW) : (cy < 0) ? y-1 : (y+rH);
         int on1 = (cy == 0) ? y : x;
         int on2 = (cy == 0) ? y + rH : (x + rW);
         int& Y = (cy == 0) ? on1 : off;
         int& X = (cx == 0) ? on1 : off;
-        bool stick = false;
         for (; on1 < on2; ++on1) {
             if (m[Y][X]) {
                 stick = true;
@@ -56,6 +55,7 @@ int diffuse(Map& m, int h, int w, int y, int x, int rH, int rW) {
         y += cy;
         x += cx;
     }
+    // Count the number of cells filled in.
     int n = 0;
     for (int dy = 0; dy < rH; ++dy) for (int dx = 0; dx < rW; ++dx) {
         if (!m[y+dy][x+dx]) {

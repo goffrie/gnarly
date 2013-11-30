@@ -1,11 +1,8 @@
 #include "altar.h"
-#include "attributes.h"
-#include "level.h"
-#include "ui.h"
-#include "rand.h"
-#include "game.h"
 
-#include <algorithm>
+#include "attributes.h"
+#include "ui.h"
+#include "game.h"
 
 using namespace std;
 

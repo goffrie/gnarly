@@ -3,7 +3,6 @@
 
 #include "displayable.h"
 #include "direction.h"
-#include "language.h"
 #include "object.h"
 
 #include <vector>

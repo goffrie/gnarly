@@ -2,7 +2,6 @@
 #define __GOLD_H__
 
 #include "levelobject.h"
-#include <string>
 
 class Player;
 

@@ -3,12 +3,10 @@
 #include "dungeon.h"
 #include "util.h"
 #include "rand.h"
-#include "ui.h"
 
 #include <vector>
 #include <cassert>
 #include <cmath>
-#include <iostream>
 
 using namespace std;
 
@@ -23,7 +21,6 @@ public:
         for (int i = 0; i < n; ++i) parent_[i] = i;
     }
     int parent(int a) {
-        //cerr << a << endl;
         if (parent_[a] != a) parent_[a] = parent(parent_[a]);
         return parent_[a];
     }

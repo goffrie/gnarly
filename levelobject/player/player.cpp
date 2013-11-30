@@ -14,8 +14,9 @@
 
 using namespace std;
 
-Player::Player(Attributes::Race r) : 
-Character(r, Players), playerClass(0), _gold(0), _currentXP(0), _targetXP(targetXPForLevel(2)), _xpLevel(1) {
+Player::Player(Attributes::Race r)
+: Character(r, Players), playerClass(0), _gold(0), _currentXP(0),
+  _targetXP(targetXPForLevel(2)), _xpLevel(1) {
 }
 
 Player::~Player() {

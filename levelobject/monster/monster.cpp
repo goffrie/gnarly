@@ -1,6 +1,5 @@
 #include "monster.h"
 
-#include "player.h"
 #include "ui.h"
 #include "level.h"
 #include "levelobjectvisitor.h"

@@ -3,7 +3,7 @@
 #include "util.h"
 #include "ui.h"
 
-#include <curses.h>
+#include <ncurses.h>
 #include <cassert>
 #include <iostream>
 using namespace std;

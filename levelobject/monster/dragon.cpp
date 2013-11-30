@@ -22,7 +22,7 @@ void Dragon::reduceHP(int amt) {
 }
 
 Character* Dragon::chooseTarget(vector<LevelObject*> objs) {
-    // Only looks an enemies adjacent to my gold
+    // Only looks at enemies adjacent to my gold
     vector<LevelObject*> goldAdjacent = getLevel()->neighbours(hoard->getY(), hoard->getX());
     vector<Character*> targets;
     for (unsigned i = 0; i < objs.size(); i++) {

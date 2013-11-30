@@ -2,9 +2,9 @@
 #include "dungeon.h"
 #include "level.h"
 #include "gnarlyspawn.h"
-#include "monster.h"
 #include "rand.h"
 #include "altar.h"
+
 #include <vector>
 #include <memory>
 

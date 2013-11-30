@@ -2,8 +2,9 @@
 #define __DRAGON_H__
 
 #include "monster.h"
-#include "dragongold.h"
 #include <vector>
+
+class DragonGold;
 
 class Dragon : public Monster {
     DragonGold* hoard;

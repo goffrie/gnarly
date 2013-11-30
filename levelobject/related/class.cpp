@@ -1,9 +1,11 @@
 #include "class.h"
+
 #include "surface.h"
-#include <sstream>
 #include "ui.h"
 #include "classbuff.h"
 #include "player.h"
+
+#include <sstream>
 
 Class::~Class() {
     for (unsigned int i = 0; i < skills.size(); i++) {

@@ -234,12 +234,15 @@ void Game::notifyPlayerDeath() {
 }
 
 void Game::makeNewLevel() {
+    // Don't bother if the game is already over.
     if (gameOver) return;
+    // Did we hit the end of the dungeon?
     if (dlvl >= (signed)plan.levels.size()) {
         gameOver = true;
         PopUpCreator::victory(player->score());
         return;
     }
+    // Remove the old level, if necessary.
     if (level) {
         UI::instance()->say("You descended a level.");
         level->remove(player);
@@ -254,7 +257,10 @@ void Game::makeNewLevel() {
     display.add(mem, 0);
     display.add(level, 1);
 
+    // Wear off buffs on the player.
     player->stripBuffs();
+
+    // Show the intro message for this level.
     if (gnarly) {
         PopUpCreator::level(dlvl);
     }
