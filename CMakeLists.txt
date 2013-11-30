@@ -17,7 +17,6 @@ set(gnarly_SOURCES
     level.cpp
     levelgen/aggregationgen.cpp
     levelgen/basicspawn.cpp
-    levelgen/bspgen.cpp
     levelgen/filegen.cpp
     levelgen/finalgen.cpp
     levelgen/forestgen.cpp

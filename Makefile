@@ -38,11 +38,11 @@ OBJECTS=\
 	levelobject/staircase.o \
 	levelgen/levelgen.o \
 	levelgen/levelplan.o \
-	levelgen/bspgen.o \
 	levelgen/aggregationgen.o \
 	levelgen/forestgen.o \
 	levelgen/roomsgen.o \
 	levelgen/finalgen.o \
+	levelgen/filegen.o \
 	shadowcasting/intervalset.o \
 	shadowcasting/shadowcast.o \
 	popup/popupcreator.o \

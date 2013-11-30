@@ -3,7 +3,6 @@
 #include "dungeon.h"
 #include "constantgen.h"
 #include "forestgen.h"
-#include "bspgen.h"
 #include "aggregationgen.h"
 #include "roomsgen.h"
 #include "finalgen.h"

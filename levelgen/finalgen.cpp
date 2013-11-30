@@ -49,7 +49,7 @@ Level* FinalGen::genLevel(Player* player, int dungeonLevel) {
     // Place the player.
     player->setPos(4, 39);
     lvl->add(player, false);
-    
+
     Altar* altar1 = new Altar();
     altar1->setPos(3, 7);
     lvl->add(altar1);
