@@ -6,6 +6,8 @@
 class CursesUI : public UI {
     int msgLineLength;
     int grey;
+
+    Direction readDirection();
 public:
     CursesUI();
     virtual ~CursesUI() override;

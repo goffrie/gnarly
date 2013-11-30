@@ -142,9 +142,9 @@ bool Level::free(int y, int x, bool canGoBetweenRooms) const {
     return !d->grid[y][x] && (t == Floor || t == Door || t == Passage);
 }
 
-void Level::computeFOV(int pY, int pX, int radius) {
+// Determine which tiles are opaque.
+vector<vector<bool> > Level::getOpaque() const {
     const int h = height(), w = width();
-    // Determine which tiles are opaque.
     vector<vector<bool> > opaque(h, vector<bool>(w, true));
     for (int y = 0; y < h; ++y) {
         for (int x = 0; x < w; ++x) {
@@ -152,8 +152,12 @@ void Level::computeFOV(int pY, int pX, int radius) {
             opaque[y][x] = !(tile == Floor || tile == Door || tile == Passage);
         }
     }
-    // Now compute the field of view.
-    shadowcast(pY, pX, radius, opaque, d->fov);
+    return opaque;
+}
+
+// Compute the field of view.
+void Level::computeFOV(int pY, int pX, int radius) {
+    shadowcast(pY, pX, radius, getOpaque(), d->fov);
 }
 
 void Level::draw(Surface& target) const {
@@ -169,20 +173,11 @@ void Level::draw(Surface& target) const {
     }
 }
 
-// XXX dupe code
 vector<LevelObject*> Level::getVisible(int pY, int pX, int radius) const {
     const int h = height(), w = width();
-    // Determine which tiles are opaque.
-    vector<vector<bool> > opaque(h, vector<bool>(w, true));
-    for (int y = 0; y < h; ++y) {
-        for (int x = 0; x < w; ++x) {
-            Tile tile = tileAt(y, x);
-            opaque[y][x] = !(tile == Floor || tile == Door || tile == Passage);
-        }
-    }
-    // Now compute the field of view.
+    // Compute the field of view.
     vector<vector<bool> > field;
-    shadowcast(pY, pX, radius, opaque, field);
+    shadowcast(pY, pX, radius, getOpaque(), field);
 
     vector<LevelObject*> objects;
     for (int y = 0; y < h; ++y) {

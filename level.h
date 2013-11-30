@@ -50,6 +50,9 @@ public:
     // nothing in that location). A passage or door usually not free
     bool free(int y, int x, bool canGoBetweenRooms = false) const;
 
+    // Return a map of opaque/not opaque tiles for FOV.
+    std::vector<std::vector<bool> > getOpaque() const;
+
     // Update the field of view for the player at position (y, x).
     // This method should be called before drawing the level.
     // However, if it is never called, then the whole level
@@ -58,6 +61,8 @@ public:
     // Draw the parts of the level that the player can see.
     void draw(Surface& target) const override;
 
+    // Return a list of objects visible from the point (y, x) within a given radius.
+    // Uses field of view (but does not interact with `computeFOV`).
     std::vector<LevelObject*> getVisible(int y, int x, int radius) const;
 
     void stepObjects();

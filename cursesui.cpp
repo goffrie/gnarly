@@ -47,6 +47,15 @@ void CursesUI::clearMsg() {
     msgLineLength = 0;
 }
 
+Direction CursesUI::readDirection() {
+    int a = readChar();
+    Direction d = Direction::get(a);
+    if (!d.valid()) {
+        say(string("Unknown direction ") + printable(a) + "!");
+    }
+    return d;
+}
+
 void CursesUI::queryCommand(CommandHandler& target) {
     clearMsg();
     switch (int c = readChar()) {
@@ -59,22 +68,15 @@ void CursesUI::queryCommand(CommandHandler& target) {
             target.move(Direction::get(c));
             break;
         case 'a': {
-            int a = readChar();
-            Direction d = Direction::get(a);
-            if (!d.valid()) {
-                say(string("Unknown direction ") + printable(a) + "!");
-            } else {
+            Direction d = readDirection();
+            if (d.valid()) {
                 target.attack(d);
             }
             break;
         }
-        case 'q': { // quaff
-            // XXX
-            int a = readChar();
-            Direction d = Direction::get(a);
-            if (!d.valid()) {
-                say(string("Unknown direction ") + printable(a) + "!");
-            } else {
+        case 'q': {
+            Direction d = readDirection();
+            if (d.valid()) {
                 target.use(d);
             }
             break;

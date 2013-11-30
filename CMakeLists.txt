@@ -18,17 +18,19 @@ set(gnarly_SOURCES
     levelgen/aggregationgen.cpp
     levelgen/basicspawn.cpp
     levelgen/bspgen.cpp
+    levelgen/filegen.cpp
+    levelgen/finalgen.cpp
     levelgen/forestgen.cpp
     levelgen/gnarlyspawn.cpp
     levelgen/levelgen.cpp
-    levelgen/roomsgen.cpp
-    levelgen/filegen.cpp
     levelgen/levelplan.cpp
+    levelgen/roomsgen.cpp
     levelobject/character.cpp
     levelobject/dragongold.cpp
     levelobject/gold.cpp
     levelobject/itemadapter.cpp
     levelobject/levelobject.cpp
+    levelobject/monster/altar.cpp
     levelobject/monster/dragon.cpp
     levelobject/monster/merchant.cpp
     levelobject/monster/monster.cpp
@@ -47,12 +49,12 @@ set(gnarly_SOURCES
     levelobject/related/inventory.cpp
     levelobject/related/paladin.cpp
     levelobject/related/skills/divinemight.cpp
-    levelobject/related/skills/doublestrike.cpp
     levelobject/related/skills/fireball.cpp
     levelobject/related/skills/heal.cpp
     levelobject/related/skills/mindcontrol.cpp
     levelobject/related/skills/skill.cpp
     levelobject/related/skills/stealth.cpp
+    levelobject/related/skills/triplestrike.cpp
     levelobject/related/thief.cpp
     levelobject/related/wizard.cpp
     levelobject/staircase.cpp
