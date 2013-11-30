@@ -6,8 +6,8 @@
 using namespace std;
 
 Inventory::Inventory() {
-    for (char s = 'a' + maxInventory - 1; s >= 'a'; --s) {
-        slots.push(s);
+    for (char s = 'z'; s >= 'a'; --s) {
+        if (s != 's') slots.push(s);
     }
 }
 

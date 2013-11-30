@@ -8,7 +8,6 @@ class Player;
 class Item;
 
 class Inventory final {
-    enum { maxInventory = 18 };
     typedef std::map<char, Item*> invMap;
     invMap items;
     std::stack<char> slots;
