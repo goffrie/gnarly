@@ -3,12 +3,16 @@
 #include "dungeon.h"
 #include "level.h"
 #include "staircase.h"
-#include "gnarlyspawn.h"
 #include "gold.h"
 #include "dragongold.h"
 #include "monster.h"
 #include "itemadapter.h"
 #include "potion.h"
+
+#include "basicspawn.h"
+#include "gnarlyspawn.h"
+
+#include "commandargs.h"
 
 #include <vector>
 #include <memory>
@@ -45,7 +49,7 @@ Level* LevelGen::genLevel(Player* player, int dungeonLevel) {
     auto_ptr<Level> lvl(new Level(gen()));
 
     const Dungeon& dungeon = lvl->getDungeon();
-    GnarlySpawn b(dungeonLevel);
+    auto_ptr<Spawn> b(gnarly ? new GnarlySpawn(dungeonLevel) : static_cast<Spawn*>(new BasicSpawn));
     Gate gate;
 
     // Place the player.
@@ -79,7 +83,7 @@ Level* LevelGen::genLevel(Player* player, int dungeonLevel) {
             gate();
             nextPos = dungeon.randomPlacement();
         } while (!lvl->free(nextPos.first, nextPos.second));
-        ItemAdapter* pot = new ItemAdapter(b.randomPotion());
+        ItemAdapter* pot = new ItemAdapter(b->randomPotion());
         pot->setPos(nextPos.first, nextPos.second);
         lvl->add(pot);
     }
@@ -92,7 +96,7 @@ Level* LevelGen::genLevel(Player* player, int dungeonLevel) {
             gate();
             nextPos = dungeon.randomPlacement();
         } while (!lvl->free(nextPos.first, nextPos.second));
-        Gold* gold = b.randomGold();
+        Gold* gold = b->randomGold();
         gold->setPos(nextPos.first, nextPos.second);
         lvl->add(gold);
 
@@ -110,7 +114,7 @@ Level* LevelGen::genLevel(Player* player, int dungeonLevel) {
             gate();
             nextPos = dungeon.randomPlacement();
         } while (!lvl->free(nextPos.first, nextPos.second));
-        Monster* newEnemy = b.randomMonster();
+        Monster* newEnemy = b->randomMonster();
         newEnemy->setPos(nextPos.first, nextPos.second);
         lvl->add(newEnemy);
     }

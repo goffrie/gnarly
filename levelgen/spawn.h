@@ -8,6 +8,7 @@ class LevelObject;
 
 class Spawn {
 public:
+    virtual ~Spawn() { }
     virtual Monster* randomMonster() = 0;
     virtual Potion* randomPotion() = 0;
     virtual Gold* randomGold() = 0;

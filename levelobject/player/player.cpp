@@ -70,11 +70,14 @@ void Player::damage(Character* other, int d) {
     msg << "You did " << dmg << " dmg to " << other->name(Definite) << " (" << other->currentHP() << " HP).";
     UI::instance()->say(msg.str());
     if (other->dead()) {
+        // rewards: gold, xp
         addGold(other->droppedGold());
-        msg.str("");
-        msg << "You gained " << other->xp() << " xp!";
-        UI::instance()->say(msg.str());
-        addXP(other->xp());
+        if (gnarly) {
+            msg.str("");
+            msg << "You gained " << other->xp() << " xp!";
+            UI::instance()->say(msg.str());
+            addXP(other->xp());
+        }
     }
 }
 
@@ -132,7 +135,9 @@ void Player::drawClass(Surface& target) const {
 
 bool Player::addToInventory(ItemAdapter* i) {
     if (!gnarly) {
-        i->removeItem()->use(this);
+        Item* item = i->removeItem();
+        item->use(this);
+        delete item;
         delete i;
         return true;
     }
