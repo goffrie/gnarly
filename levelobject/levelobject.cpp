@@ -25,7 +25,6 @@ bool LevelObject::moveTo(int nY, int nX) {
         level->move(this, nY, nX);
         return true;
     }
-    // TODO: throw an exception instead?
     return false;
 }
 
@@ -38,7 +37,7 @@ bool LevelObject::canMove(int nY, int nX) {
 }
 
 void LevelObject::step() {
-    
+    // do nothing by default
 }
 
 bool LevelObject::isEnemy(Team* t) const {

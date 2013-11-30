@@ -5,7 +5,6 @@
 #include <vector>
 #include <set>
 
-// TODO: use rational numbers?
 typedef std::pair<double, double> Interval;
 
 // Holds onto a union of closed intervals,

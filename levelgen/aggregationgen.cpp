@@ -14,14 +14,14 @@ typedef vector<vector<bool> > Map;
 
 int diffuse(Map& m, int h, int w, int y, int x, int rH, int rW) {
     int limit = 1000000;
+    bool diffuse = true;
     for (int dy = 0; dy < rH; ++dy) for (int dx = 0; dx < rW; ++dx) {
         if (m[y+dy][x+dx]) {
-            // TODO: what to do here?
-            goto gen;
-            return 0;
+            diffuse = false;
+            break;
         }
     }
-    while (1) {
+    while (diffuse) {
         if (--limit <= 0) {
             throw LevelGen::GenerationError();
         }
@@ -46,9 +46,7 @@ int diffuse(Map& m, int h, int w, int y, int x, int rH, int rW) {
         int& Y = (cy == 0) ? on1 : off;
         int& X = (cx == 0) ? on1 : off;
         bool stick = false;
-//        cerr << y << ',' << x << ':' << rH << ',' << rW << '&' << cy << ',' << cx << endl;
         for (; on1 < on2; ++on1) {
-//            cerr << Y << ';' << X << endl;
             if (m[Y][X]) {
                 stick = true;
                 break;
@@ -58,7 +56,6 @@ int diffuse(Map& m, int h, int w, int y, int x, int rH, int rW) {
         y += cy;
         x += cx;
     }
-gen:
     int n = 0;
     for (int dy = 0; dy < rH; ++dy) for (int dx = 0; dx < rW; ++dx) {
         if (!m[y+dy][x+dx]) {

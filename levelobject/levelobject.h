@@ -42,7 +42,6 @@ public:
 
     Level* getLevel() const { return level; }
 
-    // TODO: throw an exception instead of returning bool?
     // Returns true if the movement succeeded.
     bool moveTo(int y, int x);
     virtual bool moveRelative(Direction d);

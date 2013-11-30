@@ -52,7 +52,6 @@ Level* LevelGen::genLevel(Player* player, int dungeonLevel) {
     player->setPos(nextPos.first, nextPos.second);
     lvl->add(player, false);
 
-    // TODO: Handle occupied locations more gracefully.
     {
         // Place/Generate a staircase
         while (1) {
