@@ -14,7 +14,7 @@ bool MindControl::use(Player* p) {
     return true;
 }
 
-std::string MindControl::name() const{
+std::string MindControl::name() const {
     return "Mind Control";
 }
 

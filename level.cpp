@@ -23,17 +23,16 @@ struct LevelImpl {
 
     // A catalogue of the things on this level,
     // indexed by their location.
-    std::vector<std::vector<LevelObject*> > grid;
+    vector<vector<LevelObject*> > grid;
 
     // What tiles are currently visible by the player?
     // Needs to be kept up-to-date using `computeFOV`.
-    std::vector<std::vector<bool> > fov;
+    vector<vector<bool> > fov;
 
     // All the items owned by this level.
     // This includes everything except the player.
-    std::set<LevelObject*> objects;
-    std::vector<Character*> dying;
-    std::vector<LevelObject*> adding;
+    set<LevelObject*> objects;
+    set<Character*> dying;
 
     LevelImpl(Dungeon layout) : dungeon(layout),
         grid(dungeon.height(), vector<LevelObject*>(dungeon.width(), 0)),
@@ -91,10 +90,7 @@ void Level::remove(LevelObject* l) {
         d->grid[l->y][l->x] = 0;
     }
     l->level = 0;
-    set<LevelObject*>::iterator it = d->objects.find(l);
-    if (it != d->objects.end()) {
-        d->objects.erase(it);
-    }
+    d->objects.erase(l);
 }
 
 void Level::move(LevelObject* i, int y, int x) {
@@ -112,26 +108,21 @@ void Level::move(LevelObject* i, int y, int x) {
 }
 
 void Level::notifyDeath(Character* i) {
-    d->dying.push_back(i);
-}
-
-void Level::notifyAdd(LevelObject* i) {
-    d->adding.push_back(i);
+    bool removed = d->dying.insert(i).second;
+    if (removed) {
+        assert(d->grid[i->y][i->x] == i);
+        d->grid[i->y][i->x] = 0;
+    }
 }
 
 void Level::removeDead() {
-    for (unsigned int i = 0; i < d->dying.size(); i++) {
-        UI::instance()->say(capitalize(d->dying[i]->name(Definite)) + " died.");
-        delete d->dying[i];
+    for (set<Character*>::iterator p = d->dying.begin(); p != d->dying.end(); ++p) {
+        UI::instance()->say(capitalize((*p)->name(Definite)) + " died.");
+        d->objects.erase(*p);
+        (*p)->level = 0;
+        delete *p;
     }
     d->dying.clear();
-}
-
-void Level::addStored() {
-    for (unsigned int i = 0; i < d->adding.size(); i++) {
-        add(d->adding[i]);
-    }
-    d->adding.clear();
 }
 
 bool Level::free(int y, int x, bool canGoBetweenRooms) const {
@@ -206,7 +197,6 @@ void Level::stepObjects() {
         }
     }
     removeDead();
-    addStored();
 }
 
 vector<LevelObject*> Level::neighbours(int y, int x) {

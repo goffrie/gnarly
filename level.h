@@ -17,7 +17,6 @@ class Level : public Displayable {
     LevelImpl* d;
 
     void removeDead();
-    void addStored();
 
 public:
     Level(Dungeon layout);
@@ -44,7 +43,6 @@ public:
     // Move something on this level to the given position.
     void move(LevelObject* i, int y, int x);
     void notifyDeath(Character* i);
-    void notifyAdd(LevelObject* i);
 
     // Check if a position is free (i.e. there is
     // nothing in that location). A passage or door usually not free

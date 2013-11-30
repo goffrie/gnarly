@@ -14,6 +14,6 @@ void Merchant::reduceHP(int amt) {
         // TODO: make merchants not give 1 gold to enemies
         Gold* g = new Gold(Gold::Merchant);
         g->setPos(this->getY(), this->getX());
-        getLevel()->notifyAdd(g);
+        getLevel()->add(g);
     }
 }

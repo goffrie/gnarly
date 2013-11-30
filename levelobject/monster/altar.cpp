@@ -25,7 +25,7 @@ void Altar::step() {
 void Altar::reduceHP(int amt) {
     Monster::reduceHP(amt);
     if (dead()) {
-        UI::instance()->say("You destroyed the alter!");
+        UI::instance()->say("You destroyed the altar!");
         if (numAltars - 1 <= 0) {
             Game::instance()->makeNewLevel();
         }
