@@ -55,7 +55,7 @@ Attributes Attributes::get(Attributes::Race c) {
         case Cyclops:
             return Attributes(200, 0, 45, 50, 90, 'C', "cyclops");
         case Ent:
-            return Attributes(220, 0, 50, 100, 100, 'E', "ents");
+            return Attributes(220, 0, 50, 100, 100, 'E', "ent");
         case Basilisk:
             return Attributes(160, 0, 90, 60, 120, 'B', "basilisk");
         case Archon:
