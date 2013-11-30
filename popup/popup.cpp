@@ -17,7 +17,7 @@ void PopUp::setText(const std::string& t) {
 }
 
 void PopUp::draw(Surface& target) const {
-    assert(text.size() < (unsigned)(height - ybuffer * 2 - 2));
+    assert(text.size() <= (unsigned)(height - ybuffer * 2 - 2));
     target.setColor(COLOR_BLUE, COLOR_BLACK);
     for (int dy = y; dy < y + height; dy++) {
         for (int dx = x; dx < x + width; dx++) {

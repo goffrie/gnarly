@@ -9,18 +9,24 @@
 using namespace std;
 
 string InventoryPopUp::getText(const Inventory& items) {
-    ostringstream txt;
-    txt << "Inventory:" << endl;
+    const int lines = 15;
+
     bool newLine = false;
+    vector<string> names;
     for (Inventory::const_iterator p = items.begin(); p != items.end(); ++p) {
-        txt << '<' << p->first << '>' << ": " << left << setw(25) << p->second->name(NoArticle);
-        if (newLine) {
-            txt << endl;
-            newLine = false;
-        } else {
-            newLine = true;
+        names.push_back(string("<") + p->first + ">: " + p->second->name(NoArticle));
+    }
+    ostringstream txt;
+    txt << "Inventory:";
+    for (int i = 0; i < lines; ++i) {
+        txt << endl;
+        if (i + lines < names.size()) {
+            txt << left << setw(30) << names[i] << names[i + lines];
+        } else if (i < names.size()) {
+            txt << names[i];
         }
     }
+
     return txt.str();
 }
 
