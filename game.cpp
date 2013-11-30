@@ -259,6 +259,9 @@ void Game::makeNewLevel() {
     display.add(level, 1);
 
     player->stripBuffs();
+    if (gnarly) {
+        PopUpCreator::level(dlvl);
+    }
 }
 
 Game* Game::instance(bool reset) {
