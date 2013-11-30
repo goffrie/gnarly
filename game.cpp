@@ -1,6 +1,6 @@
 #include "game.h"
 
-#include "potionadapter.h"
+#include "potion.h"
 #include "gold.h"
 #include "staircase.h"
 #include "commandargs.h"
@@ -13,6 +13,7 @@
 #include "popupcreator.h"
 #include "memory.h"
 #include "target.h"
+#include "itemadapter.h"
 
 #include "levelgen/levelgen.h"
 
@@ -175,7 +176,7 @@ void Game::use(Direction d) {
         UI::instance()->say("You drink an imaginary potion.");
         return;
     }
-    PotionAdapter* target = dynamic_cast<PotionAdapter*>(level->objectAt(ny, nx));
+    ItemAdapter* target = dynamic_cast<ItemAdapter*>(level->objectAt(ny, nx));
     if (target) {
         if (player->addToInventory(target)) {
             step();

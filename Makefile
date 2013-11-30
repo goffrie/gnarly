@@ -31,7 +31,6 @@ OBJECTS=\
 	levelobject/monster/dragon.o \
 	levelobject/levelobject.o \
 	levelobject/character.o \
-	levelobject/potionadapter.o \
 	levelobject/itemadapter.o \
 	levelobject/gold.o \
 	levelobject/dragongold.o \

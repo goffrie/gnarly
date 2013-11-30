@@ -6,7 +6,7 @@
 class BasicSpawn : public Spawn {
 public:
     virtual Monster* randomMonster() override;
-    virtual PotionAdapter* randomPotion() override;
+    virtual Potion* randomPotion() override;
     virtual Gold* randomGold() override;
     virtual LevelObject* getFromTile(char t) override;
 };

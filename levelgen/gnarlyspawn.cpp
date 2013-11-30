@@ -1,7 +1,6 @@
 #include "attributes.h"
 #include "monster.h"
 #include "potion.h"
-#include "potionadapter.h"
 #include "gold.h"
 #include "dragongold.h"
 #include "merchant.h"
@@ -57,8 +56,8 @@ Monster* GnarlySpawn::randomMonster() {
     return getMonster(monsterIndex);
 }
 
-PotionAdapter* GnarlySpawn::randomPotion() {
-    return new PotionAdapter(new Potion(static_cast<Potion::Type>(rnd(0, Potion::numTypes))));
+Potion* GnarlySpawn::randomPotion() {
+    return new Potion(static_cast<Potion::Type>(rnd(0, Potion::numTypes)));
 }
 
 Gold* GnarlySpawn::randomGold() {

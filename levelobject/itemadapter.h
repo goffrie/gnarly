@@ -14,6 +14,7 @@ public:
     virtual ~ItemAdapter();
     virtual Item* removeItem();
     virtual std::string name(Article a) const;
+    virtual char tile() const override { return item->tile(); }
     virtual void accept(LevelObjectVisitor& v);
 };
 

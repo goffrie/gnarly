@@ -3,7 +3,6 @@
 
 #include "item.h"
 #include <string>
-
 class Potion : public Item {
 public:
     enum Type {
@@ -23,6 +22,8 @@ public:
 
     virtual void use(Player* target);
     virtual std::string basicName() const override;
+
+    virtual char tile() const override { return 'P'; }
 
     static void resetUsed();
 };

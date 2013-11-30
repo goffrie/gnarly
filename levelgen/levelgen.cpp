@@ -4,10 +4,11 @@
 #include "level.h"
 #include "staircase.h"
 #include "gnarlyspawn.h"
-#include "potionadapter.h"
 #include "gold.h"
 #include "dragongold.h"
 #include "monster.h"
+#include "itemadapter.h"
+#include "potion.h"
 
 #include <vector>
 #include <memory>
@@ -78,7 +79,7 @@ Level* LevelGen::genLevel(Player* player, int dungeonLevel) {
             gate();
             nextPos = dungeon.randomPlacement();
         } while (!lvl->free(nextPos.first, nextPos.second));
-        PotionAdapter* pot = b.randomPotion();
+        ItemAdapter* pot = new ItemAdapter(b.randomPotion());
         pot->setPos(nextPos.first, nextPos.second);
         lvl->add(pot);
     }

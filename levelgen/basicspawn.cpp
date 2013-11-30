@@ -2,7 +2,7 @@
 #include "attributes.h"
 #include "monster.h"
 #include "potion.h"
-#include "potionadapter.h"
+#include "itemadapter.h"
 #include "gold.h"
 #include "dragongold.h"
 #include "merchant.h"
@@ -30,8 +30,8 @@ Monster* BasicSpawn::randomMonster() {
     }
 }
 
-PotionAdapter* BasicSpawn::randomPotion() {
-    return new PotionAdapter(new Potion(static_cast<Potion::Type>(rnd(0, Potion::numTypes))));
+Potion* BasicSpawn::randomPotion() {
+    return new Potion(static_cast<Potion::Type>(rnd(0, Potion::numTypes)));
 }
 
 Gold* BasicSpawn::randomGold() {
@@ -47,12 +47,12 @@ Gold* BasicSpawn::randomGold() {
 
 LevelObject* BasicSpawn::getFromTile(char t) {
     switch (t) {
-        case '0': return new PotionAdapter(new Potion(Potion::RH));
-        case '1': return new PotionAdapter(new Potion(Potion::BA));
-        case '2': return new PotionAdapter(new Potion(Potion::BD));
-        case '3': return new PotionAdapter(new Potion(Potion::PH));
-        case '4': return new PotionAdapter(new Potion(Potion::WA));
-        case '5': return new PotionAdapter(new Potion(Potion::WD));
+        case '0': return new ItemAdapter(new Potion(Potion::RH));
+        case '1': return new ItemAdapter(new Potion(Potion::BA));
+        case '2': return new ItemAdapter(new Potion(Potion::BD));
+        case '3': return new ItemAdapter(new Potion(Potion::PH));
+        case '4': return new ItemAdapter(new Potion(Potion::WA));
+        case '5': return new ItemAdapter(new Potion(Potion::WD));
         case '6': return new Gold(Gold::Normal);
         case '7': return new Gold(Gold::Small);
         case '8': return new Gold(Gold::Merchant);

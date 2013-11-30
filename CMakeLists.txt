@@ -39,7 +39,6 @@ set(gnarly_SOURCES
     levelobject/player/humanplayer.cpp
     levelobject/player/orcplayer.cpp
     levelobject/player/player.cpp
-    levelobject/potionadapter.cpp
     levelobject/related/attributedecorator.cpp
     levelobject/related/attributes.cpp
     levelobject/related/basicbuff.cpp

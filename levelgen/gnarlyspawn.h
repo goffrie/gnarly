@@ -11,7 +11,7 @@ class GnarlySpawn : public Spawn {
 public:
     GnarlySpawn(int l, bool r = false);
     virtual Monster* randomMonster() override;
-    virtual PotionAdapter* randomPotion() override;
+    virtual Potion* randomPotion() override;
     virtual Gold* randomGold() override;
 };
 

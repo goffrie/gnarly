@@ -9,6 +9,7 @@ class Item : public Object {
 public:
     virtual ~Item() { }
     virtual void use(Player* p) = 0;
+    virtual char tile() const = 0;
 };
 
 #endif

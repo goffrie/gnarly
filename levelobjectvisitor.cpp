@@ -5,7 +5,6 @@
 #include "player.h"
 #include "itemadapter.h"
 #include "monster.h"
-#include "potionadapter.h"
 #include "gold.h"
 #include "staircase.h"
 
@@ -20,9 +19,6 @@ void LevelObjectVisitor::visit(class Monster& o) {
 }
 void LevelObjectVisitor::visit(class ItemAdapter& o) {
     visit(static_cast<LevelObject&>(o));
-}
-void LevelObjectVisitor::visit(class PotionAdapter& o) {
-    visit(static_cast<ItemAdapter&>(o));
 }
 void LevelObjectVisitor::visit(class Gold& o) {
     visit(static_cast<LevelObject&>(o));
