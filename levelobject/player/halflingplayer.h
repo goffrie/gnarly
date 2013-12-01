@@ -9,7 +9,7 @@ public:
     // Created using halfling stats
     HalflingPlayer();
     // Halflings occasionally evade attacks
-    virtual int takeDamage(int attack) override;
+    virtual Damage computeDamage(int attack) override;
 };
 
 #endif

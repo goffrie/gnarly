@@ -25,6 +25,7 @@ set(gnarly_SOURCES
     levelgen/levelplan.cpp
     levelgen/roomsgen.cpp
     levelobject/character.cpp
+    levelobject/damage.cpp
     levelobject/dragongold.cpp
     levelobject/gold.cpp
     levelobject/itemadapter.cpp

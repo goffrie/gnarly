@@ -62,13 +62,15 @@ bool Player::moveRelative(Direction d) {
 
 void Player::damage(Character* other, int d) {
     if (other->dead()) {
-        return UI::instance()->say("Target is already dead.");
+        return;
     }
     playerClass->notifyAttack(this);
     ostringstream msg;
-    int dmg = other->takeDamage(d);
-    msg << "You did " << dmg << " dmg to " << other->name(Definite) << " (" << other->currentHP() << " HP).";
+    Damage dmg = other->computeDamage(d);
+    const int ohp = max(0, other->currentHP() - dmg.getAmount());
+    msg << "You did " << dmg.getAmount() << " dmg to " << other->name(Definite) << " (" << ohp << " HP).";
     UI::instance()->say(msg.str());
+    dmg.apply();
     if (other->dead()) {
         // rewards: gold, xp
         addGold(other->droppedGold());

@@ -61,16 +61,15 @@ bool Character::dead() const {
     return hp <= 0;
 }
 
-int Character::takeDamage(int attack) {
-    // damage = ceil( attack * 100 / (100 + defense) )
+Damage Character::computeDamage(int attack) {
     const int ratio = 100 + def();
-    int damage = (attack * 100 + ratio - 1) / ratio;
-    reduceHP(damage);
-    return damage;
+    // damage = ceil( attack * 100 / (100 + defense) )
+    const int damage = (attack * 100 + ratio - 1) / ratio;
+    return createDamage(damage);
 }
 
 void Character::attack(Character* other) {
-    other->takeDamage(atk());
+    other->computeDamage(atk()).apply();
 }
 
 int Character::atk() const {

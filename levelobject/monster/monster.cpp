@@ -88,9 +88,10 @@ void Monster::attack(Character* target) {
         msg << capitalize(name(Definite)) << " misses " << target->name(Definite) << ".";
         UI::instance()->say(msg.str());
     } else {
-        int damage = target->takeDamage(atk());
-        msg << capitalize(name(Definite)) << " hits " << target->name(Definite) << " for " << damage << " dmg!";
+        Damage damage = target->computeDamage(atk());
+        msg << capitalize(name(Definite)) << " hits " << target->name(Definite) << " for " << damage.getAmount() << " dmg!";
         UI::instance()->say(msg.str());
+        damage.apply();
     }
 }
 

@@ -5,11 +5,14 @@
 #include "attributeprovider.h"
 #include "attributes.h"
 #include "team.h"
+#include "damage.h"
+
 #include <string>
 #include <vector>
 
 // An abstract class representing a character with various attributes.
 class Character : public LevelObject {
+    friend class Damage;
 protected:
     // The attributes associated with the character
     AttributeProvider* attributes;
@@ -23,6 +26,9 @@ protected:
     // If the character died, we need to notify the level
     virtual void reduceHP(int amt);
     virtual void addHP(int amt);
+
+    // Allow subclasses to create their own Damage objects.
+    Damage createDamage(int amt) { return Damage(amt, *this); }
 
 public:
     // Creates a character with a given race and team
@@ -38,16 +44,17 @@ public:
     // Decreases MP. Called when a spell is used
     virtual void reduceMP(int amt);
 
-    // Takes damage from an attack and return the amount of damage taken
-    virtual int takeDamage(int attack);
-    // Attacks another character
+    // Prepare an attack: compute the amount of damage that will be taken.
+    // Call the `apply()` method on the Damage object afterward to apply it.
+    virtual Damage computeDamage(int attack);
+    // Attack another character.
     virtual void attack(Character* other);
     // Accessor methods that return things defined in attributes, and so go through attributes
     // Atk and Def cannot be negative
     virtual int atk() const;
     virtual int def() const;
     // Note: returns the exp dropped by this character upon death, not this character's current exp
-    virtual int xp() const {return attributes->xp(); }
+    virtual int xp() const { return attributes->xp(); }
     virtual int startingHP() const { return attributes->startingHP(); }
     virtual int startingMP() const { return attributes->startingMP(); }
     virtual int droppedGold() const { return attributes->droppedGold(); }

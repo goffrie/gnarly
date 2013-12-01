@@ -225,6 +225,8 @@ LevelObject* Game::getTarget(int range) {
 void Game::notifyPlayerDeath() {
     if (gameOver) return;
     gameOver = true;
+    // Update the game screen (including messages) before showing the popup.
+    print();
     PopUpCreator::defeat(player->score());
 }
 
@@ -234,6 +236,7 @@ void Game::makeNewLevel() {
     // Did we hit the end of the dungeon?
     if (dlvl >= (signed)plan.levels.size()) {
         gameOver = true;
+        print();
         PopUpCreator::victory(player->score());
         return;
     }
