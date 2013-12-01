@@ -14,6 +14,8 @@ class LevelObject;
 
 // A central class that reads input from the UI and controls the game flow
 class Game : public CommandHandler {
+    class MoveIntoVisitor;
+
     // `Game` owns these objects.
     Player* player;
     PlayerStatus* pstatus;

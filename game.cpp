@@ -14,6 +14,7 @@
 #include "memory.h"
 #include "target.h"
 #include "itemadapter.h"
+#include "levelobjectvisitor.h"
 
 #include "levelgen/levelgen.h"
 
@@ -98,6 +99,35 @@ void Game::print() {
     ui.redraw();
 }
 
+class Game::MoveIntoVisitor : public LevelObjectVisitor {
+    Game& game;
+    Direction d;
+public:
+    bool keepMoving;
+
+    MoveIntoVisitor(Game& g, Direction d) : game(g), d(d), keepMoving(true) { }
+    void visit(Staircase& s) {
+        game.makeNewLevel();
+        keepMoving = false;
+    }
+    void visit(Character& c) {
+        if (gnarly && c.isEnemy(Team::instance(Team::Players))) {
+            game.attack(d);
+            keepMoving = false;
+        }
+    }
+    void visit(Gold& g) {
+        if (g.canPickUp()) {
+            g.use(game.player);
+            ostringstream line;
+            line << g.amount() << " gold.";
+            UI::instance()->say(line.str());
+            delete &g;
+            // Then move onto the gold tile, so leave `keepMoving = true`.
+        }
+    }
+};
+
 void Game::move(Direction d) {
     if (gameOver) {
         return UI::instance()->say("Game Over. Restart or quit.");
@@ -107,30 +137,16 @@ void Game::move(Direction d) {
 
     LevelObject* obj = level->objectAt(ny, nx);
 
-    // XXX make this more object oriented and elegant
-    Staircase* stair = dynamic_cast<Staircase*>(obj);
-    if (stair) {
-        // Go downstairs.
-        makeNewLevel();
-        return;
-    }
-    if (gnarly) {
-        // Move-to-attack.
-        Character* ch = dynamic_cast<Character*>(obj);
-        if (ch && ch->isEnemy(Team::instance(Team::Players))) {
-            return attack(d);
+    if (obj) {
+        // Walked into an object. What to do?
+        MoveIntoVisitor visitor(*this, d);
+        obj->accept(visitor);
+        if (!visitor.keepMoving) {
+            // Something happened, so don't do anything more.
+            return;
         }
     }
-    Gold* target = dynamic_cast<Gold*>(obj);
-    if (target && target->canPickUp()) {
-        target->use(player);
-        ostringstream line;
 
-        line << target->amount() << " gold.";
-        UI::instance()->say(line.str());
-        delete target;
-        obj = 0;
-    }
     if (player->moveRelative(d)) {
         // A player action happened, so step.
         step();
