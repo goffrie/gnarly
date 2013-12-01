@@ -3,8 +3,12 @@
 
 #include "direction.h"
 
+// Abstract class that represents something commands can be sent to
+// Used by UI as a target for commands
 class CommandHandler {
 public:
+    // What these do depends on exactly what class it is, so go to
+    // a specific class for description
     virtual void move(Direction d) = 0;
     virtual void attack(Direction d) = 0;
     virtual void use(Direction d) = 0;

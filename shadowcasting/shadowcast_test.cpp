@@ -4,6 +4,8 @@
 
 using namespace std;
 
+// Tests the FOV shadowcasting implementation
+
 vector<string> M;
 vector<string> out;
 vector<vector<bool> > opaque;

@@ -4,7 +4,7 @@
 #include <set>
 #include "displayable.h"
 
-// Groups Displayables into a single Displayable.
+// Groups Displayables into a single Displayable and sorts them by z-index
 class Display : public Displayable {
     std::set<std::pair<int, Displayable*> > items;
 public:

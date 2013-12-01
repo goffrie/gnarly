@@ -18,6 +18,7 @@ class Team;
 
 class LevelObject : public Displayable, public Object {
     friend class Level;
+    // The level it belongs to
     Level* level;
     // The item's position.
     int y, x;
@@ -25,6 +26,8 @@ class LevelObject : public Displayable, public Object {
 protected:
     // Returns all free adjacent locations.
     virtual std::vector<std::pair<int, int> > getFreeAdjacent();
+    // Moves to a location. Called after placement on a level
+    bool moveTo(int y, int x);
 
 public:
     // The item's ASCII tile.
@@ -35,22 +38,27 @@ public:
 
     virtual void draw(Surface& target) const override;
 
+    // Accessor methods for basic LevelObject properties
     int getY() const { return y; }
     int getX() const { return x; }
-    void setPos(int y, int x);
-
     Level* getLevel() const { return level; }
 
+    // Changes the position of self. Should only be called before being placed onto a level
+    void setPos(int y, int x);
+
     // Returns true if the movement succeeded.
-    bool moveTo(int y, int x);
     virtual bool moveRelative(Direction d);
+    // Takes any action. By default, nothing
     virtual void step();
+    // Whether on not a position is a valid for this LevelObject
     virtual bool canMove(int y, int x);
+    // Returns true of the other team is not allied
     virtual bool isEnemy(Team* t) const;
+    // Basic accessors for properties of the object
     virtual bool canPickUp() { return false; }
     virtual bool isItem() { return false; }
     virtual bool dead() const { return false; }
-
+    // Visits a LevelObjectVisitor
     virtual void accept(LevelObjectVisitor& v);
 };
 

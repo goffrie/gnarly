@@ -4,6 +4,7 @@
 class Display;
 class Surface;
 
+// Represents something that is displayable
 class Displayable {
     friend class Display;
 
@@ -12,7 +13,9 @@ class Displayable {
     // This item's z-index. Used by Display.
     int zIndex;
 
+    // Unregisters self from display
     void unregister();
+    // Registers self to a display
     void registerDisplay(Display* disp, int z);
 
 protected:

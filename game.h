@@ -35,15 +35,22 @@ class Game : public CommandHandler {
     // The current dungeon level.
     int dlvl;
 
+    // Displays everything in the game
     void print();
+    // Allows everything to take an action. Called after player makes an action
     void step();
 public:
+    // Tells the game to begin running
     void run();
+    // Has the player move, attack, or use/pickup a potion in a certain direction
     void move(Direction d) override;
     void attack(Direction d) override;
     void use(Direction d) override;
+    // Uses a player's skill
     void skill(int i) override;
+    // Displays the inventory
     void inventory() override;
+    // Quits or restarts the game
     void quit() override;
     void restart() override;
     void confirm() override;
@@ -51,10 +58,12 @@ public:
     void notifyPlayerDeath();
     // Returns if the game should be restarted after it ends
     bool shouldRestart() { return _shouldRestart; }
+    // Creates the next level in the plan
     void makeNewLevel();
+    // Uses the Target class to return a LevelObject at a tile the player chooses
     LevelObject* getTarget(int range);
 
-
+    // Returns the current dungeon level
     int dungeonLevel() const { return dlvl; }
 
 private:

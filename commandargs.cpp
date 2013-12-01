@@ -39,7 +39,7 @@ void processArgs(int argc, char *argv[]) {
                 if (layout.size() < 25) break;
                 gens.push_back(FileGen(layout));
             }
-            for (int i = 0; i < gens.size(); ++i) {
+            for (unsigned int i = 0; i < gens.size(); ++i) {
                 levelLayout.levels.push_back(&gens[i]);
             }
         } else {
