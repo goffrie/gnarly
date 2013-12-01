@@ -73,11 +73,14 @@ bool Level::valid(int y, int x) const {
 }
 
 void Level::add(LevelObject* i, bool own) {
+    // Sanity checks.
     assert(!i->level);
     assert(i->y >= 0 && (unsigned) i->y < height());
     assert(i->x >= 0 && (unsigned) i->x < width());
     assert(!d->grid[i->y][i->x]);
 
+    // Add this to the object, the object to the grid, and the object to the level
+    // if it was requested
     i->level = this;
     d->grid[i->y][i->x] = i;
     if (own) {
@@ -108,6 +111,7 @@ void Level::move(LevelObject* i, int y, int x) {
 }
 
 void Level::notifyDeath(Character* i) {
+    // Queue it up for death
     bool removed = d->dying.insert(i).second;
     if (removed) {
         assert(d->grid[i->y][i->x] == i);
@@ -155,6 +159,7 @@ void Level::draw(Surface& target) const {
     const int h = height(), w = width();
     for (int y = 0; y < h; ++y) {
         for (int x = 0; x < w; ++x) {
+            // Draw things based on what you can see
             if (!d->fov[y][x]) continue;
             drawTile(tileAt(y, x), target, y, x);
 
@@ -184,6 +189,7 @@ vector<LevelObject*> Level::getVisible(int pY, int pX, int radius) const {
 
 void Level::stepObjects() {
     vector<LevelObject*> toStep;
+    // Get everything we need to step, sorted by position, and add them
     for (unsigned int y = 0; y < d->grid.size() ; y++) {
         for (unsigned int x = 0; x < d->grid[y].size(); x++) {
             if (d->objects.find(d->grid[y][x]) != d->objects.end()) {
@@ -191,11 +197,13 @@ void Level::stepObjects() {
             }
         }
     }
+    // Step everything
     for (unsigned int i = 0; i < toStep.size(); i++) {
         if (!toStep[i]->dead()) {
             toStep[i]->step();
         }
     }
+    // Remove dead stuffs
     removeDead();
 }
 

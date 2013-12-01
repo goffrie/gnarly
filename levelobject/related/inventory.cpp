@@ -30,6 +30,7 @@ bool Inventory::useItem(Player& p, char i) {
     it->second->use(&p);
     delete it->second;
     items.erase(it);
+    // Re-add that char to the list of availabe indices
     slots.push(i);
     return true;
 }
@@ -38,6 +39,7 @@ char Inventory::addItem(Item* i) {
     if (slots.empty()) return 0;
     char slot = slots.top();
     slots.pop();
+    // Use the top avaiable index in slots
     items.insert(make_pair(slot, i));
     return slot;
 }

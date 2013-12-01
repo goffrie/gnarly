@@ -18,6 +18,7 @@ Stealth::Stealth() : Skill(4), currentDuration(-1) {
 }
 
 bool Stealth::use(Player* p) {
+    // Change alliances to allied with everyone
     Team* t = p->getTeam();
     storedAlliances = t->getAlliances();
     t->setAlliances(allAlly);
@@ -27,6 +28,7 @@ bool Stealth::use(Player* p) {
 }
 
 void Stealth::removeStealth(Player* p) {
+    // Make alliances to what they were before
     Team* t = p->getTeam();
     t->setAlliances(storedAlliances);
     UI::instance()->say("Stealth deactivated.");

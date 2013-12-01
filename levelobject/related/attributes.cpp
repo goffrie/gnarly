@@ -14,6 +14,7 @@ Attributes::Attributes(int hp, int mp, int a, int d, int x, int dg, char t, cons
 }
 
 Attributes Attributes::get(Attributes::Race c) {
+    //                        HP, MP, ATK,DEF,XP,Gold,Tile,name
     switch (c) {
         case Human:
             return Attributes(140, 20, 20, 20, 0, 0, '@', "human");

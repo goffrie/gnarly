@@ -5,6 +5,7 @@
 Displayable::Displayable() : disp(0) { }
 
 Displayable::~Displayable() {
+    // Unregister from display when deleted
     unregister();
 }
 

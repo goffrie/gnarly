@@ -211,6 +211,7 @@ void Game::confirm() {
 }
 
 LevelObject* Game::getTarget(int range) {
+    // Get a position using target, and return the object at that location
     pair<int,int> tar = Target::getTarget(player->getY(), player->getX(), range);
     if (Target::validTarget(tar)) {
         print();

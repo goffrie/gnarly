@@ -15,6 +15,7 @@ Class::~Class() {
 
 bool Class::useSkill(unsigned int i, Player* p) {
     if (i >= skills.size()) {
+        // Invalid skill
         return false;
     }
     if (skills[i]->mpCost() > p->currentMP()) {

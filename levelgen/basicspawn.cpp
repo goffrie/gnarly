@@ -13,6 +13,8 @@
 
 using namespace std;
 
+// All probabilities and tiles here are specified in the requirement
+
 Monster* BasicSpawn::randomMonster() {
     switch (rnd(0, 18)) {
         case 1 ... 4:

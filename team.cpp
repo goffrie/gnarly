@@ -40,6 +40,7 @@ std::vector<Team::Status> Team::Team::getAlliances() const {
 
 void Team::setAlliances(std::vector<Team::Status> a) {
     for (int i = 0; i < Num; i++) {
+        // Alliances are bidirectional
         if (a[i] == Ally) {
             ally(Team::instance(static_cast<Name>(i)));
         } else if (a[i] == Enemy) {

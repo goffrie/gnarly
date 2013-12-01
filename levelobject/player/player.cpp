@@ -33,6 +33,7 @@ void Player::reduceHP(int amt) {
 
 bool Player::moveRelative(Direction d) {
     if (LevelObject::moveRelative(d)) {
+        // Generate the list of everything you see
         ostringstream msg;
         msg << "You move " << d.name();
         vector<LevelObject*> neighbours = getLevel()->neighbours(getY(), getX());
@@ -93,6 +94,7 @@ void Player::heal(int amt) {
 }
 
 void Player::applyBuff(int a, int d) {
+    // Decorate attributes
     attributes = new BasicBuff(attributes, a, d);
 }
 
@@ -105,6 +107,7 @@ void Player::stripBuffs() {
 }
 
 bool Player::canMove(int nY, int nX) {
+    // Players can move on passages and doors
     return getLevel()->valid(nY, nX) && getLevel()->free(nY, nX, true);
 }
 
@@ -134,6 +137,7 @@ void Player::drawClass(Surface& target) const {
 
 bool Player::addToInventory(ItemAdapter* i) {
     if (!gnarly) {
+        // Use the item immediately
         Item* item = i->removeItem();
         item->use(this);
         delete item;
@@ -144,6 +148,7 @@ bool Player::addToInventory(ItemAdapter* i) {
         UI::instance()->say("Your inventory is full.");
         return false;
     }
+    // Add the item to your inventory
     Item* item = i->removeItem();
     char r = inventory.addItem(item);
     UI::instance()->say("You pick up " + item->name(Indefinite) + " <" + r + ">.");

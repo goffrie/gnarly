@@ -21,6 +21,7 @@ void processArgs(int argc, char *argv[]) {
         } else if (strcmp(argv[i], "-dev") == 0) {
             dev = true;
         } else if (strcmp(argv[i], "-f") == 0) {
+            // Read layout from a file
             if (i + 1 >= argc) {
                 cout << "Invalid number of arguments. -f must be followed with a file" << endl;
                 exit(1);
@@ -30,6 +31,7 @@ void processArgs(int argc, char *argv[]) {
             ifstream file(argv[i]);
             static vector<FileGen> gens;
             while (file) {
+                // Create generation layouts
                 vector<string> layout;
                 for (int i = 0; i < 25; ++i) {
                     string next;
@@ -40,6 +42,7 @@ void processArgs(int argc, char *argv[]) {
                 gens.push_back(FileGen(layout));
             }
             for (unsigned int i = 0; i < gens.size(); ++i) {
+                // And add them to a layout we will read from
                 levelLayout.levels.push_back(&gens[i]);
             }
         } else {

@@ -24,13 +24,16 @@ Dungeon FileGen::gen() {
 Level* FileGen::genLevel(Player* player, int dlvl) {
     Level* lev = new Level(gen());
     BasicSpawn b;
+    // Place all players and objects, except dragons
     for (unsigned int y = 0; y < layout.size(); y++) {
         for (unsigned int x = 0; x < layout[y].size(); x++) {
+            // Place the player
             if (layout[y][x] == '@') {
                 player->setPos(y, x);
                 lev->add(player, false);
                 continue;
             }
+            // Place any other object, other than a dragon
             LevelObject* l = b.getFromTile(layout[y][x]);
             if (l) {
                 l->setPos(y, x);
@@ -38,11 +41,13 @@ Level* FileGen::genLevel(Player* player, int dlvl) {
             }
         }
     }
+    // Look for dragons
     // XXX fix this maybe
     for (unsigned int y = 0; y < layout.size(); y++) {
         for (unsigned int x = 0; x < layout[y].size(); x++) {
             if (layout[y][x] == 'D') {
                 bool placed = false;
+                // Try to find a gold that could match with the dragon
                 for (int dy = -1; dy <= 1 && !placed; dy++) {
                     for (int dx = -1; dx <= 1 && !placed; dx ++) {
                         if (dy == 0 && dx == 0) {

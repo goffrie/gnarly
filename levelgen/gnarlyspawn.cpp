@@ -41,6 +41,7 @@ Monster* GnarlySpawn::randomMonster() {
     if (reallyRandom) {
         return getMonster(rnd(0,20));
     }
+    // Monsters are indexed in spawn by difficulty, so higher levels will spawn harder monsters
     int monsterIndex = level * 4;
     switch(rnd(0, 100)) {
         case 0 ... 4: monsterIndex = 0; break;

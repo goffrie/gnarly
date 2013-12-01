@@ -10,6 +10,7 @@ Merchant::Merchant() : Monster(Attributes::Merchant) {
 void Merchant::reduceHP(int amt) {
     Monster::reduceHP(amt);
     if (dead()) {
+        // Unally with players and drop a merchant hoard when the merchant dies
         team->unally(Team::instance(Team::Players));
         Gold* g = new Gold(Gold::Merchant);
         g->setPos(this->getY(), this->getX());

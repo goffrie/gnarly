@@ -50,6 +50,7 @@ Level* FinalGen::genLevel(Player* player, int dungeonLevel) {
     player->setPos(4, 39);
     lvl->add(player, false);
 
+    // Place the two altars
     Altar* altar1 = new Altar();
     altar1->setPos(3, 7);
     lvl->add(altar1);
@@ -59,7 +60,7 @@ Level* FinalGen::genLevel(Player* player, int dungeonLevel) {
 
     double numVisited = 0;
     double numEnemies = amtEnemies();
-    // Generate monsters.
+    // Generate monsters. Each free position has a probability of having a monster
     for (unsigned int y = 0; y < lvl->height(); y++) {
         for (unsigned int x = 0; x < lvl->width(); x++) {
             if (lvl->free(y, x)) {

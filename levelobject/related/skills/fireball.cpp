@@ -5,6 +5,7 @@
 #include <sstream>
 
 bool Fireball::use(Player* p) {
+    // Get a target for the spell
     Character* target = dynamic_cast<Character*>(Game::instance()->getTarget(range));
     if (!target) {
         return false;

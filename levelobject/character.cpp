@@ -22,6 +22,8 @@ Character::~Character() {
 }
 
 void Character::draw(Surface& target) const {
+    // The color of the character depends on how much HP they have relative to their total
+    // Green = a lot of hp, Yellow = medium, Red = low
     int color;
     if (hp * 100 / startingHP() >= 67) {
         color = COLOR_GREEN;
@@ -38,6 +40,7 @@ void Character::draw(Surface& target) const {
 void Character::reduceHP(int amt) {
     hp -= amt;
     if (hp <= 0) {
+        // HP cannot go below 0
         hp = 0;
         getLevel()->notifyDeath(this);
     }
@@ -85,6 +88,7 @@ bool Character::isEnemy(Team* t) const {
 }
 
 Character* Character::chooseTarget(vector<LevelObject*> objs) {
+    // Gets all enemy targets
     vector<Character*> targets;
     for (unsigned i = 0; i < objs.size(); i++) {
         if (objs[i]->isEnemy(team)) {
@@ -92,6 +96,7 @@ Character* Character::chooseTarget(vector<LevelObject*> objs) {
         }
     }
 
+    // Return a random one
     if (!targets.empty()) {
         int i = rnd(0, targets.size());
         return targets[i];
