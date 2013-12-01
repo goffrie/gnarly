@@ -55,6 +55,7 @@ public:
     // Returns true of the other team is not allied
     virtual bool isEnemy(Team* t) const;
     // Basic accessors for properties of the object
+    // XXX Are these necessary?
     virtual bool canPickUp() { return false; }
     virtual bool isItem() { return false; }
     virtual bool dead() const { return false; }

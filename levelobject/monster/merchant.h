@@ -8,7 +8,6 @@ protected:
     virtual void reduceHP(int amt) override;
 public:
     Merchant();
-    virtual int droppedGold() const { return 0; }
 };
 
 #endif

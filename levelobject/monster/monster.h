@@ -15,7 +15,6 @@ public:
     virtual void step();
     virtual void moveToward(Character* c);
     virtual void wander();
-    virtual int droppedGold() const { return 1; }
 };
 
 #endif

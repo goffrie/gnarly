@@ -19,6 +19,7 @@ public:
     virtual int atk() const { return base->atk(); }
     virtual int def() const { return base->def(); }
     virtual int xp() const { return base->xp(); }
+    virtual int droppedGold() const { return base->droppedGold(); }
     virtual char tile() const { return base->tile(); }
     virtual std::string name() const { return base->name(); }
 

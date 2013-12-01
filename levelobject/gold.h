@@ -5,9 +5,10 @@
 
 class Player;
 
-// XXX: Should this and potion share a object class?
+// Gold to be placed on a level
 class Gold : public LevelObject {
 public:
+    // The different possible kinds of gold
     enum Hoard {
         Normal,
         Small,
@@ -15,12 +16,15 @@ public:
         DragonH
     };
 private:
+    // How much gold is in the pile
     int _amount;
 public:
     Gold(Hoard h);
     virtual void draw(Surface& target) const override;
 
+    // Adds gold to a player
     virtual void use(Player* target);
+    // Basic accessor methods
     virtual bool canPickUp() const { return true; }
     virtual int amount() const { return _amount; }
     virtual std::string basicName() const override;
