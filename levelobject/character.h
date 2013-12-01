@@ -20,7 +20,7 @@ protected:
     virtual void addHP(int amt);
 
 public:
-    Character(Attributes::Race c, TeamName t);
+    Character(Attributes::Race c, Team::Name t);
     virtual ~Character() = 0;
 
     virtual void draw(Surface& target) const override;

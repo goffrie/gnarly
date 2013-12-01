@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Character::Character(Attributes::Race c, TeamName t)
+Character::Character(Attributes::Race c, Team::Name t)
  : attributes(new Attributes(Attributes::get(c))),
    hp(attributes->startingHP()),
    mp(attributes->startingMP()),

@@ -11,6 +11,7 @@ class UI : public Surface {
 public:
     virtual ~UI() { }
 
+    // Clears the bottom message list, instead of adding the next message to it
     virtual void clearMsg() { }
 
     // Ask for (and wait on) a command from the user.
@@ -31,6 +32,7 @@ private:
     static UI* ui;
 public:
     static UI* instance();
+    // Sets the instance to a certain type of display
     static void setInstance(UI* ui);
 };
 

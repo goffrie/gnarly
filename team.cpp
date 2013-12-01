@@ -6,8 +6,8 @@ using namespace std;
 
 vector<Team*> Team::teams;
 
-Team::Team(TeamName i) : _index(i) {
-    for (int j = 0; j < NumTeams; j++) {
+Team::Team(Name i) : _index(i) {
+    for (int j = 0; j < Num; j++) {
         if (i == j) {
             alliances.push_back(Ally);
         } else {
@@ -39,16 +39,16 @@ std::vector<Team::Status> Team::Team::getAlliances() const {
 }
 
 void Team::setAlliances(std::vector<Team::Status> a) {
-    for (int i = 0; i < NumTeams; i++) {
+    for (int i = 0; i < Num; i++) {
         if (a[i] == Ally) {
-            ally(Team::instance(static_cast<TeamName>(i)));
+            ally(Team::instance(static_cast<Name>(i)));
         } else if (a[i] == Enemy) {
-            unally(Team::instance(static_cast<TeamName>(i)));
+            unally(Team::instance(static_cast<Name>(i)));
         }
     }
 }
 
-TeamName Team::index() const{
+Team::Name Team::index() const{
     return _index;
 }
 
@@ -58,8 +58,8 @@ void Team::init() {
     }
     cleanup();
 
-    for (int i = Players; i < NumTeams; i++) {
-        teams.push_back(new Team(static_cast<TeamName>(i)));
+    for (int i = Players; i < Num; i++) {
+        teams.push_back(new Team(static_cast<Name>(i)));
     }
     teams[Merchants]->ally(teams[Players]);
     teams[Merchants]->ally(teams[Monsters]);
@@ -72,13 +72,9 @@ void Team::cleanup() {
     teams.clear();
 }
 
-Team* Team::instance(TeamName n) {
+Team* Team::instance(Name n) {
     if (teams.empty()) {
         init();
     }
     return teams[n];
-}
-
-void Team::resetAlliances() {
-    teams[Merchants]->ally(teams[Players]);
 }

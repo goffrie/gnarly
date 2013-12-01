@@ -64,7 +64,6 @@ Game::Game() : player(0), pstatus(0), level(0), mem(0), _quit(false), gameOver(f
 
     // Set up the first dungeon level.
     dlvl = 0;
-    Team::resetAlliances();
     makeNewLevel();
 }
 
@@ -123,7 +122,7 @@ void Game::move(Direction d) {
     if (gnarly) {
         // Move-to-attack.
         Character* ch = dynamic_cast<Character*>(obj);
-        if (ch && ch->isEnemy(Team::instance(Players))) {
+        if (ch && ch->isEnemy(Team::instance(Team::Players))) {
             return attack(d);
         }
     }

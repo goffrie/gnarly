@@ -13,7 +13,7 @@
 
 using namespace std;
 
-Monster::Monster(Attributes::Race c) : Character(c, Monsters) {
+Monster::Monster(Attributes::Race c) : Character(c, Team::Monsters) {
 }
 
 void Monster::step() {
