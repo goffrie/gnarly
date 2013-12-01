@@ -9,7 +9,7 @@ class ItemAdapter;
 // An abstract class representing any physical thing in the game
 class Object {
 protected:
-    friend ItemAdapter;
+    friend class ItemAdapter;
     // Returns a basic name
     virtual std::string basicName() const = 0;
 public:
