@@ -34,6 +34,7 @@ bool LevelObject::moveRelative(Direction d) {
 }
 
 bool LevelObject::canMove(int nY, int nX) {
+    // Most objects cannot move onto passages or doors
     return level->valid(nY, nX) && level->free(nY, nX);
 }
 

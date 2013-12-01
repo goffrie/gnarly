@@ -17,6 +17,7 @@ void Dragon::wander() {
 void Dragon::reduceHP(int amt) {
     Monster::reduceHP(amt);
     if (dead()) {
+        // Allow the hoard to be picked up
         hoard->notifyDragonDied();
     }
 }

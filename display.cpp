@@ -22,6 +22,7 @@ void Display::remove(Displayable* item) {
 }
 
 void Display::draw(Surface& target) const {
+    // Draw all displayables associated
     for (std::set<std::pair<int, Displayable*> >::const_iterator p = items.begin();
             p != items.end();
             ++p) {

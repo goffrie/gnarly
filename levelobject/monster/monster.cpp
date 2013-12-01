@@ -53,6 +53,9 @@ void Monster::moveToward(Character* c) {
     int bestDist = dist(target, best);
     int bestMdist = mdist(target, best);
 
+    // Chooses the closest possible free adjacent location to the character
+    // Sorting by manhattan distance if there is a tie, and randomization if there
+    // is a further tie
     for (unsigned int i = 0; i < locations.size(); ++i) {
         int d = dist(target, locations[i]);
         int md = mdist(target, locations[i]);
@@ -71,7 +74,7 @@ void Monster::moveToward(Character* c) {
 void Monster::wander() {
     vector<pair<int, int> > locations = getFreeAdjacent();
 
-    // Pick one at random.
+    // Pick free adjacent location at random.
     if (locations.size() > 0) {
         pair<int, int> newLocation = locations[rnd(0, locations.size())];
         moveTo(newLocation.first, newLocation.second);
@@ -80,6 +83,7 @@ void Monster::wander() {
 
 void Monster::attack(Character* target) {
     ostringstream msg;
+    // Monsters miss half the time
     if (rnd(0, 2) == 0) {
         msg << capitalize(name(Definite)) << " misses " << target->name(Definite) << ".";
         UI::instance()->say(msg.str());

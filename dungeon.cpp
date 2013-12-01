@@ -47,14 +47,16 @@ Dungeon::Dungeon(vector<vector<bool> >& m) {
     grid.resize(m.size());
     const int height = m.size(),
               width = m[0].size();
+    // Generates the grid from a bool of passable/not passable
     for (unsigned int y = 0; y < m.size(); ++y) {
         grid[y].resize(m[y].size());
         for (unsigned int x = 0; x < m[y].size(); ++x) {
             if (m[y][x]) {
+                // Passable
                 grid[y][x] = Floor;
                 continue;
             }
-            // Check for surroundings.
+            // Not passable. Check for surroundings to determine what to use
             const bool left = x > 0, right = (signed)x + 1 < width, top = y > 0, bottom = (signed)y + 1 < height;
             if ((left && m[y][x-1]) || (right && m[y][x+1])) grid[y][x] = WallV;
             else if ((top && m[y-1][x]) || (bottom && m[y+1][x])) grid[y][x] = WallH;
@@ -78,6 +80,7 @@ Dungeon::Dungeon(const char* str) {
             grid.push_back(std::vector<Tile>());
             newLine = false;
         }
+        // Place exactly what was specified
         grid.back().push_back(tileFromChar(*str));
     }
     loadRooms();
@@ -85,6 +88,7 @@ Dungeon::Dungeon(const char* str) {
 
 
 void drawTile(Tile t, Surface& target, unsigned y, unsigned x) {
+    // Color the drawing if necessary
     target.setColor(color(t), COLOR_BLACK);
     target.draw(y, x, tileChar(t));
     target.unsetColor(color(t), COLOR_BLACK);

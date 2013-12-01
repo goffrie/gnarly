@@ -64,6 +64,7 @@ Player* PlayerSelect::getPlayer(UI& ui) {
     if (!gnarly) {
         return ps.getBasicPlayer();
     }
+    // By default, players are human thieves
     ps.playerClass = new Thief();
     ps.player = new HumanPlayer();
     ps.player->setClass(ps.playerClass);
@@ -71,6 +72,7 @@ Player* PlayerSelect::getPlayer(UI& ui) {
     curs_set(0);
     int c;
     while (true) {
+        // Wait for input to decide what class and race for the player to be
         ps.draw(ui);
         ui.redraw();
         c = ui.readChar();
@@ -122,6 +124,7 @@ Player* PlayerSelect::getPlayer(UI& ui) {
 
 void PlayerSelect::draw(Surface& target) const {
     target.setColor(COLOR_RED, COLOR_BLACK);
+    // What a beautiful drawing, right?
     target.fillLine(0, "   _____                          _                                      ");
     target.fillLine(1, "  / ____|                        | |                        ##           ");
     target.fillLine(2, " | |  __   _ __     __ _   _ __  | |  _   _               ;=x# ;         ");

@@ -11,6 +11,7 @@ Target::Target(int y, int x, int r) : startY(y), startX(x), y(y), x(x), range(r)
 }
 
 void Target::move(Direction d) {
+    // Player moved the target
     if (max(abs(startY - y - d.dy()), abs(startX - x - d.dx())) > range) {
         return UI::instance()->say("Out of range");
     }
@@ -48,6 +49,7 @@ void Target::confirm() {
 
 pair<int,int> Target::getTarget(int y, int x, int r) {
     Target t(y, x, r);
+    // Infinite loop until the player decides to quit
     while (!t._quit) {
         UI::instance()->cursor(t.y, t.x);
         if (t.submit) {

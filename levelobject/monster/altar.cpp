@@ -17,6 +17,7 @@ Altar::~Altar() {
 }
 
 void Altar::step() {
+    // Altars don't do anything
 }
 
 void Altar::reduceHP(int amt) {
@@ -24,6 +25,7 @@ void Altar::reduceHP(int amt) {
     if (dead()) {
         UI::instance()->say("You destroyed the altar!");
         if (numAltars - 1 <= 0) {
+            // There are no more altars remaining on the level
             Game::instance()->makeNewLevel();
         }
     }

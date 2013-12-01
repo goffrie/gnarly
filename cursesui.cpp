@@ -115,6 +115,7 @@ void CursesUI::queryCommand(CommandHandler& target) {
 }
 
 void CursesUI::say(const std::string& msg) {
+    // Split the message if necessary
     if (msg.size() > maxMsgLineLength) {
         vector<string> lines = getLines(msg, maxMsgLineLength);
         for (unsigned int i = 0; i < lines.size(); ++i) {
@@ -124,6 +125,7 @@ void CursesUI::say(const std::string& msg) {
         return;
     }
     assert(msg.size() <= maxMsgLineLength);
+    // Or display on a new line
     if (msgLineLength + msg.size() > maxMsgLineLength) {
         mvaddstr(29, msgLineLength, " --more--");
         clrtoeol();

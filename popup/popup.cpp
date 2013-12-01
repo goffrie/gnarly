@@ -19,6 +19,7 @@ void PopUp::setText(const std::string& t) {
 void PopUp::draw(Surface& target) const {
     assert(text.size() <= (unsigned)(height - ybuffer * 2 - 2));
     target.setColor(COLOR_BLUE, COLOR_BLACK);
+    // Draw the border
     for (int dy = y; dy < y + height; dy++) {
         for (int dx = x; dx < x + width; dx++) {
             char c = ' ';
@@ -29,6 +30,7 @@ void PopUp::draw(Surface& target) const {
         }
     }
     target.unsetColor(COLOR_BLUE, COLOR_BLACK);
+    // Draw the actual text
     for (unsigned int i = 0; i < text.size(); i++) {
         target.draw(y + i + ybuffer, x + xbuffer, text[i]);
     }
@@ -39,6 +41,7 @@ void PopUp::make(const string& t) {
     PopUp p(t);
     p.draw(*UI::instance());
     UI::instance()->redraw();
+    // Simply wait for the player to exit
     while (!p.submit) {
         switch (UI::instance()->readChar()) {
             case ' ':

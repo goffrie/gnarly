@@ -5,11 +5,13 @@
 #include <sstream>
 
 bool MindControl::use(Player* p) {
+    // Get a target for the spell
     Character* target = dynamic_cast<Character*>(Game::instance()->getTarget(range));
     if (!target) {
         return false;
     }
     Skill::use(p);
+    // Make the target on the same team as the player
     target->setTeam(p->getTeam());
     return true;
 }

@@ -28,6 +28,7 @@ Gold::Gold(Hoard h) {
 }
 
 void Gold::draw(Surface& target) const {
+    // Gold is always yellow, of course
     target.setColor(COLOR_YELLOW, COLOR_BLACK);
     LevelObject::draw(target);
     target.unsetColor(COLOR_YELLOW, COLOR_BLACK);
