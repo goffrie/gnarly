@@ -6,6 +6,7 @@
 
 class ItemAdapter;
 
+// An abstract class representing any physical thing in the game
 class Object {
 protected:
     friend ItemAdapter;

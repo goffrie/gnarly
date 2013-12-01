@@ -12,17 +12,22 @@ class Level;
 class Memory;
 class LevelObject;
 
+// A central class that reads input from the UI and controls the game flow
 class Game : public CommandHandler {
     // `Game` owns these objects.
     Player* player;
     PlayerStatus* pstatus;
     Level* level;
+    // What the grid looked like when last seen
     Memory* mem;
 
+    // The order of Level generation methods. In basic, it uses the same plan 8 times
     LevelPlan plan;
 
+    // Most of the objects that need to be drawn, sorted in drawing order
     Display display;
 
+    // The current status of the game
     bool _quit;
     bool gameOver;
     bool _shouldRestart;
@@ -30,11 +35,10 @@ class Game : public CommandHandler {
     // The current dungeon level.
     int dlvl;
 
+    void print();
+    void step();
 public:
     void run();
-    void readCommand();
-    void step();
-    void print();
     void move(Direction d) override;
     void attack(Direction d) override;
     void use(Direction d) override;
@@ -59,8 +63,6 @@ private:
     Game();
     virtual ~Game();
     static void cleanup();
-
-    void makePlayer();
 
 public:
     // Gets the game instance, creating and restarting if necessary

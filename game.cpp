@@ -77,12 +77,8 @@ Game::~Game() {
 void Game::run() {
     while (!_quit) {
         print();
-        readCommand();
+        UI::instance()->queryCommand(*this);
     }
-}
-
-void Game::readCommand() {
-    UI::instance()->queryCommand(*this);
 }
 
 void Game::step() {

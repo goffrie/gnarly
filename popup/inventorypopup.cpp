@@ -11,7 +11,6 @@ using namespace std;
 string InventoryPopUp::getText(const Inventory& items) {
     const int lines = 15;
 
-    bool newLine = false;
     vector<string> names;
     for (Inventory::const_iterator p = items.begin(); p != items.end(); ++p) {
         names.push_back(string("<") + p->first + ">: " + p->second->name(NoArticle));
@@ -20,9 +19,9 @@ string InventoryPopUp::getText(const Inventory& items) {
     txt << "Inventory:";
     for (int i = 0; i < lines; ++i) {
         txt << endl;
-        if (i + lines < names.size()) {
+        if (i + lines < (signed)names.size()) {
             txt << left << setw(30) << names[i] << names[i + lines];
-        } else if (i < names.size()) {
+        } else if (i < (signed)names.size()) {
             txt << names[i];
         }
     }

@@ -35,8 +35,10 @@ class PlayerSelect : public Displayable {
     // Switches the currently selected class
     void swapClass(Class* c);
     PlayerSelect();
+    // Notably, PlayerSelect does not have a destructor because it should not usually destroy the player it makes
 
 public:
+    // Gets a starting player. Also, displays title screen while user chooses it
     static Player* getPlayer(UI& ui);
     virtual void draw(Surface& target) const;
 };

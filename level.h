@@ -11,23 +11,22 @@
 class LevelObject;
 struct LevelImpl;
 
-// Represents a single dungeon floor in the game
+// Represents a single dungeon floor in the game and all the monsters and items therein
 class Level : public Displayable {
     // pointer to implementation
     LevelImpl* d;
 
+    // Removes all dead levelobject from the grid. Called once per step
     void removeDead();
 
 public:
     Level(Dungeon layout);
     virtual ~Level();
 
-    // Accessor methods.
+    // Accessor methods to get basic information about the level
     unsigned int height() const;
     unsigned int width() const;
-
     const Dungeon& getDungeon() const;
-
     Tile tileAt(int y, int x) const;
     LevelObject* objectAt(int y, int x) const;
 
@@ -38,10 +37,12 @@ public:
     // Add something to the level. `own` controls whether the level
     // should take ownership of it.
     void add(LevelObject* i, bool own = true);
+    // Removes something from the level
     void remove(LevelObject* i);
 
     // Move something on this level to the given position.
     void move(LevelObject* i, int y, int x);
+    // Called when something has died
     void notifyDeath(Character* i);
 
     // Check if a position is free (i.e. there is
@@ -63,7 +64,9 @@ public:
     // Uses field of view (but does not interact with `computeFOV`).
     std::vector<LevelObject*> getVisible(int y, int x, int radius) const;
 
+    // Steps all levelobjects within this level
     void stepObjects();
+    // Returns all the neighbours of a certain position
     std::vector<LevelObject*> neighbours(int y, int x);
 };
 
