@@ -3,6 +3,7 @@
 
 #include "levelgen.h"
 
+// Generates a cave-like level through aggregation generation
 class AggregationGen : public LevelGen {
 protected:
     virtual Dungeon gen() override;
