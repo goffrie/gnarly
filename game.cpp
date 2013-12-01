@@ -243,7 +243,13 @@ void Game::notifyPlayerDeath() {
     gameOver = true;
     // Update the game screen (including messages) before showing the popup.
     print();
-    PopUpCreator::defeat(player->score());
+    if (gnarly) {
+        PopUpCreator::defeat(player->score());
+    } else {
+        ostringstream line;
+        line << "You Lose, game over. Score: " << player->score() << ". Restart or quit.";
+        UI::instance()->say(line.str());
+    }
 }
 
 void Game::makeNewLevel() {
@@ -253,7 +259,13 @@ void Game::makeNewLevel() {
     if (dlvl >= (signed)plan.levels.size()) {
         gameOver = true;
         print();
-        PopUpCreator::victory(player->score());
+        if (gnarly) {
+            PopUpCreator::victory(player->score());
+        } else {
+            ostringstream line;
+            line << "You win! Score: " << player->score() << ". Restart or quit.";
+            UI::instance()->say(line.str());
+        }
         return;
     }
     // Remove the old level, if necessary.
