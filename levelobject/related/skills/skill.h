@@ -5,6 +5,7 @@
 
 class Player;
 
+// The hotkeys for a skill
 enum SkillHotkeys {
     FirstSkill = '!',
     SecondSkill = '@',

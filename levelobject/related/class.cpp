@@ -30,12 +30,6 @@ void Class::notifyAttack(Player* p) {
     }
 }
 
-void Class::notifyMove(Player* p) {
-    for (unsigned int i = 0; i < skills.size(); i++) {
-        skills[i]->notifyMove(p);
-    }
-}
-
 void Class::step(Player* p) {
     for (unsigned int i = 0; i < skills.size(); i++) {
         skills[i]->step(p);

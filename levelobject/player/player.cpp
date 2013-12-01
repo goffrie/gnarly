@@ -33,7 +33,6 @@ void Player::reduceHP(int amt) {
 
 bool Player::moveRelative(Direction d) {
     if (LevelObject::moveRelative(d)) {
-        playerClass->notifyMove(this);
         ostringstream msg;
         msg << "You move " << d.name();
         vector<LevelObject*> neighbours = getLevel()->neighbours(getY(), getX());

@@ -5,7 +5,6 @@
 
 // A base class for decorators on top of
 // AttributeProvider.
-//
 class AttributeDecorator : public AttributeProvider {
 protected:
     AttributeProvider* base;
@@ -13,7 +12,7 @@ public:
     AttributeDecorator(AttributeProvider* b) : base(b) {}
     ~AttributeDecorator() { delete base; }
 
-    // Default to passing everything through as-is.
+    // Default is passing everything through as-is.
     virtual int startingHP() const { return base->startingHP(); }
     virtual int startingMP() const { return base->startingMP(); }
     virtual int atk() const { return base->atk(); }
@@ -23,6 +22,7 @@ public:
     virtual char tile() const { return base->tile(); }
     virtual std::string name() const { return base->name(); }
 
+    // Default is remove self
     virtual AttributeProvider* strip(bool force) override;
 };
 

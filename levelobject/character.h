@@ -55,9 +55,12 @@ public:
 
     // Changes the team a monster is on
     virtual void setTeam(Team* t) { team = t; }
+    // Returns true if dead
     virtual bool dead() const override;
 
+    // Returns true if the two teams are unallied
     virtual bool isEnemy(Team* t) const;
+    // Chooses a random enemy target from an array of possible targets
     virtual Character* chooseTarget(std::vector<LevelObject*> objs);
 
     virtual void accept(LevelObjectVisitor& v) override;
