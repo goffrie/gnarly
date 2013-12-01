@@ -11,8 +11,8 @@ class Target : public CommandHandler {
     bool _quit;
     bool submit;
 
-public:
     Target(int y, int x, int r);
+public:
     virtual void move(Direction d) override;
     virtual void attack(Direction d) override;
     virtual void use(Direction d) override;
@@ -21,7 +21,7 @@ public:
     virtual void restart() override;
     virtual void quit() override;
     virtual void confirm() override;
-    virtual std::pair<int,int> getTarget();
+    static std::pair<int,int> getTarget(int y, int x, int r);
     static bool validTarget(std::pair<int,int> p);
 };
 

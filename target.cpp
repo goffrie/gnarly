@@ -46,13 +46,14 @@ void Target::confirm() {
     submit = true;
 }
 
-pair<int,int> Target::getTarget() {
-    while (!_quit) {
-        UI::instance()->cursor(y, x);
-        if (submit) {
-            return make_pair(y, x);
+pair<int,int> Target::getTarget(int y, int x, int r) {
+    Target t(y, x, r);
+    while (!t._quit) {
+        UI::instance()->cursor(t.y, t.x);
+        if (t.submit) {
+            return make_pair(t.y, t.x);
         }
-        UI::instance()->queryCommand(*this);
+        UI::instance()->queryCommand(t);
     }
     return make_pair(-1, -1);
 }

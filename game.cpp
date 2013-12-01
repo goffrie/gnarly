@@ -216,8 +216,7 @@ void Game::confirm() {
 }
 
 LevelObject* Game::getTarget(int range) {
-    Target t(player->getY(), player->getX(), range);
-    pair<int,int> tar = t.getTarget();
+    pair<int,int> tar = Target::getTarget(player->getY(), player->getX(), range);
     if (Target::validTarget(tar)) {
         print();
         return level->objectAt(tar.first, tar.second);
