@@ -8,7 +8,7 @@ class Player;
 // An abstract class representing a level generation method
 class LevelGen {
 protected:
-    // THe height and width of the level to generate
+    // The height and width of the level to generate
     int height, width;
 
     // Generates the dungeon
