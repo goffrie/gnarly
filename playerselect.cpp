@@ -60,50 +60,51 @@ void PlayerSelect::swapClass(Class* c) {
 }
 
 Player* PlayerSelect::getPlayer(UI& ui) {
+    PlayerSelect ps;
     if (!gnarly) {
-        return getBasicPlayer();
+        return ps.getBasicPlayer();
     }
-    playerClass = new Thief();
-    player = new HumanPlayer();
-    player->setClass(playerClass);
+    ps.playerClass = new Thief();
+    ps.player = new HumanPlayer();
+    ps.player->setClass(ps.playerClass);
 
     curs_set(0);
     int c;
     while (true) {
-        draw(ui);
+        ps.draw(ui);
         ui.redraw();
         c = ui.readChar();
         switch (c) {
             case Elf:
-                swapPlayer(new ElfPlayer());
+                ps.swapPlayer(new ElfPlayer());
                 break;
             case Orc:
-                swapPlayer(new OrcPlayer());
+                ps.swapPlayer(new OrcPlayer());
                 break;
             case Human:
-                swapPlayer(new HumanPlayer());
+                ps.swapPlayer(new HumanPlayer());
                 break;
             case Dwarf:
-                swapPlayer(new DwarfPlayer());
+                ps.swapPlayer(new DwarfPlayer());
                 break;
             case Halfling:
-                swapPlayer(new HalflingPlayer());
+                ps.swapPlayer(new HalflingPlayer());
                 break;
             case ThiefClass:
-                swapClass(new Thief());
+                ps.swapClass(new Thief());
                 break;
             case PaladinClass:
-                swapClass(new Paladin());
+                ps.swapClass(new Paladin());
                 break;
             case WizardClass:
-                swapClass(new Wizard());
+                ps.swapClass(new Wizard());
                 break;
             case None:
-                swapClass(new Class());
+                ps.swapClass(new Class());
                 break;
             case SuperElf:
                 if (dev) {
-                    swapPlayer(new SuperElfPlayer());
+                    ps.swapPlayer(new SuperElfPlayer());
                 }
                 break;
             case '?':
@@ -111,9 +112,9 @@ Player* PlayerSelect::getPlayer(UI& ui) {
                 break;
             case ' ': case 's':
                 curs_set(1);
-                return player;
+                return ps.player;
             case 'q':
-                delete player;
+                delete ps.player;
                 return 0;
         }
     }

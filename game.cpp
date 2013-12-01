@@ -41,8 +41,7 @@ Game::Game() : player(0), pstatus(0), level(0), mem(0), _quit(false), gameOver(f
     Potion::resetUsed();
 
     // Ask the user to select their player.
-    PlayerSelect ps;
-    player = ps.getPlayer(*UI::instance());
+    player = PlayerSelect::getPlayer(*UI::instance());
     if (!player) {
         _quit = true;
         return;

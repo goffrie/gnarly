@@ -8,9 +8,13 @@ class Surface {
 public:
     virtual ~Surface() { }
 
+    // Sets the color for future drawing, or does nothing if not possible
     virtual void setColor(int foreground, int background) { }
+    // Unsets drawing color (note: must be the same as what was set)
     virtual void unsetColor(int foreground, int background) { }
+    // Dims future drawing, or does nothing if not possible
     virtual void setDim() { }
+    // Undims drawing
     virtual void unsetDim() { }
     // Draw a tile at the given location.
     virtual void draw(int y, int x, char c) = 0;

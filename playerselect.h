@@ -9,6 +9,7 @@ class UI;
 
 // Represents and displays a title screen. The titlescreen is also where you select your character
 class PlayerSelect : public Displayable {
+    // All possible races
     enum Race {
         Human = 'h',
         Elf = 'e',
@@ -17,21 +18,26 @@ class PlayerSelect : public Displayable {
         Halfling = 'a',
         SuperElf = 'E'
     };
+    // All possible classes
     enum PlayerClass {
         None = 'n',
         ThiefClass = 't',
         PaladinClass = 'p',
         WizardClass = 'w'
     };
+    // The currently selected race/class
     Class* playerClass;
     Player* player;
+    // Returns a player for the basic version
     Player* getBasicPlayer();
+    // Switches the currently selected race
     void swapPlayer(Player* p);
+    // Switches the currently selected class
     void swapClass(Class* c);
+    PlayerSelect();
 
 public:
-    PlayerSelect();
-    Player* getPlayer(UI& ui);
+    static Player* getPlayer(UI& ui);
     virtual void draw(Surface& target) const;
 };
 
