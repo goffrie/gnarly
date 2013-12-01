@@ -20,6 +20,7 @@ protected:
 
     // Low level method for adding and removing hp. Higher level methods
     // (like attacking and using potions) call into these
+    // If the character died, we need to notify the level
     virtual void reduceHP(int amt);
     virtual void addHP(int amt);
 

@@ -3,9 +3,12 @@
 
 #include "player.h"
 
+// A class representing a elf player
 class ElfPlayer : public Player {
 public:
+    // Created using elf stats
     ElfPlayer();
+    // Elves only have positive heals and buffs
     virtual void heal(int amt) override;
     virtual void applyBuff(int atk, int def) override;
 };

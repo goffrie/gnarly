@@ -3,6 +3,7 @@
 
 #include <vector>
 
+// Fills in a rectangle in a map
 template<typename T>
 void rect(std::vector<std::vector<T> >& map, int y0, int x0, int h, int w, T fill) {
     for (int y = y0; y < y0 + h; ++y) {
