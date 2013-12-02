@@ -37,6 +37,8 @@ CursesUI::CursesUI() : msgLineLength(0) {
     } else {
         grey = COLOR_BLACK;
     }
+
+    clearok(stdscr, TRUE);
 }
 
 CursesUI::~CursesUI() {
