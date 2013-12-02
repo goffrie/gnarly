@@ -37,8 +37,7 @@ inline int color(Tile t) {
         case Tree: return COLOR_GREEN;
         default: return COLOR_WHITE;
     }
-};
-
+}
 
 Dungeon::Dungeon(vector<vector<Tile> >& m) : grid(m) {
     loadRooms();
