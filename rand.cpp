@@ -11,8 +11,6 @@ Rand rnd;
 
 Rand::Rand() : state(88172645463325252ull) {
     state ^= time(0);
-    // XXX Remove this. Used for testing so I can see what produces what
-    std::cout << "Random Seed: " << state << std::endl;
 }
 
 uint64_t Rand::operator()() {

@@ -110,7 +110,6 @@ pair<int,int> Dungeon::randomPlacement() const {
     // Pick a room.
     int roomNum = rnd(0, roomCount);
     // Pick a spot in the room.
-    // XXX: pick a spot that isn't empty. make sure that such a spot exists.
     while (true) {
         int y = rnd(0, grid.size());
         int x = rnd(0, grid[y].size());
