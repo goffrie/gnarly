@@ -11,9 +11,9 @@ public:
     // Manacost: 20
     MindControl() : Skill(20) { }
     // Uses Mind Control. It works by changing the team of the enemy to be on the same team as the player
-    virtual bool use(Player* p) override;
-    virtual std::string name() const override;
-    virtual std::string description() const override;
+    virtual bool use(Player* p);
+    virtual std::string name() const;
+    virtual std::string description() const;
 };
 
 #endif

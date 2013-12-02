@@ -8,7 +8,8 @@ class Player;
 class Item;
 
 // A class representing an inventory with items. Belongs to the player
-class Inventory final {
+// Should not be subclassed
+class Inventory {
     typedef std::map<char, Item*> invMap;
     // The items in the inventory, indexed by chars
     invMap items;

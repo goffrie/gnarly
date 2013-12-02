@@ -58,7 +58,7 @@ public:
     // will be considered in view.
     void computeFOV(int y, int x, int radius);
     // Draw the parts of the level that the player can see.
-    void draw(Surface& target) const override;
+    void draw(Surface& target) const;
 
     // Return a list of objects visible from the point (y, x) within a given radius.
     // Uses field of view (but does not interact with `computeFOV`).

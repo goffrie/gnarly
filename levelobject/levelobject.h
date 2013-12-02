@@ -36,7 +36,7 @@ public:
     LevelObject() : level(0), y(-1), x(-1) { }
     virtual ~LevelObject();
 
-    virtual void draw(Surface& target) const override;
+    virtual void draw(Surface& target) const;
 
     // Accessor methods for basic LevelObject properties
     int getY() const { return y; }

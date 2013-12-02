@@ -34,7 +34,7 @@ string DragonGold::basicName() const {
 }
 
 string DragonGold::name(Article a) const {
-    // Use the default implementation in LevelObject, not Gold's override.
+    // Use the default implementation in LevelObject, not Gold's.
     return LevelObject::name(a);
 }
 

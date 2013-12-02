@@ -8,10 +8,10 @@
 class BasicSpawn : public Spawn {
 public:
     // See spawn for descriptions
-    virtual Monster* randomMonster() override;
-    virtual Potion* randomPotion() override;
-    virtual Gold* randomGold() override;
-    virtual LevelObject* getFromTile(char t) override;
+    virtual Monster* randomMonster();
+    virtual Potion* randomPotion();
+    virtual Gold* randomGold();
+    virtual LevelObject* getFromTile(char t);
 };
 
 #endif

@@ -16,16 +16,16 @@ class BasicUI : public UI {
     std::string readNext();
 public:
     BasicUI();
-    virtual ~BasicUI() override;
+    virtual ~BasicUI();
     // See description in the UI and surface class
-    virtual void queryCommand(CommandHandler& target) override;
-    virtual void say(const std::string& msg) override;
-    virtual int readChar() override;
-    virtual std::string readLine() override;
-    virtual void draw(int y, int x, char c) override;
-    virtual void draw(int y, int x, const std::string& str) override;
-    virtual void fillLine(int y, const std::string& str) override;
-    virtual void redraw() override;
+    virtual void queryCommand(CommandHandler& target);
+    virtual void say(const std::string& msg);
+    virtual int readChar();
+    virtual std::string readLine();
+    virtual void draw(int y, int x, char c);
+    virtual void draw(int y, int x, const std::string& str);
+    virtual void fillLine(int y, const std::string& str);
+    virtual void redraw();
 };
 
 #endif

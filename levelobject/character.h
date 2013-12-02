@@ -35,7 +35,7 @@ public:
     Character(Attributes::Race c, Team::Name t);
     virtual ~Character() = 0;
 
-    virtual void draw(Surface& target) const override;
+    virtual void draw(Surface& target) const;
 
     // Basic accessor methods
     int currentHP() const { return hp; }
@@ -58,20 +58,20 @@ public:
     virtual int startingHP() const { return attributes->startingHP(); }
     virtual int startingMP() const { return attributes->startingMP(); }
     virtual int droppedGold() const { return attributes->droppedGold(); }
-    virtual char tile() const override { return attributes->tile(); }
-    virtual std::string basicName() const override { return attributes->name(); }
+    virtual char tile() const { return attributes->tile(); }
+    virtual std::string basicName() const { return attributes->name(); }
 
     // Changes the team a monster is on
     virtual void setTeam(Team* t) { team = t; }
     // Returns true if dead
-    virtual bool dead() const override;
+    virtual bool dead() const;
 
     // Returns true if the two teams are unallied
     virtual bool isEnemy(Team* t) const;
     // Chooses a random enemy target from an array of possible targets
     virtual Character* chooseTarget(std::vector<LevelObject*> objs);
 
-    virtual void accept(LevelObjectVisitor& v) override;
+    virtual void accept(LevelObjectVisitor& v);
 };
 
 #endif

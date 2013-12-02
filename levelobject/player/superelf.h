@@ -8,9 +8,9 @@ class SuperElfPlayer : public ElfPlayer {
 public:
     SuperElfPlayer() : ElfPlayer() { }
     // Doesn't reduce HP
-    virtual void reduceHP(int amount) override { }
+    virtual void reduceHP(int amount) { }
     // Gets 10x xp
-    virtual void addXP(int xp) override { ElfPlayer::addXP(xp * 10); }
+    virtual void addXP(int xp) { ElfPlayer::addXP(xp * 10); }
 };
 
 #endif

@@ -18,7 +18,7 @@ public:
     virtual Item* removeItem();
     // Uses item's name and tile
     virtual std::string name(Article a) const;
-    virtual char tile() const override { return item->tile(); }
+    virtual char tile() const { return item->tile(); }
     virtual void accept(LevelObjectVisitor& v);
 };
 

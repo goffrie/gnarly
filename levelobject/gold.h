@@ -20,17 +20,17 @@ private:
     int _amount;
 public:
     Gold(Hoard h);
-    virtual void draw(Surface& target) const override;
+    virtual void draw(Surface& target) const;
 
     // Adds gold to a player
     virtual void use(Player* target);
     // Basic accessor methods
     virtual bool canPickUp() const { return true; }
     virtual int amount() const { return _amount; }
-    virtual std::string basicName() const override;
-    virtual std::string name(Article a) const override;
+    virtual std::string basicName() const;
+    virtual std::string name(Article a) const;
 
-    virtual char tile() const override { return 'G'; }
+    virtual char tile() const { return 'G'; }
 
     virtual void accept(LevelObjectVisitor& v);
 };

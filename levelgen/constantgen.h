@@ -9,7 +9,7 @@ class ConstantGen : public LevelGen {
     const Dungeon& d;
 protected:
     // Give them the layout we were given
-    virtual Dungeon gen() override { return d; }
+    virtual Dungeon gen() { return d; }
 public:
     ConstantGen(const Dungeon& d) : LevelGen(d.height(), d.width()), d(d) { }
 };

@@ -48,12 +48,12 @@ private:
 public:
     virtual ~Attributes() { }
     // Accessor methods for stats associated with an attribute set
-    virtual int startingHP() const override { return _startingHP; }
-    virtual int startingMP() const override { return _startingMP; }
-    virtual int atk() const override { return _atk; }
-    virtual int def() const override { return _def; }
-    virtual int xp() const override { return _xp; }
-    virtual int droppedGold() const override { return _droppedGold; }
+    virtual int startingHP() const { return _startingHP; }
+    virtual int startingMP() const { return _startingMP; }
+    virtual int atk() const { return _atk; }
+    virtual int def() const { return _def; }
+    virtual int xp() const { return _xp; }
+    virtual int droppedGold() const { return _droppedGold; }
     virtual char tile() const { return _tile; }
     virtual std::string name() const { return _name; }
 

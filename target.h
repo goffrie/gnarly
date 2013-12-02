@@ -19,17 +19,17 @@ class Target : public CommandHandler {
     Target(int y, int x, int r);
 public:
     // Move the target
-    virtual void move(Direction d) override;
+    virtual void move(Direction d);
     // All of the following do nothing
-    virtual void attack(Direction d) override;
-    virtual void use(Direction d) override;
-    virtual void skill(int i) override;
-    virtual void inventory() override;
-    virtual void restart() override;
+    virtual void attack(Direction d);
+    virtual void use(Direction d);
+    virtual void skill(int i);
+    virtual void inventory();
+    virtual void restart();
     // Cancel targeting
-    virtual void quit() override;
+    virtual void quit();
     // Submit current target position
-    virtual void confirm() override;
+    virtual void confirm();
     // Returns a target, given starting y, x, and range
     static std::pair<int,int> getTarget(int y, int x, int r);
     // Returns whether something is a valid target

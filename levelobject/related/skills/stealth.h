@@ -21,14 +21,14 @@ public:
     Stealth();
     // Uses stealth. Stealth works by storing the previous alliance status
     // of the player's team and changing it to being allied with everyone
-    virtual bool use(Player* p) override;
+    virtual bool use(Player* p);
     // When the player attacks, remove stealth
-    virtual void notifyAttack(Player* p) override;
+    virtual void notifyAttack(Player* p);
     // Decreases the currentDuration
-    virtual void step(Player* p) override;
-    virtual std::string name() const override;
-    virtual std::string description() const override;
-    virtual std::string display() const override;
+    virtual void step(Player* p);
+    virtual std::string name() const;
+    virtual std::string description() const;
+    virtual std::string display() const;
 };
 
 #endif

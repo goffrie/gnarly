@@ -6,7 +6,7 @@
 // Generates a cave-like level through aggregation generation
 class AggregationGen : public LevelGen {
 protected:
-    virtual Dungeon gen() override;
+    virtual Dungeon gen();
 public:
     AggregationGen(int h, int w) : LevelGen(h, w) { }
 };

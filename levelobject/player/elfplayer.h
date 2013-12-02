@@ -9,8 +9,8 @@ public:
     // Created using elf stats
     ElfPlayer();
     // Elves only have positive heals and buffs
-    virtual void heal(int amt) override;
-    virtual void applyBuff(int atk, int def) override;
+    virtual void heal(int amt);
+    virtual void applyBuff(int atk, int def);
 };
 
 #endif

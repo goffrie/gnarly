@@ -13,25 +13,25 @@ class CursesUI : public UI {
     Direction readDirection();
 public:
     CursesUI();
-    virtual ~CursesUI() override;
+    virtual ~CursesUI();
 
     // Unlike BasicUI, CursesUI can support colors and dimming
-    virtual void setColor(int foreground, int background) override;
-    virtual void unsetColor(int foreground, int background) override;
-    virtual void setDim() override;
-    virtual void unsetDim() override;
+    virtual void setColor(int foreground, int background);
+    virtual void unsetColor(int foreground, int background);
+    virtual void setDim();
+    virtual void unsetDim();
 
     // See description in the UI and surface class
-    virtual void clearMsg() override;
-    virtual void queryCommand(CommandHandler& target) override;
-    virtual void say(const std::string& msg) override;
-    virtual int readChar() override;
-    virtual std::string readLine() override;
-    virtual void draw(int y, int x, char c) override;
-    virtual void draw(int y, int x, const std::string& str) override;
-    virtual void fillLine(int y, const std::string& str) override;
-    virtual void cursor(int y, int x) override;
-    virtual void redraw() override;
+    virtual void clearMsg();
+    virtual void queryCommand(CommandHandler& target);
+    virtual void say(const std::string& msg);
+    virtual int readChar();
+    virtual std::string readLine();
+    virtual void draw(int y, int x, char c);
+    virtual void draw(int y, int x, const std::string& str);
+    virtual void fillLine(int y, const std::string& str);
+    virtual void cursor(int y, int x);
+    virtual void redraw();
 };
 
 #endif

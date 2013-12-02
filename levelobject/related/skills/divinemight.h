@@ -9,9 +9,9 @@ public:
     // Manacost: 10
     DivineMight() : Skill(10) { }
     // Applies a buff to the player
-    virtual bool use(Player* p) override;
-    virtual std::string name() const override;
-    virtual std::string description() const override;
+    virtual bool use(Player* p);
+    virtual std::string name() const;
+    virtual std::string description() const;
 };
 
 #endif

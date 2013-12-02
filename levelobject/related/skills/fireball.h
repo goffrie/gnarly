@@ -10,9 +10,9 @@ public:
     // Manacost: 5
     Fireball() : Skill(5) { }
     // Gets a target and attacks it
-    virtual bool use(Player* p) override;
-    virtual std::string name() const override;
-    virtual std::string description() const override;
+    virtual bool use(Player* p);
+    virtual std::string name() const;
+    virtual std::string description() const;
 };
 
 #endif

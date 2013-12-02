@@ -31,7 +31,7 @@ public:
     virtual AttributeProvider* getClassBuff(AttributeProvider* a) const;
     virtual AttributeProvider* getLevelBuff(AttributeProvider* a) const;
     // Draws the skills and their manacosts on the bottom of the screen.
-    virtual void draw(Surface& target) const override;
+    virtual void draw(Surface& target) const;
 };
 
 #endif

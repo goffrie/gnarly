@@ -44,7 +44,7 @@ public:
     Dungeon(std::vector<std::vector<bool> >& m);
 
     // Draws the entire dungeon layout
-    virtual void draw(Surface& target) const override;
+    virtual void draw(Surface& target) const;
 
     unsigned int height() const { return grid.size(); }
     unsigned int width() const { return grid[0].size(); }

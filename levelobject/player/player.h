@@ -23,7 +23,7 @@ class Player : public Character {
 
 protected:
     // When the player dies, we need to notify the game
-    virtual void reduceHP(int amt) override;
+    virtual void reduceHP(int amt);
     // Levelup the player, restoring hp, mp, buffing the player from the class
     virtual void levelUp();
 
@@ -40,15 +40,15 @@ public:
     virtual int targetXP() const { return _targetXP; }
     virtual int gold() const { return _gold; }
     virtual int score() const { return gold(); }
-    virtual std::string basicName() const override { return name(NoArticle); }
-    virtual std::string name(Article a) const override;
+    virtual std::string basicName() const { return name(NoArticle); }
+    virtual std::string name(Article a) const;
 
     // Moving the player describes what the player sees
-    virtual bool moveRelative(Direction d) override;
+    virtual bool moveRelative(Direction d);
     // Does a given amount of damage to a character
     virtual void damage(Character* other, int d);
     // Default attack. Calls damage()
-    virtual void attack(Character* other) override;
+    virtual void attack(Character* other);
 
     // Potion/skill effect: restore (or remove) HP.
     // Calls into `addHP` or removeHP
@@ -77,7 +77,7 @@ public:
     // Draws the skills associated with the class
     virtual void drawClass(Surface& target) const;
 
-    virtual void accept(LevelObjectVisitor& v) override;
+    virtual void accept(LevelObjectVisitor& v);
 };
 
 #endif

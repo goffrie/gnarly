@@ -14,13 +14,13 @@ class Dragon : public Monster {
 protected:
     // When a dragon dies, it notifies its hoard
     // to allow that hoard to be picked up
-    virtual void reduceHP(int amt) override;
+    virtual void reduceHP(int amt);
 
 public:
     // Creates a dragon with its hoard
     Dragon(DragonGold* hoard);
     // Dragons do not wander to stay near their horde
-    virtual void wander() override;
+    virtual void wander();
     // Dragons will only attack things next to their horde
     virtual Character* chooseTarget(std::vector<LevelObject*> objs);
 };

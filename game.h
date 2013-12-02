@@ -45,17 +45,17 @@ public:
     // Tells the game to begin running
     void run();
     // Has the player move, attack, or use/pickup a potion in a certain direction
-    void move(Direction d) override;
-    void attack(Direction d) override;
-    void use(Direction d) override;
+    void move(Direction d);
+    void attack(Direction d);
+    void use(Direction d);
     // Uses a player's skill
-    void skill(int i) override;
+    void skill(int i);
     // Displays the inventory
-    void inventory() override;
+    void inventory();
     // Quits or restarts the game
-    void quit() override;
-    void restart() override;
-    void confirm() override;
+    void quit();
+    void restart();
+    void confirm();
     // Called when the player has died
     void notifyPlayerDeath();
     // Returns if the game should be restarted after it ends

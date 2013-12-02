@@ -12,9 +12,9 @@ public:
     virtual ~Monster() { }
 
     // Attacks a target, missing half of the time
-    virtual void attack(Character* target) override;
+    virtual void attack(Character* target);
 
-    virtual void accept(LevelObjectVisitor& v) override;
+    virtual void accept(LevelObjectVisitor& v);
     // Either attacks an adjacent enemy, moves towards a visible enemy (if gnarly mode is enabled),
     // or wanders randomly
     virtual void step();

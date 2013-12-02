@@ -23,7 +23,7 @@ public:
     virtual std::string name() const { return base->name(); }
 
     // Default is remove self
-    virtual AttributeProvider* strip(bool force) override;
+    virtual AttributeProvider* strip(bool force);
 };
 
 #endif

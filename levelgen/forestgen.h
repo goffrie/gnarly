@@ -8,7 +8,7 @@
 class ForestGen : public LevelGen {
 protected:
     // Randomly generates the dungeon
-    virtual Dungeon gen() override;
+    virtual Dungeon gen();
 public:
     ForestGen(int h, int w) : LevelGen(h, w) { }
 };

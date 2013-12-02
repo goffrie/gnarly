@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-Wall -MMD -ggdb -std=gnu++11 -I. -Ilevelobject -Ilevelobject/related -Ilevelobject/player -Ilevelobject/monster -Ilevelobject/related/skills -Ipopup -Iitem
+CXXFLAGS=-Wall -MMD -ggdb -I. -Ilevelobject -Ilevelobject/related -Ilevelobject/player -Ilevelobject/monster -Ilevelobject/related/skills -Ipopup -Iitem
 LDFLAGS=-lncurses
 EXEC=cc3k
 OBJECTS=\

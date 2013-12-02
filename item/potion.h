@@ -26,9 +26,9 @@ public:
 
     // Uses the potion, applying a buff or modifying hp or the player
     virtual void use(Player* target);
-    virtual std::string basicName() const override;
+    virtual std::string basicName() const;
 
-    virtual char tile() const override { return 'P'; }
+    virtual char tile() const { return 'P'; }
 
     // Reset the used states of all types to player has not yet used them
     static void resetUsed();

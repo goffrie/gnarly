@@ -13,10 +13,10 @@ public:
     Memory(int height, int width);
 
     // Implement `Displayable`.
-    virtual void draw(Surface& target) const override;
+    virtual void draw(Surface& target) const;
 
     // Implement `Surface`.
-    virtual void draw(int y, int x, char c) override;
+    virtual void draw(int y, int x, char c);
 };
 
 #endif

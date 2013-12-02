@@ -18,8 +18,8 @@ public:
     virtual bool canPickUp() const;
     // Called when the associated dragon dies
     virtual void notifyDragonDied();
-    virtual std::string basicName() const override;
-    virtual std::string name(Article a) const override;
+    virtual std::string basicName() const;
+    virtual std::string name(Article a) const;
 };
 
 #endif

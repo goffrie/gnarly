@@ -9,7 +9,7 @@ public:
     // Created using human stats
     HumanPlayer();
     // Humans get 150% score
-    virtual int score() const override;
+    virtual int score() const;
 };
 
 #endif

@@ -27,7 +27,7 @@ public:
     virtual ~PopUp() {}
     // Changes the text on the popup
     virtual void setText(const std::string& t);
-    virtual void draw(Surface& target) const override;
+    virtual void draw(Surface& target) const;
     // Creates and manages a popup with the given text, pausing the gmae
     static void make(const std::string& t);
 };

@@ -8,8 +8,8 @@
 // is managed in game
 class Staircase : public LevelObject {
 public:
-    virtual char tile() const override { return '\\'; }
-    virtual std::string basicName() const override { return "staircase"; }
+    virtual char tile() const { return '\\'; }
+    virtual std::string basicName() const { return "staircase"; }
 
     virtual void accept(LevelObjectVisitor& v);
 };

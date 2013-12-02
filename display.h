@@ -18,7 +18,7 @@ public:
     void remove(Displayable* item);
 
     // Draw the display on the given surface.
-    void draw(Surface& target) const override;
+    void draw(Surface& target) const;
 };
 
 #endif
