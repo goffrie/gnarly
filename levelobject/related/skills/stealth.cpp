@@ -18,11 +18,15 @@ Stealth::Stealth() : Skill(4), currentDuration(-1) {
 }
 
 bool Stealth::use(Player* p) {
+    if (currentDuration > 0) {
+        currentDuration = duration;
+        return true;
+    }
+    currentDuration = duration;
     // Change alliances to allied with everyone
     Team* t = p->getTeam();
     storedAlliances = t->getAlliances();
     t->setAlliances(allAlly);
-    currentDuration = duration;
     Skill::use(p);
     return true;
 }
