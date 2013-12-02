@@ -20,6 +20,7 @@ Stealth::Stealth() : Skill(4), currentDuration(-1) {
 bool Stealth::use(Player* p) {
     if (currentDuration > 0) {
         currentDuration = duration;
+        Skill::use(p);
         return true;
     }
     currentDuration = duration;
