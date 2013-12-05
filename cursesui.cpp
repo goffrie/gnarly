@@ -86,6 +86,9 @@ void CursesUI::queryCommand(CommandHandler& target) {
         case FirstSkill: case SecondSkill: case ThirdSkill: case FourthSkill:
             target.skill(Skill::getSkillNumber(c));
             break;
+        case '.':
+            target.wait();
+            break;
         case ' ': case 's':
             target.confirm();
             break;
@@ -131,7 +134,7 @@ void CursesUI::say(const std::string& msg) {
     if (msgLineLength + msg.size() > maxMsgLineLength) {
         mvaddstr(29, msgLineLength, " --more--");
         clrtoeol();
-        while (getch() != '\n');
+        while (char c = getch()) if (c == '\n' || c == ' ') break;
         msgLineLength = 0;
     }
 

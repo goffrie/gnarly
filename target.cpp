@@ -31,6 +31,10 @@ void Target::skill(int i) {
     UI::instance()->say("Currently targeting, press Q to quit");
 }
 
+void Target::wait() {
+    UI::instance()->say("Currently targeting, press Q to quit");
+}
+
 void Target::restart() {
     UI::instance()->say("Currently targeting, press Q to quit");
 }

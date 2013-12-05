@@ -207,6 +207,10 @@ void Game::skill(int i) {
     }
 }
 
+void Game::wait() {
+    step();
+}
+
 void Game::restart() {
     Potion::resetUsed();
     _shouldRestart = true;

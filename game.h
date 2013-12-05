@@ -50,6 +50,7 @@ public:
     void use(Direction d) override;
     // Uses a player's skill
     void skill(int i) override;
+    void wait() override;
     // Displays the inventory
     void inventory() override;
     // Quits or restarts the game

@@ -24,6 +24,7 @@ public:
     virtual void attack(Direction d) override;
     virtual void use(Direction d) override;
     virtual void skill(int i) override;
+    virtual void wait() override;
     virtual void inventory() override;
     virtual void restart() override;
     // Cancel targeting
